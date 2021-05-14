@@ -110,3 +110,7 @@ class InformedConsent(SiteModelMixin, BaseUuidModel):
         max_length=3,
         choices=YES_NO,
         help_text='if declined, return copy with the consent')
+
+    class Meta:
+        verbose_name = "Informed Consent"
+        verbose_name_plural = "Informed Consent"

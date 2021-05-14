@@ -2,3 +2,4 @@ from .eligibility_checklist_admin import EligibilityCheckListAdmin
 from .informed_consent_admin import InformedConsentAdmin
 from .subject_locator_admin import SubjectLocatorAdmin
 from .demographics_data_admin import DemographicDataAdmin
+from .vaccination_details_admin import VaccinationDetailsAdmin
