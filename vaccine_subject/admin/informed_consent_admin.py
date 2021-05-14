@@ -49,7 +49,3 @@ class InformedConsentAdmin(admin.ModelAdmin):
                     'copy_of_consent': admin.VERTICAL,
                     'is_estimated': admin.VERTICAL,
                     }
-
-    # list_display = ('screening_identifier', 'subject_identifier',
-    # 'suspected_cancer',
-    #                 'performance', 'pain_score')

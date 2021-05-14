@@ -1,17 +1,13 @@
 from django.db import models
 
 from edc_base.model_mixins import BaseUuidModel
-from edc_base.sites import CurrentSiteManager, SiteModelMixin
+from edc_base.sites import SiteModelMixin
 from edc_identifier.model_mixins import NonUniqueSubjectIdentifierFieldMixin
 from edc_base.utils import get_utcnow
 
 
-# from .model_mixins import SearchSlugModelMixin
-
-
 class EligibilityCheckList(NonUniqueSubjectIdentifierFieldMixin,
                            SiteModelMixin, BaseUuidModel):
-
     subject_identifier = models.CharField(
         verbose_name="Subject ID",
         max_length=36,

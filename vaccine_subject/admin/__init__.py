@@ -1,2 +1,3 @@
 from .eligibility_checklist_admin import EligibilityCheckListAdmin
 from .informed_consent_admin import InformedConsentAdmin
+from .subject_locator_admin import SubjectLocatorAdmin

@@ -1,2 +1,3 @@
 from .eligibility_checklist import EligibilityCheckList
 from .informed_consent import InformedConsent
+from .subject_locator import SubjectLocator

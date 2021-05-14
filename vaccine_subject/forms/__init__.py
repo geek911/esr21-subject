@@ -1,2 +1,3 @@
 from .eligibility_checklist_form import EligibilityCheckListForm
 from .informed_consent_form import InformedConsentForm
+from .subject_locator_form import SubjectLocatorForm
