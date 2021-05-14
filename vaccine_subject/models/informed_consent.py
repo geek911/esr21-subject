@@ -1,18 +1,13 @@
-from django.apps import apps as django_apps
-from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.conf import settings
 from django_crypto_fields.fields import (
     IdentityField, FirstnameField, LastnameField)
 from edc_base.model_mixins import BaseUuidModel
-from edc_base.model_validators import datetime_not_future, date_not_future
+from edc_base.model_validators import date_not_future
 from edc_base.sites.site_model_mixin import SiteModelMixin
-# from edc_consent.field_mixins import IdentityFieldsMixin
 from edc_constants.choices import GENDER, YES_NO
 from edc_base.model_fields import IsDateEstimatedField
-from edc_identifier.model_mixins import NonUniqueSubjectIdentifierFieldMixin
-from edc_protocol.validators import datetime_not_before_study_start
-from ..choices import LANGUAGE, IDENTITY_TYPE
+from ..choices import IDENTITY_TYPE
 from edc_base.utils import get_utcnow
 
 
