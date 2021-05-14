@@ -1,8 +1,6 @@
 from django.contrib import admin
-from edc_model_admin import TabularInlineMixin
+
 from edc_model_admin import audit_fieldset_tuple
-
-
 from ..forms import InformedConsentForm
 from ..models import InformedConsent
 
