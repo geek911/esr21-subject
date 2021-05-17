@@ -15,6 +15,18 @@ IDENTITY_TYPE = (
     ('passport', 'Passport'),
     (OTHER, 'Other'),
 )
+
+STATUS = (
+    ('Resolved', 'Resolved'),
+    ('ongoing', 'Ongoing'),
+)
+AE_GRADE = (
+    ('mild_AE', 'Mild AE'),
+    ('moderate_AE', 'Moderate AE'),
+    ('severe_AE', 'Severe AE'),
+    ('life-threatening', 'Life-threatening or Disabling AE'),
+    ('Death_related', 'Death related to AE'),
+)
 #
 # CARDIOVASCULAR_DISORDER = (
 #     ('None', 'None'),

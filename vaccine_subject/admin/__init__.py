@@ -3,3 +3,4 @@ from .informed_consent_admin import InformedConsentAdmin
 from .subject_locator_admin import SubjectLocatorAdmin
 from .demographics_data_admin import DemographicDataAdmin
 from .vaccination_details_admin import VaccinationDetailsAdmin
+from .adverse_events_admin import AdverseEventsAdmin
