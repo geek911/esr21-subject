@@ -22,7 +22,7 @@ class AdverseEventsAdmin(admin.ModelAdmin):
         (None, {
             'fields': (
                 'report_date_time',
-                       )
+            )
         }),
         ('Adverse Event', {
             'fields': (
@@ -52,7 +52,6 @@ class AdverseEventsAdmin(admin.ModelAdmin):
                 'performed_autopsy',
             )
         }),
-
 
         audit_fieldset_tuple
     )

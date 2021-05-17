@@ -4,3 +4,4 @@ from .subject_locator_form import SubjectLocatorForm
 from .demographics_data_form import DemographicsDataForm
 from .vaccination_details_form import VaccinationDetailsForm
 from .adverse_events_form import AdverseEventsForm
+from .pregnancy_status_form import PregnancyStatusForm

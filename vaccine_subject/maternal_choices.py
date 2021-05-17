@@ -96,3 +96,19 @@ HOUSE_TYPE = (
     ('Informal: Mud-walled or thatched', 'Informal: Mud-walled or thatched'),
     ('Mixed formal/informal', 'Mixed formal/informal'),
     ('Shack/Mokhukhu', 'Shack/Mokhukhu'),)
+
+KNOW_HIV_STATUS = (
+    ('Nobody', 'Nobody'),
+    ('1 person', '1 person'),
+    ('2-5 people', '2-5 people'),
+    ('6-10 people', '6-10 people'),
+    ('More than 10 people', 'More than 10 people'),
+    ('dont know', 'I do not know'),)
+
+IS_DATE_ESTIMATED = (
+    (NO, 'No'),
+    ('Yes, estimated the Day', 'Yes, estimated the Day'),
+    ('Yes, estimated Month and Day', 'Yes, estimated Month and Day'),
+    ('Yes, estimated Year, Month and Day',
+     'Yes, estimated Year, Month and Day'),
+)
