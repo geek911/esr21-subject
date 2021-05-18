@@ -1,24 +1,5 @@
-from django.utils.translation import ugettext_lazy as _
-from edc_constants.constants import FAILED_ELIGIBILITY, YES, NO, OTHER, \
-    ON_STUDY, OFF_STUDY, DONT_KNOW, MALE, FEMALE
-from edc_constants.constants import NEG, POS, IND
+from edc_constants.constants import OTHER
 
-LANGUAGE = (
-    ('Setswana', 'Setswana'),
-    ('Setswana', 'English'),
-)
-#
-IDENTITY_TYPE = (
-    ('country_id', 'Country ID number'),
-    ('country_id_rcpt', 'Country ID receipt'),
-    ('passport', 'Passport'),
-    (OTHER, 'Other'),
-)
-
-STATUS = (
-    ('Resolved', 'Resolved'),
-    ('ongoing', 'Ongoing'),
-)
 AE_GRADE = (
     ('mild_AE', 'Mild AE'),
     ('moderate_AE', 'Moderate AE'),
@@ -29,8 +10,8 @@ AE_GRADE = (
 AGREE = (
     ('strongly_disagree', 'Strongly disagree'),
     ('undecided', 'Undecided'),
-    ('strongly_agree', 'Strongly agree'),
-)
+    ('strongly_agree', 'Strongly agree'),)
+
 CAUSE_OF_DEATH = (
     ('autopsy', 'Autopsy'),
     ('clinical_records', 'Clinical_records'),
@@ -52,12 +33,6 @@ CAUSE_OF_DEATH_CAT = (
     ('trauma', 'Trauma/Accident'),
     ('no_info', 'No information available'),
     (OTHER, 'Other, specify'),)
-MED_RESPONSIBILITY = (
-    ('doctor', 'Doctor'),
-    ('nurse', 'Nurse'),
-    ('traditional', 'Traditional Healer'),
-    ('all', 'Both Doctor or Nurse and Traditional Healer'),
-    ('none', 'No known medical care received (family/friends only)'),)
 
 HOSPITILIZATION_REASONS = (
     ('respiratory illness(unspecified)', 'Respiratory Illness(unspecified)'),
@@ -80,3 +55,26 @@ HOSPITILIZATION_REASONS = (
      'Non-infectious reason for hospitalization, specify'),
     (OTHER, 'Other infection, specify'),
 )
+
+IDENTITY_TYPE = (
+    ('country_id', 'Country ID number'),
+    ('country_id_rcpt', 'Country ID receipt'),
+    ('passport', 'Passport'),
+    (OTHER, 'Other'),
+)
+
+LANGUAGE = (
+    ('Setswana', 'Setswana'),
+    ('Setswana', 'English'),
+)
+
+MED_RESPONSIBILITY = (
+    ('doctor', 'Doctor'),
+    ('nurse', 'Nurse'),
+    ('traditional', 'Traditional Healer'),
+    ('all', 'Both Doctor or Nurse and Traditional Healer'),
+    ('none', 'No known medical care received (family/friends only)'),)
+
+STATUS = (
+    ('Resolved', 'Resolved'),
+    ('ongoing', 'Ongoing'),)
