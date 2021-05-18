@@ -5,3 +5,4 @@ from .demographics_data_admin import DemographicDataAdmin
 from .vaccination_details_admin import VaccinationDetailsAdmin
 from .adverse_events_admin import AdverseEventsAdmin
 from .pregnancy_status_admin import PregnancyStatusAdmin
+from .covid19_preventive_behaviors_admin import Covid19PreventiveBehaviorsAdmin

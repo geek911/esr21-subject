@@ -5,3 +5,4 @@ from .demographics_data_form import DemographicsDataForm
 from .vaccination_details_form import VaccinationDetailsForm
 from .adverse_events_form import AdverseEventsForm
 from .pregnancy_status_form import PregnancyStatusForm
+from .covid19_preventive_behaviors_form import Covid19PreventiveBehaviorsForm
