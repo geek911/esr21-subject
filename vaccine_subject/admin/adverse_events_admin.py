@@ -5,9 +5,10 @@ from django.forms import Textarea
 from edc_model_admin import audit_fieldset_tuple
 from ..forms import AdverseEventsForm
 from ..models import AdverseEvents
+from ..admin_site import vaccine_subject_admin
 
 
-@admin.register(AdverseEvents)
+@admin.register(AdverseEvents, site=vaccine_subject_admin)
 class AdverseEventsAdmin(admin.ModelAdmin):
     form = AdverseEventsForm
 

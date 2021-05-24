@@ -8,9 +8,10 @@ from simple_history.admin import SimpleHistoryAdmin
 
 from ..forms import DeathReportForm
 from ..models import DeathReport
+from ..admin_site import vaccine_subject_admin
 
 
-@admin.register(DeathReport)
+@admin.register(DeathReport, site=vaccine_subject_admin)
 class DeathReportAdmin(ModelAdminBasicMixin,
                        SimpleHistoryAdmin,
                        admin.ModelAdmin):

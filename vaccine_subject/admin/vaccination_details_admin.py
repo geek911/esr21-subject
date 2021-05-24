@@ -6,12 +6,13 @@ from simple_history.admin import SimpleHistoryAdmin
 
 from ..forms import VaccinationDetailsForm
 from ..models import VaccinationDetails
+from ..admin_site import vaccine_subject_admin
 
 
-@admin.register(VaccinationDetails)
+@admin.register(VaccinationDetails, site=vaccine_subject_admin)
 class VaccinationDetailsAdmin(ModelAdminBasicMixin,
-                                SimpleHistoryAdmin,
-                                admin.ModelAdmin):
+                              SimpleHistoryAdmin,
+                              admin.ModelAdmin):
     form = VaccinationDetailsForm
     fieldsets = (
         (None, {

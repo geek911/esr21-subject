@@ -6,9 +6,10 @@ from simple_history.admin import SimpleHistoryAdmin
 
 from ..forms import EligibilityCheckListForm
 from ..models import EligibilityCheckList
+from ..admin_site import vaccine_subject_admin
 
 
-@admin.register(EligibilityCheckList)
+@admin.register(EligibilityCheckList, site=vaccine_subject_admin)
 class EligibilityCheckListAdmin(ModelAdminBasicMixin,
                                 SimpleHistoryAdmin,
                                 admin.ModelAdmin):
