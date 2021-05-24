@@ -6,9 +6,10 @@ from simple_history.admin import SimpleHistoryAdmin
 
 from ..forms import SubjectLocatorForm
 from ..models import SubjectLocator
+from ..admin_site import vaccine_subject_admin
 
 
-@admin.register(SubjectLocator)
+@admin.register(SubjectLocator, site=vaccine_subject_admin)
 class SubjectLocatorAdmin(ModelAdminBasicMixin,
                           SimpleHistoryAdmin,
                           admin.ModelAdmin):

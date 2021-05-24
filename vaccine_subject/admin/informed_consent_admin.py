@@ -3,9 +3,10 @@ from django.contrib import admin
 from edc_model_admin import audit_fieldset_tuple
 from ..forms import InformedConsentForm
 from ..models import InformedConsent
+from ..admin_site import vaccine_subject_admin
 
 
-@admin.register(InformedConsent)
+@admin.register(InformedConsent, site=vaccine_subject_admin)
 class InformedConsentAdmin(admin.ModelAdmin):
     form = InformedConsentForm
 
@@ -39,9 +40,7 @@ class InformedConsentAdmin(admin.ModelAdmin):
     radio_fields = {'language': admin.VERTICAL,
                     'is_literate': admin.VERTICAL,
                     'gender': admin.VERTICAL,
-                    'language': admin.VERTICAL,
                     'identity_type': admin.VERTICAL,
-                    'gender': admin.VERTICAL,
                     'reviewed_consent': admin.VERTICAL,
                     'answered_all_questions': admin.VERTICAL,
                     'asked_questions': admin.VERTICAL,
