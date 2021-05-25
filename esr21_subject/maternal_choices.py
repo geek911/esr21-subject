@@ -112,3 +112,8 @@ IS_DATE_ESTIMATED = (
     ('Yes, estimated Year, Month and Day',
      'Yes, estimated Year, Month and Day'),
 )
+OUTCOME = (
+    ('live_birth', 'Live Birth'),
+    ('miscarriage', 'Miscarriage'),
+    ('abortion', 'Abortion'),
+)

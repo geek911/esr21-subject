@@ -7,3 +7,4 @@ from .adverse_events_form import AdverseEventsForm
 from .pregnancy_status_form import PregnancyStatusForm
 from .covid19_preventive_behaviors_form import Covid19PreventiveBehaviorsForm
 from .death_report_form import DeathReportForm
+from .medical_history_form import MedicalHistoryForm
