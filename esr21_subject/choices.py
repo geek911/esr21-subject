@@ -1,11 +1,19 @@
-from edc_constants.constants import OTHER
+from edc_constants.constants import OTHER, NOT_APPLICABLE, UNKNOWN
+
+
+ACTION_TAKEN = (
+    ('dose_not_changed', 'Dose not changed'),
+    ('drug_withdrawal', 'Drug withdrawal'),
+    (NOT_APPLICABLE, NOT_APPLICABLE),
+    (UNKNOWN, UNKNOWN),
+)
 
 AE_GRADE = (
-    ('mild_AE', 'Mild AE'),
-    ('moderate_AE', 'Moderate AE'),
-    ('severe_AE', 'Severe AE'),
-    ('life-threatening', 'Life-threatening or Disabling AE'),
-    ('Death_related', 'Death related to AE'),
+    ('mild', 'Mild (Grade 1)'),
+    ('moderate', 'Moderate (Grade 2)'),
+    ('severe', 'Severe (Grade 3)'),
+    ('life_threatening', 'Life-threatening (Grade 4)'),
+    ('fatal', 'Fatal (Grade 5)'),
 )
 AGREE = (
     ('strongly_disagree', 'Strongly disagree'),
@@ -64,8 +72,17 @@ IDENTITY_TYPE = (
 )
 
 LANGUAGE = (
-    ('Setswana', 'Setswana'),
-    ('Setswana', 'English'),
+    ('setswana', 'Setswana'),
+    ('setswana', 'English'),
+)
+
+OUTCOME = (
+    ('not_resolved', 'Not recovered/ not resolved'),
+    ('resolved', 'Recovered / resolved'),
+    ('resolved_with_sequelae', 'Recovered / resolved with sequelae'),
+    ('resolving', 'Recovering / resolving'),
+    ('fatal', 'Fatal'),
+    (UNKNOWN, UNKNOWN),
 )
 
 MED_RESPONSIBILITY = (
@@ -76,5 +93,10 @@ MED_RESPONSIBILITY = (
     ('none', 'No known medical care received (family/friends only)'),)
 
 STATUS = (
-    ('Resolved', 'Resolved'),
+    ('resolved', 'Resolved'),
     ('ongoing', 'Ongoing'),)
+
+TREATMENT_RELATIONSHIP = (
+    ('related', 'Related'),
+    ('not_related', 'Not Related'),
+)

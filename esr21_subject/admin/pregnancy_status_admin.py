@@ -2,14 +2,14 @@ from django.contrib import admin
 from django.db import models
 from django.forms import Textarea
 
-from ..forms import AdverseEventsForm
+from ..forms import PregnancyStatusForm
 from ..models import PregnancyStatus
 from ..admin_site import esr21_subject_admin
 
 
 @admin.register(PregnancyStatus, site=esr21_subject_admin)
 class PregnancyStatusAdmin(admin.ModelAdmin):
-    form = AdverseEventsForm
+    form = PregnancyStatusForm
 
     formfield_overrides = {
         models.TextField: {'widget': Textarea(
