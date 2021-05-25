@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'vaccine_subject.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'esr21_subject.settings')
 
 application = get_wsgi_application()

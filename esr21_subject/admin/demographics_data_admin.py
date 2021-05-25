@@ -3,10 +3,10 @@ from edc_model_admin import audit_fieldset_tuple
 
 from ..forms import DemographicsDataForm
 from ..models import DemographicsData
-from ..admin_site import vaccine_subject_admin
+from ..admin_site import esr21_subject_admin
 
 
-@admin.register(DemographicsData, site=vaccine_subject_admin)
+@admin.register(DemographicsData, site=esr21_subject_admin)
 class DemographicDataAdmin(admin.ModelAdmin):
     form = DemographicsDataForm
 

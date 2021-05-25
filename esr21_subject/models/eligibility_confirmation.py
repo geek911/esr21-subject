@@ -6,12 +6,13 @@ from edc_identifier.model_mixins import NonUniqueSubjectIdentifierFieldMixin
 from edc_base.utils import get_utcnow
 
 
-class EligibilityCheckList(NonUniqueSubjectIdentifierFieldMixin,
-                           SiteModelMixin, BaseUuidModel):
-    subject_identifier = models.CharField(
-        verbose_name="Subject ID",
+class EligibilityConfirmation(NonUniqueSubjectIdentifierFieldMixin,
+                              SiteModelMixin, BaseUuidModel):
+
+    screening_identifier = models.CharField(
+        verbose_name='Screening Identifier',
         max_length=36,
-        unique=True, )
+        unique=True,)
 
     report_datetime = models.DateTimeField(
         verbose_name='Report Date and Time',
@@ -23,5 +24,6 @@ class EligibilityCheckList(NonUniqueSubjectIdentifierFieldMixin,
         help_text='(Years)', )
 
     class Meta:
-        verbose_name = "EligibilityCheckList"
-        verbose_name_plural = "EligibilityCheckList"
+        app_label = 'esr21_subject'
+        verbose_name = 'Eligibility Confirmation'
+        verbose_name_plural = 'Eligibility Confirmation'

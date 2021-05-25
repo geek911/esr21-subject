@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django_crypto_fields.apps.AppConfig',
-    'vaccine_subject',
+    'esr21_subject.apps.AppConfig',
 ]
 
 MIDDLEWARE = [
@@ -57,7 +57,7 @@ MIDDLEWARE = [
     'django.contrib.sites.middleware.CurrentSiteMiddleware',
 ]
 
-ROOT_URLCONF = 'vaccine_subject.urls'
+ROOT_URLCONF = 'esr21_subject.urls'
 
 TEMPLATES = [
     {
@@ -75,7 +75,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'vaccine_subject.wsgi.application'
+WSGI_APPLICATION = 'esr21_subject.wsgi.application'
 
 AUTO_CREATE_KEYS = False
 

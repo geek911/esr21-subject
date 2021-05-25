@@ -3,10 +3,10 @@ from django.contrib import admin
 from edc_model_admin import audit_fieldset_tuple
 from ..forms import InformedConsentForm
 from ..models import InformedConsent
-from ..admin_site import vaccine_subject_admin
+from ..admin_site import esr21_subject_admin
 
 
-@admin.register(InformedConsent, site=vaccine_subject_admin)
+@admin.register(InformedConsent, site=esr21_subject_admin)
 class InformedConsentAdmin(admin.ModelAdmin):
     form = InformedConsentForm
 

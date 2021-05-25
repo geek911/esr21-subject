@@ -6,10 +6,10 @@ from simple_history.admin import SimpleHistoryAdmin
 
 from ..forms import VaccinationDetailsForm
 from ..models import VaccinationDetails
-from ..admin_site import vaccine_subject_admin
+from ..admin_site import esr21_subject_admin
 
 
-@admin.register(VaccinationDetails, site=vaccine_subject_admin)
+@admin.register(VaccinationDetails, site=esr21_subject_admin)
 class VaccinationDetailsAdmin(ModelAdminBasicMixin,
                               SimpleHistoryAdmin,
                               admin.ModelAdmin):

@@ -6,10 +6,10 @@ from simple_history.admin import SimpleHistoryAdmin
 
 from ..forms import Covid19PreventiveBehaviorsForm
 from ..models import Covid19PreventiveBehaviors
-from ..admin_site import vaccine_subject_admin
+from ..admin_site import esr21_subject_admin
 
 
-@admin.register(Covid19PreventiveBehaviors, site=vaccine_subject_admin)
+@admin.register(Covid19PreventiveBehaviors, site=esr21_subject_admin)
 class Covid19PreventiveBehaviorsAdmin(ModelAdminBasicMixin,
                                       SimpleHistoryAdmin,
                                       admin.ModelAdmin):
