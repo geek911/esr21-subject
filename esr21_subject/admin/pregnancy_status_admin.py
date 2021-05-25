@@ -3,14 +3,14 @@ from django.db import models
 from django.forms import Textarea
 
 from edc_model_admin import audit_fieldset_tuple
-from ..forms import AdverseEventsForm
+from ..forms import PregnancyStatusForm
 from ..models import PregnancyStatus
 from ..admin_site import esr21_subject_admin
 
 
 @admin.register(PregnancyStatus, site=esr21_subject_admin)
 class PregnancyStatusAdmin(admin.ModelAdmin):
-    form = AdverseEventsForm
+    form = PregnancyStatusForm
 
     formfield_overrides = {
         models.TextField: {'widget': Textarea(

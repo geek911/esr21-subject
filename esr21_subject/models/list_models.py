@@ -19,3 +19,7 @@ class PriorArv(ListModelMixin, BaseUuidModel):
 
 class WcsDxAdult(ListModelMixin, BaseUuidModel):
     pass
+
+
+class SAECriteria(ListModelMixin, BaseUuidModel):
+    pass
