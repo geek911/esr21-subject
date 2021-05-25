@@ -1,5 +1,5 @@
 from edc_constants.choices import YES, NO
-from edc_constants.constants import OTHER, NOT_APPLICABLE
+from edc_constants.constants import OTHER, UNKNOWN
 
 
 YES_NO_DNT_DWTA = (
@@ -117,3 +117,12 @@ OUTCOME = (
     ('miscarriage', 'Miscarriage'),
     ('abortion', 'Abortion'),
 )
+CHILDBEARING = (
+    ('post-menopausal', 'Post-Menopausal'),
+    ('surgically_sterile', 'Surgically Sterile'),
+    (OTHER, 'Other, specify'),)
+
+RACE = (
+    ('', 'Reported'),
+    ('', 'Not Reported'),
+    (UNKNOWN, 'Unknown'),)

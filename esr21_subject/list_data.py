@@ -11,6 +11,13 @@ list_data = {
         ('incapacity', 'Persistent or significant disability/incapacity'),
         (OTHER, 'Other important medical event'),
     ],
+    'esr21_subject.subjectrace': [
+        ('american', 'American Indian or Alaska Native'),
+        ('asian', 'Asian'),
+        ('african', 'Black or African American'),
+        ('pacific_islander', 'Native Hawaiian or Other Pacific Islanders'),
+        ('white', 'White'),
+    ],
 }
 
 preload_data = PreloadData(
