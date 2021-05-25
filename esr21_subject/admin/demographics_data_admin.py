@@ -10,47 +10,27 @@ from ..admin_site import esr21_subject_admin
 class DemographicDataAdmin(admin.ModelAdmin):
     form = DemographicsDataForm
 
-    list_display = ('marital_status',
-                    'ethnicity',
-                    'highest_education',
-                    'own_phone')
-    list_filter = ('marital_status',
-                   'ethnicity',
-                   'highest_education',
-                   'own_phone')
-
     fieldsets = (
         (None, {
             'fields': [
                 'report_datetime',
-                'marital_status',
-                'marital_status_other',
+                'date_of_birth',
+                'age',
+                'gender',
+                'childbearing_potential',
+                'if_no_reason',
+                'if_no_reason_other',
                 'ethnicity',
                 'ethnicity_other',
-                'highest_education',
-                'current_occupation',
-                'current_occupation_other',
-                'provides_money',
-                'provides_money_other',
-                'money_earned',
-                'money_earned_other',
-                'own_phone',
-                'water_source',
-                'house_electrified',
-                'toilet_facility',
-                'toilet_facility_other',
-                'house_people_number',
-                'house_type']}
+                'race_of_subject',
+                'race',
+               ]}
          ), audit_fieldset_tuple)
 
-    radio_fields = {'marital_status': admin.VERTICAL,
+    radio_fields = {'gender': admin.VERTICAL,
+                    'childbearing_potential': admin.VERTICAL,
+                    'if_no_reason': admin.VERTICAL,
                     'ethnicity': admin.VERTICAL,
-                    'highest_education': admin.VERTICAL,
-                    'current_occupation': admin.VERTICAL,
-                    'provides_money': admin.VERTICAL,
-                    'money_earned': admin.VERTICAL,
-                    'own_phone': admin.VERTICAL,
-                    'water_source': admin.VERTICAL,
-                    'house_electrified': admin.VERTICAL,
-                    'toilet_facility': admin.VERTICAL,
-                    'house_type': admin.VERTICAL, }
+                    'race_of_subject': admin.VERTICAL, }
+
+    filter_horizontal = ('race',)

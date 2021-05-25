@@ -1,7 +1,7 @@
 from edc_base.model_mixins import BaseUuidModel, ListModelMixin
 
 
-class ChronicConditions(ListModelMixin, BaseUuidModel):
+class SubjectRace(ListModelMixin, BaseUuidModel):
     pass
 
 
