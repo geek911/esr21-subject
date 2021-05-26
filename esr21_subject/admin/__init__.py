@@ -9,3 +9,4 @@ from .pregnancy_status_admin import PregnancyStatusAdmin
 from .covid19_preventive_behaviors_admin import Covid19PreventiveBehaviorsAdmin
 from .death_report_admin import DeathReportAdmin
 from .medical_history_admin import MedicalHistoryAdmin
+from .physical_exam_admin import PhysicalExamAdmin
