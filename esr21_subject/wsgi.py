@@ -1,5 +1,5 @@
 """
-WSGI config for vaccine_subject project.
+WSGI config for esr21_subject project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

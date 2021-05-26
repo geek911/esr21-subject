@@ -10,3 +10,5 @@ from .covid19_preventive_behaviors import Covid19PreventiveBehaviors
 from .death_report import DeathReport
 from .medical_history import MedicalHistory
 from .physical_exam import PhysicalExam
+from .onschedule import OnSchedule
+from .signals import informed_consent_on_post_save
