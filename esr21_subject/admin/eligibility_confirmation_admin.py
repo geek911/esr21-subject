@@ -22,3 +22,7 @@ class EligibilityConfirmationAdmin(ModelAdminBasicMixin,
                 'report_datetime',
                 'age_in_years',)}),
         audit_fieldset_tuple)
+
+    search_fields = ['screening_identifier']
+
+    readonly_fields = ('screening_identifier',)

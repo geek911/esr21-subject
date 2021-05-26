@@ -5,14 +5,19 @@ from edc_base.sites import SiteModelMixin
 from edc_identifier.model_mixins import NonUniqueSubjectIdentifierFieldMixin
 from edc_base.utils import get_utcnow
 
+from ..identifiers import ScreeningIdentifier
+
 
 class EligibilityConfirmation(NonUniqueSubjectIdentifierFieldMixin,
                               SiteModelMixin, BaseUuidModel):
 
+    identifier_cls = ScreeningIdentifier
+
     screening_identifier = models.CharField(
-        verbose_name='Screening Identifier',
+        verbose_name="Eligibility Identifier",
         max_length=36,
-        unique=True,)
+        unique=True,
+        editable=False)
 
     report_datetime = models.DateTimeField(
         verbose_name='Report Date and Time',
@@ -22,6 +27,14 @@ class EligibilityConfirmation(NonUniqueSubjectIdentifierFieldMixin,
     age_in_years = models.IntegerField(
         verbose_name='What is the participants age?',
         help_text='(Years)', )
+
+    def __str__(self):
+        return self.screening_identifier
+
+    def save(self, *args, **kwargs):
+        if not self.screening_identifier:
+            self.screening_identifier = self.identifier_cls().identifier
+        super().save(*args, **kwargs)
 
     class Meta:
         app_label = 'esr21_subject'

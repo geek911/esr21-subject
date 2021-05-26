@@ -1,5 +1,5 @@
 """
-ASGI config for vaccine_subject project.
+ASGI config for esr21_subject project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
