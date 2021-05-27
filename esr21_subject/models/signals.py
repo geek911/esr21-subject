@@ -31,14 +31,14 @@ def put_on_schedule(schedule_name, instance=None):
 
         try:
             onschedule_model_cls.objects.get(
-                subject_identifier=instance.national_identity,
+                subject_identifier=instance.subject_identifier,
                 schedule_name=schedule_name)
         except onschedule_model_cls.DoesNotExist:
             schedule.put_on_schedule(
-                subject_identifier=instance.national_identity,
+                subject_identifier=instance.subject_identifier,
                 onschedule_datetime=instance.consent_datetime,
                 schedule_name=schedule_name)
         else:
             schedule.refresh_schedule(
-                subject_identifier=instance.national_identity,
+                subject_identifier=instance.subject_identifier,
                 schedule_name=schedule_name)

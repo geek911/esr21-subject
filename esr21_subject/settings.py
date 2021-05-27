@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django_crypto_fields.apps.AppConfig',
+    'edc_base.apps.AppConfig',
     'edc_device.apps.AppConfig',
     'edc_registration.apps.AppConfig',
     'edc_visit_schedule.apps.AppConfig',
@@ -139,7 +140,6 @@ HOLIDAY_FILE = os.path.join(BASE_DIR, 'holidays.csv')
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-KEY_PATH = os.path.join(BASE_DIR, 'crypto_fields')
 
 if 'test' in sys.argv:
 

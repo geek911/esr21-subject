@@ -2,6 +2,7 @@ from django.db import models
 
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
+from edc_base.model_validators import datetime_not_future
 from edc_base.sites import SiteModelMixin
 from edc_base.utils import get_utcnow
 from edc_identifier.model_mixins import NonUniqueSubjectIdentifierFieldMixin
@@ -32,6 +33,7 @@ class EligibilityConfirmation(NonUniqueSubjectIdentifierFieldMixin, SiteModelMix
     report_datetime = models.DateTimeField(
         verbose_name='Report Date and Time',
         default=get_utcnow,
+        validators=[datetime_not_future],
         help_text='Date and time of report.')
 
     age_in_years = models.IntegerField(
@@ -58,6 +60,9 @@ class EligibilityConfirmation(NonUniqueSubjectIdentifierFieldMixin, SiteModelMix
     objects = EligibilityConfirmationManager()
 
     def __str__(self):
+        return self.screening_identifier
+
+    def natural_key(self):
         return self.screening_identifier
 
     def save(self, *args, **kwargs):

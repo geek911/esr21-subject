@@ -27,9 +27,9 @@ if settings.APP_NAME == 'esr21_subject':
                                  slots=[100, 100, 100, 100, 100])}
 
     class EdcProtocolAppConfig(BaseEdcProtocolAppConfigs):
-        protocol = 'BHP142'
-        protocol_name = 'Flourish Follow'
-        protocol_number = '142'
+        protocol = 'ADZ1222'
+        protocol_name = 'ADZ 1222 - ESR-21-21311'
+        protocol_number = '1222'
         protocol_title = ''
         study_open_datetime = datetime(
             2021, 4, 15, 0, 0, 0, tzinfo=gettz('UTC'))
