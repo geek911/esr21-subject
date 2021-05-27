@@ -6,6 +6,7 @@ from edc_constants.choices import YES_NO
 
 
 class MedicalHistory(SiteModelMixin, BaseUuidModel):
+
     medical_history = models.CharField(
         verbose_name="Does the subject have any relevant Medical History?",
         max_length=10,
