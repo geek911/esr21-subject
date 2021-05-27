@@ -13,17 +13,25 @@ from ..admin_site import esr21_subject_admin
 class VaccinationDetailsAdmin(ModelAdminBasicMixin,
                               SimpleHistoryAdmin,
                               admin.ModelAdmin):
+
     form = VaccinationDetailsForm
+
     fieldsets = (
         (None, {
             'fields': (
                 'report_datetime',
-                'date_of_vaccination',
                 'vaccination_place',
-                'vaccine_name',
-                'dosage_administered',
+                'vaccination_dt',
+                'route',
+                'location',
+                'location_other',
+                'admin_per_protocol',
+                'reason_not_per_protocol',
+                'dose_administered',
                 'batch_number',
                 'expiry_date',
                 'provider_name',
-                'next_vaccination',)}),
+                'next_vaccination',
+            ),
+        }),
         audit_fieldset_tuple)

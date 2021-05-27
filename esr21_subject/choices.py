@@ -47,6 +47,11 @@ OUTCOME = (
     (UNKNOWN, UNKNOWN),
 )
 
+ROUTE = (
+    ('intramuscular', 'Intramuscular'),
+    ('oral', 'Oral'),
+)
+
 STATUS = (
     ('resolved', 'Resolved'),
     ('ongoing', 'Ongoing'),)
@@ -55,6 +60,7 @@ TREATMENT_RELATIONSHIP = (
     ('related', 'Related'),
     ('not_related', 'Not Related'),
 )
+
 REASON = (
     ('not_collected', 'Not collected'),
     ('not_required', 'Not required at this visit'),
@@ -63,4 +69,10 @@ REASON = (
     ('equipment_malfunction', 'Equipment malfunction'),
     ('staff_unavailable', 'Staff unavailable'),
     ('no_information', 'No further information'),
+)
+
+VACCINATION_LOCATION = (
+    ('left_deltoid', 'Left deltoid'),
+    ('right_deltoid', 'Right deltoid'),
+    (OTHER, 'Other, specify'),
 )
