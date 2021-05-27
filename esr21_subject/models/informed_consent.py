@@ -12,6 +12,7 @@ from edc_base.utils import get_utcnow
 
 
 class InformedConsent(SiteModelMixin, BaseUuidModel):
+
     consent_datetime = models.DateTimeField(
         verbose_name='Consent datetime',
         default=get_utcnow,
@@ -45,11 +46,15 @@ class InformedConsent(SiteModelMixin, BaseUuidModel):
 
     witness_fname = FirstnameField(
         verbose_name='Witness first name',
-        max_length=5, )
+        max_length=5,
+        null=True,
+        blank=False)
 
     witness_lname = LastnameField(
         verbose_name='Witness last name',
-        max_length=5, )
+        max_length=5,
+        null=True,
+        blank=False)
 
     gender = models.CharField(
         verbose_name="Gender",
@@ -64,6 +69,7 @@ class InformedConsent(SiteModelMixin, BaseUuidModel):
         verbose_name="Is date of birth estimated?",
         null=True,
         blank=False)
+
     national_identity = IdentityField(
         verbose_name='Patient ID number (Omang)',
         # validators=[identity_check, ],

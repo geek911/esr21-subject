@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+import os
+import sys
 from pathlib import Path
 from django.core.management.color import color_style
 
@@ -32,7 +34,6 @@ SITE_ID = 1
 ALLOWED_HOSTS = []
 ETC_DIR = '/etc/'
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -45,6 +46,11 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django_crypto_fields.apps.AppConfig',
     'edc_device.apps.AppConfig',
+    'edc_registration.apps.AppConfig',
+    'edc_visit_schedule.apps.AppConfig',
+    'esr21_visit_schedule.apps.AppConfig',
+    'esr21_subject.apps.EdcFacilityAppConfig',
+    'esr21_subject.apps.EdcProtocolAppConfig',
     'esr21_subject.apps.AppConfig',
 ]
 
@@ -79,9 +85,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'esr21_subject.wsgi.application'
 
-AUTO_CREATE_KEYS = False
-
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
@@ -91,7 +94,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -116,7 +118,6 @@ LANGUAGES = (
     ('kck', 'Ikalanga'),
 )
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -132,8 +133,25 @@ USE_TZ = True
 
 COUNTRY = 'botswana'
 
+HOLIDAY_FILE = os.path.join(BASE_DIR, 'holidays.csv')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+KEY_PATH = os.path.join(BASE_DIR, 'crypto_fields')
+
+if 'test' in sys.argv:
+
+    class DisableMigrations:
+
+        def __contains__(self, item):
+            return True
+
+        def __getitem__(self, item):
+            return None
+
+    MIGRATION_MODULES = DisableMigrations()
+    PASSWORD_HASHERS = ('django.contrib.auth.hashers.MD5PasswordHasher',)
+    DEFAULT_FILE_STORAGE = 'inmemorystorage.InMemoryStorage'
+
