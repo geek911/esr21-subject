@@ -12,6 +12,7 @@ from edc_base.utils import get_utcnow
 
 
 class InformedConsent(SiteModelMixin, BaseUuidModel):
+
     consent_datetime = models.DateTimeField(
         verbose_name='Consent datetime',
         default=get_utcnow,
