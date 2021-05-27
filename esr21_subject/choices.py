@@ -100,3 +100,12 @@ TREATMENT_RELATIONSHIP = (
     ('related', 'Related'),
     ('not_related', 'Not Related'),
 )
+REASON = (
+    ('not_collected', 'Not collected'),
+    ('not_required', 'Not required at this visit'),
+    ('measurement_skipped', 'Measurement skipped at this visit'),
+    ('subject_refused', 'Subject refused'),
+    ('equipment_malfunction', 'Equipment malfunction'),
+    ('staff_unavailable', 'Staff unavailable'),
+    ('no_information', 'No further information'),
+)
