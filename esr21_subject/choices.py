@@ -76,6 +76,7 @@ REASON = (
     ('equipment_malfunction', 'Equipment malfunction'),
     ('staff_unavailable', 'Staff unavailable'),
     ('no_information', 'No further information'),
+    (NOT_APPLICABLE, 'Not applicable'),
 )
 HOSPITALIZATION_REASON = (
   ('covid19_related_symptoms', 'COVID-19 related symptoms'),

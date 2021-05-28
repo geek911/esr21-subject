@@ -15,6 +15,7 @@ from .list_models import SubjectRace
 
 class DemographicsData(NonUniqueSubjectIdentifierFieldMixin,
                        SiteModelMixin, BaseUuidModel):
+
     report_datetime = models.DateTimeField(
         verbose_name='Report Date and Time',
         default=get_utcnow,
@@ -37,7 +38,7 @@ class DemographicsData(NonUniqueSubjectIdentifierFieldMixin,
     childbearing_potential = models.CharField(
         max_length=25,
         verbose_name="Is the subject a woman of childbearing potential?",
-        choices=YES_NO)
+        choices=YES_NO_NA)
 
     if_no_reason = models.CharField(
         max_length=25,

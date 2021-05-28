@@ -81,4 +81,4 @@ class VaccinationDetails(NonUniqueSubjectIdentifierFieldMixin,
     class Meta:
         app_label = 'esr21_subject'
         verbose_name = 'Collection of vaccination details'
-        verbose_name_plural = 'Collection of vaccination detailsf'
+        verbose_name_plural = 'Collection of vaccination details'

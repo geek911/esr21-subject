@@ -52,5 +52,6 @@ class Hospitalization(NonUniqueSubjectIdentifierFieldMixin,
     )
 
     class Meta:
+        app_label = 'esr21_subject'
         verbose_name = 'Hospitalization'
         verbose_name_plural = 'Hospitalization'
