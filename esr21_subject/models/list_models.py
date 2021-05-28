@@ -23,3 +23,7 @@ class WcsDxAdult(ListModelMixin, BaseUuidModel):
 
 class SAECriteria(ListModelMixin, BaseUuidModel):
     pass
+
+
+class COVIDSymptoms(ListModelMixin, BaseUuidModel):
+    pass
