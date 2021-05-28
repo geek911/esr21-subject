@@ -22,7 +22,7 @@ def put_on_schedule(schedule_name, instance=None):
 
     if instance:
 
-        onschedule_model = 'flourish_caregiver.onschedule'
+        onschedule_model = 'esr21_subject.onschedule'
 
         _, schedule = site_visit_schedules.get_by_onschedule_model_schedule_name(
             onschedule_model=onschedule_model, name=schedule_name)

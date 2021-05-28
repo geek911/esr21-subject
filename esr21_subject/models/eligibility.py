@@ -5,9 +5,8 @@ MAX_AGE_OF_CONSENT = 60
 class Eligibility:
 
     def __init__(self, age_in_years=None, **kwargs):
-        """checks if participant is eligible otherwise'
-        ' error message is the reason for'
-        ' eligibility test failed."""
+        """ checks if participant is eligible otherwise
+            error message is the reason for eligibility test failed."""
         self.error_message = []
         self.age_in_years = age_in_years
         if self.age_in_years < MIN_AGE_OF_CONSENT:
