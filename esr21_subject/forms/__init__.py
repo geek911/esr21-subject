@@ -11,3 +11,4 @@ from .death_report_form import DeathReportForm
 from .medical_history_form import MedicalHistoryForm
 from .physical_exam_form import PhysicalExamForm
 from .pregnancy_form import PregnancyForm
+from .hospitalization_form import HospitalizationForm

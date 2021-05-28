@@ -11,3 +11,4 @@ from .death_report_admin import DeathReportAdmin
 from .medical_history_admin import MedicalHistoryAdmin
 from .physical_exam_admin import PhysicalExamAdmin
 from .pregnancy_admin import PregnancyAdmin
+from .hospitalization_admin import HospitalizationAdmin

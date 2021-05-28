@@ -13,3 +13,4 @@ from .physical_exam import PhysicalExam
 from .onschedule import OnSchedule
 from .signals import informed_consent_on_post_save
 from .pregnancy import Pregnancy
+from .hospitalization import Hospitalization

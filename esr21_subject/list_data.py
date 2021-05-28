@@ -18,6 +18,26 @@ list_data = {
         ('pacific_islander', 'Native Hawaiian or Other Pacific Islanders'),
         ('white', 'White'),
     ],
+    'esr32_subject.covidsymptoms':[
+        ('cough', 'Cough'),
+        ('fever', 'Fever'),
+        ('myalgia', 'Myalgia'),
+        ('diarrhea', 'Diarrhea'),
+        ('dyspnea', 'Dyspnea'),
+        ('fatigue_or-Malaise', 'Fatigue or Malaise'),
+        ('difficulty_in_breathing', 'Difficulty in breathing'),
+        ('loss_of_smell', 'Loss of Smell'),
+        ('loss_of_taste', 'Loss of Taste'),
+        ('chills', 'Chills'),
+        ('body_aches', 'Body aches'),
+        ('headache', 'Headache'),
+        ('sore_throat', 'Sore Throat'),
+        ('vomiting', 'Vomiting'),
+        ('congestion', 'Congestion'),
+        ('runny_nose', 'Runny Nose'),
+        ('nausea', 'Nausea'),
+        ('hospitalization_outcome', 'Hospitalization Outcome'),
+    ],
 }
 
 preload_data = PreloadData(

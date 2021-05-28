@@ -109,3 +109,23 @@ REASON = (
     ('staff_unavailable', 'Staff unavailable'),
     ('no_information', 'No further information'),
 )
+HOSPITALIZATION_STATUS = (
+  ('er', 'ER'),
+  ('regular_ward', 'Regular Ward'),
+  ('icu_hdu', 'ICU/HDU'),
+)
+HOSPITALIZATION_REASON = (
+  ('covid-19_related_symptoms', 'COVID-19 related symptoms'),
+  (OTHER, 'Other'),
+)
+HOSPITALIZATION_OUTCOME = (
+    ('expired', 'Expired'),
+    ('hospice_care', 'Home: Hospice Care'),
+    ('self_Care', 'Home: Self Care'),
+    ('hospice_medical_facility', 'Hospice Medical Facility'),
+    ('inpatient_rehabilitation', 'Inpatient Rehabilitation'),
+    ('intermediate_care_facility', 'Intermediate Care Facility'),
+    ('medical_advice', 'Left Against Medical Advice'),
+    ('long_term_care_hospital', 'Long Term Care Hospital'),
+    ('nursing_facility', 'Nursing Facility'),
+    ('unit/ward-change', 'Unit/Ward Change'),)
