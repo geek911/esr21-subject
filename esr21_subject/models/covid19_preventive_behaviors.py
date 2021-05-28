@@ -54,5 +54,5 @@ class Covid19PreventiveBehaviors(NonUniqueSubjectIdentifierFieldMixin,
         choices=AGREE, )
 
     class Meta:
-        verbose_name = "Covid19 Preventive Behaviors"
-        verbose_name_plural = "Covid19 Preventive Behaviors"
+        verbose_name = 'COVID Preventive Behaviors'
+        verbose_name_plural = 'COVID Preventive Behaviors'

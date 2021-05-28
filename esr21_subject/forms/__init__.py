@@ -5,6 +5,7 @@ from .demographics_data_form import DemographicsDataForm
 from .vaccination_details_form import VaccinationDetailsForm
 from .adverse_event_form import AdverseEventForm
 from .pregnancy_status_form import PregnancyStatusForm
+from .rapid_hiv_testing_form import RapidHIVTestingForm
 from .serious_adverse_event_form import SeriousAdverseEventForm
 from .covid19_preventive_behaviors_form import Covid19PreventiveBehaviorsForm
 from .medical_history_form import MedicalHistoryForm

@@ -1,4 +1,4 @@
-from edc_constants.constants import OTHER, NOT_APPLICABLE, UNKNOWN
+from edc_constants.constants import OTHER, NOT_APPLICABLE, UNKNOWN, POS, NEG, IND
 
 
 ACTION_TAKEN = (
@@ -47,6 +47,13 @@ OUTCOME = (
     (UNKNOWN, UNKNOWN),
 )
 
+
+POS_NEG_IND = (
+    (POS, 'Positive'),
+    (NEG, 'Negative'),
+    (IND, 'Indeterminate')
+)
+
 ROUTE = (
     ('intramuscular', 'Intramuscular'),
     ('oral', 'Oral'),
@@ -71,20 +78,22 @@ REASON = (
     ('no_information', 'No further information'),
 )
 HOSPITALIZATION_REASON = (
-  ('covid-19_related_symptoms', 'COVID-19 related symptoms'),
+  ('covid19_related_symptoms', 'COVID-19 related symptoms'),
   (OTHER, 'Other'),
 )
+
 HOSPITALIZATION_OUTCOME = (
     ('expired', 'Expired'),
     ('hospice_care', 'Home: Hospice Care'),
-    ('self_Care', 'Home: Self Care'),
+    ('self_care', 'Home: Self Care'),
     ('hospice_medical_facility', 'Hospice Medical Facility'),
     ('inpatient_rehabilitation', 'Inpatient Rehabilitation'),
     ('intermediate_care_facility', 'Intermediate Care Facility'),
     ('medical_advice', 'Left Against Medical Advice'),
     ('long_term_care_hospital', 'Long Term Care Hospital'),
     ('nursing_facility', 'Nursing Facility'),
-    ('unit/ward-change', 'Unit/Ward Change'),)
+    ('unit_ward_change', 'Unit/Ward Change'),
+)
 
 VACCINATION_LOCATION = (
     ('left_deltoid', 'Left deltoid'),
