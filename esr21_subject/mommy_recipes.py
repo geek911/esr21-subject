@@ -13,10 +13,11 @@ informedconsent = Recipe(
     InformedConsent,
     first_name=fake.first_name,
     last_name=fake.last_name,
-    national_identity=seq('123427675'),
+    identity=seq('123427675'),
+    confirm_identity=seq('123427675'),
     is_literate=YES,
-    reviewed_consent=YES,
-    answered_all_questions=YES,
-    asked_questions=YES,
-    have_verified=YES,
-    copy_of_consent=YES)
+    consent_reviewed=YES,
+    study_questions=YES,
+    assessment_score=YES,
+    consent_signature=YES,
+    consent_copy=YES)

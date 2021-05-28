@@ -21,12 +21,13 @@ class TestVisitScheduleSetup(TestCase):
             'esr21_subject.eligibilityconfirmation',)
 
         informed_consent = mommy.make_recipe(
-            'esr21_subject.informedconsent',)
+            'esr21_subject.informedconsent',
+            subject_identifier='123-9876')
 
         self.assertEqual(OnSchedule.objects.filter(
-            subject_identifier=informed_consent.national_identity,
+            subject_identifier=informed_consent.subject_identifier,
             schedule_name='esr21_enrol_schedule').count(), 1)
 
         self.assertEqual(OnSchedule.objects.filter(
-            subject_identifier=informed_consent.national_identity,
+            subject_identifier=informed_consent.subject_identifier,
             schedule_name='esr21_fu_schedule').count(), 1)

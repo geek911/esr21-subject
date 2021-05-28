@@ -46,12 +46,15 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django_crypto_fields.apps.AppConfig',
     'edc_base.apps.AppConfig',
+    'edc_consent.apps.AppConfig',
     'edc_device.apps.AppConfig',
     'edc_registration.apps.AppConfig',
     'edc_visit_schedule.apps.AppConfig',
     'esr21_visit_schedule.apps.AppConfig',
     'esr21_subject.apps.EdcFacilityAppConfig',
     'esr21_subject.apps.EdcProtocolAppConfig',
+    'esr21_subject.apps.EdcAppointmentAppConfig',
+    'esr21_subject.apps.EdcTimepointAppConfig',
     'esr21_subject.apps.AppConfig',
 ]
 
@@ -140,6 +143,8 @@ HOLIDAY_FILE = os.path.join(BASE_DIR, 'holidays.csv')
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+DASHBOARD_URL_NAMES = {}
 
 if 'test' in sys.argv:
 

@@ -14,8 +14,14 @@ class AppConfig(DjangoAppConfig):
 
 
 if settings.APP_NAME == 'esr21_subject':
+    from edc_appointment.appointment_config import AppointmentConfig
+    from edc_appointment.apps import AppConfig as BaseEdcAppointmentAppConfig
+    from edc_appointment.constants import COMPLETE_APPT
     from edc_facility.apps import AppConfig as BaseEdcFacilityAppConfig
     from edc_protocol.apps import AppConfig as BaseEdcProtocolAppConfigs
+    from edc_timepoint.apps import AppConfig as BaseEdcTimepointAppConfig
+    from edc_timepoint.timepoint import Timepoint
+    from edc_timepoint.timepoint_collection import TimepointCollection
     from dateutil.relativedelta import MO, TU, WE, TH, FR, SA, SU
 
     class EdcFacilityAppConfig(BaseEdcFacilityAppConfig):
@@ -35,3 +41,24 @@ if settings.APP_NAME == 'esr21_subject':
             2021, 4, 15, 0, 0, 0, tzinfo=gettz('UTC'))
         study_close_datetime = datetime(
             2025, 12, 1, 0, 0, 0, tzinfo=gettz('UTC'))
+
+    class EdcAppointmentAppConfig(BaseEdcAppointmentAppConfig):
+        configurations = [
+            AppointmentConfig(
+                model='edc_appointment.appointment',
+                related_visit_model='esr21_subject.subjectvisit',
+                appt_type='clinic'), ]
+
+    class EdcTimepointAppConfig(BaseEdcTimepointAppConfig):
+        timepoints = TimepointCollection(
+            timepoints=[
+                Timepoint(
+                    model='edc_appointment.appointment',
+                    datetime_field='appt_datetime',
+                    status_field='appt_status',
+                    closed_status=COMPLETE_APPT),
+                Timepoint(
+                    model='edc_appointment.historicalappointment',
+                    datetime_field='appt_datetime',
+                    status_field='appt_status',
+                    closed_status=COMPLETE_APPT), ])
