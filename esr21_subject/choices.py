@@ -1,4 +1,6 @@
 from edc_constants.constants import OTHER, NOT_APPLICABLE, UNKNOWN, POS, NEG, IND
+from edc_visit_tracking.constants import SCHEDULED, UNSCHEDULED, LOST_VISIT
+from edc_visit_tracking.constants import MISSED_VISIT, COMPLETED_PROTOCOL_VISIT
 
 
 ACTION_TAKEN = (
@@ -78,6 +80,7 @@ REASON = (
     ('no_information', 'No further information'),
     (NOT_APPLICABLE, 'Not applicable'),
 )
+
 HOSPITALIZATION_REASON = (
   ('covid19_related_symptoms', 'COVID-19 related symptoms'),
   (OTHER, 'Other'),
@@ -100,4 +103,21 @@ VACCINATION_LOCATION = (
     ('left_deltoid', 'Left deltoid'),
     ('right_deltoid', 'Right deltoid'),
     (OTHER, 'Other, specify'),
+)
+
+VISIT_INFO_SOURCE = (
+    ('clinic_visit_w_subject', 'Clinic visit with participant'),
+    ('other_contact_w_subject', 'Other contact with participant (i.e telephone call)'),
+    ('contact_w_health_worker', 'Contact with health care worker'),
+    ('Contact_w_family_design',
+     'Contact with family or designated person who can provide information'),
+    (OTHER, 'Other,specify'),
+)
+
+VISIT_REASON = (
+    (SCHEDULED, 'Scheduled visit/contact'),
+    (MISSED_VISIT, 'Missed Scheduled visit'),
+    (UNSCHEDULED, 'Unscheduled visit/contact'),
+    (LOST_VISIT, 'Lost to follow-up (use only when taking subject off study)'),
+    (COMPLETED_PROTOCOL_VISIT, 'Subject has completed the study'),
 )

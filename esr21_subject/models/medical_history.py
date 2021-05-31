@@ -1,19 +1,19 @@
 from django.db import models
 
-from edc_base.model_mixins import BaseUuidModel
-from edc_base.sites import SiteModelMixin
 from edc_constants.choices import YES_NO
 
+from .model_mixins import CrfModelMixin
 
-class MedicalHistory(SiteModelMixin, BaseUuidModel):
+
+class MedicalHistory(CrfModelMixin):
 
     medical_history = models.CharField(
-        verbose_name="Does the subject have any relevant Medical History?",
+        verbose_name='Does the subject have any relevant Medical History?',
         max_length=10,
         choices=YES_NO, )
 
     medical_history_diagnosis = models.CharField(
-        verbose_name="Medical History Diagnosis",
+        verbose_name='Medical History Diagnosis',
         max_length=32, )
 
     start_date = models.DateField(
@@ -23,21 +23,22 @@ class MedicalHistory(SiteModelMixin, BaseUuidModel):
         verbose_name='End Date (DD MMM YYYY)', )
 
     ongoing = models.CharField(
-        verbose_name="Ongoing",
+        verbose_name='Ongoing',
         max_length=32, )
 
     subject_taking_medication = models.CharField(
-        verbose_name="Is the subject taking medication related to "
-                     "this condition?",
+        verbose_name='Is the subject taking medication related to '
+                     'this condition?',
         max_length=10,
         choices=YES_NO,
-        help_text="(If Yes,please record on CM form)")
+        help_text='(If Yes,please record on CM form)')
 
     cm_log_line = models.CharField(
         max_length=200,
         verbose_name='CM log line')
 
 
-class Meta:
-    verbose_name = "Medical History"
-    verbose_name_plural = "Medical History"
+class Meta(CrfModelMixin.Meta):
+    app_label = 'esr21_subject'
+    verbose_name = 'Medical History'
+    verbose_name_plural = 'Medical History'

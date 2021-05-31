@@ -1,12 +1,10 @@
 from django import forms
+
+from .form_mixins import SubjectModelFormMixin
 from ..models import AdverseEvent
 
 
-class AdverseEventForm(forms.ModelForm):
-
-    subject_identifier = forms.CharField(
-        label='Subject Identifier',
-        widget=forms.TextInput(attrs={'readonly': 'readonly'}))
+class AdverseEventForm(SubjectModelFormMixin, forms.ModelForm):
 
     class Meta:
         model = AdverseEvent

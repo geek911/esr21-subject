@@ -1,22 +1,20 @@
 from django.contrib import admin
 
-from edc_model_admin import ModelAdminBasicMixin
 from edc_model_admin.model_admin_audit_fields_mixin import audit_fieldset_tuple
-from simple_history.admin import SimpleHistoryAdmin
 
+from .modeladmin_mixins import CrfModelAdminMixin
 from ..forms import Covid19PreventiveBehaviorsForm
 from ..models import Covid19PreventiveBehaviors
 from ..admin_site import esr21_subject_admin
 
 
 @admin.register(Covid19PreventiveBehaviors, site=esr21_subject_admin)
-class Covid19PreventiveBehaviorsAdmin(ModelAdminBasicMixin,
-                                      SimpleHistoryAdmin,
-                                      admin.ModelAdmin):
+class Covid19PreventiveBehaviorsAdmin(CrfModelAdminMixin, admin.ModelAdmin):
     form = Covid19PreventiveBehaviorsForm
     fieldsets = (
         (None, {
             'fields': (
+                'subject_visit',
                 'report_datetime',
                 'people_sneezing',
                 'avoid_touching',

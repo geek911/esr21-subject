@@ -1,19 +1,10 @@
 from django.db import models
 
-from edc_base.model_mixins import BaseUuidModel
-from edc_base.sites import SiteModelMixin
-from edc_identifier.model_mixins import NonUniqueSubjectIdentifierFieldMixin
-from edc_base.utils import get_utcnow
+from .model_mixins import CrfModelMixin
 from ..choices import AGREE
 
 
-class Covid19PreventiveBehaviors(NonUniqueSubjectIdentifierFieldMixin,
-                                 SiteModelMixin, BaseUuidModel):
-
-    report_datetime = models.DateTimeField(
-        verbose_name='Report Date and Time',
-        default=get_utcnow,
-        help_text='Date and time of report.')
+class Covid19PreventiveBehaviors(CrfModelMixin):
 
     people_sneezing = models.CharField(
         verbose_name='It really bothers me when people sneeze '
@@ -53,6 +44,7 @@ class Covid19PreventiveBehaviors(NonUniqueSubjectIdentifierFieldMixin,
         max_length=20,
         choices=AGREE, )
 
-    class Meta:
+    class Meta(CrfModelMixin.Meta):
+        app_label = 'esr21_subject'
         verbose_name = 'COVID Preventive Behaviors'
         verbose_name_plural = 'COVID Preventive Behaviors'

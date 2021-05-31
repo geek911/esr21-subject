@@ -1,9 +1,10 @@
 from django import forms
 
+from .form_mixins import SubjectModelFormMixin
 from ..models import RapidHIVTesting
 
 
-class RapidHIVTestingForm(forms.ModelForm):
+class RapidHIVTestingForm(SubjectModelFormMixin, forms.ModelForm):
 
     class Meta:
         model = RapidHIVTesting

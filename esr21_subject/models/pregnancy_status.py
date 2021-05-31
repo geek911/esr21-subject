@@ -1,17 +1,12 @@
-from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
-from edc_base.model_mixins import BaseUuidModel
-from edc_base.sites import SiteModelMixin
-from edc_base.model_fields import OtherCharField
-from edc_identifier.model_mixins import NonUniqueSubjectIdentifierFieldMixin
-from edc_base.utils import get_utcnow
 from edc_constants.choices import YES_NO
+
+from .model_mixins import CrfModelMixin
 from ..maternal_choices import OUTCOME
 
 
-class PregnancyStatus(NonUniqueSubjectIdentifierFieldMixin,
-                      SiteModelMixin, BaseUuidModel):
+class PregnancyStatus(CrfModelMixin):
 
     start_date_menstrual_period = models.DateField(
         verbose_name='Start Date of Last Menstrual Period (DD MMM YYYY)',
@@ -75,6 +70,7 @@ class PregnancyStatus(NonUniqueSubjectIdentifierFieldMixin,
         null=True,
         blank=True)
 
-    class Meta:
-        verbose_name = "Pregnancy Status"
-        verbose_name_plural = "Pregnancy Status"
+    class Meta(CrfModelMixin.Meta):
+        app_label = 'esr21_subject'
+        verbose_name = 'Pregnancy Status'
+        verbose_name_plural = 'Pregnancy Status'

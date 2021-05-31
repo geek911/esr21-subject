@@ -1,16 +1,14 @@
 from django.db import models
-from edc_base.model_mixins import BaseUuidModel
-from edc_base.sites import SiteModelMixin
 from edc_base.model_fields import OtherCharField
-from edc_identifier.model_mixins import NonUniqueSubjectIdentifierFieldMixin
 from edc_constants.choices import YES_NO
+
 from ..choices import (HOSPITALIZATION_STATUS,
                        HOSPITALIZATION_REASON, HOSPITALIZATION_OUTCOME)
+from .model_mixins import CrfModelMixin
 from .list_models import COVIDSymptoms
 
 
-class Hospitalization(NonUniqueSubjectIdentifierFieldMixin,
-                      SiteModelMixin, BaseUuidModel):
+class Hospitalization(CrfModelMixin):
 
     status = models.CharField(
         verbose_name='Hospitalization Status',
@@ -51,7 +49,7 @@ class Hospitalization(NonUniqueSubjectIdentifierFieldMixin,
         choices=HOSPITALIZATION_OUTCOME,
     )
 
-    class Meta:
+    class Meta(CrfModelMixin.Meta):
         app_label = 'esr21_subject'
         verbose_name = 'Hospitalization'
         verbose_name_plural = 'Hospitalization'

@@ -5,6 +5,7 @@ from django.forms import Textarea
 from edc_model_admin import audit_fieldset_tuple
 from edc_model_admin.inlines import StackedInlineMixin
 
+from .modeladmin_mixins import CrfModelAdminMixin
 from ..forms import AdverseEventForm, SeriousAdverseEventForm
 from ..models import AdverseEvent, SeriousAdverseEvent
 from ..admin_site import esr21_subject_admin
@@ -45,7 +46,7 @@ class SeriousAdverseEventInlineAdmin(StackedInlineMixin, admin.StackedInline):
 
 
 @admin.register(AdverseEvent, site=esr21_subject_admin)
-class AdverseEventAdmin(admin.ModelAdmin):
+class AdverseEventAdmin(CrfModelAdminMixin, admin.ModelAdmin):
 
     form = AdverseEventForm
     inlines = [SeriousAdverseEventInlineAdmin, ]
@@ -60,7 +61,7 @@ class AdverseEventAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
             'fields': (
-                'subject_identifier',
+                'subject_visit',
                 'report_datetime',
                 'event_details',
                 'start_date',

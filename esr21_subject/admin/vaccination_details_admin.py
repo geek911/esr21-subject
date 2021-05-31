@@ -1,24 +1,22 @@
 from django.contrib import admin
 
-from edc_model_admin import ModelAdminBasicMixin
 from edc_model_admin.model_admin_audit_fields_mixin import audit_fieldset_tuple
-from simple_history.admin import SimpleHistoryAdmin
 
+from .modeladmin_mixins import CrfModelAdminMixin
 from ..forms import VaccinationDetailsForm
 from ..models import VaccinationDetails
 from ..admin_site import esr21_subject_admin
 
 
 @admin.register(VaccinationDetails, site=esr21_subject_admin)
-class VaccinationDetailsAdmin(ModelAdminBasicMixin,
-                              SimpleHistoryAdmin,
-                              admin.ModelAdmin):
+class VaccinationDetailsAdmin(CrfModelAdminMixin, admin.ModelAdmin):
 
     form = VaccinationDetailsForm
 
     fieldsets = (
         (None, {
             'fields': (
+                'subject_visit',
                 'report_datetime',
                 'vaccination_place',
                 'vaccination_dt',

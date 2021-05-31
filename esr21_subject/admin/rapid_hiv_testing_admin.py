@@ -1,23 +1,21 @@
 from django.contrib import admin
 from edc_model_admin import audit_fieldset_tuple
-from edc_model_admin import ModelAdminBasicMixin
-from simple_history.admin import SimpleHistoryAdmin
 
+from .modeladmin_mixins import CrfModelAdminMixin
 from ..admin_site import esr21_subject_admin
 from ..forms import RapidHIVTestingForm
 from ..models import RapidHIVTesting
 
 
 @admin.register(RapidHIVTesting, site=esr21_subject_admin)
-class RapidHIVTestingAdmin(ModelAdminBasicMixin, SimpleHistoryAdmin,
-                           admin.ModelAdmin):
+class RapidHIVTestingAdmin(CrfModelAdminMixin, admin.ModelAdmin):
 
     form = RapidHIVTestingForm
 
     fieldsets = (
         (None, {
             'fields': [
-                'subject_identifier',
+                'subject_visit',
                 'report_datetime',
                 'rapid_test_done',
                 'result_date',

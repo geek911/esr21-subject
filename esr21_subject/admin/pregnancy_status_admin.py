@@ -2,13 +2,15 @@ from django.contrib import admin
 from django.db import models
 from django.forms import Textarea
 
+from .modeladmin_mixins import CrfModelAdminMixin
 from ..forms import PregnancyStatusForm
 from ..models import PregnancyStatus
 from ..admin_site import esr21_subject_admin
 
 
 @admin.register(PregnancyStatus, site=esr21_subject_admin)
-class PregnancyStatusAdmin(admin.ModelAdmin):
+class PregnancyStatusAdmin(CrfModelAdminMixin, admin.ModelAdmin):
+
     form = PregnancyStatusForm
 
     formfield_overrides = {
@@ -21,6 +23,8 @@ class PregnancyStatusAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
             'fields': (
+                'subject_visit',
+                'report_datetime',
                 'start_date_menstrual_period',
                 'expected_delivery',
                 'using_contraceptives',
@@ -41,5 +45,4 @@ class PregnancyStatusAdmin(admin.ModelAdmin):
     )
 
     radio_fields = {'using_contraceptives': admin.VERTICAL,
-                    'birth_defects': admin.VERTICAL,
-                    }
+                    'birth_defects': admin.VERTICAL, }

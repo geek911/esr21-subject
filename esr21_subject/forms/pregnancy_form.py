@@ -1,8 +1,10 @@
 from django import forms
+
+from .form_mixins import SubjectModelFormMixin
 from ..models import Pregnancy
 
 
-class PregnancyForm(forms.ModelForm):
+class PregnancyForm(SubjectModelFormMixin, forms.ModelForm):
 
     class Meta:
         model = Pregnancy

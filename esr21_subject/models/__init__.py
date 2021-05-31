@@ -7,6 +7,7 @@ from .adverse_event import AdverseEvent
 from .pregnancy_status import PregnancyStatus
 from .rapid_hiv_testing import RapidHIVTesting
 from .serious_adverse_event import SeriousAdverseEvent
+from .subject_visit import SubjectVisit
 from .covid19_preventive_behaviors import Covid19PreventiveBehaviors
 from .medical_history import MedicalHistory
 from .physical_exam import PhysicalExam

@@ -1,8 +1,10 @@
 from django import forms
+
+from .form_mixins import SubjectModelFormMixin
 from ..models import DemographicsData
 
 
-class DemographicsDataForm(forms.ModelForm):
+class DemographicsDataForm(SubjectModelFormMixin, forms.ModelForm):
 
     class Meta:
         model = DemographicsData

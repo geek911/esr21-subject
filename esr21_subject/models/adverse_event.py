@@ -1,26 +1,14 @@
 from django.db import models
 
 from edc_base.model_fields import OtherCharField
-from edc_base.model_mixins import BaseUuidModel
-from edc_base.model_validators import datetime_not_future
-from edc_base.sites import SiteModelMixin
-from edc_identifier.model_mixins import NonUniqueSubjectIdentifierFieldMixin
-from edc_base.utils import get_utcnow
 from edc_constants.choices import YES_NO
 
+from .model_mixins import CrfModelMixin
 from ..choices import ACTION_TAKEN, STATUS, AE_GRADE, TREATMENT_RELATIONSHIP
 from ..choices import OUTCOME
 
 
-class AdverseEvent(NonUniqueSubjectIdentifierFieldMixin,
-                   SiteModelMixin, BaseUuidModel):
-
-    report_datetime = models.DateTimeField(
-        verbose_name='Report Date and Time',
-        default=get_utcnow,
-        validators=[datetime_not_future, ],
-        help_text='Date and time of report.')
-
+class AdverseEvent(CrfModelMixin):
     """"Adverse Event"""""
 
     event_details = models.TextField(
@@ -40,7 +28,7 @@ class AdverseEvent(NonUniqueSubjectIdentifierFieldMixin,
         blank=True)
 
     ae_grade = models.CharField(
-        verbose_name="FDA Severity Grading",
+        verbose_name='FDA Severity Grading',
         max_length=30,
         choices=AE_GRADE, )
 
@@ -82,7 +70,7 @@ class AdverseEvent(NonUniqueSubjectIdentifierFieldMixin,
         verbose_name='Was the event an AE of Special Interest?',
         max_length=3,
         choices=YES_NO,
-        help_text=(' (If Yes, check all serious criteria that apply on the '
+        help_text=('(If Yes, check all serious criteria that apply on the '
                    'corresponding SAE form.)'), )
 
     medically_attended_ae = models.CharField(
@@ -109,7 +97,7 @@ class AdverseEvent(NonUniqueSubjectIdentifierFieldMixin,
         max_length=3,
         choices=YES_NO, )
 
-    class Meta:
+    class Meta(CrfModelMixin.Meta):
         app_label = 'esr21_subject'
-        verbose_name = "Adverse Event"
-        verbose_name_plural = "Adverse Events"
+        verbose_name = 'Adverse Event'
+        verbose_name_plural = 'Adverse Events'

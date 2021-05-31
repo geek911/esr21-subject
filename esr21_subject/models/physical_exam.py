@@ -1,22 +1,14 @@
 from django.db import models
 
-from edc_base.model_mixins import BaseUuidModel
-from edc_base.sites import SiteModelMixin
-from edc_identifier.model_mixins import NonUniqueSubjectIdentifierFieldMixin
-from edc_base.utils import get_utcnow
 from edc_constants.choices import YES_NO
+
+from .model_mixins import CrfModelMixin
 from ..choices import REASON
 
 
-class PhysicalExam(NonUniqueSubjectIdentifierFieldMixin,
-                   SiteModelMixin, BaseUuidModel):
-
-    report_datetime = models.DateTimeField(
-        verbose_name='Report Date and Time',
-        default=get_utcnow,
-        help_text='Date and time of report.')
-
+class PhysicalExam(CrfModelMixin):
     """Physical Examination"""
+
     physical_exam = models.CharField(
         verbose_name='Was the physical examination performed?',
         max_length=10,
@@ -96,7 +88,7 @@ class PhysicalExam(NonUniqueSubjectIdentifierFieldMixin,
         blank=True,
         null=True)
 
-    class Meta:
+    class Meta(CrfModelMixin.Meta):
         app_label = 'esr21_subject'
         verbose_name = 'Physical examination and Vital signs'
         verbose_name_plural = 'Physical examination and Vital signs'
