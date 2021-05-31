@@ -1,6 +1,7 @@
 from django.db import models
 from django_crypto_fields.fields import EncryptedCharField
 from django.utils.safestring import mark_safe
+from django.contrib.sites.models import Site
 
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.model_validators import CellNumber, TelephoneNumber
@@ -12,6 +13,10 @@ from edc_identifier.model_mixins import NonUniqueSubjectIdentifierFieldMixin
 
 class SubjectLocator(NonUniqueSubjectIdentifierFieldMixin,
                      SiteModelMixin, BaseUuidModel):
+
+    site = models.ForeignKey(
+        Site, related_name='site_name', on_delete=models.PROTECT, null=True, editable=False)
+
     report_datetime = models.DateTimeField(
         verbose_name='Report Date and Time',
         default=get_utcnow,)
