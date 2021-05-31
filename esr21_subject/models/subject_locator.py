@@ -2,17 +2,20 @@ from django.db import models
 from django_crypto_fields.fields import EncryptedCharField
 from django.utils.safestring import mark_safe
 from django.contrib.sites.models import Site
-
+from edc_action_item.model_mixins import ActionModelMixin
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.model_validators import CellNumber, TelephoneNumber
 from edc_base.sites import SiteModelMixin
 from edc_base.utils import get_utcnow
 from edc_constants.choices import YES_NO, YES_NO_NA
-from edc_identifier.model_mixins import NonUniqueSubjectIdentifierFieldMixin
+from ..action_items import CONTACT_INFORMATION_ACTION
 
 
-class SubjectLocator(NonUniqueSubjectIdentifierFieldMixin,
-                     SiteModelMixin, BaseUuidModel):
+class SubjectLocator(ActionModelMixin, SiteModelMixin, BaseUuidModel):
+
+    action_name = CONTACT_INFORMATION_ACTION
+
+    tracking_identifier_prefix = 'SL'
 
     site = models.ForeignKey(
         Site, related_name='site_name', on_delete=models.PROTECT, null=True, editable=False)
@@ -30,7 +33,7 @@ class SubjectLocator(NonUniqueSubjectIdentifierFieldMixin,
                      'staff to make home visits for follow-up purposes during '
                      'the study?',
         max_length=5,
-        choices=YES_NO, )
+        choices=YES_NO,)
 
     physical_address = models.CharField(
         verbose_name='Physical address with detailed description',
@@ -43,7 +46,7 @@ class SubjectLocator(NonUniqueSubjectIdentifierFieldMixin,
                      'study staff to call her for follow-up purposes '
                      'during the study?',
         max_length=5,
-        choices=YES_NO, )
+        choices=YES_NO,)
 
     participant_cell = EncryptedCharField(
         verbose_name="Cell number",
@@ -104,7 +107,7 @@ class SubjectLocator(NonUniqueSubjectIdentifierFieldMixin,
                      'staff to contact anyone else for follow-up purposes'
                      ' during the study?',
         max_length=5,
-        choices=YES_NO, )
+        choices=YES_NO,)
 
     full_name = EncryptedCharField(
         verbose_name="Full names of contact person",
@@ -123,7 +126,7 @@ class SubjectLocator(NonUniqueSubjectIdentifierFieldMixin,
         verbose_name='Full physical address',
         max_length=50,
         null=True,
-        blank=True, )
+        blank=True,)
 
     cell = EncryptedCharField(
         verbose_name="Cell number",
