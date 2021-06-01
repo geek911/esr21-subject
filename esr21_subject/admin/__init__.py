@@ -4,6 +4,7 @@ from .demographics_data_admin import DemographicDataAdmin
 from .vaccination_details_admin import VaccinationDetailsAdmin
 from .adverse_event_admin import AdverseEventAdmin
 from .adverse_event_admin import SeriousAdverseEventAdmin
+from .adverse_event_admin import SpecialInterestAdverseEventAdmin
 from .pregnancy_status_admin import PregnancyStatusAdmin
 from .rapid_hiv_testing_admin import RapidHIVTestingAdmin
 from .subject_visit_admin import SubjectVisitAdmin

@@ -6,6 +6,7 @@ from .adverse_event import AdverseEvent
 from .pregnancy_status import PregnancyStatus
 from .rapid_hiv_testing import RapidHIVTesting
 from .serious_adverse_event import SeriousAdverseEvent
+from .special_interest_adverse_event import SpecialInterestAdverseEvent
 from .subject_visit import SubjectVisit
 from .covid19_preventive_behaviors import Covid19PreventiveBehaviors
 from .personal_contact_info import PersonalContactInfo

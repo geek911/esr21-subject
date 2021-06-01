@@ -17,6 +17,21 @@ AE_GRADE = (
     ('life_threatening', 'Life-threatening (Grade 4)'),
     ('fatal', 'Fatal (Grade 5)'),
 )
+
+AESI_CATEGORY = (
+    ('generalized_convulsion', 'Generalized convulsion'),
+    ('guillain_barre_syndrome', 'Guillain-Barre syndrome'),
+    ('acute_disseminated', 'Acute disseminated encephalomyelitis'),
+    ('other_neuro_events', 'Other neurologic events'),
+    ('thrombotic', 'Thrombotic or thromboembolic or neurovascular events'),
+    ('Thrombocytopenia', 'Thrombocytopenia'),
+    ('vasculitides', 'Vasculitides'),
+    ('anaphylaxis', 'Anaphylaxis'),
+    ('vaccine_assoc_resp_disease',
+     'Vaccine-associated enhanced respiratory disease'),
+    ('immune_mediated_cond', 'Potential immune-mediated conditions'),
+)
+
 AGREE = (
     ('strongly_disagree', 'Strongly disagree'),
     ('undecided', 'Undecided'),

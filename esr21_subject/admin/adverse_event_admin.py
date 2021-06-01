@@ -7,7 +7,9 @@ from edc_model_admin.inlines import StackedInlineMixin
 
 from .modeladmin_mixins import CrfModelAdminMixin
 from ..forms import AdverseEventForm, SeriousAdverseEventForm
+from ..forms import SpecialInterestAdverseEventForm
 from ..models import AdverseEvent, SeriousAdverseEvent
+from ..models import SpecialInterestAdverseEvent
 from ..admin_site import esr21_subject_admin
 
 
@@ -16,7 +18,7 @@ class SeriousAdverseEventInlineAdmin(StackedInlineMixin, admin.StackedInline):
     model = SeriousAdverseEvent
     form = SeriousAdverseEventForm
 
-    extra = 1
+    extra = 0
     max_num = 3
 
     fieldsets = (
@@ -45,11 +47,36 @@ class SeriousAdverseEventInlineAdmin(StackedInlineMixin, admin.StackedInline):
     filter_horizontal = ('seriousness_criteria', )
 
 
+class SpecialInterestAdverseEventInlineAdmin(StackedInlineMixin, admin.StackedInline):
+
+    model = SpecialInterestAdverseEvent
+    form = SpecialInterestAdverseEventForm
+
+    extra = 0
+    max_num = 3
+
+    fieldsets = (
+        (None, {
+            'fields': [
+                'start_date',
+                'end_date',
+                'date_aware_of',
+                'aesi_category',
+                'rationale',
+                'describe_aesi_treatmnt',
+                'additional_info',
+                ]}
+         ),)
+
+    radio_fields = {'aesi_category': admin.VERTICAL, }
+
+
 @admin.register(AdverseEvent, site=esr21_subject_admin)
 class AdverseEventAdmin(CrfModelAdminMixin, admin.ModelAdmin):
 
     form = AdverseEventForm
-    inlines = [SeriousAdverseEventInlineAdmin, ]
+    inlines = [SeriousAdverseEventInlineAdmin,
+               SpecialInterestAdverseEventInlineAdmin]
 
     formfield_overrides = {
         models.TextField: {'widget': Textarea(
@@ -108,7 +135,7 @@ class SeriousAdverseEventAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': [
+            'fields': (
                 'adverse_event',
                 'start_date',
                 'resolution_date',
@@ -124,10 +151,37 @@ class SeriousAdverseEventAdmin(admin.ModelAdmin):
                 'describe_sae_treatmnt',
                 'test_performed',
                 'additional_info',
-                ]}
-         ),)
+            ),
+        }),
+    )
 
     radio_fields = {'event_abate': admin.VERTICAL,
                     'event_reappear': admin.VERTICAL, }
 
     filter_horizontal = ('seriousness_criteria', )
+
+
+@admin.register(SpecialInterestAdverseEvent, site=esr21_subject_admin)
+class SpecialInterestAdverseEventAdmin(admin.ModelAdmin):
+
+    form = SpecialInterestAdverseEventForm
+
+    extra = 0
+    max_num = 3
+
+    fieldsets = (
+        (None, {
+            'fields': (
+                'adverse_event',
+                'start_date',
+                'end_date',
+                'date_aware_of',
+                'aesi_category',
+                'rationale',
+                'describe_aesi_treatmnt',
+                'additional_info',
+            ),
+        }),
+    )
+
+    radio_fields = {'aesi_category': admin.VERTICAL, }
