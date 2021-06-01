@@ -8,22 +8,24 @@ from ..admin_site import esr21_subject_admin
 
 @admin.register(MedicalHistory, site=esr21_subject_admin)
 class MedicalHistoryAdmin(CrfModelAdminMixin, admin.ModelAdmin):
+
     form = MedicalHistoryForm
 
     fieldsets = (
         (None, {
-            'fields': [
+            'fields': (
                 'subject_visit',
                 'report_datetime',
-                'medical_history',
-                'medical_history_diagnosis',
+                'relevant_history',
+                'diagnosis',
                 'start_date',
                 'end_date',
                 'ongoing',
-                'subject_taking_medication',
+                'on_medication',
                 'cm_log_line',
-            ]}
-         ),)
+            ),
+        }),
+    )
 
-    radio_fields = {'medical_history': admin.VERTICAL,
-                    'subject_taking_medication': admin.VERTICAL, }
+    radio_fields = {'relevant_history': admin.VERTICAL,
+                    'on_medication': admin.VERTICAL, }
