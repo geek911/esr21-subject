@@ -14,3 +14,5 @@ from .personal_contact_info_admin import PersonalContactInfoAdmin
 from .physical_exam_admin import PhysicalExamAdmin
 from .pregnancy_admin import PregnancyAdmin
 from .hospitalization_admin import HospitalizationAdmin
+from .covid19_symptomatic_infections_admin import Covid19SymptomaticInfectionsAdmin
+from .azd1222_vaccination_admin import Azd1222VaccinationAdmin

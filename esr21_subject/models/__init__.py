@@ -17,3 +17,6 @@ from .onschedule import OnSchedule
 from .signals import informed_consent_on_post_save
 from .pregnancy import Pregnancy
 from .hospitalization import Hospitalization
+from .covid19_symptomatic_infections import Covid19SymptomaticInfections
+from .azd1222_vaccination import Azd1222Vaccination
+from .sample_collection import SampleCollection
