@@ -14,3 +14,6 @@ from .medical_history_form import MedicalHistoryForm
 from .physical_exam_form import PhysicalExamForm
 from .pregnancy_form import PregnancyForm
 from .hospitalization_form import HospitalizationForm
+from .covid19_symptomatic_infections_form import Covid19SymptomaticInfectionsForm
+from .azd1222_vaccination_form import Azd1222VaccinationForm
+from .sample_collection_form import SampleCollectionForm
