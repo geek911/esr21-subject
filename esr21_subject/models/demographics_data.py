@@ -29,7 +29,9 @@ class DemographicsData(CrfModelMixin):
     if_no_reason = models.CharField(
         max_length=25,
         verbose_name='If No, reason',
-        choices=CHILDBEARING, )
+        choices=CHILDBEARING,
+        null=True,
+        blank=True)
 
     if_no_reason_other = OtherCharField(
         max_length=50,
