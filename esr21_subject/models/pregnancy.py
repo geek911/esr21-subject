@@ -1,5 +1,6 @@
 from django.db import models
 from edc_constants.choices import POS_NEG, YES_NO
+from edc_base.model_validators.date import datetime_not_future
 
 from .model_mixins import CrfModelMixin
 
@@ -16,6 +17,7 @@ class Pregnancy(CrfModelMixin):
 
     preg_date = models.DateTimeField(
         verbose_name='Date of pregnancy test',
+        validators=[datetime_not_future, ],
         help_text=' (DD MMM YYYY)')
 
     result = models.CharField(

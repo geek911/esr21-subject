@@ -22,7 +22,7 @@ class HospitalizationAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                 'ongoing',
                 'reason',
                 'reason_other',
-                'seriousness_criteria',
+                'covid_symptoms',
                 'hospitalization_outcome',
             ]}
          ),)
@@ -32,4 +32,4 @@ class HospitalizationAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                     'reason': admin.VERTICAL,
                     'hospitalization_outcome': admin.VERTICAL, }
 
-    filter_horizontal = ('seriousness_criteria',)
+    filter_horizontal = ('covid_symptoms',)

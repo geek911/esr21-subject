@@ -1,5 +1,5 @@
 from django.db import models
-
+from edc_base.model_validators.date import date_not_future
 from edc_constants.choices import YES_NO
 
 from .model_mixins import CrfModelMixin
@@ -10,6 +10,7 @@ class PregnancyStatus(CrfModelMixin):
 
     start_date_menstrual_period = models.DateField(
         verbose_name='Start Date of Last Menstrual Period (DD MMM YYYY)',
+        validators=[date_not_future, ],
         null=True,
         blank=True)
 

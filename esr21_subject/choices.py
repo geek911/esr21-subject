@@ -2,7 +2,6 @@ from edc_constants.constants import OTHER, NOT_APPLICABLE, UNKNOWN, POS, NEG, IN
 from edc_visit_tracking.constants import SCHEDULED, UNSCHEDULED, LOST_VISIT
 from edc_visit_tracking.constants import MISSED_VISIT, COMPLETED_PROTOCOL_VISIT
 
-
 ACTION_TAKEN = (
     ('dose_not_changed', 'Dose not changed'),
     ('drug_withdrawal', 'Drug withdrawal'),
@@ -32,7 +31,7 @@ AESI_CATEGORY = (
     ('immune_mediated_cond', 'Potential immune-mediated conditions'),
 )
 
-AGREE = (
+AGREE_DISAGREE = (
     ('strongly_disagree', 'Strongly disagree'),
     ('undecided', 'Undecided'),
     ('strongly_agree', 'Strongly agree'),)
@@ -64,11 +63,20 @@ OUTCOME = (
     (UNKNOWN, UNKNOWN),
 )
 
-
 POS_NEG_IND = (
     (POS, 'Positive'),
     (NEG, 'Negative'),
     (IND, 'Indeterminate')
+)
+
+REASON_NOT_DRAWN = (
+    ('not_collected', 'Not collected'),
+    ('not_required', 'Not required at this visit'),
+    ('measurement_skipped', 'Measurement skipped at this visit'),
+    ('subject_refused', 'Subject refused'),
+    ('equipment_malfunction', 'Equipment malfunction'),
+    ('staff_unavailable', 'Staff unavailable'),
+    ('no_further_information', 'No further information'),
 )
 
 ROUTE = (

@@ -29,7 +29,7 @@ class Hospitalization(CrfModelMixin):
     reason = models.CharField(
         verbose_name='Primary reason for hospital/ inpatient/ ER visit',
         max_length=50,
-        choices=HOSPITALIZATION_REASON, )
+        choices=HOSPITALIZATION_REASON,)
 
     reason_other = OtherCharField(
         verbose_name='If Other, specify',
@@ -38,10 +38,10 @@ class Hospitalization(CrfModelMixin):
         blank=True,
     )
 
-    seriousness_criteria = models.ManyToManyField(
+    covid_symptoms = models.ManyToManyField(
         COVIDSymptoms,
-        verbose_name='If COVID-19 related symptoms',
-        help_text='(check all that apply)', )
+        verbose_name=('If COVID-19 related symptoms, please check all that apply'),
+        blank=True)
 
     hospitalization_outcome = models.CharField(
         verbose_name='Hospitalization Outcome',

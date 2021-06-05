@@ -3,7 +3,7 @@ from django.contrib.sites.models import Site
 from django.utils.safestring import mark_safe
 from edc_action_item.model_mixins import ActionModelMixin
 from edc_base.model_mixins import BaseUuidModel
-from edc_base.model_validators import datetime_not_future
+from edc_base.model_validators import datetime_not_future, date_not_future
 from edc_base.sites import SiteModelMixin
 from edc_base.utils import get_utcnow
 from edc_constants.choices import YES_NO, YES_NO_NA, YES_NO_DOESNT_WORK
@@ -30,7 +30,8 @@ class PersonalContactInfo(LocatorModelMixin, ActionModelMixin, SiteModelMixin,
 
     date_signed = models.DateField(
         verbose_name='Date Locator form signed',
-        default=get_utcnow,)
+        default=get_utcnow,
+        validators=[date_not_future])
 
     may_call = models.CharField(
         max_length=25,
