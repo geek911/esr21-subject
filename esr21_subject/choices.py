@@ -84,6 +84,10 @@ ROUTE = (
     ('oral', 'Oral'),
 )
 
+INFECTION_STATUS = (
+    ('seronegative', 'Seronegative'),
+    ('seropositive', 'Seropositive'),)
+
 STATUS = (
     ('resolved', 'Resolved'),
     ('ongoing', 'Ongoing'),)
