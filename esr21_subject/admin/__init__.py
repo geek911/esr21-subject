@@ -16,3 +16,4 @@ from .pregnancy_admin import PregnancyAdmin
 from .hospitalization_admin import HospitalizationAdmin
 from .covid19_symptomatic_infections_admin import Covid19SymptomaticInfectionsAdmin
 from .azd1222_vaccination_admin import Azd1222VaccinationAdmin
+from .subject_requisition_admin import SubjectRequisitionAdmin

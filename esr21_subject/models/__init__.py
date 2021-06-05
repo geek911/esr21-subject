@@ -15,6 +15,7 @@ from .physical_exam import PhysicalExam
 from .offschedule import OffSchedule
 from .onschedule import OnSchedule
 from .signals import informed_consent_on_post_save
+from .subject_requisition import SubjectRequisition
 from .pregnancy import Pregnancy
 from .hospitalization import Hospitalization
 from .covid19_symptomatic_infections import Covid19SymptomaticInfections
