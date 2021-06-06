@@ -46,8 +46,10 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django_crypto_fields.apps.AppConfig',
     'edc_base.apps.AppConfig',
+    'edc_action_item.apps.AppConfig',
     'edc_consent.apps.AppConfig',
     'edc_device.apps.AppConfig',
+    'edc_lab.apps.AppConfig',
     'edc_registration.apps.AppConfig',
     'edc_visit_schedule.apps.AppConfig',
     'esr21_visit_schedule.apps.AppConfig',
@@ -55,6 +57,7 @@ INSTALLED_APPS = [
     'esr21_subject.apps.EdcProtocolAppConfig',
     'esr21_subject.apps.EdcAppointmentAppConfig',
     'esr21_subject.apps.EdcTimepointAppConfig',
+    'esr21_subject.apps.EdcVisitTrackingAppConfig',
     'esr21_subject.apps.AppConfig',
 ]
 
@@ -67,6 +70,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.sites.middleware.CurrentSiteMiddleware',
+    'edc_subject_dashboard.middleware.DashboardMiddleware',
 ]
 
 ROOT_URLCONF = 'esr21_subject.urls'

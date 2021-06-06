@@ -22,6 +22,7 @@ if settings.APP_NAME == 'esr21_subject':
     from edc_timepoint.apps import AppConfig as BaseEdcTimepointAppConfig
     from edc_timepoint.timepoint import Timepoint
     from edc_timepoint.timepoint_collection import TimepointCollection
+    from edc_visit_tracking.apps import AppConfig as BaseEdcVisitTrackingAppConfig
     from dateutil.relativedelta import MO, TU, WE, TH, FR, SA, SU
 
     class EdcFacilityAppConfig(BaseEdcFacilityAppConfig):
@@ -62,3 +63,9 @@ if settings.APP_NAME == 'esr21_subject':
                     datetime_field='appt_datetime',
                     status_field='appt_status',
                     closed_status=COMPLETE_APPT), ])
+
+    class EdcVisitTrackingAppConfig(BaseEdcVisitTrackingAppConfig):
+        report_datetime_allowance = -1
+        visit_models = {
+            'esr21_subject': ('subject_visit', 'esr21_subject.subjectvisit'), }
+

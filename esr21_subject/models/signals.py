@@ -13,10 +13,11 @@ def informed_consent_on_post_save(sender, instance, raw, created, **kwargs):
     if not raw:
         if created:
             instance.registration_update_or_create()
+        import pdb; pdb.set_trace()
 
-            put_on_schedule('esr21_enrol_schedule', instance=instance)
+        put_on_schedule('esr21_enrol_schedule', instance=instance)
 
-            put_on_schedule('esr21_fu_schedule', instance=instance)
+        put_on_schedule('esr21_fu_schedule', instance=instance)
 
 
 def put_on_schedule(schedule_name, instance=None):
