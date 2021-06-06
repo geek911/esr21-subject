@@ -1,7 +1,9 @@
 from django.db import models
 
 from edc_base.model_fields import OtherCharField
+from edc_base.model_validators import date_not_future
 from edc_constants.choices import YES_NO
+from edc_protocol.validators import date_not_before_study_start
 
 from .model_mixins import CrfModelMixin
 from ..choices import ACTION_TAKEN, STATUS, AE_GRADE, TREATMENT_RELATIONSHIP
@@ -15,7 +17,10 @@ class AdverseEvent(CrfModelMixin):
         verbose_name='Details of the Adverse Event', )
 
     start_date = models.DateField(
-        verbose_name='Adverse Event start date', )
+        verbose_name='Adverse Event start date',
+        validators=[
+            date_not_before_study_start,
+            date_not_future, ])
 
     status = models.CharField(
         verbose_name='Status of the Adverse Event',
@@ -24,6 +29,7 @@ class AdverseEvent(CrfModelMixin):
 
     resolution_date = models.DateField(
         verbose_name='Adverse Event end date',
+        validators=[date_not_future, ],
         null=True,
         blank=True)
 
