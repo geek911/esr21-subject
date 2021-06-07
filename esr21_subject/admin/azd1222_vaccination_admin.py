@@ -8,13 +8,15 @@ from .modeladmin_mixins import ModelAdminMixin
 
 
 @admin.register(Azd1222Vaccination, site=esr21_subject_admin)
-class Azd1222VaccinationAdmin(
-    ModelAdminMixin, admin.ModelAdmin):
+class Azd1222VaccinationAdmin(ModelAdminMixin, admin.ModelAdmin):
+
     form = Azd1222VaccinationForm
 
     fieldsets = (
         (None, {
-            'fields': [
+            'fields': (
+                'subject_visit',
+                'report_datetime',
                 'vaccine_status',
                 'received_first_dose',
                 'vaccination_date',
@@ -22,7 +24,8 @@ class Azd1222VaccinationAdmin(
                 'vaccination_site',
                 'receive_second_dose',
                 'scheduled_vaccination',
-            ]}),
+            ),
+        }),
         audit_fieldset_tuple
     )
 
