@@ -18,7 +18,7 @@ list_data = {
         ('pacific_islander', 'Native Hawaiian or Other Pacific Islanders'),
         ('white', 'White'),
     ],
-    'esr32_subject.covidsymptoms': [
+    'esr21_subject.covidsymptoms': [
         ('cough', 'Cough'),
         ('fever', 'Fever'),
         ('myalgia', 'Myalgia'),
