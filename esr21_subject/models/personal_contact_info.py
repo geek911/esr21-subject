@@ -1,9 +1,11 @@
 from django.db import models
 from django.contrib.sites.models import Site
 from django.utils.safestring import mark_safe
+from django_crypto_fields.fields import EncryptedCharField
 from edc_action_item.model_mixins import ActionModelMixin
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.model_validators import datetime_not_future, date_not_future
+from edc_base.model_validators import CellNumber
 from edc_base.sites import SiteModelMixin
 from edc_base.utils import get_utcnow
 from edc_constants.choices import YES_NO, YES_NO_NA, YES_NO_DOESNT_WORK
@@ -37,22 +39,35 @@ class PersonalContactInfo(LocatorModelMixin, ActionModelMixin, SiteModelMixin,
         max_length=25,
         choices=YES_NO_NA,
         verbose_name=mark_safe(
-            'Has the participant given his/her permission for study '
-            'staff to call her for follow-up purposes during the study?'))
+            'Has the participant given their permission for study '
+            'staff to call them for follow-up purposes during the study?'))
+
+    subject_cell = EncryptedCharField(
+        verbose_name='Mobile phone number',
+        validators=[CellNumber, ],
+        blank=True,
+        null=True,
+        help_text='')
+
+    subject_cell_alt = EncryptedCharField(
+        verbose_name='Mobile phone number (alternate)',
+        validators=[CellNumber, ],
+        blank=True,
+        null=True)
 
     may_visit_home = models.CharField(
         max_length=25,
         choices=YES_NO,
         verbose_name=mark_safe(
-            'Has the participant given his/her permission for study staff <b>to '
+            'Has the participant given their permission for study staff <b>to '
             'make home visits</b> for follow-up purposes during the study??'))
 
     may_call_work = models.CharField(
         max_length=25,
         choices=YES_NO_DOESNT_WORK,
         verbose_name=mark_safe(
-            'Has the participant given his/her permission for study staff '
-            'to contact her at work for follow up purposes during the study?'))
+            'Has the participant given their permission for study staff '
+            'to contact them at work for follow up purposes during the study?'))
 
     class Meta:
         app_label = 'esr21_subject'

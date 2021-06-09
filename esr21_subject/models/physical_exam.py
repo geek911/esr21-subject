@@ -1,9 +1,11 @@
 from django.db import models
 
+from edc_base.model_fields import OtherCharField
 from edc_constants.choices import YES_NO
+from edc_constants.constants import NOT_APPLICABLE
 
 from .model_mixins import CrfModelMixin
-from ..choices import REASON
+from ..choices import REASON, TEMP_UNITS
 
 
 class PhysicalExam(CrfModelMixin):
@@ -17,10 +19,11 @@ class PhysicalExam(CrfModelMixin):
     reason_not_done = models.CharField(
         verbose_name='If No, Reason Not Done',
         max_length=30,
-        choices=REASON)
+        choices=REASON,
+        default=NOT_APPLICABLE)
 
     exam_date = models.DateField(
-        verbose_name='Date of examination (DD MMM YYYY)',
+        verbose_name='Date of examination (DD/MMM/YYYY)',
         blank=True,
         null=True,)
 
@@ -29,10 +32,14 @@ class PhysicalExam(CrfModelMixin):
         max_length=10,
         choices=YES_NO)
 
+    abn_specify = OtherCharField(verbose_name='If yes, specify')
+
     clinically_significant = models.CharField(
-        verbose_name='If Yes, were any abnormalities clinically significant?',
+        verbose_name='If yes, were any abnormalities clinically significant?',
         max_length=10,
-        choices=YES_NO)
+        choices=YES_NO,
+        blank=True,
+        null=True)
 
     comment = models.TextField(
         verbose_name='Comment',
@@ -48,7 +55,8 @@ class PhysicalExam(CrfModelMixin):
     reason_vitals_nd = models.CharField(
         verbose_name='If No, Reason Not Done',
         max_length=30,
-        choices=REASON)
+        choices=REASON,
+        default=NOT_APPLICABLE)
 
     assessment_dt = models.DateTimeField(
         verbose_name='Date and Time of Assessment',
@@ -77,6 +85,13 @@ class PhysicalExam(CrfModelMixin):
         verbose_name='Body Temperature',
         max_digits=5,
         decimal_places=2,
+        blank=True,
+        null=True)
+
+    body_temp_unit = models.CharField(
+        verbose_name='Unit of temperature',
+        choices=TEMP_UNITS,
+        max_length=10,
         blank=True,
         null=True)
 

@@ -28,7 +28,7 @@ class AdverseEvent(CrfModelMixin):
         choices=STATUS, )
 
     resolution_date = models.DateField(
-        verbose_name='Adverse Event end date',
+        verbose_name='Adverse Event stop date',
         validators=[date_not_future, ],
         null=True,
         blank=True)
@@ -68,7 +68,7 @@ class AdverseEvent(CrfModelMixin):
         max_length=100, )
 
     serious_event = models.CharField(
-        verbose_name='Serious Event?',
+        verbose_name='Was this considered to be a Serious Adverse Event?',
         max_length=3,
         choices=YES_NO, )
 
@@ -93,10 +93,18 @@ class AdverseEvent(CrfModelMixin):
         max_length=3,
         choices=YES_NO, )
 
+    treatmnt_given_specify = OtherCharField(
+        verbose_name='If yes, specify details')
+
     ae_study_discontinued = models.CharField(
         verbose_name='Did the AE cause the subject to discontinue from the study?',
         max_length=3,
         choices=YES_NO, )
+
+    discontn_dt = models.DateField(
+        verbose_name='Date of discontinuation',
+        blank=True,
+        null=True)
 
     covid_related_ae = models.CharField(
         verbose_name='Is this a COVID-19 related AE?',

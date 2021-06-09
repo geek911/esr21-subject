@@ -106,7 +106,9 @@ class AdverseEventAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                 'medically_attended_ae',
                 'maae_specify',
                 'treatment_given',
+                'treatmnt_given_specify',
                 'ae_study_discontinued',
+                'discontn_dt',
                 'covid_related_ae'
             )
         }),

@@ -1,4 +1,7 @@
-from edc_constants.constants import OTHER, NOT_APPLICABLE, UNKNOWN, POS, NEG, IND
+from django.utils.translation import ugettext_lazy as _
+
+from edc_constants.constants import (OTHER, NOT_APPLICABLE, UNKNOWN, POS, NEG,
+                                     IND, MALE, FEMALE)
 from edc_visit_tracking.constants import SCHEDULED, UNSCHEDULED, LOST_VISIT
 from edc_visit_tracking.constants import MISSED_VISIT, COMPLETED_PROTOCOL_VISIT
 
@@ -34,7 +37,23 @@ AESI_CATEGORY = (
 AGREE_DISAGREE = (
     ('strongly_disagree', 'Strongly disagree'),
     ('undecided', 'Undecided'),
-    ('strongly_agree', 'Strongly agree'),)
+    ('strongly_agree', 'Strongly agree'),
+)
+
+CONTRACEPTIVES = (
+    ('iud', 'IUD'),
+    ('diaphragm', 'Diaphragm'),
+    ('pill', 'Contraceptive pill'),
+    ('barrier_method', 'Barrier Method'),
+    ('abstention', 'Abstention'),
+    (OTHER, 'Other, specify'),
+)
+
+GENDER_OTHER = (
+    (MALE, _('Male')),
+    (FEMALE, _('Female')),
+    (OTHER, _('Other')),
+)
 
 HOSPITALIZATION_STATUS = (
     ('er', 'ER'),
@@ -86,11 +105,18 @@ ROUTE = (
 
 INFECTION_STATUS = (
     ('seronegative', 'Seronegative'),
-    ('seropositive', 'Seropositive'),)
+    ('seropositive', 'Seropositive'),
+)
 
 STATUS = (
     ('resolved', 'Resolved'),
-    ('ongoing', 'Ongoing'),)
+    ('ongoing', 'Ongoing'),
+)
+
+TEMP_UNITS = (
+    ('celcius', 'Celcius (ºC)'),
+    ('fahrenheit', 'Fahrenheit (ºF)'),
+)
 
 TREATMENT_RELATIONSHIP = (
     ('related', 'Related'),
