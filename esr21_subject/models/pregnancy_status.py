@@ -1,28 +1,39 @@
 from django.db import models
+from edc_base.model_fields import OtherCharField
 from edc_base.model_validators.date import date_not_future
 from edc_constants.choices import YES_NO
 
 from .model_mixins import CrfModelMixin
+from ..choices import CONTRACEPTIVES
 from ..maternal_choices import OUTCOME
 
 
 class PregnancyStatus(CrfModelMixin):
 
     start_date_menstrual_period = models.DateField(
-        verbose_name='Start Date of Last Menstrual Period (DD MMM YYYY)',
+        verbose_name='Start Date of Last Menstrual Period (DD/MMM/YYYY)',
         validators=[date_not_future, ],
         null=True,
         blank=True)
 
     expected_delivery = models.DateField(
-        verbose_name='Date of Expected Delivery (DD MMM YYYY)',
+        verbose_name='Date of Expected Delivery (DD/MMM/YYYY)',
         null=True,
         blank=True)
 
-    using_contraceptives = models.CharField(
+    contraceptive_usage = models.CharField(
         verbose_name='Using Contraception',
         choices=YES_NO,
         max_length=10,)
+
+    contraceptive = models.CharField(
+        verbose_name='If yes, specify contraception',
+        choices=CONTRACEPTIVES,
+        max_length=30,
+        blank=True,
+        null=True)
+
+    contraceptive_othr = OtherCharField()
 
     pregnancy_outcome = models.CharField(
         verbose_name='Pregnancy Outcome',
@@ -36,8 +47,8 @@ class PregnancyStatus(CrfModelMixin):
         max_length=10,
         choices=YES_NO,)
 
-    if_yes = models.CharField(
-        verbose_name='Yes, Specify:',
+    specify_defect = models.CharField(
+        verbose_name='If yes, Specify:',
         max_length=50,
         null=True,
         blank=True)

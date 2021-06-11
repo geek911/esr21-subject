@@ -1,7 +1,9 @@
 from django.db import models
 
 from edc_base.model_fields import OtherCharField
+from edc_base.model_validators import date_not_future
 from edc_constants.choices import YES_NO
+from edc_protocol.validators import date_not_before_study_start
 
 from .model_mixins import CrfModelMixin
 from ..choices import ACTION_TAKEN, STATUS, AE_GRADE, TREATMENT_RELATIONSHIP
@@ -15,7 +17,10 @@ class AdverseEvent(CrfModelMixin):
         verbose_name='Details of the Adverse Event', )
 
     start_date = models.DateField(
-        verbose_name='Adverse Event start date', )
+        verbose_name='Adverse Event start date',
+        validators=[
+            date_not_before_study_start,
+            date_not_future, ])
 
     status = models.CharField(
         verbose_name='Status of the Adverse Event',
@@ -23,7 +28,8 @@ class AdverseEvent(CrfModelMixin):
         choices=STATUS, )
 
     resolution_date = models.DateField(
-        verbose_name='Adverse Event end date',
+        verbose_name='Adverse Event stop date',
+        validators=[date_not_future, ],
         null=True,
         blank=True)
 
@@ -62,7 +68,7 @@ class AdverseEvent(CrfModelMixin):
         max_length=100, )
 
     serious_event = models.CharField(
-        verbose_name='Serious Event?',
+        verbose_name='Was this considered to be a Serious Adverse Event?',
         max_length=3,
         choices=YES_NO, )
 
@@ -87,10 +93,18 @@ class AdverseEvent(CrfModelMixin):
         max_length=3,
         choices=YES_NO, )
 
+    treatmnt_given_specify = OtherCharField(
+        verbose_name='If yes, specify details')
+
     ae_study_discontinued = models.CharField(
         verbose_name='Did the AE cause the subject to discontinue from the study?',
         max_length=3,
         choices=YES_NO, )
+
+    discontn_dt = models.DateField(
+        verbose_name='Date of discontinuation',
+        blank=True,
+        null=True)
 
     covid_related_ae = models.CharField(
         verbose_name='Is this a COVID-19 related AE?',

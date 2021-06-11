@@ -28,4 +28,5 @@ class MedicalHistoryAdmin(CrfModelAdminMixin, admin.ModelAdmin):
     )
 
     radio_fields = {'relevant_history': admin.VERTICAL,
-                    'on_medication': admin.VERTICAL, }
+                    'on_medication': admin.VERTICAL,
+                    'ongoing': admin.VERTICAL, }

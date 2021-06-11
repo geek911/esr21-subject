@@ -17,11 +17,16 @@ if settings.APP_NAME == 'esr21_subject':
     from edc_appointment.appointment_config import AppointmentConfig
     from edc_appointment.apps import AppConfig as BaseEdcAppointmentAppConfig
     from edc_appointment.constants import COMPLETE_APPT
+    from edc_constants.constants import FAILED_ELIGIBILITY
     from edc_facility.apps import AppConfig as BaseEdcFacilityAppConfig
+    from edc_metadata.apps import AppConfig as BaseEdcMetadataAppConfig
     from edc_protocol.apps import AppConfig as BaseEdcProtocolAppConfigs
     from edc_timepoint.apps import AppConfig as BaseEdcTimepointAppConfig
     from edc_timepoint.timepoint import Timepoint
     from edc_timepoint.timepoint_collection import TimepointCollection
+    from edc_visit_tracking.apps import AppConfig as BaseEdcVisitTrackingAppConfig
+    from edc_visit_tracking.constants import MISSED_VISIT, COMPLETED_PROTOCOL_VISIT
+    from edc_visit_tracking.constants import SCHEDULED, UNSCHEDULED, LOST_VISIT
     from dateutil.relativedelta import MO, TU, WE, TH, FR, SA, SU
 
     class EdcFacilityAppConfig(BaseEdcFacilityAppConfig):
@@ -62,3 +67,15 @@ if settings.APP_NAME == 'esr21_subject':
                     datetime_field='appt_datetime',
                     status_field='appt_status',
                     closed_status=COMPLETE_APPT), ])
+
+    class EdcVisitTrackingAppConfig(BaseEdcVisitTrackingAppConfig):
+        report_datetime_allowance = -1
+        visit_models = {
+            'esr21_subject': ('subject_visit', 'esr21_subject.subjectvisit'), }
+
+    class EdcMetadataAppConfig(BaseEdcMetadataAppConfig):
+
+        reason_field = {'esr21_subject.subjectvisit': 'reason'}
+        create_on_reasons = [SCHEDULED, UNSCHEDULED, COMPLETED_PROTOCOL_VISIT]
+        delete_on_reasons = [LOST_VISIT, MISSED_VISIT, FAILED_ELIGIBILITY]
+

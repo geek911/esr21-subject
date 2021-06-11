@@ -1,4 +1,5 @@
 from django.db import models
+from edc_base.model_fields import OtherCharField
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.sites.site_model_mixin import SiteModelMixin
@@ -13,6 +14,7 @@ from edc_registration.model_mixins import UpdatesOrCreatesRegistrationModelMixin
 from edc_search.model_mixins import SearchSlugManager
 
 from .model_mixins import SearchSlugModelMixin
+from ..choices import GENDER_OTHER
 from ..subject_identifier import SubjectIdentifier
 
 
@@ -36,7 +38,7 @@ class InformedConsent(ConsentModelMixin, SiteModelMixin,
         max_length=50)
 
     consent_datetime = models.DateTimeField(
-        verbose_name='Consent datetime',
+        verbose_name='Consent date and time',
         default=get_utcnow,
         help_text='Date and time of consent.')
 
@@ -44,6 +46,15 @@ class InformedConsent(ConsentModelMixin, SiteModelMixin,
         verbose_name='What type of identity number is this?',
         max_length=25,
         choices=IDENTITY_TYPE)
+
+    gender = models.CharField(
+        verbose_name="Gender",
+        choices=GENDER_OTHER,
+        max_length=5,
+        null=True,
+        blank=False)
+
+    gender_other = OtherCharField()
 
     objects = InformedConsentManager()
 

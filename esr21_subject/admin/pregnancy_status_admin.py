@@ -27,9 +27,11 @@ class PregnancyStatusAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                 'report_datetime',
                 'start_date_menstrual_period',
                 'expected_delivery',
-                'using_contraceptives',
+                'contraceptive_usage',
+                'contraceptive',
+                'contraceptive_othr',
                 'birth_defects',
-                'if_yes',
+                'specify_defect',
             )
         }),
         ('Pregnancy History', {
@@ -44,5 +46,6 @@ class PregnancyStatusAdmin(CrfModelAdminMixin, admin.ModelAdmin):
         }),
     )
 
-    radio_fields = {'using_contraceptives': admin.VERTICAL,
-                    'birth_defects': admin.VERTICAL, }
+    radio_fields = {'contraceptive_usage': admin.VERTICAL,
+                    'birth_defects': admin.VERTICAL,
+                    'contraceptive': admin.VERTICAL, }

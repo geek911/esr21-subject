@@ -8,19 +8,22 @@ from .modeladmin_mixins import ModelAdminMixin
 
 
 @admin.register(Covid19SymptomaticInfections, site=esr21_subject_admin)
-class Covid19SymptomaticInfectionsAdmin(
-    ModelAdminMixin, admin.ModelAdmin):
+class Covid19SymptomaticInfectionsAdmin(ModelAdminMixin, admin.ModelAdmin):
+
     form = Covid19SymptomaticInfectionsForm
 
     fieldsets = (
         (None, {
-            'fields': [
+            'fields': (
+                'subject_visit',
+                'report_datetime',
                 'symptomatic_experiences',
                 'date_of_infection',
                 'infection_status',
                 'visits',
                 'hospitalisation_date',
-            ]}),
+            ),
+        }),
         audit_fieldset_tuple
     )
 

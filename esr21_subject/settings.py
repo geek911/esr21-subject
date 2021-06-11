@@ -46,15 +46,23 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django_crypto_fields.apps.AppConfig',
     'edc_base.apps.AppConfig',
+    'edc_action_item.apps.AppConfig',
     'edc_consent.apps.AppConfig',
     'edc_device.apps.AppConfig',
+    'edc_lab.apps.AppConfig',
+    'edc_reference.apps.AppConfig',
+    'edc_metadata_rules.apps.AppConfig',
     'edc_registration.apps.AppConfig',
     'edc_visit_schedule.apps.AppConfig',
     'esr21_visit_schedule.apps.AppConfig',
+    'esr21_reference.apps.AppConfig',
+    'esr21_metadata_rules.apps.AppConfig',
     'esr21_subject.apps.EdcFacilityAppConfig',
     'esr21_subject.apps.EdcProtocolAppConfig',
     'esr21_subject.apps.EdcAppointmentAppConfig',
     'esr21_subject.apps.EdcTimepointAppConfig',
+    'esr21_subject.apps.EdcVisitTrackingAppConfig',
+    'esr21_subject.apps.EdcMetadataAppConfig',
     'esr21_subject.apps.AppConfig',
 ]
 
@@ -67,6 +75,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.sites.middleware.CurrentSiteMiddleware',
+    'edc_subject_dashboard.middleware.DashboardMiddleware',
 ]
 
 ROOT_URLCONF = 'esr21_subject.urls'
@@ -131,9 +140,12 @@ TIME_ZONE = 'Africa/Gaborone'
 
 USE_I18N = True
 
-USE_L10N = True
+USE_L10N = False
 
 USE_TZ = True
+
+DATETIME_INPUT_FORMATS = ['%d-%m-%Y %H:%M']
+DATE_INPUT_FORMATS = ['%d-%m-%Y']
 
 COUNTRY = 'botswana'
 

@@ -8,8 +8,8 @@ from .modeladmin_mixins import ModelAdminMixin
 
 
 @admin.register(SampleCollection, site=esr21_subject_admin)
-class SampleCollectionAdmin(
-    ModelAdminMixin, admin.ModelAdmin):
+class SampleCollectionAdmin(ModelAdminMixin, admin.ModelAdmin):
+
     form = SampleCollectionForm
 
     fieldsets = (

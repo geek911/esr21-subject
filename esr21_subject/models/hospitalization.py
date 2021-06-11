@@ -15,10 +15,11 @@ class Hospitalization(CrfModelMixin):
         max_length=50,
         choices=HOSPITALIZATION_STATUS)
 
-    start_date = models.DateField()
+    start_date = models.DateField(
+        verbose_name='Start date of hospitalization')
 
     stop_date = models.DateField(
-        verbose_name='Stop date',
+        verbose_name='Stop date of hospitalization',
         null=True,
         blank=True)
 

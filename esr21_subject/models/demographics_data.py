@@ -10,7 +10,7 @@ from .list_models import SubjectRace
 class DemographicsData(CrfModelMixin):
 
     date_of_birth = models.DateField(
-        verbose_name='Date of Birth (YYYY)', )
+        verbose_name='Date of Birth', )
 
     age = models.CharField(
         max_length=25,

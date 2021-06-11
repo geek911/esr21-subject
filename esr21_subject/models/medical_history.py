@@ -17,14 +17,15 @@ class MedicalHistory(CrfModelMixin):
         max_length=32, )
 
     start_date = models.DateField(
-        verbose_name='Start Date (DD MMM YYYY)', )
+        verbose_name='Start Date (DD/MMM/YYYY)', )
 
     end_date = models.DateField(
-        verbose_name='End Date (DD MMM YYYY)', )
+        verbose_name='End Date (DD/MMM/YYYY)', )
 
     ongoing = models.CharField(
         verbose_name='Ongoing',
-        max_length=32, )
+        choices=YES_NO,
+        max_length=3, )
 
     on_medication = models.CharField(
         verbose_name='Is the subject taking medication related to '

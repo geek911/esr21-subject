@@ -76,7 +76,7 @@ class SeriousAdverseEvent(SiteModelMixin, BaseUuidModel):
         max_length=200)
 
     test_performed = models.TextField(
-        verbose_name='List all diagnostic tests that were done to confirm event',
+        verbose_name='List all diagnostic tests that were performed to confirm event',
         max_length=200)
 
     additional_info = models.TextField(
