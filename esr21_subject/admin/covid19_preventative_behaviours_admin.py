@@ -9,7 +9,7 @@ from ..admin_site import esr21_subject_admin
 
 
 @admin.register(Covid19PreventativeBehaviours, site=esr21_subject_admin)
-class Covid19PreventativeBehaviorsAdmin(CrfModelAdminMixin, admin.ModelAdmin):
+class Covid19PreventativeBehavioursAdmin(CrfModelAdminMixin, admin.ModelAdmin):
     form = Covid19PreventativeBehavioursForm
     fieldsets = (
         (None, {

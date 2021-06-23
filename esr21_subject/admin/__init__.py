@@ -8,7 +8,7 @@ from .adverse_event_admin import SpecialInterestAdverseEventAdmin
 from .pregnancy_status_admin import PregnancyStatusAdmin
 from .rapid_hiv_testing_admin import RapidHIVTestingAdmin
 from .subject_visit_admin import SubjectVisitAdmin
-from esr21_subject.admin.covid19_preventative_behaviours_admin import Covid19PreventativeBehaviorsAdmin
+from esr21_subject.admin.covid19_preventative_behaviours_admin import Covid19PreventativeBehavioursAdmin
 from .medical_history_admin import MedicalHistoryAdmin
 from .personal_contact_info_admin import PersonalContactInfoAdmin
 from .physical_exam_admin import PhysicalExamAdmin
