@@ -16,23 +16,29 @@ class DemographicDataAdmin(CrfModelAdminMixin, admin.ModelAdmin):
             'fields': [
                 'subject_visit',
                 'report_datetime',
-                'date_of_birth',
-                'age',
-                'gender',
-                'childbearing_potential',
-                'if_no_reason',
-                'if_no_reason_other',
+                'age_at_entry',
+                'country',
                 'ethnicity',
                 'ethnicity_other',
-                'race_of_subject',
-                'race',
+                'household_members',
+                'highest_education',
+                'employment_status',
+                'employment_status_other',
+                'settlement_type',
+                'marital_status',
+                'marital_status_other',
+                'running_water',
+                'mass_gathering',
+                'shared_kitchen',
+                'mode_of_transport',
                ]}
          ), audit_fieldset_tuple)
 
-    radio_fields = {'gender': admin.VERTICAL,
-                    'childbearing_potential': admin.VERTICAL,
-                    'if_no_reason': admin.VERTICAL,
-                    'ethnicity': admin.VERTICAL,
-                    'race_of_subject': admin.VERTICAL, }
-
-    filter_horizontal = ('race',)
+    radio_fields = {'ethnicity': admin.VERTICAL,
+                    'highest_education': admin.VERTICAL,
+                    'employment_status': admin.VERTICAL,
+                    'settlement_type': admin.VERTICAL,
+                    'marital_status': admin.VERTICAL,
+                    'running_water': admin.VERTICAL,
+                    'shared_kitchen': admin.VERTICAL,
+                    'mode_of_transport': admin.VERTICAL, }

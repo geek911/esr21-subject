@@ -20,13 +20,10 @@ class VaccinationDetailsAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                 'report_datetime',
                 'vaccination_place',
                 'vaccination_dt',
-                'route',
                 'location',
                 'location_other',
                 'admin_per_protocol',
                 'reason_not_per_protocol',
-                'dose_administered',
-                'batch_number',
                 'expiry_date',
                 'provider_name',
                 'next_vaccination',
@@ -35,5 +32,4 @@ class VaccinationDetailsAdmin(CrfModelAdminMixin, admin.ModelAdmin):
         audit_fieldset_tuple)
 
     radio_fields = {'location': admin.VERTICAL,
-                    'route': admin.VERTICAL,
                     'admin_per_protocol': admin.VERTICAL}

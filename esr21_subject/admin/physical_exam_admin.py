@@ -12,7 +12,6 @@ from ..admin_site import esr21_subject_admin
 
 @admin.register(PhysicalExam, site=esr21_subject_admin)
 class PhysicalExamAdmin(CrfModelAdminMixin, admin.ModelAdmin):
-
     form = PhysicalExamForm
 
     formfield_overrides = {
@@ -32,15 +31,6 @@ class PhysicalExamAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                 'abnormalities',
                 'abn_specify',
                 'clinically_significant',
-                'vital_signs_measured',
-                'reason_vitals_nd',
-                'assessment_dt',
-                'systolic_bp',
-                'diastolic_bp',
-                'heart_rate',
-                'body_temp',
-                'body_temp_unit',
-                'oxygen_saturated',
                 'comment',
             ),
         }),
@@ -49,7 +39,4 @@ class PhysicalExamAdmin(CrfModelAdminMixin, admin.ModelAdmin):
     radio_fields = {'physical_exam': admin.VERTICAL,
                     'abnormalities': admin.VERTICAL,
                     'clinically_significant': admin.VERTICAL,
-                    'reason_not_done': admin.VERTICAL,
-                    'vital_signs_measured': admin.VERTICAL,
-                    'reason_vitals_nd': admin.VERTICAL,
-                    'body_temp_unit': admin.VERTICAL, }
+                    'reason_not_done': admin.VERTICAL, }

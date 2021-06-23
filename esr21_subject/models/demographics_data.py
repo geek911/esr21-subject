@@ -1,43 +1,20 @@
 from django.db import models
+from django_countries.fields import CountryField
 from edc_base.model_fields import OtherCharField
-from edc_constants.choices import YES_NO_NA, GENDER
+from edc_constants.choices import YES_NO
 
-from ..maternal_choices import ETHNICITY, RACE, CHILDBEARING
+from ..maternal_choices import ETHNICITY, HIGHEST_EDUCATION
 from .model_mixins import CrfModelMixin
-from .list_models import SubjectRace
+from ..choices import EMPLOYMENT_STATUS, SETTLEMENT_TYPE, MARITAL_STATUS, \
+    MODE_TRANSPORT
 
 
 class DemographicsData(CrfModelMixin):
 
-    date_of_birth = models.DateField(
-        verbose_name='Date of Birth', )
+    age_at_entry = models.IntegerField(
+        verbose_name='Age at study entry', )
 
-    age = models.CharField(
-        max_length=25,
-        verbose_name='Age', )
-
-    gender = models.CharField(
-        verbose_name='Gender',
-        choices=GENDER,
-        max_length=1)
-
-    childbearing_potential = models.CharField(
-        max_length=25,
-        verbose_name='Is the subject a woman of childbearing potential?',
-        choices=YES_NO_NA)
-
-    if_no_reason = models.CharField(
-        max_length=25,
-        verbose_name='If No, reason',
-        choices=CHILDBEARING,
-        null=True,
-        blank=True)
-
-    if_no_reason_other = OtherCharField(
-        max_length=50,
-        verbose_name='Other, specify',
-        blank=True,
-        null=True, )
+    country = CountryField()
 
     ethnicity = models.CharField(
         max_length=25,
@@ -50,16 +27,61 @@ class DemographicsData(CrfModelMixin):
         blank=True,
         null=True, )
 
-    race_of_subject = models.CharField(
-        max_length=75,
-        verbose_name='Race of Subject',
-        choices=RACE,)
+    household_members = models.IntegerField(
+        verbose_name='How many household members live in the participants '
+                     'primary home / compound', )
 
-    race = models.ManyToManyField(
-        SubjectRace,
-        max_length=35,
-        verbose_name='If Reported, Check ALL that apply:',
-        blank=True, )
+    highest_education = models.CharField(
+        verbose_name='Highest education level',
+        max_length=30,
+        choices=HIGHEST_EDUCATION)
+
+    employment_status = models.CharField(
+        verbose_name='Employment Status',
+        max_length=33,
+        choices=EMPLOYMENT_STATUS)
+
+    employment_status_other = models.CharField(
+        verbose_name='Other, specify',
+        max_length=33,
+        blank=True,
+        null=True)
+
+    settlement_type = models.CharField(
+        verbose_name='Settlement Type?',
+        max_length=30,
+        choices=SETTLEMENT_TYPE)
+
+    marital_status = models.CharField(
+        verbose_name='Current marital status?',
+        max_length=30,
+        choices=MARITAL_STATUS)
+
+    marital_status_other = models.CharField(
+        verbose_name='Other, specify',
+        max_length=30,
+        blank=True,
+        null=True)
+
+    running_water = models.CharField(
+        verbose_name='Is the running water in domicile?',
+        max_length=30,
+        choices=YES_NO)
+
+    mass_gathering = models.CharField(
+        verbose_name='Number of mass gatherings in preceding 12 weeks?',
+        max_length=23,
+        help_text='e.g weddings, funerals; defined as 50 or more people')
+
+    shared_kitchen = models.CharField(
+        verbose_name='Shared kitchen/dining at work?',
+        max_length=30,
+        choices=YES_NO)
+
+    mode_of_transport = models.CharField(
+        verbose_name='Mode of transport commonly used',
+        max_length=30,
+        choices=MODE_TRANSPORT)
 
     class Meta(CrfModelMixin.Meta):
         app_label = 'esr21_subject'

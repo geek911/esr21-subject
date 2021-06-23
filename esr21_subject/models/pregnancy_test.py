@@ -3,9 +3,10 @@ from edc_constants.choices import POS_NEG, YES_NO
 from edc_base.model_validators.date import datetime_not_future
 
 from .model_mixins import CrfModelMixin
+from ..choices import PREGNANCY_TEST_TYPE
 
 
-class Pregnancy(CrfModelMixin):
+class PregnancyTest(CrfModelMixin):
 
     preg_performed = models.CharField(
         verbose_name='Was the pregnancy test performed?',
@@ -14,6 +15,12 @@ class Pregnancy(CrfModelMixin):
         help_text=(
             'The language used for the consent process will '
             'also be used during data collection.'))
+
+    preg_test_type = models.CharField(
+        verbose_name='Type of pregnancy test performed',
+        max_length=30,
+        choices=PREGNANCY_TEST_TYPE
+    )
 
     preg_date = models.DateTimeField(
         verbose_name='Date of pregnancy test',

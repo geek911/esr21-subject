@@ -54,6 +54,17 @@ CONTRACEPTIVES = (
     (OTHER, 'Other, specify'),
 )
 
+EMPLOYMENT_STATUS = (
+    ('formal-wage_employment_part_time', 'Formal wage employment (Part-time)'),
+    (
+        'formal_wage_employment-full_time)',
+        'Formal wage employment (full-time)'),
+    ('self_employed_full_time)', 'Self employed (full time)'),
+    ('self_employed_part_time)', 'Self employed (part time)'),
+    ('piece_job', 'Piece job'),
+    ('Seasonal_employment', 'Seasonal employment'),
+    (OTHER, 'Other (specify)'),)
+
 GENDER_OTHER = (
     (MALE, _('Male')),
     (FEMALE, _('Female')),
@@ -88,8 +99,8 @@ INFECTION_STATUS = (
     ('seropositive', 'Seropositive'),)
 
 HOSPITALIZATION_REASON = (
-  ('covid19_related_symptoms', 'COVID-19 related symptoms'),
-  (OTHER, 'Other'),
+    ('covid19_related_symptoms', 'COVID-19 related symptoms'),
+    (OTHER, 'Other'),
 )
 
 HOSPITALIZATION_OUTCOME = (
@@ -122,6 +133,18 @@ LANGUAGE = (
     ('setswana', 'English'),
 )
 
+MARITAL_STATUS = (
+    ('Single', 'Single'),
+    ('Married', 'Married'),
+    ('Cohabiting', 'Cohabiting'),
+    ('Widowed', 'Widowed'),
+    ('Divorced', 'Divorced'),
+    (OTHER, 'Other, specify'))
+
+MODE_TRANSPORT = (
+    ('public_transport', 'Public Transport'),
+    ('private_transport', 'Private Transport'))
+
 MED_HISTORY_NO = (
     ('mh_log_line_number1', 'MH log line number1'),
     ('mh_log_line_number2', 'MH log line number2'),
@@ -152,16 +175,9 @@ REASON = (
     (NOT_APPLICABLE, 'Not applicable'),
 )
 
-REASON = (
-    ('not_collected', 'Not collected'),
-    ('not_required', 'Not required at this visit'),
-    ('measurement_skipped', 'Measurement skipped at this visit'),
-    ('subject_refused', 'Subject refused'),
-    ('equipment_malfunction', 'Equipment malfunction'),
-    ('staff_unavailable', 'Staff unavailable'),
-    ('no_information', 'No further information'),
-    (NOT_APPLICABLE, 'Not applicable'),
-)
+PREGNANCY_TEST_TYPE = (
+    ('urine_serum', 'Urine/Serum'),
+    ('hgg', 'HCG'),)
 
 REASON_NOT_DRAWN = (
     ('not_collected', 'Not collected'),
@@ -176,6 +192,11 @@ REASON_NOT_DRAWN = (
 ROUTE = (
     ('intramuscular', 'Intramuscular'),
     ('oral', 'Oral'),
+)
+
+SETTLEMENT_TYPE = (
+    ('urban', 'Urban'),
+    ('rural', 'Rural'),
 )
 
 STATUS = (
@@ -234,17 +255,6 @@ UNIT_OPTIONS = (
     ('Tsp', 'tsp'),
     ('cup', 'cup'),
     ('drop', 'Drop'),)
-
-REASON = (
-    ('not_collected', 'Not collected'),
-    ('not_required', 'Not required at this visit'),
-    ('measurement_skipped', 'Measurement skipped at this visit'),
-    ('subject_refused', 'Subject refused'),
-    ('equipment_malfunction', 'Equipment malfunction'),
-    ('staff_unavailable', 'Staff unavailable'),
-    ('no_information', 'No further information'),
-    (NOT_APPLICABLE, 'Not applicable'),
-)
 
 HOSPITALIZATION_REASON = (
   ('', 'COVID-19 related symptoms'),
