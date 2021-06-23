@@ -1,11 +1,11 @@
 from edc_base.model_mixins import BaseUuidModel, ListModelMixin
 
 
-class SubjectRace(ListModelMixin, BaseUuidModel):
+class COVIDSymptoms(ListModelMixin, BaseUuidModel):
     pass
 
 
-class ParticipantMedications(ListModelMixin, BaseUuidModel):
+class MedicationIndication(ListModelMixin, BaseUuidModel):
     pass
 
 
@@ -13,11 +13,11 @@ class MaternalDiagnosesList(ListModelMixin, BaseUuidModel):
     pass
 
 
-class PriorArv(ListModelMixin, BaseUuidModel):
+class ParticipantMedications(ListModelMixin, BaseUuidModel):
     pass
 
 
-class WcsDxAdult(ListModelMixin, BaseUuidModel):
+class PriorArv(ListModelMixin, BaseUuidModel):
     pass
 
 
@@ -25,5 +25,10 @@ class SAECriteria(ListModelMixin, BaseUuidModel):
     pass
 
 
-class COVIDSymptoms(ListModelMixin, BaseUuidModel):
+class SubjectRace(ListModelMixin, BaseUuidModel):
     pass
+
+
+class WcsDxAdult(ListModelMixin, BaseUuidModel):
+    pass
+

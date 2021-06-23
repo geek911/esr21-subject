@@ -20,6 +20,11 @@ AE_GRADE = (
     ('fatal', 'Fatal (Grade 5)'),
 )
 
+AE_NUMBER = (
+    ('ae_log_line_number1', 'AE log line number1'),
+    ('ae_log_line_number1', 'AE log line number2'),
+)
+
 AESI_CATEGORY = (
     ('generalized_convulsion', 'Generalized convulsion'),
     ('guillain_barre_syndrome', 'Guillain-Barre syndrome'),
@@ -61,79 +66,6 @@ HOSPITALIZATION_STATUS = (
     ('icu_hdu', 'ICU/HDU'),
 )
 
-IDENTITY_TYPE = (
-    ('country_id', 'Country ID number'),
-    ('country_id_rcpt', 'Country ID receipt'),
-    ('passport', 'Passport'),
-    (OTHER, 'Other'),
-)
-
-LANGUAGE = (
-    ('setswana', 'Setswana'),
-    ('setswana', 'English'),
-)
-
-OUTCOME = (
-    ('not_resolved', 'Not recovered/ not resolved'),
-    ('resolved', 'Recovered / resolved'),
-    ('resolved_with_sequelae', 'Recovered / resolved with sequelae'),
-    ('resolving', 'Recovering / resolving'),
-    ('fatal', 'Fatal'),
-    (UNKNOWN, UNKNOWN),
-)
-
-POS_NEG_IND = (
-    (POS, 'Positive'),
-    (NEG, 'Negative'),
-    (IND, 'Indeterminate')
-)
-
-REASON_NOT_DRAWN = (
-    ('not_collected', 'Not collected'),
-    ('not_required', 'Not required at this visit'),
-    ('measurement_skipped', 'Measurement skipped at this visit'),
-    ('subject_refused', 'Subject refused'),
-    ('equipment_malfunction', 'Equipment malfunction'),
-    ('staff_unavailable', 'Staff unavailable'),
-    ('no_further_information', 'No further information'),
-)
-
-ROUTE = (
-    ('intramuscular', 'Intramuscular'),
-    ('oral', 'Oral'),
-)
-
-INFECTION_STATUS = (
-    ('seronegative', 'Seronegative'),
-    ('seropositive', 'Seropositive'),
-)
-
-STATUS = (
-    ('resolved', 'Resolved'),
-    ('ongoing', 'Ongoing'),
-)
-
-TEMP_UNITS = (
-    ('celcius', 'Celcius (ºC)'),
-    ('fahrenheit', 'Fahrenheit (ºF)'),
-)
-
-TREATMENT_RELATIONSHIP = (
-    ('related', 'Related'),
-    ('not_related', 'Not Related'),
-)
-
-REASON = (
-    ('not_collected', 'Not collected'),
-    ('not_required', 'Not required at this visit'),
-    ('measurement_skipped', 'Measurement skipped at this visit'),
-    ('subject_refused', 'Subject refused'),
-    ('equipment_malfunction', 'Equipment malfunction'),
-    ('staff_unavailable', 'Staff unavailable'),
-    ('no_information', 'No further information'),
-    (NOT_APPLICABLE, 'Not applicable'),
-)
-
 HOSPITALIZATION_REASON = (
   ('covid19_related_symptoms', 'COVID-19 related symptoms'),
   (OTHER, 'Other'),
@@ -151,6 +83,126 @@ HOSPITALIZATION_OUTCOME = (
     ('nursing_facility', 'Nursing Facility'),
     ('unit_ward_change', 'Unit/Ward Change'),
 )
+
+IDENTITY_TYPE = (
+    ('country_id', 'Country ID number'),
+    ('country_id_rcpt', 'Country ID receipt'),
+    ('passport', 'Passport'),
+    (OTHER, 'Other'),
+)
+
+INFECTION_STATUS = (
+    ('seronegative', 'Seronegative'),
+    ('seropositive', 'Seropositive'),
+)
+
+LANGUAGE = (
+    ('setswana', 'Setswana'),
+    ('setswana', 'English'),
+)
+
+MED_HISTORY_NO = (
+    ('mh_log_line_number1', 'MH log line number1'),
+    ('mh_log_line_number2', 'MH log line number2'),
+)
+
+OUTCOME = (
+    ('not_resolved', 'Not recovered/ not resolved'),
+    ('resolved', 'Recovered / resolved'),
+    ('resolved_with_sequelae', 'Recovered / resolved with sequelae'),
+    ('resolving', 'Recovering / resolving'),
+    ('fatal', 'Fatal'),
+    (UNKNOWN, UNKNOWN),
+)
+
+POS_NEG_IND = (
+    (POS, 'Positive'),
+    (NEG, 'Negative'),
+    (IND, 'Indeterminate')
+)
+
+REASON = (
+    ('not_collected', 'Not collected'),
+    ('not_required', 'Not required at this visit'),
+    ('measurement_skipped', 'Measurement skipped at this visit'),
+    ('subject_refused', 'Subject refused'),
+    ('equipment_malfunction', 'Equipment malfunction'),
+    ('staff_unavailable', 'Staff unavailable'),
+    ('no_information', 'No further information'),
+    (NOT_APPLICABLE, 'Not applicable'),
+)
+
+REASON_NOT_DRAWN = (
+    ('not_collected', 'Not collected'),
+    ('not_required', 'Not required at this visit'),
+    ('measurement_skipped', 'Measurement skipped at this visit'),
+    ('subject_refused', 'Subject refused'),
+    ('equipment_malfunction', 'Equipment malfunction'),
+    ('staff_unavailable', 'Staff unavailable'),
+    ('no_further_information', 'No further information'),
+)
+
+ROUTE = (
+    ('intramuscular', 'Intramuscular'),
+    ('oral', 'Oral'),
+)
+
+STATUS = (
+    ('resolved', 'Resolved'),
+    ('ongoing', 'Ongoing'),
+)
+
+TEMP_UNITS = (
+    ('celcius', 'Celcius (ºC)'),
+    ('fahrenheit', 'Fahrenheit (ºF)'),
+)
+
+TREATMENT_RELATIONSHIP = (
+    ('related', 'Related'),
+    ('not_related', 'Not Related'),
+)
+
+UNIT_OPTIONS = (
+    ('ampule', 'Ampule'),
+    ('bag', 'Bag'),
+    ('bar', 'Bar'),
+    ('bolus', 'Bolus'),
+    ('bottle', 'Bottle'),
+    ('box', 'Box'),
+    ('can', 'Can'),
+    ('capsule', 'Capsule'),
+    ('cartridge', 'Cartridge'),
+    ('coat', 'Coat'),
+    ('container', 'Container'),
+    ('cylinder', 'Cylinder'),
+    ('disk', 'Disk'),
+    ('drum', 'Drum'),
+    ('grain', 'Grain'),
+    ('homeopathic_dilution', 'Homeopathic dilution'),
+    ('implant', 'Implant'),
+    ('inch', 'Inch'),
+    ('inhalation', 'Inhalation'),
+    ('jar', 'Jar'),
+    ('kallikrein_inhibitor_unit', 'Kallikrein inhibitor unit'),
+    ('kit', 'Kit'),
+    ('L', 'L'),
+    ('MCi', 'MCi'),
+    ('mEq', 'mEq'),
+    ('mmol', 'mmol'),
+    ('ng', 'ng'),
+    ('nmol', 'nmol'),
+    ('ounce', 'Ounce'),
+    ('uCi', 'uCi'),
+    ('um', 'um'),
+    ('umol', 'umol'),
+    ('gram', 'gram'),
+    ('mg', 'mg'),
+    ('mg/dL', 'mg/dL'),
+    ('puff', 'Puff'),
+    ('Tbsp', 'Tbsp'),
+    ('Tsp', 'tsp'),
+    ('cup', 'cup'),
+    ('drop', 'Drop'),)
 
 VACCINATION_LOCATION = (
     ('left_deltoid', 'Left deltoid'),
