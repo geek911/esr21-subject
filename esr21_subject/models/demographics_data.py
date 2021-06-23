@@ -10,7 +10,7 @@ from ..choices import EMPLOYMENT_STATUS, SETTLEMENT_TYPE, MARITAL_STATUS, \
 
 
 class DemographicsData(CrfModelMixin):
-    
+
     age_at_entry = models.IntegerField(
         verbose_name='Age at study entry', )
 

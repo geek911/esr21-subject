@@ -20,6 +20,11 @@ AE_GRADE = (
     ('fatal', 'Fatal (Grade 5)'),
 )
 
+AE_NUMBER = (
+    ('ae_log_line_number1', 'AE log line number1'),
+    ('ae_log_line_number1', 'AE log line number2'),
+)
+
 AESI_CATEGORY = (
     ('generalized_convulsion', 'Generalized convulsion'),
     ('guillain_barre_syndrome', 'Guillain-Barre syndrome'),
@@ -72,11 +77,34 @@ HOSPITALIZATION_STATUS = (
     ('icu_hdu', 'ICU/HDU'),
 )
 
+HOSPITALIZATION_REASON = (
+    ('covid19_related_symptoms', 'COVID-19 related symptoms'),
+    (OTHER, 'Other'),
+)
+
+HOSPITALIZATION_OUTCOME = (
+    ('expired', 'Expired'),
+    ('hospice_care', 'Home: Hospice Care'),
+    ('self_care', 'Home: Self Care'),
+    ('hospice_medical_facility', 'Hospice Medical Facility'),
+    ('inpatient_rehabilitation', 'Inpatient Rehabilitation'),
+    ('intermediate_care_facility', 'Intermediate Care Facility'),
+    ('medical_advice', 'Left Against Medical Advice'),
+    ('long_term_care_hospital', 'Long Term Care Hospital'),
+    ('nursing_facility', 'Nursing Facility'),
+    ('unit_ward_change', 'Unit/Ward Change'),
+)
+
 IDENTITY_TYPE = (
     ('country_id', 'Country ID number'),
     ('country_id_rcpt', 'Country ID receipt'),
     ('passport', 'Passport'),
     (OTHER, 'Other'),
+)
+
+INFECTION_STATUS = (
+    ('seronegative', 'Seronegative'),
+    ('seropositive', 'Seropositive'),
 )
 
 LANGUAGE = (
@@ -94,7 +122,11 @@ MARITAL_STATUS = (
 
 MODE_TRANSPORT = (
     ('public_transport', 'Public Transport'),
-    ('private_transport', 'Private Transport')
+    ('private_transport', 'Private Transport'))
+
+MED_HISTORY_NO = (
+    ('mh_log_line_number1', 'MH log line number1'),
+    ('mh_log_line_number2', 'MH log line number2'),
 )
 
 OUTCOME = (
@@ -114,8 +146,7 @@ POS_NEG_IND = (
 
 PREGNANCY_TEST_TYPE = (
     ('urine_serum', 'Urine/Serum'),
-    ('hgg', 'HCG'),
-)
+    ('hgg', 'HCG'),)
 
 REASON_NOT_DRAWN = (
     ('not_collected', 'Not collected'),
@@ -130,11 +161,6 @@ REASON_NOT_DRAWN = (
 ROUTE = (
     ('intramuscular', 'Intramuscular'),
     ('oral', 'Oral'),
-)
-
-INFECTION_STATUS = (
-    ('seronegative', 'Seronegative'),
-    ('seropositive', 'Seropositive'),
 )
 
 SETTLEMENT_TYPE = (
@@ -157,34 +183,47 @@ TREATMENT_RELATIONSHIP = (
     ('not_related', 'Not Related'),
 )
 
-REASON = (
-    ('not_collected', 'Not collected'),
-    ('not_required', 'Not required at this visit'),
-    ('measurement_skipped', 'Measurement skipped at this visit'),
-    ('subject_refused', 'Subject refused'),
-    ('equipment_malfunction', 'Equipment malfunction'),
-    ('staff_unavailable', 'Staff unavailable'),
-    ('no_information', 'No further information'),
-    (NOT_APPLICABLE, 'Not applicable'),
-)
-
-HOSPITALIZATION_REASON = (
-    ('', 'COVID-19 related symptoms'),
-    (OTHER, 'Other'),
-)
-
-HOSPITALIZATION_OUTCOME = (
-    ('expired', 'Expired'),
-    ('hospice_care', 'Home: Hospice Care'),
-    ('self_care', 'Home: Self Care'),
-    ('hospice_medical_facility', 'Hospice Medical Facility'),
-    ('inpatient_rehabilitation', 'Inpatient Rehabilitation'),
-    ('intermediate_care_facility', 'Intermediate Care Facility'),
-    ('medical_advice', 'Left Against Medical Advice'),
-    ('long_term_care_hospital', 'Long Term Care Hospital'),
-    ('nursing_facility', 'Nursing Facility'),
-    ('unit_ward_change', 'Unit/Ward Change'),
-)
+UNIT_OPTIONS = (
+    ('ampule', 'Ampule'),
+    ('bag', 'Bag'),
+    ('bar', 'Bar'),
+    ('bolus', 'Bolus'),
+    ('bottle', 'Bottle'),
+    ('box', 'Box'),
+    ('can', 'Can'),
+    ('capsule', 'Capsule'),
+    ('cartridge', 'Cartridge'),
+    ('coat', 'Coat'),
+    ('container', 'Container'),
+    ('cylinder', 'Cylinder'),
+    ('disk', 'Disk'),
+    ('drum', 'Drum'),
+    ('grain', 'Grain'),
+    ('homeopathic_dilution', 'Homeopathic dilution'),
+    ('implant', 'Implant'),
+    ('inch', 'Inch'),
+    ('inhalation', 'Inhalation'),
+    ('jar', 'Jar'),
+    ('kallikrein_inhibitor_unit', 'Kallikrein inhibitor unit'),
+    ('kit', 'Kit'),
+    ('L', 'L'),
+    ('MCi', 'MCi'),
+    ('mEq', 'mEq'),
+    ('mmol', 'mmol'),
+    ('ng', 'ng'),
+    ('nmol', 'nmol'),
+    ('ounce', 'Ounce'),
+    ('uCi', 'uCi'),
+    ('um', 'um'),
+    ('umol', 'umol'),
+    ('gram', 'gram'),
+    ('mg', 'mg'),
+    ('mg/dL', 'mg/dL'),
+    ('puff', 'Puff'),
+    ('Tbsp', 'Tbsp'),
+    ('Tsp', 'tsp'),
+    ('cup', 'cup'),
+    ('drop', 'Drop'),)
 
 VACCINATION_LOCATION = (
     ('left_deltoid', 'Left deltoid'),
