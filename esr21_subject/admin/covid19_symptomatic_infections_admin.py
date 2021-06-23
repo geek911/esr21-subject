@@ -22,8 +22,8 @@ class Covid19SymptomaticInfectionsAdmin(ModelAdminMixin, admin.ModelAdmin):
                 'infection_status',
                 'visits',
                 'hospitalisation_date',
-            ),
-        }),
+                'hospitalisation_details',
+            )}),
         audit_fieldset_tuple
     )
 
