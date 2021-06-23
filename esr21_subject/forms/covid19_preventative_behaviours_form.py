@@ -1,11 +1,11 @@
 from django import forms
 
 from .form_mixins import SubjectModelFormMixin
-from ..models import Covid19PreventativeBehaviors
+from ..models import Covid19PreventativeBehaviours
 
 
-class Covid19PreventativeBehaviorsForm(SubjectModelFormMixin, forms.ModelForm):
+class Covid19PreventativeBehavioursForm(SubjectModelFormMixin, forms.ModelForm):
 
     class Meta:
-        model = Covid19PreventativeBehaviors
+        model = Covid19PreventativeBehaviours
         fields = '__all__'

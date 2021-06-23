@@ -44,7 +44,7 @@ class InformedConsent(ConsentModelMixin, SiteModelMixin,
 
     identity_type = models.CharField(
         verbose_name='What type of identity number is this?',
-        max_length=25,
+        max_length=30,
         choices=IDENTITY_TYPE)
 
     gender = models.CharField(

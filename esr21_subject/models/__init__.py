@@ -8,7 +8,7 @@ from .rapid_hiv_testing import RapidHIVTesting
 from .serious_adverse_event import SeriousAdverseEvent
 from .special_interest_adverse_event import SpecialInterestAdverseEvent
 from .subject_visit import SubjectVisit
-from .covid19_preventative_behaviors import Covid19PreventativeBehaviors
+from esr21_subject.models.covid19_preventative_behaviours import Covid19PreventativeBehaviours
 from .personal_contact_info import PersonalContactInfo
 from .medical_history import MedicalHistory
 from .physical_exam import PhysicalExam
