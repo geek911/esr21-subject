@@ -123,6 +123,6 @@ CHILDBEARING = (
     (OTHER, 'Other, specify'),)
 
 RACE = (
-    ('', 'Reported'),
-    ('', 'Not Reported'),
+    ('reported', 'Reported'),
+    ('not_reported', 'Not Reported'),
     (UNKNOWN, 'Unknown'),)

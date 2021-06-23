@@ -4,7 +4,7 @@ from .model_mixins import CrfModelMixin
 from ..choices import AGREE_DISAGREE
 
 
-class Covid19PreventiveBehaviors(CrfModelMixin):
+class Covid19PreventativeBehaviors(CrfModelMixin):
 
     people_sneezing = models.CharField(
         verbose_name='It really bothers me when people sneeze '
@@ -53,5 +53,5 @@ class Covid19PreventiveBehaviors(CrfModelMixin):
 
     class Meta(CrfModelMixin.Meta):
         app_label = 'esr21_subject'
-        verbose_name = 'COVID Preventive Behaviors'
-        verbose_name_plural = 'COVID Preventive Behaviors'
+        verbose_name = 'COVID Preventative Behaviors'
+        verbose_name_plural = 'COVID Preventative Behaviors'

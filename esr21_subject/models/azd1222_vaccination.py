@@ -42,5 +42,5 @@ class Azd1222Vaccination(CrfModelMixin):
 
     class Meta(CrfModelMixin.Meta):
         app_label = 'esr21_subject'
-        verbose_name = 'AZD122 Vaccination'
+        verbose_name = 'AZD1222 Vaccination'
         verbose_name_plural = 'AZD1222 Vaccination'
