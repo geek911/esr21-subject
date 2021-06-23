@@ -20,6 +20,8 @@ class InformedConsentForm(SiteModelFormMixin, FormValidatorMixin,
         widget=forms.TextInput(attrs={'readonly': 'readonly'}),
         required=False)
 
+
+
     class Meta:
         model = InformedConsent
         fields = '__all__'

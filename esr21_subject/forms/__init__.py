@@ -9,7 +9,7 @@ from .rapid_hiv_testing_form import RapidHIVTestingForm
 from .serious_adverse_event_form import SeriousAdverseEventForm
 from .special_interest_adverse_event_form import SpecialInterestAdverseEventForm
 from .subject_visit_form import SubjectVisitForm
-from .covid19_preventative_behaviors_form import Covid19PreventativeBehaviorsForm
+from esr21_subject.forms.covid19_preventative_behaviours_form import Covid19PreventativeBehavioursForm
 from .personal_contact_info_form import PersonalContactInfoForm
 from .medical_history_form import MedicalHistoryForm
 from .physical_exam_form import PhysicalExamForm

@@ -4,7 +4,7 @@ from .model_mixins import CrfModelMixin
 from ..choices import AGREE_DISAGREE
 
 
-class Covid19PreventativeBehaviors(CrfModelMixin):
+class Covid19PreventativeBehaviours(CrfModelMixin):
 
     people_sneezing = models.CharField(
         verbose_name='It really bothers me when people sneeze '
@@ -25,7 +25,7 @@ class Covid19PreventativeBehaviors(CrfModelMixin):
         choices=AGREE_DISAGREE)
 
     temperature = models.CharField(
-        verbose_name='I want peoples temperature to be taken before they '
+        verbose_name='I want people\'s temperature to be taken before they '
                      'enter public places',
         max_length=20,
         choices=AGREE_DISAGREE)
@@ -42,7 +42,7 @@ class Covid19PreventativeBehaviors(CrfModelMixin):
 
     use_hand_sanitizer = models.CharField(
         verbose_name='I frequently use hand sanitizer and/or wash my hands '
-                     'after shaking someones hand',
+                     'after shaking someone\'s hand',
         max_length=20,
         choices=AGREE_DISAGREE)
 
@@ -53,5 +53,5 @@ class Covid19PreventativeBehaviors(CrfModelMixin):
 
     class Meta(CrfModelMixin.Meta):
         app_label = 'esr21_subject'
-        verbose_name = 'COVID Preventative Behaviors'
-        verbose_name_plural = 'COVID Preventative Behaviors'
+        verbose_name = 'COVID Preventative Behaviours'
+        verbose_name_plural = 'COVID Preventative Behaviours'
