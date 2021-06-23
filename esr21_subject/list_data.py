@@ -38,6 +38,32 @@ list_data = {
         ('nausea', 'Nausea'),
         ('hospitalization_outcome', 'Hospitalization Outcome'),
     ],
+    'esr21_subject.symptoms': [
+        ('fever', 'Fever'),
+        ('dry_cough', 'Dry Cough'),
+        ('fatigue', 'Fatigue'),
+        ('loss_of_taste_or_smell', 'Loss of taste or smell'),
+        ('headache', 'Headache'),
+        ('muscle_or_joint_pain', 'Muscle or joint pain'),
+        ('shortness_of_breath', 'Shortness Of Breath'),
+        ('difficulty_breathing_or_shortness_of_breath', 'Difficulty breathing or shortness of breath'),
+        ('chest_pain_or_pressure', 'Chest pain or pressure'),
+        ('loss_of_speech_or_movement', 'Loss of speech or movement'),
+        (OTHER, 'Other')
+    ],
+    'esr21_subject.diseases': [
+        ('HIV', 'HIV'),
+        ('malignancy', 'malignancy'),
+        ('chronic_disease', 'Chronic Disease'),
+        ('chronic_obstructive_pulmonary_disease_and_other_chronic_lung_diseases',
+         'Chronic obstructive pulmonary disease and other chronic lung diseases'),
+        ('hypertension', 'Hypertension'),
+        ('coronary_artery_disease', 'Coronary artery disease'),
+        ('cardiomyopathy', 'Cardiomyopathy'),
+        ('pulmonary_hypertension', 'Pulmonary hypertension'),
+        ('obesity', 'Obesity'),
+        (OTHER, 'Other')
+    ]
 }
 
 preload_data = PreloadData(

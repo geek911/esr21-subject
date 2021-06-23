@@ -23,3 +23,4 @@ from .azd1222_vaccination import Azd1222Vaccination
 from .sample_collection import SampleCollection
 from .vital_signs import VitalSigns
 from .targeted_physical_examination import TargetedPhysicalExamination
+from .medical_history import MedicalDiagnosis
