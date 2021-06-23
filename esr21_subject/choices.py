@@ -135,7 +135,7 @@ REASON = (
 )
 
 HOSPITALIZATION_REASON = (
-  ('covid19_related_symptoms', 'COVID-19 related symptoms'),
+  ('', 'COVID-19 related symptoms'),
   (OTHER, 'Other'),
 )
 
