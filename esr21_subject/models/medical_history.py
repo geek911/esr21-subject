@@ -2,47 +2,11 @@ from django.db import models
 
 from edc_constants.choices import YES_NO
 
+from .list_models import Symptoms, Diseases
+from ..choices import SMOKED_STATUS_CHOICES, ALCOHOL_STATUS_CHOICES
+
+
 from .model_mixins import CrfModelMixin
-
-
-class Symptoms(models.Model):
-    """
-    For multiple choices symptoms
-    """
-    TYPE_CHOICES = (
-        ('fever', 'Fever'),
-        ('dry_cough', 'Dry Cough'),
-        ('fatigue', 'Fatigue'),
-        ('loss_of_taste_or_smell', 'Loss of taste or smell'),
-        ('headache', 'Headache'),
-        ('muscle_or_joint_pain', 'Muscle or joint pain'),
-        ('shortness_of_breath', 'Shortness Of Breath'),
-        ('difficulty_breathing_or_shortness_of_breath', 'Difficulty breathing or shortness of breath'),
-        ('chest_pain_or_pressure', 'Chest pain or pressure'),
-        ('loss_of_speech_or_movement', 'Loss of speech or movement'),
-        ('other', 'Other')
-    )
-    type = models.CharField(choices=TYPE_CHOICES, max_length=30)
-
-
-class Diseases(models.Model):
-    """
-    For multiple selections for diseases
-    """
-    NAME_CHOICES = (
-        ('HIV', 'HIV'),
-        ('malignancy', 'malignancy'),
-        ('chronic_disease', 'Chronic Disease'),
-        ('chronic_obstructive_pulmonary_disease_and_other_chronic_lung_diseases',
-         'Chronic obstructive pulmonary disease and other chronic lung diseases'),
-        ('hypertension', 'Hypertension'),
-        ('coronary artery disease', 'Coronary artery disease'),
-        ('cardiomyopathy', 'Cardiomyopathy'),
-        ('pulmonary hypertension', 'Pulmonary hypertension'),
-        ('obesity', 'Obesity'),
-        ('other', 'Other')
-    )
-    name = models.CharField(max_length=10, name=NAME_CHOICES)
 
 
 class MedicalHistory(CrfModelMixin):
@@ -65,25 +29,10 @@ class MedicalHistory(CrfModelMixin):
     is_other = models.TextField(
         verbose_name='If other specify', )
 
-    SMOKED_STATUS_CHOICES = (
-        ('never_smoked', 'Never Smoked'),
-        ('previously_smoked', 'Previously Smoked'),
-        ('occasionally_smoked', 'Occasionally Smoked'),
-        ('currently_smoking', 'Currently Smoked'),
-    )
-
     smoking_status = models.CharField(
         choices=SMOKED_STATUS_CHOICES,
         verbose_name='Smoking status/history',
         max_length=20, )
-
-    ALCOHOL_STATUS_CHOICES = (
-        'never_drank_alcohol', 'Never drank alcohol',
-        'previously_drank_alcohol', 'Previously drank alcohol',
-        'occasionally_drank_alcohol', 'Occasionally drank alcohol',
-        'currently_drank_alcohol', 'Currently drank alcohol',
-
-    )
 
     alcohol_status = models.CharField(
         choices=ALCOHOL_STATUS_CHOICES,
