@@ -32,3 +32,6 @@ class SubjectRace(ListModelMixin, BaseUuidModel):
 class WcsDxAdult(ListModelMixin, BaseUuidModel):
     pass
 
+
+class SymptomaticInfections(ListModelMixin, BaseUuidModel):
+    pass

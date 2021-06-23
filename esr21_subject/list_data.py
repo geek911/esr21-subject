@@ -38,6 +38,16 @@ list_data = {
         ('nausea', 'Nausea'),
         ('hospitalization_outcome', 'Hospitalization Outcome'),
     ],
+    'esr21_subject.symptomaticinfections': [
+        ('dry_cough', 'Dry Cough'),
+        ('fever', 'Fever'),
+        ('fatigue', 'Fatigue'),
+        ('loss_of_smell', 'Loss of Smell'),
+        ('loss_of_taste', 'Loss of Taste'),
+        ('body_aches', 'Body aches'),
+        ('headache', 'Headache'),
+        ('shortness_of_breath', 'Shortness of breath'),
+    ],
 }
 
 preload_data = PreloadData(

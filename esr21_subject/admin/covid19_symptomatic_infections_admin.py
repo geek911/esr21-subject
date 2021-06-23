@@ -18,11 +18,11 @@ class Covid19SymptomaticInfectionsAdmin(ModelAdminMixin, admin.ModelAdmin):
                 'subject_visit',
                 'report_datetime',
                 'symptomatic_experiences',
+                'symptomatic_infections',
                 'date_of_infection',
                 'infection_status',
                 'visits',
                 'hospitalisation_date',
-                'hospitalisation_details',
             )}),
         audit_fieldset_tuple
     )
@@ -31,3 +31,5 @@ class Covid19SymptomaticInfectionsAdmin(ModelAdminMixin, admin.ModelAdmin):
         'symptomatic_experiences': admin.VERTICAL,
         'infection_status': admin.VERTICAL,
         'visits': admin.VERTICAL, }
+
+    filter_horizontal = ("symptomatic_infections",)

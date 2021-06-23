@@ -59,7 +59,7 @@ class MedicalHistory(CrfModelMixin):
     # TODO: Needed if {was_subject_infected_before} is 'yes'
     symptoms = models.ManyToManyField(
         Symptoms,
-        verbose_name='If yes, did the participant experience any symptoms? ')
+        verbose_name='If yes, did the participant experience any symptoms?')
 
     # TODO: Needed if {symptoms} is 'other'
     is_other = models.TextField(
