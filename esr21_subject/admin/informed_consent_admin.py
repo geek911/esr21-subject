@@ -69,7 +69,7 @@ class InformedConsentAdmin(ModelAdminBasicMixin, ModelAdminMixin,
                 'identity_type',
                 'confirm_identity',
                 'consent_to_hiv_testing',
-                'consent_to_participate'
+                'consent_to_participate',
                 'optional_sample_collection',
             ),
         }),
@@ -81,11 +81,6 @@ class InformedConsentAdmin(ModelAdminBasicMixin, ModelAdminMixin,
         'is_literate': admin.VERTICAL,
         'gender': admin.VERTICAL,
         'identity_type': admin.VERTICAL,
-        'consent_reviewed': admin.VERTICAL,
-        'study_questions': admin.VERTICAL,
-        'assessment_score': admin.VERTICAL,
-        'consent_signature': admin.VERTICAL,
-        'consent_copy': admin.VERTICAL,
         'is_dob_estimated': admin.VERTICAL,
         'consent_to_hiv_testing': admin.VERTICAL,
         'optional_sample_collection': admin.VERTICAL,
@@ -106,7 +101,7 @@ class InformedConsentAdmin(ModelAdminBasicMixin, ModelAdminMixin,
                     'user_created',
                     'user_modified')
 
-    search_fields = ('subject_identifier', 'dob', )
+    search_fields = ('subject_identifier', 'dob',)
 
     def get_actions(self, request):
 
