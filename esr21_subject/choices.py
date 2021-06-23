@@ -179,6 +179,6 @@ IDENTITY_TYPE = (
     ('NATIONAL_IDENTITY_CARD', 'National Identity Card'),
     ('DRIVERS', 'Driver\'s License'),
     ('PASSPORT', 'Passport'),
-    ('NATIONAL_IDENTITY_CARD_RECEIPT', 'Omang Receipt'),
+    ('NATIONAL_IDENTITY_CARD_RECEIPT', 'National Identity Receipt'),
     (OTHER, 'Other'),
 )
