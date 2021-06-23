@@ -18,12 +18,12 @@ class MedicalHistoryAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                 'relevant_history',
                 'was_subject_infected_before',
                 'symptoms',
-                'is_other',
+                'symptoms_other',
                 'smoking_status',
                 'alcohol_status',
                 'diabetes',
                 'comorbidities',
-                'other_specify',
+                'comorbidities_other',
                 'no_of_mass_gathering',
                 'no_internal_trips',
                 'mode_of_transport',
@@ -41,3 +41,5 @@ class MedicalHistoryAdmin(CrfModelAdminMixin, admin.ModelAdmin):
         'mode_of_transport': admin.VERTICAL,
         'using_shared_kitchen': admin.VERTICAL,
     }
+
+    filter_horizontal = ('symptoms', 'comorbidities')

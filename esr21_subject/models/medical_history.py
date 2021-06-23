@@ -2,57 +2,23 @@ from django.db import models
 
 from edc_constants.choices import YES_NO
 
+from .list_models import Symptoms, Diseases
+from ..choices import SMOKED_STATUS_CHOICES, ALCOHOL_STATUS_CHOICES, \
+    MODE_OF_TRANSPORT_CHOICE
+
 from .model_mixins import CrfModelMixin
 
 
-class Symptoms(models.Model):
-    """
-    For multiple choices symptoms
-    """
-    TYPE_CHOICES = (
-        ('fever', 'Fever'),
-        ('dry_cough', 'Dry Cough'),
-        ('fatigue', 'Fatigue'),
-        ('loss_of_taste_or_smell', 'Loss of taste or smell'),
-        ('headache', 'Headache'),
-        ('muscle_or_joint_pain', 'Muscle or joint pain'),
-        ('shortness_of_breath', 'Shortness Of Breath'),
-        ('difficulty_breathing_or_shortness_of_breath', 'Difficulty breathing or shortness of breath'),
-        ('chest_pain_or_pressure', 'Chest pain or pressure'),
-        ('loss_of_speech_or_movement', 'Loss of speech or movement'),
-        ('other', 'Other')
-    )
-    type = models.CharField(choices=TYPE_CHOICES, max_length=30)
-
-
-class Diseases(models.Model):
-    """
-    For multiple selections for diseases
-    """
-    NAME_CHOICES = (
-        ('HIV', 'HIV'),
-        ('malignancy', 'malignancy'),
-        ('chronic_disease', 'Chronic Disease'),
-        ('chronic_obstructive_pulmonary_disease_and_other_chronic_lung_diseases',
-         'Chronic obstructive pulmonary disease and other chronic lung diseases'),
-        ('hypertension', 'Hypertension'),
-        ('coronary artery disease', 'Coronary artery disease'),
-        ('cardiomyopathy', 'Cardiomyopathy'),
-        ('pulmonary hypertension', 'Pulmonary hypertension'),
-        ('obesity', 'Obesity'),
-        ('other', 'Other')
-    )
-    name = models.CharField(max_length=10, name=NAME_CHOICES)
-
-
 class MedicalHistory(CrfModelMixin):
+
     relevant_history = models.CharField(
         verbose_name='Does the subject have any relevant Medical History?',
         max_length=10,
         choices=YES_NO, )
 
     was_subject_infected_before = models.CharField(
-        verbose_name='Has the participant had a prior infection of SARS-CoV-2/COVID 19?',
+        verbose_name='Has the participant had a prior infection of '
+                     'SARS-CoV-2/COVID 19?',
         max_length=10,
         choices=YES_NO, )
 
@@ -62,70 +28,61 @@ class MedicalHistory(CrfModelMixin):
         verbose_name='If yes, did the participant experience any symptoms?')
 
     # TODO: Needed if {symptoms} is 'other'
-    is_other = models.TextField(
-        verbose_name='If other specify', )
-
-    SMOKED_STATUS_CHOICES = (
-        ('never_smoked', 'Never Smoked'),
-        ('previously_smoked', 'Previously Smoked'),
-        ('occasionally_smoked', 'Occasionally Smoked'),
-        ('currently_smoking', 'Currently Smoked'),
-    )
+    symptoms_other = models.TextField(
+        verbose_name='If other specify',
+        blank=True,
+        null=True)
 
     smoking_status = models.CharField(
         choices=SMOKED_STATUS_CHOICES,
         verbose_name='Smoking status/history',
         max_length=20, )
 
-    ALCOHOL_STATUS_CHOICES = (
-        'never_drank_alcohol', 'Never drank alcohol',
-        'previously_drank_alcohol', 'Previously drank alcohol',
-        'occasionally_drank_alcohol', 'Occasionally drank alcohol',
-        'currently_drank_alcohol', 'Currently drank alcohol',
-
-    )
-
     alcohol_status = models.CharField(
         choices=ALCOHOL_STATUS_CHOICES,
         verbose_name='Alcohol Use',
-        max_length=20,
+        max_length=50,
     )
 
     diabetes = models.CharField(
-        verbose_name="Is the participant diabetes mellitus?",
-        choices=YES_NO
+        verbose_name='Is the participant diabetes mellitus?',
+        choices=YES_NO,
+        max_length=3
     )
 
-    comorbidities = models.ManyToManyField(Diseases, verbose_name='Comorbidities')
+    comorbidities = models.ManyToManyField(Diseases,
+                                           verbose_name='Comorbidities')
 
     # TODO: If {comorbidities} is 'other'
-    other_specify = models.CharField(
+    comorbidities_other = models.CharField(
         verbose_name='Other specify',
-        max_length=50, )
+        max_length=50,
+        blank=True,
+        null=True)
 
     no_of_mass_gathering = models.PositiveIntegerField(
         default=0,
-        verbose_name='How many mass gatherings has the participant attended in the preceding 12 weeks?'
+        verbose_name='How many mass gatherings has the participant attended '
+                     'in the preceding 12 weeks? '
     )
 
     no_internal_trips = models.PositiveIntegerField(
         default=0,
-        verbose_name='How many COVID-19 inter-zonal trips has the participant made in Botswana in the past 12 weeks?'
-    )
-
-    MODE_OF_TRANSPORT_CHOICE = (
-        ('private', 'Private'),
-        ('public', 'Public')
+        verbose_name='How many COVID-19 inter-zonal trips has the '
+                     'participant made in Botswana in the past 12 weeks? '
     )
 
     mode_of_transport = models.CharField(
         choices=MODE_OF_TRANSPORT_CHOICE,
-        verbose_name='Mode of Transport'
+        verbose_name='Mode of Transport',
+        max_length=30,
     )
 
     using_shared_kitchen = models.CharField(
         choices=YES_NO,
-        verbose_name='Is the participant using a shared kitchen/dinning at work?'
+        verbose_name='Is the participant using a shared kitchen/dinning at '
+                     'work?',
+        max_length=3
     )
 
     class Meta(CrfModelMixin.Meta):
@@ -139,10 +96,10 @@ class MedicalDiagnosis(CrfModelMixin):
         verbose_name='Medical History Diagnosis',
         max_length=29)
     start_date = models.DateField(
-        verbose_name='Start Date (DD/MMM/YYYY)', )
+        verbose_name='Start Date (DD/MMM/YYYY)')
 
     end_date = models.DateField(
-        verbose_name='End Date (DD/MMM/YYYY)', )
+        verbose_name='End Date (DD/MMM/YYYY)')
 
     ongoing = models.CharField(
         verbose_name='Ongoing',
@@ -150,7 +107,8 @@ class MedicalDiagnosis(CrfModelMixin):
         max_length=5)
 
     subject_taking_medicine = models.CharField(
-        verbose_name='Is the subject taking medication related to this condition?',
+        verbose_name='Is the subject taking medication related to this '
+                     'condition?',
         choices=YES_NO,
         max_length=5)
 

@@ -1,4 +1,5 @@
 from edc_base.model_mixins import BaseUuidModel, ListModelMixin
+from django.db import models
 
 
 class COVIDSymptoms(ListModelMixin, BaseUuidModel):
@@ -34,4 +35,12 @@ class WcsDxAdult(ListModelMixin, BaseUuidModel):
 
 
 class SymptomaticInfections(ListModelMixin, BaseUuidModel):
+    pass
+
+
+class Diseases(ListModelMixin, BaseUuidModel):
+    pass
+
+
+class Symptoms(ListModelMixin, BaseUuidModel):
     pass

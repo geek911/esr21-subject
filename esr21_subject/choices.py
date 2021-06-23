@@ -343,3 +343,31 @@ VISIT_REASON = (
     (LOST_VISIT, 'Lost to follow-up (use only when taking subject off study)'),
     (COMPLETED_PROTOCOL_VISIT, 'Subject has completed the study'),
 )
+
+# IDENTITY_TYPE = (
+#     ('NATIONAL_IDENTITY_CARD', 'National Identity Card'),
+#     ('DRIVERS', 'Driver\'s License'),
+#     ('PASSPORT', 'Passport'),
+#     ('NATIONAL_IDENTITY_CARD_RECEIPT', 'National Identity Receipt'),
+#     (OTHER, 'Other'),
+# )
+
+SMOKED_STATUS_CHOICES = (
+    ('never_smoked', 'Never Smoked'),
+    ('previously_smoked', 'Previously Smoked'),
+    ('occasionally_smoked', 'Occasionally Smoked'),
+    ('currently_smoking', 'Currently Smoked'),
+)
+
+ALCOHOL_STATUS_CHOICES = (
+    ('never_drank_alcohol', 'Never drank alcohol'),
+    ('previously_drank_alcohol', 'Previously drank alcohol'),
+    ('occasionally_drank_alcohol', 'Occasionally drank alcohol'),
+    ('currently_drank_alcohol', 'Currently drank alcohol'),
+
+)
+
+MODE_OF_TRANSPORT_CHOICE = (
+    ('private', 'Private'),
+    ('public', 'Public')
+)
