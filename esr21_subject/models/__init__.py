@@ -1,4 +1,5 @@
 from .eligibility_confirmation import EligibilityConfirmation
+from .concomitant_medications import ConcomitantMedication
 from .informed_consent import InformedConsent
 from .demographics_data import DemographicsData
 from .vaccination_details import VaccinationDetails

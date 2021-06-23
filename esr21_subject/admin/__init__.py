@@ -1,4 +1,5 @@
 from .eligibility_confirmation_admin import EligibilityConfirmationAdmin
+from .concomitant_medication_admin import ConcomitantMedicationAdmin
 from .informed_consent_admin import InformedConsentAdmin
 from .demographics_data_admin import DemographicDataAdmin
 from .vaccination_details_admin import VaccinationDetailsAdmin

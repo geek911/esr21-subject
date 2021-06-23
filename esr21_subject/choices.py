@@ -65,6 +65,24 @@ EMPLOYMENT_STATUS = (
     ('Seasonal_employment', 'Seasonal employment'),
     (OTHER, 'Other (specify)'),)
 
+FREQUENCY = (('BID', 'BID'),
+             ('TID', 'TID',),
+             ('QID', 'QID'),
+             ('QOD', 'QOD'),
+             ('PRN', 'PRD'),
+             ('Once', 'Once'),
+             ('one_time_per_week', 'One Time Per Week'),
+             ('every_month', 'Every Month'),
+             ('QH', 'QH'),
+             ('Q2H', 'Q2H'),
+             ('Q3H', 'Q3H'),
+             ('Q4H', 'Q4H'),
+             ('Q6H', 'Q6H'),
+             ('Q8H', 'Q8H'),
+             ('Q12H', 'Q12H'),
+             (UNKNOWN, 'Unknown'),
+             (OTHER, 'Other'))
+
 GENDER_OTHER = (
     (MALE, _('Male')),
     (FEMALE, _('Female')),
@@ -103,34 +121,11 @@ INFECTION_STATUS = (
     ('seronegative', 'Seronegative'),
     ('seropositive', 'Seropositive'),)
 
-HOSPITALIZATION_REASON = (
-    ('covid19_related_symptoms', 'COVID-19 related symptoms'),
-    (OTHER, 'Other'),
-)
-
-HOSPITALIZATION_OUTCOME = (
-    ('expired', 'Expired'),
-    ('hospice_care', 'Home: Hospice Care'),
-    ('self_care', 'Home: Self Care'),
-    ('hospice_medical_facility', 'Hospice Medical Facility'),
-    ('inpatient_rehabilitation', 'Inpatient Rehabilitation'),
-    ('intermediate_care_facility', 'Intermediate Care Facility'),
-    ('medical_advice', 'Left Against Medical Advice'),
-    ('long_term_care_hospital', 'Long Term Care Hospital'),
-    ('nursing_facility', 'Nursing Facility'),
-    ('unit_ward_change', 'Unit/Ward Change'),
-)
-
 IDENTITY_TYPE = (
     ('country_id', 'Country ID number'),
     ('country_id_rcpt', 'Country ID receipt'),
     ('passport', 'Passport'),
     (OTHER, 'Other'),
-)
-
-INFECTION_STATUS = (
-    ('seronegative', 'Seronegative'),
-    ('seropositive', 'Seropositive'),
 )
 
 LANGUAGE = (
@@ -199,6 +194,41 @@ ROUTE = (
     ('oral', 'Oral'),
 )
 
+CONCOMITANT_ROUTE = (
+    ('auricular_otic', 'Auricular(otic)'),
+    ('buccal', 'Buccal'),
+    ('endotracheal', 'Endotracheal'),
+    ('epidural', 'Epidural'),
+    ('intra-articular', 'Intra-articular'),
+    ('intracardiac', 'Intracardiac'),
+    ('intradermal', 'Intradermal'),
+    ('intralesional', 'Intralesional'),
+    ('intramuscular', 'Intramuscular'),
+    ('intraocular', 'Intraocular'),
+    ('intraperitoneal', 'Intraperitoneal'),
+    ('intrathecal', 'Intrathecal'),
+    ('intratumor', 'Intratumor'),
+    ('intravenous', 'Intravenous'),
+    ('intravenous_bolus', 'Intravenous Bolus'),
+    ('intravenous_drip', 'Intravenous Drip'),
+    ('irrigation', 'Irrigation'),
+    ('microdialysis', 'Microdialysis'),
+    ('nasal', 'Nasal'),
+    ('ophthalmic', 'Ophthalmic'),
+    ('oral', 'Oral'),
+    ('parenteral', 'Parenteral'),
+    ('percutaneous', 'Percutaneous'),
+    ('rectal', 'Rectal'),
+    ('respiratory_inhalation', 'Respiratory Inhalation'),
+    ('subcutaneous', 'Subcutaneous'),
+    ('sublingual', 'Sublingual'),
+    ('topical', 'Topical'),
+    ('transdermal', 'Transdermal'),
+    ('vaginal', 'Vaginal'),
+    (UNKNOWN, 'Unknown'),
+    (OTHER, 'Other'),
+)
+
 SETTLEMENT_TYPE = (
     ('urban', 'Urban'),
     ('rural', 'Rural'),
@@ -259,24 +289,30 @@ UNIT_OPTIONS = (
     ('Tbsp', 'Tbsp'),
     ('Tsp', 'tsp'),
     ('cup', 'cup'),
-    ('drop', 'Drop'),)
-
-HOSPITALIZATION_REASON = (
-  ('', 'COVID-19 related symptoms'),
-  (OTHER, 'Other'),
-)
-
-HOSPITALIZATION_OUTCOME = (
-    ('expired', 'Expired'),
-    ('hospice_care', 'Home: Hospice Care'),
-    ('self_care', 'Home: Self Care'),
-    ('hospice_medical_facility', 'Hospice Medical Facility'),
-    ('inpatient_rehabilitation', 'Inpatient Rehabilitation'),
-    ('intermediate_care_facility', 'Intermediate Care Facility'),
-    ('medical_advice', 'Left Against Medical Advice'),
-    ('long_term_care_hospital', 'Long Term Care Hospital'),
-    ('nursing_facility', 'Nursing Facility'),
-    ('unit_ward_change', 'Unit/Ward Change'),)
+    ('drop', 'Drop'),
+    ('iu_l', 'IU / L'),
+    ('mg_m2', 'mg / m2'),
+    ('ug', 'Ug'),
+    ('patch_dosing_unit', 'Patch Dosing Unit'),
+    ('pellet_dosing_unit', 'Pellet Dosing Unit'),
+    ('%', '%'),
+    ('%_v_v)', '% (v / v)'),
+    ('%_w_v)', '% (w / v)'),
+    ('%_w_w)', '% (w / w)'),
+    ('spray', 'Spray'),
+    ('tablet', 'Tablet'),
+    ('ug_l', 'ug / L'),
+    ('iu_ml', 'IU / mL'),
+    (OTHER, 'Other'),
+    ('gtt', 'gtt'),
+    ('iu_kg', 'IU / kg'),
+    ('kiu', 'kIU'),
+    ('mbq', 'MBq'),
+    ('mg_kg', 'mg / kg'),
+    ('ug_kg', 'ug / kg'),
+    ('ug_m2', 'ug / m2'),
+    ('iu', 'IU'),
+    ('suppository', 'Suppository'),)
 
 TEST_TYPE = (
     ('pcr_test', 'PCR Test'),

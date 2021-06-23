@@ -1,4 +1,5 @@
 from .eligibility_confirmation_form import EligibilityConfirmationForm
+from .concomitant_medication_form import ConcomitantMedicationForm
 from .informed_consent_form import InformedConsentForm
 from .demographics_data_form import DemographicsDataForm
 from .vaccination_details_form import VaccinationDetailsForm
