@@ -49,7 +49,7 @@ list_data = {
         ('difficulty_breathing_or_shortness_of_breath', 'Difficulty breathing or shortness of breath'),
         ('chest_pain_or_pressure', 'Chest pain or pressure'),
         ('loss_of_speech_or_movement', 'Loss of speech or movement'),
-        ('other', 'Other')
+        (OTHER, 'Other')
     ],
     'esr21_subject.diseases': [
         ('HIV', 'HIV'),
@@ -58,11 +58,11 @@ list_data = {
         ('chronic_obstructive_pulmonary_disease_and_other_chronic_lung_diseases',
          'Chronic obstructive pulmonary disease and other chronic lung diseases'),
         ('hypertension', 'Hypertension'),
-        ('coronary artery disease', 'Coronary artery disease'),
+        ('coronary_artery_disease', 'Coronary artery disease'),
         ('cardiomyopathy', 'Cardiomyopathy'),
-        ('pulmonary hypertension', 'Pulmonary hypertension'),
+        ('pulmonary_hypertension', 'Pulmonary hypertension'),
         ('obesity', 'Obesity'),
-        ('other', 'Other')
+        (OTHER, 'Other')
     ]
 }
 

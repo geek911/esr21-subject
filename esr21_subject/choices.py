@@ -324,10 +324,10 @@ SMOKED_STATUS_CHOICES = (
 )
 
 ALCOHOL_STATUS_CHOICES = (
-    'never_drank_alcohol', 'Never drank alcohol',
-    'previously_drank_alcohol', 'Previously drank alcohol',
-    'occasionally_drank_alcohol', 'Occasionally drank alcohol',
-    'currently_drank_alcohol', 'Currently drank alcohol',
+    ('never_drank_alcohol', 'Never drank alcohol'),
+    ('previously_drank_alcohol', 'Previously drank alcohol'),
+    ('occasionally_drank_alcohol', 'Occasionally drank alcohol'),
+    ('currently_drank_alcohol', 'Currently drank alcohol'),
 
 )
 

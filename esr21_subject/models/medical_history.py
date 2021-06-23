@@ -36,12 +36,13 @@ class MedicalHistory(CrfModelMixin):
     alcohol_status = models.CharField(
         choices=ALCOHOL_STATUS_CHOICES,
         verbose_name='Alcohol Use',
-        max_length=20,
+        max_length=50,
     )
 
     diabetes = models.CharField(
-        verbose_name="Is the participant diabetes mellitus?",
-        choices=YES_NO
+        verbose_name='Is the participant diabetes mellitus?',
+        choices=YES_NO,
+        max_length=3
     )
 
     comorbidities = models.ManyToManyField(Diseases, verbose_name='Comorbidities')
@@ -63,12 +64,14 @@ class MedicalHistory(CrfModelMixin):
 
     mode_of_transport = models.CharField(
         choices=MODE_OF_TRANSPORT_CHOICE,
-        verbose_name='Mode of Transport'
+        verbose_name='Mode of Transport',
+        max_length=30,
     )
 
     using_shared_kitchen = models.CharField(
         choices=YES_NO,
-        verbose_name='Is the participant using a shared kitchen/dinning at work?'
+        verbose_name='Is the participant using a shared kitchen/dinning at work?',
+        max_length=3
     )
 
     class Meta(CrfModelMixin.Meta):
@@ -82,10 +85,10 @@ class MedicalDiagnosis(CrfModelMixin):
         verbose_name='Medical History Diagnosis',
         max_length=29)
     start_date = models.DateField(
-        verbose_name='Start Date (DD/MMM/YYYY)', )
+        verbose_name='Start Date (DD/MMM/YYYY)')
 
     end_date = models.DateField(
-        verbose_name='End Date (DD/MMM/YYYY)', )
+        verbose_name='End Date (DD/MMM/YYYY)' )
 
     ongoing = models.CharField(
         verbose_name='Ongoing',
