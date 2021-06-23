@@ -68,6 +68,8 @@ class InformedConsentAdmin(ModelAdminBasicMixin, ModelAdminMixin,
                 'identity',
                 'identity_type',
                 'confirm_identity',
+                'consent_to_hiv_testing',
+                'consent_to_participate'
             ),
         }),
         ('Review Questions', {
@@ -94,6 +96,8 @@ class InformedConsentAdmin(ModelAdminBasicMixin, ModelAdminMixin,
         'consent_signature': admin.VERTICAL,
         'consent_copy': admin.VERTICAL,
         'is_dob_estimated': admin.VERTICAL,
+        'consent_to_hiv_testing': admin.VERTICAL,
+        'consent_to_participate': admin.VERTICAL,
     }
 
     list_display = ('subject_identifier',
