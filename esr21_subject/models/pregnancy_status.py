@@ -5,7 +5,6 @@ from edc_constants.choices import YES_NO
 
 from .model_mixins import CrfModelMixin
 from ..choices import CONTRACEPTIVES
-from ..maternal_choices import OUTCOME
 
 
 class PregnancyStatus(CrfModelMixin):
@@ -24,7 +23,7 @@ class PregnancyStatus(CrfModelMixin):
     contraceptive_usage = models.CharField(
         verbose_name='Using Contraception',
         choices=YES_NO,
-        max_length=10,)
+        max_length=10, )
 
     contraceptive = models.CharField(
         verbose_name='If yes, specify contraception',
@@ -34,24 +33,6 @@ class PregnancyStatus(CrfModelMixin):
         null=True)
 
     contraceptive_othr = OtherCharField()
-
-    pregnancy_outcome = models.CharField(
-        verbose_name='Pregnancy Outcome',
-        choices=OUTCOME,
-        max_length=30,
-        null=True,
-        blank=True)
-
-    birth_defects = models.CharField(
-        verbose_name='Were there any birth defects/anomalies?',
-        max_length=10,
-        choices=YES_NO,)
-
-    specify_defect = models.CharField(
-        verbose_name='If yes, Specify:',
-        max_length=50,
-        null=True,
-        blank=True)
 
     """""Pregnancy History"""""
 
@@ -70,14 +51,18 @@ class PregnancyStatus(CrfModelMixin):
         null=True,
         blank=True)
 
+    date_miscarriages = models.DateField(
+        verbose_name='Date of Spontaneous Miscarriages',
+    )
+
     risk_factor = models.CharField(
         verbose_name='Relevant Pregnancy Risk Factor',
         max_length=10,
         null=True,
         blank=True)
 
-    family_history = models.CharField(
-        verbose_name='Relevant Family History',
+    maternal_history = models.CharField(
+        verbose_name='Maternal medical and obstetric history',
         max_length=10,
         null=True,
         blank=True)

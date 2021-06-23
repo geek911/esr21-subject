@@ -8,12 +8,13 @@ from .adverse_event_admin import SpecialInterestAdverseEventAdmin
 from .pregnancy_status_admin import PregnancyStatusAdmin
 from .rapid_hiv_testing_admin import RapidHIVTestingAdmin
 from .subject_visit_admin import SubjectVisitAdmin
-from .covid19_preventive_behaviors_admin import Covid19PreventiveBehaviorsAdmin
+from .covid19_preventative_behaviors_admin import Covid19PreventativeBehaviorsAdmin
 from .medical_history_admin import MedicalHistoryAdmin
 from .personal_contact_info_admin import PersonalContactInfoAdmin
 from .physical_exam_admin import PhysicalExamAdmin
-from .pregnancy_admin import PregnancyAdmin
+from .pregnancy_test_admin import PregnancyTestAdmin
 from .hospitalization_admin import HospitalizationAdmin
 from .covid19_symptomatic_infections_admin import Covid19SymptomaticInfectionsAdmin
 from .azd1222_vaccination_admin import Azd1222VaccinationAdmin
 from .subject_requisition_admin import SubjectRequisitionAdmin
+from .vital_signs_admin import VitalSignsAdmin

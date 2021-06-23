@@ -41,7 +41,8 @@ class Hospitalization(CrfModelMixin):
 
     covid_symptoms = models.ManyToManyField(
         COVIDSymptoms,
-        verbose_name=('If COVID-19 related symptoms, please check all that apply'),
+        verbose_name=('If COVID-19 related symptoms, please check all that '
+                      'apply'),
         blank=True)
 
     hospitalization_outcome = models.CharField(

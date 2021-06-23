@@ -1,11 +1,10 @@
 from django import forms
 
 from .form_mixins import SubjectModelFormMixin
-from ..models import Pregnancy
+from ..models import PregnancyTest
 
 
-class PregnancyForm(SubjectModelFormMixin, forms.ModelForm):
-
+class PregnancyTestForm(SubjectModelFormMixin, forms.ModelForm):
     class Meta:
-        model = Pregnancy
+        model = PregnancyTest
         fields = '__all__'

@@ -21,13 +21,6 @@ class VaccinationDetails(CrfModelMixin):
         verbose_name='Date and time the vaccination was administered',
         validators=[datetime_not_future, ])
 
-    route = models.CharField(
-        verbose_name='Route (defaulted, no entry required)',
-        max_length=30,
-        choices=ROUTE,
-        blank=True,
-        null=True)
-
     location = models.CharField(
         verbose_name='Location',
         max_length=30,
@@ -45,15 +38,6 @@ class VaccinationDetails(CrfModelMixin):
         max_length=100,
         blank=True,
         null=True)
-
-    dose_administered = models.DecimalField(
-        verbose_name='Dosage administered',
-        decimal_places=2,
-        max_digits=3)
-
-    batch_number = models.CharField(
-        verbose_name='Vaccination batch number',
-        max_length=35, )
 
     expiry_date = models.DateField(
         verbose_name='Vaccination expiry date',

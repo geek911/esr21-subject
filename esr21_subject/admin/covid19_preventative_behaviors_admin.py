@@ -3,14 +3,14 @@ from django.contrib import admin
 from edc_model_admin.model_admin_audit_fields_mixin import audit_fieldset_tuple
 
 from .modeladmin_mixins import CrfModelAdminMixin
-from ..forms import Covid19PreventiveBehaviorsForm
-from ..models import Covid19PreventiveBehaviors
+from ..forms import Covid19PreventativeBehaviorsForm
+from ..models import Covid19PreventativeBehaviors
 from ..admin_site import esr21_subject_admin
 
 
-@admin.register(Covid19PreventiveBehaviors, site=esr21_subject_admin)
-class Covid19PreventiveBehaviorsAdmin(CrfModelAdminMixin, admin.ModelAdmin):
-    form = Covid19PreventiveBehaviorsForm
+@admin.register(Covid19PreventativeBehaviors, site=esr21_subject_admin)
+class Covid19PreventativeBehaviorsAdmin(CrfModelAdminMixin, admin.ModelAdmin):
+    form = Covid19PreventativeBehaviorsForm
     fieldsets = (
         (None, {
             'fields': (

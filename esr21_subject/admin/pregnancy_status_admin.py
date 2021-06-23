@@ -10,7 +10,6 @@ from ..admin_site import esr21_subject_admin
 
 @admin.register(PregnancyStatus, site=esr21_subject_admin)
 class PregnancyStatusAdmin(CrfModelAdminMixin, admin.ModelAdmin):
-
     form = PregnancyStatusForm
 
     formfield_overrides = {
@@ -30,8 +29,6 @@ class PregnancyStatusAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                 'contraceptive_usage',
                 'contraceptive',
                 'contraceptive_othr',
-                'birth_defects',
-                'specify_defect',
             )
         }),
         ('Pregnancy History', {
@@ -39,13 +36,13 @@ class PregnancyStatusAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                 'number_prev_pregnancies',
                 'number_normal_pregnancies',
                 'number_miscarriages',
+                'date_miscarriages',
                 'risk_factor',
-                'family_history',
+                'maternal_history',
             )
 
         }),
     )
 
     radio_fields = {'contraceptive_usage': admin.VERTICAL,
-                    'birth_defects': admin.VERTICAL,
                     'contraceptive': admin.VERTICAL, }

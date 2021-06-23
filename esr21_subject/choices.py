@@ -49,6 +49,17 @@ CONTRACEPTIVES = (
     (OTHER, 'Other, specify'),
 )
 
+EMPLOYMENT_STATUS = (
+    ('formal-wage_employment_part_time', 'Formal wage employment (Part-time)'),
+    (
+        'formal_wage_employment-full_time)',
+        'Formal wage employment (full-time)'),
+    ('self_employed_full_time)', 'Self employed (full time)'),
+    ('self_employed_part_time)', 'Self employed (part time)'),
+    ('piece_job', 'Piece job'),
+    ('Seasonal_employment', 'Seasonal employment'),
+    (OTHER, 'Other (specify)'),)
+
 GENDER_OTHER = (
     (MALE, _('Male')),
     (FEMALE, _('Female')),
@@ -73,6 +84,19 @@ LANGUAGE = (
     ('setswana', 'English'),
 )
 
+MARITAL_STATUS = (
+    ('Single', 'Single'),
+    ('Married', 'Married'),
+    ('Cohabiting', 'Cohabiting'),
+    ('Widowed', 'Widowed'),
+    ('Divorced', 'Divorced'),
+    (OTHER, 'Other, specify'))
+
+MODE_TRANSPORT = (
+    ('public_transport', 'Public Transport'),
+    ('private_transport', 'Private Transport')
+)
+
 OUTCOME = (
     ('not_resolved', 'Not recovered/ not resolved'),
     ('resolved', 'Recovered / resolved'),
@@ -86,6 +110,11 @@ POS_NEG_IND = (
     (POS, 'Positive'),
     (NEG, 'Negative'),
     (IND, 'Indeterminate')
+)
+
+PREGNANCY_TEST_TYPE = (
+    ('urine_serum', 'Urine/Serum'),
+    ('hgg', 'HCG'),
 )
 
 REASON_NOT_DRAWN = (
@@ -106,6 +135,11 @@ ROUTE = (
 INFECTION_STATUS = (
     ('seronegative', 'Seronegative'),
     ('seropositive', 'Seropositive'),
+)
+
+SETTLEMENT_TYPE = (
+    ('urban', 'Urban'),
+    ('rural', 'Rural'),
 )
 
 STATUS = (
@@ -135,8 +169,8 @@ REASON = (
 )
 
 HOSPITALIZATION_REASON = (
-  ('', 'COVID-19 related symptoms'),
-  (OTHER, 'Other'),
+    ('', 'COVID-19 related symptoms'),
+    (OTHER, 'Other'),
 )
 
 HOSPITALIZATION_OUTCOME = (
@@ -160,7 +194,8 @@ VACCINATION_LOCATION = (
 
 VISIT_INFO_SOURCE = (
     ('clinic_visit_w_subject', 'Clinic visit with participant'),
-    ('other_contact_w_subject', 'Other contact with participant (i.e telephone call)'),
+    ('other_contact_w_subject',
+     'Other contact with participant (i.e telephone call)'),
     ('contact_w_health_worker', 'Contact with health care worker'),
     ('Contact_w_family_design',
      'Contact with family or designated person who can provide information'),
