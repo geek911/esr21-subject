@@ -3,8 +3,7 @@ from django.db import models
 from edc_constants.choices import YES_NO
 
 from .list_models import Symptoms, Diseases
-from ..choices import SMOKED_STATUS_CHOICES, ALCOHOL_STATUS_CHOICES
-
+from ..choices import SMOKED_STATUS_CHOICES, ALCOHOL_STATUS_CHOICES, MODE_OF_TRANSPORT_CHOICE
 
 from .model_mixins import CrfModelMixin
 
@@ -60,11 +59,6 @@ class MedicalHistory(CrfModelMixin):
     no_internal_trips = models.PositiveIntegerField(
         default=0,
         verbose_name='How many COVID-19 inter-zonal trips has the participant made in Botswana in the past 12 weeks?'
-    )
-
-    MODE_OF_TRANSPORT_CHOICE = (
-        ('private', 'Private'),
-        ('public', 'Public')
     )
 
     mode_of_transport = models.CharField(

@@ -330,3 +330,8 @@ ALCOHOL_STATUS_CHOICES = (
     'currently_drank_alcohol', 'Currently drank alcohol',
 
 )
+
+MODE_OF_TRANSPORT_CHOICE = (
+    ('private', 'Private'),
+    ('public', 'Public')
+)
