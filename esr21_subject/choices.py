@@ -262,8 +262,8 @@ UNIT_OPTIONS = (
     ('drop', 'Drop'),)
 
 HOSPITALIZATION_REASON = (
-  ('', 'COVID-19 related symptoms'),
-  (OTHER, 'Other'),
+    ('covid19_related_symptoms', 'COVID-19 related symptoms'),
+    (OTHER, 'Other'),
 )
 
 HOSPITALIZATION_OUTCOME = (
@@ -306,4 +306,12 @@ VISIT_REASON = (
     (UNSCHEDULED, 'Unscheduled visit/contact'),
     (LOST_VISIT, 'Lost to follow-up (use only when taking subject off study)'),
     (COMPLETED_PROTOCOL_VISIT, 'Subject has completed the study'),
+)
+
+IDENTITY_TYPE = (
+    ('NATIONAL_IDENTITY_CARD', 'National Identity Card'),
+    ('DRIVERS', 'Driver\'s License'),
+    ('PASSPORT', 'Passport'),
+    ('NATIONAL_IDENTITY_CARD_RECEIPT', 'National Identity Receipt'),
+    (OTHER, 'Other'),
 )

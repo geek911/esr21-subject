@@ -8,7 +8,9 @@ from edc_consent.field_mixins import IdentityFieldsMixin, ReviewFieldsMixin
 from edc_consent.field_mixins import PersonalFieldsMixin, VulnerabilityFieldsMixin
 from edc_consent.managers import ConsentManager
 from edc_consent.model_mixins import ConsentModelMixin
-from edc_constants.choices import IDENTITY_TYPE
+from edc_constants.choices import YES_NO
+
+from ..choices import IDENTITY_TYPE
 from edc_identifier.model_mixins import NonUniqueSubjectIdentifierModelMixin
 from edc_registration.model_mixins import UpdatesOrCreatesRegistrationModelMixin
 from edc_search.model_mixins import SearchSlugManager
@@ -28,9 +30,7 @@ class InformedConsentManager(SearchSlugManager, models.Manager):
 class InformedConsent(ConsentModelMixin, SiteModelMixin,
                       UpdatesOrCreatesRegistrationModelMixin,
                       NonUniqueSubjectIdentifierModelMixin, IdentityFieldsMixin,
-                      PersonalFieldsMixin, VulnerabilityFieldsMixin,
-                      ReviewFieldsMixin, SearchSlugModelMixin, BaseUuidModel):
-
+                      PersonalFieldsMixin, VulnerabilityFieldsMixin, SearchSlugModelMixin, BaseUuidModel):
     subject_screening_model = 'esr21_subject.eligibilityconfirmation'
 
     screening_identifier = models.CharField(
@@ -54,6 +54,17 @@ class InformedConsent(ConsentModelMixin, SiteModelMixin,
         null=True,
         blank=False)
 
+    # TODO: If No -> Not qualify and turn to radio buttons
+    consent_to_hiv_testing = models.CharField(
+        choices=YES_NO, max_length=3,
+        verbose_name='Do you consent to having HIV testing?')
+    optional_sample_collection = models.CharField(
+        choices=YES_NO, max_length=3,
+        verbose_name='Do you consent to optional sample collection?'
+    )
+    consent_to_participate = models.CharField(
+        choices=YES_NO, max_length=3,
+        verbose_name='Do you consent to participate in the study?')
     gender_other = OtherCharField()
 
     objects = InformedConsentManager()

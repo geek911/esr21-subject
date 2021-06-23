@@ -68,17 +68,10 @@ class InformedConsentAdmin(ModelAdminBasicMixin, ModelAdminMixin,
                 'identity',
                 'identity_type',
                 'confirm_identity',
+                'consent_to_hiv_testing',
+                'consent_to_participate'
+                'optional_sample_collection',
             ),
-        }),
-        ('Review Questions', {
-            'fields': (
-                'consent_reviewed',
-                'study_questions',
-                'assessment_score',
-                'consent_signature',
-                'consent_copy',
-            ),
-            'description': 'The following questions are directed to the interviewer.'
         }),
         audit_fieldset_tuple
     )
@@ -94,6 +87,9 @@ class InformedConsentAdmin(ModelAdminBasicMixin, ModelAdminMixin,
         'consent_signature': admin.VERTICAL,
         'consent_copy': admin.VERTICAL,
         'is_dob_estimated': admin.VERTICAL,
+        'consent_to_hiv_testing': admin.VERTICAL,
+        'optional_sample_collection': admin.VERTICAL,
+        'consent_to_participate': admin.VERTICAL,
     }
 
     list_display = ('subject_identifier',
@@ -140,4 +136,4 @@ class InformedConsentAdmin(ModelAdminBasicMixin, ModelAdminMixin,
         return super_actions
 
     def get_readonly_fields(self, request, obj=None):
-        return (super().get_readonly_fields(request, obj=obj) + audit_fields)
+        return super().get_readonly_fields(request, obj=obj) + audit_fields
