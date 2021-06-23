@@ -8,7 +8,7 @@ from ..choices import REASON_NOT_DRAWN
 
 
 class TargetedPhysicalExamination(CrfModelMixin):
-    
+
     physical_exam_performed = models.CharField(
         verbose_name='Was the physical examination performed?',
         max_length=35,
