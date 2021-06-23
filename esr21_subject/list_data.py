@@ -7,8 +7,8 @@ list_data = {
         ('death', 'Death'),
         ('life_threatening', 'Life-threatening'),
         ('hospitalization', 'Initial or prolonged hospitalization'),
-        ('birth_defects', 'Congenital anomaly/birth defect'),
         ('incapacity', 'Persistent or significant disability/incapacity'),
+        ('birth_defects', 'Congenital anomaly/birth defect'),
         (OTHER, 'Other important medical event'),
     ],
     'esr21_subject.subjectrace': [

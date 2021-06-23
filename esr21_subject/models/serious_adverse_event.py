@@ -4,6 +4,7 @@ from edc_base.model_fields import OtherCharField
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.model_validators import date_not_future
 from edc_base.sites import SiteModelMixin
+from edc_constants.choices import SEVERITY_LEVEL
 
 from .adverse_event import AdverseEvent
 from .list_models import SAECriteria
@@ -17,6 +18,29 @@ class SeriousAdverseEvent(SiteModelMixin, BaseUuidModel):
     adverse_event = models.ForeignKey(
         AdverseEvent,
         on_delete=models.PROTECT)
+
+    sae_details = models.TextField(
+        verbose_name='Details of the SAE', )
+
+    sae_name = models.CharField(
+        verbose_name='Name of the SAE',
+        max_length=100)
+
+    meddra_pname = models.CharField(
+        verbose_name='MedDRA Preferred Name of the SAE',
+        max_length=100)
+
+    meddra_pcode = models.CharField(
+        verbose_name='MedDRA Preferred Code OF the SAE',
+        max_length=50)
+
+    meddra_version = models.IntegerField(
+        verbose_name='MedDRA version')
+
+    sae_intensity = models.CharField(
+        verbose_name='Intensity of the SAE',
+        choices=SEVERITY_LEVEL,
+        max_length=10)
 
     start_date = models.DateField(
         verbose_name='SAE start date',

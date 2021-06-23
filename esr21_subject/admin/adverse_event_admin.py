@@ -24,6 +24,12 @@ class SeriousAdverseEventInlineAdmin(StackedInlineMixin, admin.StackedInline):
     fieldsets = (
         (None, {
             'fields': [
+                'sae_name',
+                'meddra_pname',
+                'meddra_pcode',
+                'meddra_version',
+                'sae_details',
+                'sae_intensity',
                 'start_date',
                 'resolution_date',
                 'date_aware_of',
@@ -41,13 +47,15 @@ class SeriousAdverseEventInlineAdmin(StackedInlineMixin, admin.StackedInline):
                 ]}
          ),)
 
-    radio_fields = {'event_abate': admin.VERTICAL,
+    radio_fields = {'sae_intensity': admin.VERTICAL,
+                    'event_abate': admin.VERTICAL,
                     'event_reappear': admin.VERTICAL, }
 
     filter_horizontal = ('seriousness_criteria', )
 
 
-class SpecialInterestAdverseEventInlineAdmin(StackedInlineMixin, admin.StackedInline):
+class SpecialInterestAdverseEventInlineAdmin(StackedInlineMixin,
+                                             admin.StackedInline):
 
     model = SpecialInterestAdverseEvent
     form = SpecialInterestAdverseEventForm
@@ -56,8 +64,12 @@ class SpecialInterestAdverseEventInlineAdmin(StackedInlineMixin, admin.StackedIn
     max_num = 3
 
     fieldsets = (
-        (None, {
+        ('Participants should be encouraged to report any adverse events reported in the AE form', {
             'fields': [
+                'aesi_name',
+                'meddra_pname',
+                'meddra_pcode',
+                'meddra_version',
                 'start_date',
                 'end_date',
                 'date_aware_of',
@@ -90,10 +102,15 @@ class AdverseEventAdmin(CrfModelAdminMixin, admin.ModelAdmin):
             'fields': (
                 'subject_visit',
                 'report_datetime',
+                'experienced_ae',
+                'ae_name',
+                'meddra_pname',
+                'meddra_pcode',
+                'meddra_version',
                 'event_details',
                 'start_date',
                 'status',
-                'resolution_date',
+                'stop_date',
                 'ae_grade',
                 'study_treatmnt_rel',
                 'nonstudy_treatmnt_rel',
@@ -115,7 +132,8 @@ class AdverseEventAdmin(CrfModelAdminMixin, admin.ModelAdmin):
         audit_fieldset_tuple
     )
 
-    radio_fields = {'status': admin.VERTICAL,
+    radio_fields = {'experienced_ae': admin.VERTICAL,
+                    'status': admin.VERTICAL,
                     'ae_grade': admin.VERTICAL,
                     'study_treatmnt_rel': admin.VERTICAL,
                     'nonstudy_treatmnt_rel': admin.VERTICAL,
@@ -139,6 +157,12 @@ class SeriousAdverseEventAdmin(admin.ModelAdmin):
         (None, {
             'fields': (
                 'adverse_event',
+                'sae_name',
+                'meddra_pname',
+                'meddra_pcode',
+                'meddra_version',
+                'sae_details',
+                'sae_intensity',
                 'start_date',
                 'resolution_date',
                 'date_aware_of',
@@ -157,7 +181,8 @@ class SeriousAdverseEventAdmin(admin.ModelAdmin):
         }),
     )
 
-    radio_fields = {'event_abate': admin.VERTICAL,
+    radio_fields = {'sae_intensity': admin.VERTICAL,
+                    'event_abate': admin.VERTICAL,
                     'event_reappear': admin.VERTICAL, }
 
     filter_horizontal = ('seriousness_criteria', )
@@ -175,6 +200,10 @@ class SpecialInterestAdverseEventAdmin(admin.ModelAdmin):
         (None, {
             'fields': (
                 'adverse_event',
+                'aesi_name',
+                'meddra_pname',
+                'meddra_pcode',
+                'meddra_version',
                 'start_date',
                 'end_date',
                 'date_aware_of',
