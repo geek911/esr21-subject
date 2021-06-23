@@ -22,3 +22,4 @@ from .covid19_symptomatic_infections import Covid19SymptomaticInfections
 from .azd1222_vaccination import Azd1222Vaccination
 from .sample_collection import SampleCollection
 from .vital_signs import VitalSigns
+from .targeted_physical_examination import TargetedPhysicalExamination

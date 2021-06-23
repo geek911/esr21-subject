@@ -18,3 +18,4 @@ from .covid19_symptomatic_infections_admin import Covid19SymptomaticInfectionsAd
 from .azd1222_vaccination_admin import Azd1222VaccinationAdmin
 from .subject_requisition_admin import SubjectRequisitionAdmin
 from .vital_signs_admin import VitalSignsAdmin
+from .targeted_physical_examination_admin import TargetedPhysicalExaminationAdmin

@@ -19,3 +19,4 @@ from .azd1222_vaccination_form import Azd1222VaccinationForm
 from .sample_collection_form import SampleCollectionForm
 from .subject_requisition_form import SubjectRequisitionForm
 from .vital_signs_form import VitalSignsForm
+from .targeted_physical_examination_form import TargetedPhysicalExaminationForm
