@@ -204,6 +204,35 @@ UNIT_OPTIONS = (
     ('cup', 'cup'),
     ('drop', 'Drop'),)
 
+REASON = (
+    ('not_collected', 'Not collected'),
+    ('not_required', 'Not required at this visit'),
+    ('measurement_skipped', 'Measurement skipped at this visit'),
+    ('subject_refused', 'Subject refused'),
+    ('equipment_malfunction', 'Equipment malfunction'),
+    ('staff_unavailable', 'Staff unavailable'),
+    ('no_information', 'No further information'),
+    (NOT_APPLICABLE, 'Not applicable'),
+)
+
+HOSPITALIZATION_REASON = (
+  ('', 'COVID-19 related symptoms'),
+  (OTHER, 'Other'),
+)
+
+HOSPITALIZATION_OUTCOME = (
+    ('expired', 'Expired'),
+    ('hospice_care', 'Home: Hospice Care'),
+    ('self_care', 'Home: Self Care'),
+    ('hospice_medical_facility', 'Hospice Medical Facility'),
+    ('inpatient_rehabilitation', 'Inpatient Rehabilitation'),
+    ('intermediate_care_facility', 'Intermediate Care Facility'),
+    ('medical_advice', 'Left Against Medical Advice'),
+    ('long_term_care_hospital', 'Long Term Care Hospital'),
+    ('nursing_facility', 'Nursing Facility'),
+    ('unit_ward_change', 'Unit/Ward Change'),
+)
+
 VACCINATION_LOCATION = (
     ('left_deltoid', 'Left deltoid'),
     ('right_deltoid', 'Right deltoid'),
