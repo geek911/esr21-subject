@@ -28,3 +28,4 @@ git+https://github.com/botswana-harvard/edc-visit-schedule.git@develop#egg=edc_v
 git+https://github.com/botswana-harvard/edc-visit-tracking.git@develop#egg=edc_visit_tracking
 git+https://github.com/botswana-harvard/edc-identifier.git@develop#egg=edc_identifier
 git+https://github.com/covid19-vaccine/esr21-subject-validation.git@develop#egg=esr21_subject_validation
+django-countries

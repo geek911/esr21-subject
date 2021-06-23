@@ -71,6 +71,11 @@ GENDER_OTHER = (
     (OTHER, _('Other')),
 )
 
+GENERAL_APPEARANCE = (
+    ('normal', 'Normal'),
+    ('abnormal', 'Abnormal'),
+)
+
 HOSPITALIZATION_OUTCOME = (
     ('expired', 'Expired'),
     ('hospice_care', 'Home: Hospice Care'),
