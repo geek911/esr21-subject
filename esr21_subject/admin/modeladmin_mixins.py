@@ -31,7 +31,7 @@ class VersionControlMixin:
         form_version = form_versions.get(model_name)
 
         return mark_safe(
-                f'Version: <kbd> {form_version} </kbd>  ')
+                f' Version: {form_version} ')
 
     def get_timepoint(self, request):
 
@@ -43,7 +43,8 @@ class VersionControlMixin:
             pass
         else:
             return mark_safe(
-                    f'Timepoint: <i>{app_obj.visits.get(app_obj.visit_code).title} </i> &emsp;')
+                    f'Timepoint: <i>{app_obj.visits.get(app_obj.visit_code).title} '
+                    '</i> &emsp; ')
 
     # visit_label indicating month and day visit is happenning
 
@@ -72,7 +73,7 @@ class ModelAdminMixin(ModelAdminNextUrlRedirectMixin,
     def add_view(self, request, form_url='', extra_context=None):
         extra_context = extra_context or {}
 
-        self.instructions = self.instructions + self.get_form_version(request)
+        extra_context['form_version'] = self.get_form_version(request)
 
         return super().add_view(
             request, form_url=form_url, extra_context=extra_context)
@@ -81,7 +82,7 @@ class ModelAdminMixin(ModelAdminNextUrlRedirectMixin,
 
         extra_context = extra_context or {}
 
-        self.instructions = self.instructions + self.get_form_version(request)
+        extra_context['form_version'] = self.get_form_version(request)
 
         return super().change_view(
             request, object_id, form_url=form_url, extra_context=extra_context)
@@ -99,7 +100,7 @@ class CrfModelAdminMixin(VisitTrackingCrfModelAdminMixin,
     def add_view(self, request, form_url='', extra_context=None):
         extra_context = extra_context or {}
 
-        self.instructions = self.instructions + self.get_timepoint(request)
+        extra_context['timepoint'] = self.get_timepoint(request)
 
         return super().add_view(
             request, form_url=form_url, extra_context=extra_context)
@@ -108,7 +109,7 @@ class CrfModelAdminMixin(VisitTrackingCrfModelAdminMixin,
 
         extra_context = extra_context or {}
 
-        self.instructions = self.instructions + self.get_timepoint(request)
+        extra_context['timepoint'] = self.get_timepoint(request)
 
         return super().change_view(
             request, object_id, form_url=form_url, extra_context=extra_context)

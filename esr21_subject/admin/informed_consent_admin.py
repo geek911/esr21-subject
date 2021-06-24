@@ -8,19 +8,22 @@ from edc_consent.actions import (flag_as_verified_against_paper,
 from edc_model_admin import (
     ModelAdminFormAutoNumberMixin, ModelAdminInstitutionMixin,
     audit_fieldset_tuple, audit_fields, ModelAdminNextUrlRedirectMixin,
-    ModelAdminNextUrlRedirectError, ModelAdminReplaceLabelTextMixin)
+    ModelAdminNextUrlRedirectError, ModelAdminReplaceLabelTextMixin,
+    ModelAdminFormInstructionsMixin)
 from edc_model_admin import ModelAdminBasicMixin, ModelAdminReadOnlyMixin
 from simple_history.admin import SimpleHistoryAdmin
 
 from .exportaction_mixin import ExportActionMixin
 from ..forms import InformedConsentForm
 from ..models import InformedConsent
+from .modeladmin_mixins import VersionControlMixin
 from ..admin_site import esr21_subject_admin
 
 
 class ModelAdminMixin(ModelAdminNextUrlRedirectMixin, ModelAdminFormAutoNumberMixin,
                       ModelAdminRevisionMixin, ModelAdminReplaceLabelTextMixin,
                       ModelAdminInstitutionMixin, ModelAdminReadOnlyMixin,
+                      VersionControlMixin, ModelAdminFormInstructionsMixin,
                       ExportActionMixin):
 
     list_per_page = 10
@@ -41,6 +44,23 @@ class ModelAdminMixin(ModelAdminNextUrlRedirectMixin, ModelAdminFormAutoNumberMi
                 raise ModelAdminNextUrlRedirectError(
                     f'{e}. Got url_name={url_name}, kwargs={options}.')
         return redirect_url
+
+    def add_view(self, request, form_url='', extra_context=None):
+        extra_context = extra_context or {}
+
+        extra_context['form_version'] = self.get_form_version(request)
+
+        return super().add_view(
+            request, form_url=form_url, extra_context=extra_context)
+
+    def change_view(self, request, object_id, form_url='', extra_context=None):
+
+        extra_context = extra_context or {}
+
+        extra_context['form_version'] = self.get_form_version(request)
+
+        return super().change_view(
+            request, object_id, form_url=form_url, extra_context=extra_context)
 
 
 @admin.register(InformedConsent, site=esr21_subject_admin)
