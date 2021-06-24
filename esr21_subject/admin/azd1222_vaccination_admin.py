@@ -31,4 +31,5 @@ class Azd1222VaccinationAdmin(CrfModelAdminMixin, admin.ModelAdmin):
     radio_fields = {
         'vaccine_status': admin.VERTICAL,
         'received_first_dose': admin.VERTICAL,
-        'receive_second_dose': admin.VERTICAL, }
+        'receive_second_dose': admin.VERTICAL,
+        'vaccination_site': admin.VERTICAL,}
