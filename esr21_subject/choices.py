@@ -13,8 +13,9 @@ ACTION_TAKEN = (
 )
 
 LEFT_RIGHT = (
-    ('left_arm', 'Left arm'),
-    ('right_arm', 'Right arm')
+    ('left_deltoid', 'Left deltoid'),
+    ('right_arm', 'Right deltoid'),
+    (OTHER, 'Other (specify)')
 )
 
 AE_GRADE = (

@@ -15,21 +15,27 @@ class Azd1222VaccinationAdmin(CrfModelAdminMixin, admin.ModelAdmin):
         (None, {
             'fields': (
                 'subject_visit',
-                'report_datetime',
-                'vaccine_status',
+                'report_datetime',  # )}),
+        # ('First Dose', {
+            # 'fields': (
                 'received_first_dose',
-                'vaccination_date',
-                'lot_number',
-                'vaccination_site',
+                'first_vaccination_date',
+                'first_lot_number',
+                'first_dose_site',
+                'first_dose_site_other',  # )})
+        # ('Second Dose', {
+            # 'fields': (
                 'receive_second_dose',
-                'scheduled_vaccination',
-            ),
-        }),
+                'second_scheduled_dose_date',
+                'second_lot_number',
+                'second_dose_site',
+                'second_dose_site_other'
+            ), }),
         audit_fieldset_tuple
     )
 
     radio_fields = {
-        'vaccine_status': admin.VERTICAL,
         'received_first_dose': admin.VERTICAL,
         'receive_second_dose': admin.VERTICAL,
-        'vaccination_site': admin.VERTICAL,}
+        'first_dose_site': admin.VERTICAL,
+        'second_dose_site': admin.VERTICAL, }
