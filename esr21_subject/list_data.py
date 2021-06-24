@@ -38,7 +38,7 @@ list_data = {
         ('nausea', 'Nausea'),
         ('hospitalization_outcome', 'Hospitalization Outcome'),
     ],
-<<<<<<< HEAD
+
     'esr21_subject.symptomaticinfections': [
         ('dry_cough', 'Dry Cough'),
         ('fever', 'Fever'),
@@ -49,7 +49,7 @@ list_data = {
         ('headache', 'Headache'),
         ('shortness_of_breath', 'Shortness of breath'),
     ],
-=======
+
     'esr21_subject.symptoms': [
         ('fever', 'Fever'),
         ('dry_cough', 'Dry Cough'),
@@ -76,7 +76,7 @@ list_data = {
         ('obesity', 'Obesity'),
         (OTHER, 'Other')
     ]
->>>>>>> fbf1c8c3c76dd9d9aa71a54b9dfc906fdc6c30ab
+
 }
 
 preload_data = PreloadData(
