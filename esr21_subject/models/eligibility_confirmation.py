@@ -39,7 +39,7 @@ class EligibilityConfirmation(NonUniqueSubjectIdentifierFieldMixin,
 
     age_in_years = models.IntegerField(
         verbose_name='What is the participants age?',
-        help_text='(Years)', )
+        help_text='(Years)',)
 
     received_vaccines = models.CharField(
         verbose_name='Has the participant received any vaccine other than '
@@ -75,7 +75,8 @@ class EligibilityConfirmation(NonUniqueSubjectIdentifierFieldMixin,
         return self.screening_identifier
 
     def save(self, *args, **kwargs):
-        eligibility_criteria = Eligibility(self.age_in_years)
+        eligibility_criteria = Eligibility(self.age_in_years,
+                                           self.received_vaccines)
         self.is_eligible = eligibility_criteria.is_eligible
         self.ineligibility = eligibility_criteria.error_message
         if not self.screening_identifier:
