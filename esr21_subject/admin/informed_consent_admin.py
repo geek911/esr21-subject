@@ -29,6 +29,7 @@ class ModelAdminMixin(ModelAdminNextUrlRedirectMixin, ModelAdminFormAutoNumberMi
     list_per_page = 10
     date_hierarchy = 'modified'
     empty_value_display = '-'
+    enable_nav_sidebar = False
 
     def redirect_url(self, request, obj, post_url_continue=None):
         redirect_url = super().redirect_url(
