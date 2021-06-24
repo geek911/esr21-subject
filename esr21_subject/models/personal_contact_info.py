@@ -17,7 +17,6 @@ from ..action_items import CONTACT_INFORMATION_ACTION
 
 class PersonalContactInfo(LocatorModelMixin, ActionModelMixin, SiteModelMixin,
                           BaseUuidModel):
-
     action_name = CONTACT_INFORMATION_ACTION
 
     tracking_identifier_prefix = 'CI'
@@ -53,8 +52,7 @@ class PersonalContactInfo(LocatorModelMixin, ActionModelMixin, SiteModelMixin,
         verbose_name='Mobile phone number',
         validators=[CellNumber, ],
         blank=True,
-        null=True,
-        help_text='')
+        null=True,)
 
     subject_cell_alt = EncryptedCharField(
         verbose_name='Mobile phone number (alternate)',
@@ -68,6 +66,12 @@ class PersonalContactInfo(LocatorModelMixin, ActionModelMixin, SiteModelMixin,
         verbose_name=mark_safe(
             'Has the participant given their permission for study staff '
             'to contact them at work for follow up purposes during the study?'))
+
+    indirect_contact_cell = EncryptedCharField(
+        verbose_name='Mobile phone number',
+        validators=[CellNumber, ],
+        blank=True,
+        null=True,)
 
     class Meta:
         app_label = 'esr21_subject'
