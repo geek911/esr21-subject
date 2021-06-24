@@ -1,10 +1,12 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 from edc_constants.choices import YES_NO
 from edc_constants.constants import NOT_APPLICABLE
 
 from .model_mixins import CrfModelMixin
 from ..choices import REASON, TEMP_UNITS
+
 
 
 class VitalSigns(CrfModelMixin):
@@ -28,12 +30,14 @@ class VitalSigns(CrfModelMixin):
     systolic_bp = models.IntegerField(
         verbose_name='Systolic Blood Pressure',
         help_text='Fixed Unit: mmHg',
+        validators=[MinValueValidator(75), MaxValueValidator(220),],
         blank=True,
         null=True)
 
     diastolic_bp = models.IntegerField(
         verbose_name='Diastolic Blood Pressure',
         help_text='Fixed Unit: mmHg',
+        validators=[MinValueValidator(55), MaxValueValidator(150), ],
         blank=True,
         null=True)
 
