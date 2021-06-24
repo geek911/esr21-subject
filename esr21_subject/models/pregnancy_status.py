@@ -53,7 +53,8 @@ class PregnancyStatus(CrfModelMixin):
 
     date_miscarriages = models.DateField(
         verbose_name='Date of Spontaneous Miscarriages',
-    )
+        null=True,
+        blank=True)
 
     risk_factor = models.CharField(
         verbose_name='Relevant Pregnancy Risk Factor',

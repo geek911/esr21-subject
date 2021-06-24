@@ -28,8 +28,6 @@ class DemographicDataAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                 'marital_status',
                 'marital_status_other',
                 'running_water',
-                'mass_gathering',
-                'shared_kitchen',
                ]}
          ), audit_fieldset_tuple)
 
