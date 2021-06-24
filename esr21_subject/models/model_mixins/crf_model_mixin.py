@@ -27,9 +27,9 @@ class CrfModelMixin(BaseCrfModelMixin, SubjectScheduleCrfModelMixin,
     subject_visit = models.OneToOneField(SubjectVisit, on_delete=PROTECT)
     crf_date_validator_cls = None
 
-    form_version = DecimalField(
-        decimal_places=1,
-        max_digits=3)
+    # form_version = DecimalField(
+        # decimal_places=1,
+        # max_digits=3)
 
     @property
     def subject_identifier(self):
