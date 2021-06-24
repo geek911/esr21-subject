@@ -131,5 +131,5 @@ class PhysicalExam(CrfModelMixin):
 
     class Meta(CrfModelMixin.Meta):
         app_label = 'esr21_subject'
-        verbose_name = 'Physical examination and Vital signs'
-        verbose_name_plural = 'Physical examination and Vital signs'
+        verbose_name = 'Physical examination'
+        verbose_name_plural = 'Physical examination'

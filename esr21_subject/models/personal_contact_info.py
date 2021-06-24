@@ -35,6 +35,13 @@ class PersonalContactInfo(LocatorModelMixin, ActionModelMixin, SiteModelMixin,
         default=get_utcnow,
         validators=[date_not_future])
 
+    may_visit_home = models.CharField(
+        max_length=25,
+        choices=YES_NO,
+        verbose_name=mark_safe(
+            'Has the participant given their permission for study staff <b>to '
+            'make home visits</b> for follow-up purposes during the study??'))
+
     may_call = models.CharField(
         max_length=25,
         choices=YES_NO_NA,
@@ -54,13 +61,6 @@ class PersonalContactInfo(LocatorModelMixin, ActionModelMixin, SiteModelMixin,
         validators=[CellNumber, ],
         blank=True,
         null=True)
-
-    may_visit_home = models.CharField(
-        max_length=25,
-        choices=YES_NO,
-        verbose_name=mark_safe(
-            'Has the participant given their permission for study staff <b>to '
-            'make home visits</b> for follow-up purposes during the study??'))
 
     may_call_work = models.CharField(
         max_length=25,

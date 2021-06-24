@@ -7,6 +7,7 @@ from edc_base.sites import SiteModelMixin
 from edc_base.utils import get_utcnow
 from edc_identifier.model_mixins import NonUniqueSubjectIdentifierFieldMixin
 from edc_search.model_mixins import SearchSlugManager
+from edc_constants.choices import YES_NO
 
 from .eligibility import Eligibility
 from .model_mixins import SearchSlugModelMixin
@@ -19,9 +20,9 @@ class EligibilityConfirmationManager(SearchSlugManager, models.Manager):
         return self.get(screening_identifier=screening_identifier)
 
 
-class EligibilityConfirmation(NonUniqueSubjectIdentifierFieldMixin, SiteModelMixin,
+class EligibilityConfirmation(NonUniqueSubjectIdentifierFieldMixin,
+                              SiteModelMixin,
                               SearchSlugModelMixin, BaseUuidModel):
-
     identifier_cls = ScreeningIdentifier
 
     screening_identifier = models.CharField(
@@ -39,6 +40,14 @@ class EligibilityConfirmation(NonUniqueSubjectIdentifierFieldMixin, SiteModelMix
     age_in_years = models.IntegerField(
         verbose_name='What is the participants age?',
         help_text='(Years)', )
+
+    received_vaccines = models.CharField(
+        verbose_name='Has the participant received any vaccine other than '
+                     'licensed influenza vaccines within 30 days prior to '
+                     'and after administration of study intervention',
+        max_length=10,
+        choices=YES_NO,
+        help_text='If Yes, participant is not eligible')
 
     ineligibility = models.TextField(
         verbose_name="Reason not eligible",
