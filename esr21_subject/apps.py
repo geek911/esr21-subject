@@ -22,7 +22,7 @@ class AppConfig(DjangoAppConfig):
         'esr21_subject.informedconsent': 1.0,
         'esr21_subject.medicaldiagnosis': 1.0,
         'esr21_subject.medicalhistory': 1.1,
-        'esr21_subject.personalcontactinfo': 1.0,
+        'esr21_subject.personalcontactinfo': 1.1,
         'esr21_subject.physicalexam': 1.1,
         'esr21_subject.pregnancystatus': 1.0,
         'esr21_subject.pregnancytest': 1.0,
