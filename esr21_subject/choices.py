@@ -192,6 +192,7 @@ REASON_NOT_DRAWN = (
     ('equipment_malfunction', 'Equipment malfunction'),
     ('staff_unavailable', 'Staff unavailable'),
     ('no_further_information', 'No further information'),
+    (NOT_APPLICABLE, 'Not applicable'),
 )
 
 ROUTE = (
