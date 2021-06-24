@@ -22,7 +22,8 @@ class Azd1222Vaccination(CrfModelMixin):
         verbose_name='Vaccine batch/lot number',
         max_length=20,
         blank=True,
-        null=True)
+        null=True,
+        help_text='first dose')
 
     first_dose_site = models.CharField(
         verbose_name='Vaccination site',
@@ -43,12 +44,14 @@ class Azd1222Vaccination(CrfModelMixin):
         verbose_name='Vaccine batch/lot number',
         max_length=20,
         blank=True,
-        null=True)
+        null=True,
+        help_text='second dose')
 
     second_dose_site = models.CharField(
         verbose_name='Vaccination site',
         max_length=20,
-        choices=LEFT_RIGHT,)
+        choices=LEFT_RIGHT,
+        help_text='first dose')
 
     second_dose_site_other = OtherCharField()
 

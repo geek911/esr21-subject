@@ -62,12 +62,11 @@ CONTRACEPTIVES = (
 
 EMPLOYMENT_STATUS = (
     ('formal-wage_employment_part_time', 'Formal wage employment (Part-time)'),
-    (
-        'formal_wage_employment-full_time)',
+    ('formal_wage_employment-full_time)',
         'Formal wage employment (full-time)'),
     ('self_employed_full_time)', 'Self employed (full time)'),
     ('self_employed_part_time)', 'Self employed (part time)'),
-    ('piece_job', 'Piece job'),
+    ('adhoc_work', 'Adhoc work'),
     ('Seasonal_employment', 'Seasonal employment'),
     (OTHER, 'Other (specify)'),)
 
@@ -128,8 +127,8 @@ INFECTION_STATUS = (
     ('seropositive', 'Seropositive'),)
 
 IDENTITY_TYPE = (
-    ('country_id', 'Country ID number'),
-    ('country_id_rcpt', 'Country ID receipt'),
+    ('national_identity_card', 'National Identity Card'),
+    ('national_identity_card_rcpt', 'National Identity Card Receipt'),
     ('passport', 'Passport'),
     (OTHER, 'Other'),
 )
@@ -360,16 +359,16 @@ VISIT_REASON = (
 
 SMOKED_STATUS_CHOICES = (
     ('never_smoked', 'Never Smoked'),
-    ('previously_smoked', 'Previously Smoked'),
-    ('occasionally_smoked', 'Occasionally Smoked'),
-    ('currently_smoking', 'Currently Smoked'),
+    ('previous_smoker', 'Previous Smoker'),
+    ('occasional_smoker', 'Occasional Smoker'),
+    ('current_smoking', 'Current Smoker'),
 )
 
 ALCOHOL_STATUS_CHOICES = (
-    ('never_drank_alcohol', 'Never drank alcohol'),
-    ('previously_drank_alcohol', 'Previously drank alcohol'),
-    ('occasionally_drank_alcohol', 'Occasionally drank alcohol'),
-    ('currently_drank_alcohol', 'Currently drank alcohol'),
+    ('never_drunk_alcohol', 'Never drunk alcohol'),
+    ('previously_drunk_alcohol', 'Previously drunk alcohol'),
+    ('occasionally_drinks_alcohol', 'Occasionally drinks alcohol'),
+    ('currently_drinks_alcohol', 'Currently drinks alcohol'),
 
 )
 

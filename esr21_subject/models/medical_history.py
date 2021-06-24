@@ -45,7 +45,7 @@ class MedicalHistory(CrfModelMixin):
     )
 
     diabetes = models.CharField(
-        verbose_name='Is the participant diabetes mellitus?',
+        verbose_name='Has the participant been diagnosed with diabetes mellitus?',
         choices=YES_NO,
         max_length=3
     )

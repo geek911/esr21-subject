@@ -43,8 +43,8 @@ class PhysicalExamAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                 'cardiovascular_description',
                 'abdominal_check',
                 'abdominal_description',
-                'dermatologic_check',
-                'dermatologic_description',
+                'skin_check',
+                'skin_description',
                 'neurological_check',
                 'neurological_description'
             ),
@@ -60,6 +60,6 @@ class PhysicalExamAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                     'respiratory_check': admin.VERTICAL,
                     'cardiovascular_check': admin.VERTICAL,
                     'abdominal_check': admin.VERTICAL,
-                    'dermatologic_check': admin.VERTICAL,
+                    'skin_check': admin.VERTICAL,
                     'neurological_check': admin.VERTICAL,
                     'reason_not_done': admin.VERTICAL, }

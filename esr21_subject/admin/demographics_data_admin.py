@@ -30,7 +30,6 @@ class DemographicDataAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                 'running_water',
                 'mass_gathering',
                 'shared_kitchen',
-                'mode_of_transport',
                ]}
          ), audit_fieldset_tuple)
 
@@ -39,6 +38,4 @@ class DemographicDataAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                     'employment_status': admin.VERTICAL,
                     'settlement_type': admin.VERTICAL,
                     'marital_status': admin.VERTICAL,
-                    'running_water': admin.VERTICAL,
-                    'shared_kitchen': admin.VERTICAL,
-                    'mode_of_transport': admin.VERTICAL, }
+                    'running_water': admin.VERTICAL, }

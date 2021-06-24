@@ -12,7 +12,7 @@ from ..choices import EMPLOYMENT_STATUS, SETTLEMENT_TYPE, MARITAL_STATUS, \
 class DemographicsData(CrfModelMixin):
 
     age_at_entry = models.IntegerField(
-        verbose_name='Age at study entry', )
+        verbose_name='Age at study entry',)
 
     country = CountryField()
 
@@ -25,11 +25,11 @@ class DemographicsData(CrfModelMixin):
         max_length=35,
         verbose_name='If other specify...',
         blank=True,
-        null=True, )
+        null=True,)
 
     household_members = models.IntegerField(
         verbose_name='How many household members live in the participants '
-                     'primary home / compound', )
+                     'primary home / compound',)
 
     highest_education = models.CharField(
         verbose_name='Highest education level',
@@ -64,24 +64,9 @@ class DemographicsData(CrfModelMixin):
         null=True)
 
     running_water = models.CharField(
-        verbose_name='Is the running water in domicile?',
+        verbose_name='Is there running water in domicile?',
         max_length=30,
         choices=YES_NO)
-
-    mass_gathering = models.CharField(
-        verbose_name='Number of mass gatherings in preceding 12 weeks?',
-        max_length=23,
-        help_text='e.g weddings, funerals; defined as 50 or more people')
-
-    shared_kitchen = models.CharField(
-        verbose_name='Shared kitchen/dining at work?',
-        max_length=30,
-        choices=YES_NO)
-
-    mode_of_transport = models.CharField(
-        verbose_name='Mode of transport commonly used',
-        max_length=30,
-        choices=MODE_TRANSPORT)
 
     class Meta(CrfModelMixin.Meta):
         app_label = 'esr21_subject'

@@ -39,7 +39,7 @@ class PersonalContactInfo(LocatorModelMixin, ActionModelMixin, SiteModelMixin,
         choices=YES_NO,
         verbose_name=mark_safe(
             'Has the participant given their permission for study staff <b>to '
-            'make home visits</b> for follow-up purposes during the study??'))
+            'make home visits</b> for follow-up purposes during the study?'))
 
     may_call = models.CharField(
         max_length=25,

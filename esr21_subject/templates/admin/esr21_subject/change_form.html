@@ -12,7 +12,7 @@
 
 {% block field_sets %}
 	
-	<b> {{ timepoint }}  {{ form_version }} </b>
+	<b> {% if timepoint %} {{ timepoint }} {% endif %}  {{ form_version }} </b>
 
   {% instructions %}
 

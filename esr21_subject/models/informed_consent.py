@@ -4,7 +4,7 @@ from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.sites.site_model_mixin import SiteModelMixin
 from edc_base.utils import get_utcnow
-from edc_consent.field_mixins import IdentityFieldsMixin, ReviewFieldsMixin
+from edc_consent.field_mixins import IdentityFieldsMixin
 from edc_consent.field_mixins import PersonalFieldsMixin, VulnerabilityFieldsMixin
 from edc_consent.managers import ConsentManager
 from edc_consent.model_mixins import ConsentModelMixin
@@ -54,17 +54,21 @@ class InformedConsent(ConsentModelMixin, SiteModelMixin,
         null=True,
         blank=False)
 
-    # TODO: If No -> Not qualify and turn to radio buttons
-    consent_to_hiv_testing = models.CharField(
-        choices=YES_NO, max_length=3,
-        verbose_name='Do you consent to having HIV testing?')
+    hiv_testing_consent = models.CharField(
+        verbose_name='Do you consent to having HIV testing?',
+        choices=YES_NO,
+        max_length=3,)
+
     optional_sample_collection = models.CharField(
-        choices=YES_NO, max_length=3,
-        verbose_name='Do you consent to optional sample collection?'
-    )
+        verbose_name='Do you consent to optional sample collection?',
+        choices=YES_NO,
+        max_length=3,)
+
     consent_to_participate = models.CharField(
-        choices=YES_NO, max_length=3,
+        choices=YES_NO,
+        max_length=3,
         verbose_name='Do you consent to participate in the study?')
+
     gender_other = OtherCharField()
 
     objects = InformedConsentManager()
