@@ -63,6 +63,7 @@ class ModelAdminMixin(ModelAdminNextUrlRedirectMixin,
     date_hierarchy = 'modified'
     empty_value_display = '-'
     next_form_getter_cls = NextFormGetter
+    enable_nav_sidebar = False
 
     instructions = mark_safe(
         'Please complete the questions below. Required questions are in bold. '
