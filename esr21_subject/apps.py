@@ -17,7 +17,7 @@ class AppConfig(DjangoAppConfig):
         'esr21_subject.covid19preventativebehaviours': 1.1,
         'esr21_subject.covid19symptomaticinfections': 1.1,
         'esr21_subject.demographicsdata': 1.0,
-        'esr21_subject.eligibilityconfirmation': 1.0,
+        'esr21_subject.eligibilityconfirmation': 1.1,
         'esr21_subject.hospitalization': 1.1,
         'esr21_subject.informedconsent': 1.0,
         'esr21_subject.medicaldiagnosis': 1.0,
