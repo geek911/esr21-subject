@@ -12,6 +12,11 @@ ACTION_TAKEN = (
     (UNKNOWN, UNKNOWN),
 )
 
+LEFT_RIGHT = (
+    ('left_arm', 'Left arm'),
+    ('right_arm', 'Right arm')
+)
+
 AE_GRADE = (
     ('mild', 'Mild (Grade 1)'),
     ('moderate', 'Moderate (Grade 2)'),

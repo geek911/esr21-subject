@@ -2,6 +2,7 @@ from django.db import models
 
 from edc_constants.choices import YES_NO
 from .model_mixins import CrfModelMixin
+from ..choices import LEFT_RIGHT
 
 
 class Azd1222Vaccination(CrfModelMixin):
@@ -28,8 +29,9 @@ class Azd1222Vaccination(CrfModelMixin):
         null=True)
 
     vaccination_site = models.CharField(
-        verbose_name='Vaccination site (eg, left arm)',
-        max_length=20,)
+        verbose_name='Vaccination site',
+        max_length=20,
+        choices=LEFT_RIGHT,)
 
     receive_second_dose = models.CharField(
         verbose_name='Is the participant scheduled to receive a second '
