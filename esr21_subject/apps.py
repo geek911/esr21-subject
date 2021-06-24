@@ -9,6 +9,33 @@ class AppConfig(DjangoAppConfig):
     verbose_name = 'ESR21 Subject CRFs'
     admin_site_name = 'esr21_subject_admin'
 
+    form_versions = {
+        'esr21_subject.eligibilityconfirmation': 1.1,
+        'esr21_subject.informedconsent': 1.1,
+        'esr21_subject.personalcontactinfo': 1.1,
+        'edc_appointment.appointment': 1.1,
+        'esr21_subject.subjectvisit': 1.1,
+        'esr21_subject.azd1222vaccination': 1.3,
+        'esr21_subject.vaccinationdetails': 1.1,
+        'esr21_subject.demographicsdata': 1.1,
+        'esr21_subject.adverseevent': 1.1,
+        'esr21_subject.pregnancystatus': 1.1,
+        'esr21_subject.rapidhivtesting': 1.1,
+        'esr21_subject.seriousadverseevent': 1.1,
+        'esr21_subject.specialinterestadverseevent': 1.1,
+        'esr21_subject.covid19preventativebehaviours': 1.1,
+        # 'esr21_subject.medicalhistory': 1.1,
+        'esr21_subject.physicalexam': 1.1,
+        'esr21_subject.subjectrequisition': 1.1,
+        'esr21_subject.pregnancytest': 1.1,
+        'esr21_subject.hospitalization': 1.1,
+        'esr21_subject.covid19symptomaticinfections': 1.1,
+        'esr21_subject.azd1222vaccination': 1.1,
+        'esr21_subject.samplecollection': 1.1,
+        'esr21_subject.vitalsigns': 1.1,
+        'esr21_subject.targetedphysicalexamination': 1.1,
+        }
+
     def ready(self):
         from .models import informed_consent_on_post_save
 

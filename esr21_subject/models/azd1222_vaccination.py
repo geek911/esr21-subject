@@ -9,7 +9,7 @@ class Azd1222Vaccination(CrfModelMixin):
     vaccine_status = models.CharField(
         verbose_name='Vaccine status:',
         max_length=20,
-        choices=YES_NO, )
+        choices=YES_NO,)
 
     received_first_dose = models.CharField(
         verbose_name='Has the participant received a first dose of AZD1222?',
@@ -29,16 +29,16 @@ class Azd1222Vaccination(CrfModelMixin):
 
     vaccination_site = models.CharField(
         verbose_name='Vaccination site (eg, left arm)',
-        max_length=20, )
+        max_length=20,)
 
     receive_second_dose = models.CharField(
         verbose_name='Is the participant scheduled to receive a second '
                      'dose of AZD1222?',
         max_length=20,
-        choices=YES_NO, )
+        choices=YES_NO,)
 
     scheduled_vaccination = models.DateField(
-        verbose_name='Date of scheduled vaccination', )
+        verbose_name='Date of scheduled vaccination',)
 
     class Meta(CrfModelMixin.Meta):
         app_label = 'esr21_subject'

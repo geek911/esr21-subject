@@ -14,7 +14,7 @@ from .personal_contact_info import PersonalContactInfo
 from .medical_history import MedicalHistory
 from .physical_exam import PhysicalExam
 from .offschedule import OffSchedule
-from .onschedule import OnSchedule
+from .onschedule import OnSchedule, OnScheduleIll
 from .signals import informed_consent_on_post_save
 from .subject_requisition import SubjectRequisition
 from .pregnancy_test import PregnancyTest

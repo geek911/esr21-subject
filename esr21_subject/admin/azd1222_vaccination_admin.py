@@ -1,14 +1,13 @@
 from django.contrib import admin
 from edc_model_admin import audit_fieldset_tuple
-
 from ..admin_site import esr21_subject_admin
 from ..forms import Azd1222VaccinationForm
 from ..models import Azd1222Vaccination
-from .modeladmin_mixins import ModelAdminMixin
+from .modeladmin_mixins import CrfModelAdminMixin
 
 
 @admin.register(Azd1222Vaccination, site=esr21_subject_admin)
-class Azd1222VaccinationAdmin(ModelAdminMixin, admin.ModelAdmin):
+class Azd1222VaccinationAdmin(CrfModelAdminMixin, admin.ModelAdmin):
 
     form = Azd1222VaccinationForm
 

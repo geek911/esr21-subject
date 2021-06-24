@@ -12,6 +12,7 @@ from edc_visit_tracking.model_mixins import CrfModelMixin as BaseCrfModelMixin
 from edc_visit_tracking.model_mixins import PreviousVisitModelMixin
 
 from ..subject_visit import SubjectVisit
+from django.db.models.fields import DecimalField
 
 
 class CrfModelMixin(BaseCrfModelMixin, SubjectScheduleCrfModelMixin,
@@ -25,6 +26,10 @@ class CrfModelMixin(BaseCrfModelMixin, SubjectScheduleCrfModelMixin,
     offschedule_compare_dates_as_datetimes = True
     subject_visit = models.OneToOneField(SubjectVisit, on_delete=PROTECT)
     crf_date_validator_cls = None
+
+    form_version = DecimalField(
+        decimal_places=1,
+        max_digits=3)
 
     @property
     def subject_identifier(self):

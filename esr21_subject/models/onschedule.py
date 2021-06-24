@@ -32,5 +32,31 @@ class OnSchedule(
         self.consent_version = None
         super().save(*args, **kwargs)
 
+
+class OnScheduleIll(
+        # RequiresConsentFieldsModelMixin,
+        OnScheduleModelMixin, BaseUuidModel):
+
+    subject_identifier = models.CharField(
+        verbose_name="Subject Identifier",
+        max_length=50)
+
+    schedule_name = models.CharField(max_length=25,
+                                     blank=True,
+                                     null=True)
+
+    onsite = CurrentSiteManager()
+
+    objects = SubjectIdentifierManager()
+
+    history = HistoricalRecords()
+
+    def put_on_schedule(self):
+        pass
+
+    def save(self, *args, **kwargs):
+        self.consent_version = None
+        super().save(*args, **kwargs)
+
     class Meta:
         unique_together = ('subject_identifier', 'schedule_name')

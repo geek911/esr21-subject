@@ -1,5 +1,7 @@
+from django.apps import apps as django_apps
 from django.conf import settings
 from django.contrib import admin
+from django.utils.safestring import mark_safe
 from django.urls.base import reverse
 from django.urls.exceptions import NoReverseMatch
 from django_revision.modeladmin_mixin import ModelAdminRevisionMixin
@@ -18,7 +20,36 @@ from edc_visit_tracking.modeladmin_mixins import (
 from .exportaction_mixin import ExportActionMixin
 
 
+class VersionControlMixin:
+
+    def get_form_version(self, request):
+
+        form_versions = django_apps.get_app_config('esr21_subject').form_versions
+
+        queryset = self.get_queryset(request)
+        model_name = queryset.model._meta.label_lower
+        form_version = form_versions.get(model_name)
+
+        return mark_safe(
+                f'Version: <kbd> {form_version} </kbd>  ')
+
+    def get_timepoint(self, request):
+
+        appt_model = django_apps.get_model('edc_appointment.appointment')
+
+        try:
+            app_obj = appt_model.objects.get(id=request.GET.get('appointment'))
+        except appt_model.DoesNotExist:
+            pass
+        else:
+            return mark_safe(
+                    f'Timepoint: <i>{app_obj.visits.get(app_obj.visit_code).title} </i> &emsp;')
+
+    # visit_label indicating month and day visit is happenning
+
+
 class ModelAdminMixin(ModelAdminNextUrlRedirectMixin,
+                      VersionControlMixin,
                       ModelAdminFormInstructionsMixin,
                       ModelAdminFormAutoNumberMixin, ModelAdminRevisionMixin,
                       ModelAdminAuditFieldsMixin, ModelAdminReadOnlyMixin,
@@ -32,6 +63,29 @@ class ModelAdminMixin(ModelAdminNextUrlRedirectMixin,
     empty_value_display = '-'
     next_form_getter_cls = NextFormGetter
 
+    instructions = mark_safe(
+        'Please complete the questions below. Required questions are in bold. '
+        'When all required questions are complete click SAVE. <br> Based on your '
+        'responses, additional questions may be required or some answers may '
+        'need to be corrected.<br>')
+
+    def add_view(self, request, form_url='', extra_context=None):
+        extra_context = extra_context or {}
+
+        self.instructions = self.instructions + self.get_form_version(request)
+
+        return super().add_view(
+            request, form_url=form_url, extra_context=extra_context)
+
+    def change_view(self, request, object_id, form_url='', extra_context=None):
+
+        extra_context = extra_context or {}
+
+        self.instructions = self.instructions + self.get_form_version(request)
+
+        return super().change_view(
+            request, object_id, form_url=form_url, extra_context=extra_context)
+
 
 class CrfModelAdminMixin(VisitTrackingCrfModelAdminMixin,
                          ModelAdminMixin,
@@ -41,11 +95,23 @@ class CrfModelAdminMixin(VisitTrackingCrfModelAdminMixin,
 
     post_url_on_delete_name = settings.DASHBOARD_URL_NAMES.get(
         'subject_dashboard_url')
-    instructions = (
-        'Please complete the questions below. Required questions are in bold. '
-        'When all required questions are complete click SAVE. Based on your '
-        'responses, additional questions may be required or some answers may '
-        'need to be corrected.')
+
+    def add_view(self, request, form_url='', extra_context=None):
+        extra_context = extra_context or {}
+
+        self.instructions = self.instructions + self.get_timepoint(request)
+
+        return super().add_view(
+            request, form_url=form_url, extra_context=extra_context)
+
+    def change_view(self, request, object_id, form_url='', extra_context=None):
+
+        extra_context = extra_context or {}
+
+        self.instructions = self.instructions + self.get_timepoint(request)
+
+        return super().change_view(
+            request, object_id, form_url=form_url, extra_context=extra_context)
 
     def post_url_on_delete_kwargs(self, request, obj):
         return dict(

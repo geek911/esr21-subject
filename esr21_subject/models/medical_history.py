@@ -14,13 +14,13 @@ class MedicalHistory(CrfModelMixin):
     relevant_history = models.CharField(
         verbose_name='Does the subject have any relevant Medical History?',
         max_length=10,
-        choices=YES_NO, )
+        choices=YES_NO,)
 
     was_subject_infected_before = models.CharField(
         verbose_name='Has the participant had a prior infection of '
                      'SARS-CoV-2/COVID 19?',
         max_length=10,
-        choices=YES_NO, )
+        choices=YES_NO,)
 
     # TODO: Needed if {was_subject_infected_before} is 'yes'
     symptoms = models.ManyToManyField(
@@ -36,7 +36,7 @@ class MedicalHistory(CrfModelMixin):
     smoking_status = models.CharField(
         choices=SMOKED_STATUS_CHOICES,
         verbose_name='Smoking status/history',
-        max_length=20, )
+        max_length=20,)
 
     alcohol_status = models.CharField(
         choices=ALCOHOL_STATUS_CHOICES,
