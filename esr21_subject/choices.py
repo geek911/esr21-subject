@@ -345,7 +345,7 @@ VISIT_REASON = (
     (SCHEDULED, 'Scheduled visit/contact'),
     (MISSED_VISIT, 'Missed Scheduled visit'),
     (UNSCHEDULED, 'Unscheduled visit/contact'),
-    (LOST_VISIT, 'Lost to follow-up (use only when taking subject off study)'),
+    (LOST_VISIT, 'Use only when withdrawing subject off study'),
     (COMPLETED_PROTOCOL_VISIT, 'Subject has completed the study'),
 )
 
