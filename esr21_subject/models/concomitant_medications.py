@@ -1,41 +1,89 @@
 from django.db import models
 
-from edc_base.model_fields import OtherCharField
 from edc_base.model_validators import date_not_future
 from edc_constants.choices import YES_NO
-from edc_protocol.validators import date_not_before_study_start
-
-from .list_models import MedicationIndication
 from .model_mixins import CrfModelMixin
-from ..choices import AE_GRADE, UNIT_OPTIONS
+from ..choices import UNIT_OPTIONS, FREQUENCY, CONCOMITANT_ROUTE
 
 
-class AdverseEvent(CrfModelMixin):
-    """Concomitant Medications"""
+class ConcomitantMedication(CrfModelMixin):
 
-    medication = models.CharField(
-        verbose_name='Medication',
-        max_length=25,
-        help_text='Please use generic drug name or trade name for combination drugs')
+    administered_date = models.DateField(
+        verbose_name='Date Administered (DD MMM YYYY):', )
 
-    indication = models.ManyToManyField(
-        MedicationIndication,
-        verbose_name='Indication',
-        max_length=25,
-        help_text='Please tick all that apply')
+    medication_name = models.CharField(
+        verbose_name='Name of concomitant medication ',
+        max_length=40,
+    )
 
-    indication_other = OtherCharField(
-        verbose_name='if \'Prophylaxis\' or \'Other\' above, please specify')
+    medDra_name = models.CharField(
+        verbose_name='MedDRA preferred name',
+        max_length=30)
 
-    ae_number = models.CharField(
-        verbose_name=('If indication is \'Adverse Event,\' select the corresponding Adverse '
-                      'event number'),
-        max_length=25,
-        choices=AE_GRADE)
+    medDra_code = models.CharField(
+        verbose_name='MedDRA preferred code',
+        max_length=30)
 
-    dose = models.CharField(
-        max_length=5,)
+    atc_code = models.CharField(
+        verbose_name='ATC code',
+        max_length=30)
+
+    dose = models.DecimalField(
+        verbose_name='Dose',
+        decimal_places=2,
+        max_digits=4)
 
     unit = models.CharField(
+        verbose_name='Unit',
         max_length=25,
         choices=UNIT_OPTIONS)
+
+    unit_other = models.CharField(
+        verbose_name='Other, specify',
+        max_length=25,
+        blank=True,
+        null=True)
+
+    frequency = models.CharField(
+        verbose_name='Frequency',
+        max_length=25,
+        choices=FREQUENCY)
+
+    frequency_other = models.CharField(
+        verbose_name='Other, specify',
+        max_length=25,
+        blank=True,
+        null=True)
+
+    route = models.CharField(
+        verbose_name='Route',
+        max_length=25,
+        choices=CONCOMITANT_ROUTE)
+
+    route_other = models.CharField(
+        verbose_name='Other, specify',
+        max_length=25,
+        blank=True,
+        null=True)
+
+    reason_of_use = models.TextField(
+        verbose_name='Reason for use', )
+
+    ongoing = models.CharField(
+        verbose_name='Ongoing',
+        max_length=25,
+        choices=YES_NO)
+
+    stop_date = models.DateField(
+        verbose_name='Stop Date (DD MMM YYYY)',
+        validators=[date_not_future, ])
+
+    prohibited = models.CharField(
+        verbose_name='Is concomitant medication prohibited?',
+        max_length=25,
+        choices=YES_NO)
+
+    class Meta(CrfModelMixin.Meta):
+        app_label = 'esr21_subject'
+        verbose_name = 'Concomitant Medication'
+        verbose_name_plural = 'Concomitant Medication'

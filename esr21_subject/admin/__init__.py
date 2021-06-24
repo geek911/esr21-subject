@@ -1,4 +1,5 @@
 from .eligibility_confirmation_admin import EligibilityConfirmationAdmin
+from .concomitant_medication_admin import ConcomitantMedicationAdmin
 from .informed_consent_admin import InformedConsentAdmin
 from .demographics_data_admin import DemographicDataAdmin
 from .vaccination_details_admin import VaccinationDetailsAdmin
@@ -8,7 +9,7 @@ from .adverse_event_admin import SpecialInterestAdverseEventAdmin
 from .pregnancy_status_admin import PregnancyStatusAdmin
 from .rapid_hiv_testing_admin import RapidHIVTestingAdmin
 from .subject_visit_admin import SubjectVisitAdmin
-from esr21_subject.admin.covid19_preventative_behaviours_admin import Covid19PreventativeBehavioursAdmin
+from .covid19_preventative_behaviours_admin import Covid19PreventativeBehavioursAdmin
 from .medical_history_admin import MedicalHistoryAdmin
 from .personal_contact_info_admin import PersonalContactInfoAdmin
 from .physical_exam_admin import PhysicalExamAdmin

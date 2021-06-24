@@ -3,6 +3,7 @@ from django.db import models
 from edc_constants.choices import YES_NO
 from .model_mixins import CrfModelMixin
 from ..choices import INFECTION_STATUS
+from .list_models import SymptomaticInfections
 
 
 class Covid19SymptomaticInfections(CrfModelMixin):
@@ -13,8 +14,13 @@ class Covid19SymptomaticInfections(CrfModelMixin):
         max_length=20,
         choices=YES_NO, )
 
+    symptomatic_infections = models.ManyToManyField(
+        SymptomaticInfections,
+        verbose_name='Symptomatic infections '
+    )
+
     date_of_infection = models.DateField(
-        verbose_name='Date of symptomatic infection:')
+        verbose_name='Date of symptomatic infection (DD MMM YYYY):')
 
     infection_status = models.CharField(
         verbose_name='Previous SARS coV-2 infection status?',
@@ -28,12 +34,6 @@ class Covid19SymptomaticInfections(CrfModelMixin):
 
     hospitalisation_date = models.DateField(
         verbose_name='Date of hospitalisation:')
-
-    hospitalisation_details = models.TextField(
-        verbose_name='Date of hospitalisation:',
-        max_length=150,
-        blank=True,
-        null=True)
 
     class Meta(CrfModelMixin.Meta):
         app_label = 'esr21_subject'

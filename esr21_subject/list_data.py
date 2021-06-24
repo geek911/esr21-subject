@@ -7,8 +7,8 @@ list_data = {
         ('death', 'Death'),
         ('life_threatening', 'Life-threatening'),
         ('hospitalization', 'Initial or prolonged hospitalization'),
-        ('birth_defects', 'Congenital anomaly/birth defect'),
         ('incapacity', 'Persistent or significant disability/incapacity'),
+        ('birth_defects', 'Congenital anomaly/birth defect'),
         (OTHER, 'Other important medical event'),
     ],
     'esr21_subject.subjectrace': [
@@ -38,6 +38,45 @@ list_data = {
         ('nausea', 'Nausea'),
         ('hospitalization_outcome', 'Hospitalization Outcome'),
     ],
+<<<<<<< HEAD
+    'esr21_subject.symptomaticinfections': [
+        ('dry_cough', 'Dry Cough'),
+        ('fever', 'Fever'),
+        ('fatigue', 'Fatigue'),
+        ('loss_of_smell', 'Loss of Smell'),
+        ('loss_of_taste', 'Loss of Taste'),
+        ('body_aches', 'Body aches'),
+        ('headache', 'Headache'),
+        ('shortness_of_breath', 'Shortness of breath'),
+    ],
+=======
+    'esr21_subject.symptoms': [
+        ('fever', 'Fever'),
+        ('dry_cough', 'Dry Cough'),
+        ('fatigue', 'Fatigue'),
+        ('loss_of_taste_or_smell', 'Loss of taste or smell'),
+        ('headache', 'Headache'),
+        ('muscle_or_joint_pain', 'Muscle or joint pain'),
+        ('shortness_of_breath', 'Shortness Of Breath'),
+        ('difficulty_breathing_or_shortness_of_breath', 'Difficulty breathing or shortness of breath'),
+        ('chest_pain_or_pressure', 'Chest pain or pressure'),
+        ('loss_of_speech_or_movement', 'Loss of speech or movement'),
+        (OTHER, 'Other')
+    ],
+    'esr21_subject.diseases': [
+        ('HIV', 'HIV'),
+        ('malignancy', 'malignancy'),
+        ('chronic_disease', 'Chronic Disease'),
+        ('chronic_obstructive_pulmonary_disease_and_other_chronic_lung_diseases',
+         'Chronic obstructive pulmonary disease and other chronic lung diseases'),
+        ('hypertension', 'Hypertension'),
+        ('coronary_artery_disease', 'Coronary artery disease'),
+        ('cardiomyopathy', 'Cardiomyopathy'),
+        ('pulmonary_hypertension', 'Pulmonary hypertension'),
+        ('obesity', 'Obesity'),
+        (OTHER, 'Other')
+    ]
+>>>>>>> fbf1c8c3c76dd9d9aa71a54b9dfc906fdc6c30ab
 }
 
 preload_data = PreloadData(

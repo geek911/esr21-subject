@@ -1,4 +1,5 @@
 from .eligibility_confirmation import EligibilityConfirmation
+from .concomitant_medications import ConcomitantMedication
 from .informed_consent import InformedConsent
 from .demographics_data import DemographicsData
 from .vaccination_details import VaccinationDetails
@@ -8,7 +9,7 @@ from .rapid_hiv_testing import RapidHIVTesting
 from .serious_adverse_event import SeriousAdverseEvent
 from .special_interest_adverse_event import SpecialInterestAdverseEvent
 from .subject_visit import SubjectVisit
-from esr21_subject.models.covid19_preventative_behaviours import Covid19PreventativeBehaviours
+from .covid19_preventative_behaviours import Covid19PreventativeBehaviours
 from .personal_contact_info import PersonalContactInfo
 from .medical_history import MedicalHistory
 from .physical_exam import PhysicalExam
@@ -23,3 +24,4 @@ from .azd1222_vaccination import Azd1222Vaccination
 from .sample_collection import SampleCollection
 from .vital_signs import VitalSigns
 from .targeted_physical_examination import TargetedPhysicalExamination
+from .medical_history import MedicalDiagnosis
