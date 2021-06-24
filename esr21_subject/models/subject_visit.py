@@ -34,13 +34,15 @@ class SubjectVisit(
         choices=VISIT_REASON)
 
     reason_missed = models.CharField(
-        verbose_name='If \'missed\' above, reason scheduled visit was missed',
+        verbose_name='If \'Did not attend scheduled visit\' is detailed above,'
+                     ' reason visit was not attended.',
         blank=True,
         null=True,
         max_length=250)
 
     reason_unscheduled = models.CharField(
-        verbose_name='If \'Unscheduled\' above, provide reason for the unscheduled visit',
+        verbose_name='If \'Unscheduled\' above, provide reason for the '
+                     'unscheduled visit',
         blank=True,
         null=True,
         max_length=25,)

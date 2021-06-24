@@ -44,7 +44,7 @@ class EligibilityConfirmation(NonUniqueSubjectIdentifierFieldMixin,
     received_vaccines = models.CharField(
         verbose_name='Has the participant received any vaccine other than '
                      'licensed influenza vaccines within 30 days prior to '
-                     'and after administration of study intervention',
+                     'and after administration of study intervention?',
         max_length=10,
         choices=YES_NO,
         help_text='If Yes, participant is not eligible')

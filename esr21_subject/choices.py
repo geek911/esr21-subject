@@ -344,7 +344,7 @@ VISIT_INFO_SOURCE = (
 
 VISIT_REASON = (
     (SCHEDULED, 'Scheduled visit/contact'),
-    (MISSED_VISIT, 'Missed Scheduled visit'),
+    (MISSED_VISIT, 'Did not attend scheduled visit'),
     (UNSCHEDULED, 'Unscheduled visit/contact'),
     (LOST_VISIT, 'Lost to follow-up (use only when taking subject off study)'),
     (COMPLETED_PROTOCOL_VISIT, 'Subject has completed the study'),
