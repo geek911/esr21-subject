@@ -16,12 +16,12 @@ class ConcomitantMedication(CrfModelMixin):
         max_length=40,
     )
 
-    medDra_name = models.CharField(
-        verbose_name='MedDRA preferred name',
+    who_name = models.CharField(
+        verbose_name='WHODRUG preferred name',
         max_length=30)
 
-    medDra_code = models.CharField(
-        verbose_name='MedDRA preferred code',
+    who_code = models.CharField(
+        verbose_name='WHODRUG preferred code',
         max_length=30)
 
     atc_code = models.CharField(
