@@ -32,9 +32,9 @@ class AppConfig(DjangoAppConfig):
         'esr21_subject.specialinterestadverseevent': 1.1,
         'esr21_subject.subjectrequisition': 1.0,
         'esr21_subject.subjectvisit': 1.0,
-        'esr21_subject.targetedphysicalexamination': 1.1,
+        'esr21_subject.targetedphysicalexamination': 1.0,
         'esr21_subject.vaccinationdetails': 1.0,
-        'esr21_subject.vitalsigns': 1.0,
+        'esr21_subject.vitalsigns': 1.1,
         }
 
     def ready(self):
