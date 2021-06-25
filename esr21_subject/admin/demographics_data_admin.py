@@ -16,7 +16,6 @@ class DemographicDataAdmin(CrfModelAdminMixin, admin.ModelAdmin):
             'fields': [
                 'subject_visit',
                 'report_datetime',
-                'age_at_entry',
                 'country',
                 'ethnicity',
                 'ethnicity_other',
