@@ -11,7 +11,7 @@ class AppConfig(DjangoAppConfig):
 
     form_versions = {
         'edc_appointment.appointment': 1.0,
-        'esr21_subject.adverseevent': 1.0,
+        'esr21_subject.adverseevent': 1.1,
         'esr21_subject.azd1222vaccination': 1.1,
         'esr21_subject.concomitantmedication': 1.1,
         'esr21_subject.covid19preventativebehaviours': 1.1,
@@ -28,8 +28,8 @@ class AppConfig(DjangoAppConfig):
         'esr21_subject.pregnancytest': 1.1,
         'esr21_subject.rapidhivtesting': 1.0,
         'esr21_subject.samplecollection': 1.0,
-        'esr21_subject.seriousadverseevent': 1.0,
-        'esr21_subject.specialinterestadverseevent': 1.0,
+        'esr21_subject.seriousadverseevent': 1.1,
+        'esr21_subject.specialinterestadverseevent': 1.1,
         'esr21_subject.subjectrequisition': 1.0,
         'esr21_subject.subjectvisit': 1.0,
         'esr21_subject.targetedphysicalexamination': 1.1,
