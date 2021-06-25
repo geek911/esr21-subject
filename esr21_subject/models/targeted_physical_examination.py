@@ -1,7 +1,7 @@
 from django.db import models
 
 from edc_base.model_validators import datetime_not_future
-from edc_constants.choices import YES_NO
+from edc_constants.choices import YES_NO, YES_NO_NA
 
 from .model_mixins import CrfModelMixin
 from ..choices import REASON_NOT_DRAWN
@@ -23,21 +23,25 @@ class TargetedPhysicalExamination(CrfModelMixin):
 
     area_performed = models.CharField(
         verbose_name='What area was the physical exam preformed?',
-        max_length=35,)
+        max_length=35,
+        blank=True,
+        null=True,)
 
     exam_date = models.DateTimeField(
         verbose_name='Date of examination (DD MMM YYYY)',
-        validators=[datetime_not_future, ])
+        validators=[datetime_not_future, ],
+        blank=True,
+        null=True,)
 
     abnormalities = models.CharField(
         verbose_name='Were any abnormalities found?',
         max_length=30,
-        choices=YES_NO)
+        choices=YES_NO_NA)
 
     if_abnormalities = models.CharField(
         verbose_name='If Yes, were any abnormalities clinically significant? ',
         max_length=3,
-        choices=YES_NO,
+        choices=YES_NO_NA,
         blank=True,
         null=True,)
 

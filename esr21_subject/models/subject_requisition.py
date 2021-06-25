@@ -3,24 +3,24 @@ from django.db import models
 from django.db.models.deletion import PROTECT
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
-from edc_base.model_validators.date import datetime_not_future
 from edc_consent.model_mixins import RequiresConsentFieldsModelMixin
 from edc_constants.constants import NOT_APPLICABLE
-from edc_constants.choices import YES_NO
 from edc_identifier.model_mixins import NonUniqueSubjectIdentifierFieldMixin
+from edc_lab.choices import PRIORITY
 from edc_lab.models import RequisitionIdentifierMixin
 from edc_lab.models import RequisitionModelMixin, RequisitionStatusMixin
 from edc_metadata.model_mixins.updates import UpdatesRequisitionMetadataModelMixin
 from edc_reference.model_mixins import RequisitionReferenceModelMixin
 from edc_search.model_mixins import SearchSlugManager
-from edc_visit_schedule.model_mixins import SubjectScheduleCrfModelMixin
 from edc_visit_tracking.managers import CrfModelManager as VisitTrackingCrfModelManager
 from edc_visit_tracking.model_mixins import CrfModelMixin as VisitTrackingCrfModelMixin
 from edc_visit_tracking.model_mixins import PreviousVisitModelMixin
 
+from edc_visit_schedule.model_mixins import SubjectScheduleCrfModelMixin
+
 from ..choices import REASON_NOT_DRAWN
 from .subject_visit import SubjectVisit
-# from .search_slug_model_mixin import SearchSlugModelMixin
+from .model_mixins import SearchSlugModelMixin
 
 
 class Manager(VisitTrackingCrfModelManager, SearchSlugManager):
@@ -33,34 +33,48 @@ class SubjectRequisition(
         VisitTrackingCrfModelMixin, SubjectScheduleCrfModelMixin,
         RequiresConsentFieldsModelMixin, PreviousVisitModelMixin,
         RequisitionReferenceModelMixin, UpdatesRequisitionMetadataModelMixin,
-        # SearchSlugModelMixin,
-        BaseUuidModel):
+        SearchSlugModelMixin, BaseUuidModel):
 
     lab_profile_name = 'esr21_subject'
 
     subject_visit = models.ForeignKey(SubjectVisit, on_delete=PROTECT)
 
-    is_drawn = models.CharField(
-        verbose_name='Was a sample collected?',
-        max_length=3,
-        choices=YES_NO)
+    study_site = models.CharField(
+        verbose_name='Study site',
+        max_length=25,)
+
+    estimated_volume = models.DecimalField(
+        verbose_name='Estimated volume in mL',
+        max_digits=7,
+        decimal_places=2,
+        help_text=(
+            'If applicable, estimated volume of sample for this test/order. '
+            'This is the total volume if number of "tubes" above is greater than 1'))
+
+    item_count = models.IntegerField(
+        verbose_name='Total number of items',
+        help_text=(
+            'Number of tubes, samples, cards, etc being sent for this test/order only. '
+            'Determines number of labels to print'))
+
+    priority = models.CharField(
+        verbose_name='Priority',
+        max_length=25,
+        choices=PRIORITY,
+        default='normal',)
 
     reason_not_drawn = models.CharField(
-        verbose_name='If no, reason not done',
+        verbose_name='If not drawn, please explain',
         max_length=25,
         default=NOT_APPLICABLE,
         choices=REASON_NOT_DRAWN)
 
-    drawn_date = models.DateField(
-        verbose_name='Collection date',
-        validators=[datetime_not_future, ],
-        null=True,
-        blank=True,)
-
-    drawn_time = models.TimeField(
-        verbose_name='Collection time',
+    comments = models.TextField(
+        max_length=350,
         null=True,
         blank=True)
+
+#     on_site = CurrentSiteManager()
 
     objects = Manager()
 
@@ -80,12 +94,12 @@ class SubjectRequisition(
         self.subject_identifier = self.subject_visit.subject_identifier
         super().save(*args, **kwargs)
 
-    # def get_search_slug_fields(self):
-        # fields = super().get_search_slug_fields()
-        # fields.extend([
-            # 'requisition_identifier',
-            # 'human_readable_identifier', 'identifier_prefix'])
-        # return fields
+    def get_search_slug_fields(self):
+        fields = super().get_search_slug_fields()
+        fields.extend([
+            'requisition_identifier',
+            'human_readable_identifier', 'identifier_prefix'])
+        return fields
 
     class Meta:
         unique_together = ('panel', 'subject_visit')
