@@ -30,7 +30,7 @@ class AppConfig(DjangoAppConfig):
         'esr21_subject.samplecollection': 1.0,
         'esr21_subject.seriousadverseevent': 1.1,
         'esr21_subject.specialinterestadverseevent': 1.1,
-        'esr21_subject.subjectrequisition': 1.0,
+        'esr21_subject.subjectrequisition': 1.1,
         'esr21_subject.subjectvisit': 1.0,
         'esr21_subject.targetedphysicalexamination': 1.0,
         'esr21_subject.vaccinationdetails': 1.0,

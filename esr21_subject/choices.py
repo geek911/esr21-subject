@@ -2,6 +2,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from edc_constants.constants import (OTHER, NOT_APPLICABLE, UNKNOWN, POS, NEG,
                                      IND, MALE, FEMALE)
+from edc_lab.constants import TUBE
 from edc_visit_tracking.constants import SCHEDULED, UNSCHEDULED, LOST_VISIT
 from edc_visit_tracking.constants import MISSED_VISIT, COMPLETED_PROTOCOL_VISIT
 
@@ -130,6 +131,13 @@ IDENTITY_TYPE = (
     ('national_identity_card', 'National Identity Card'),
     ('national_identity_card_rcpt', 'National Identity Card Receipt'),
     ('passport', 'Passport'),
+    (OTHER, 'Other'),
+)
+
+ITEM_TYPE = (
+    (NOT_APPLICABLE, 'Not applicable'),
+    (TUBE, 'Tube'),
+    ('swab', 'Swab'),
     (OTHER, 'Other'),
 )
 
