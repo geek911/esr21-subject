@@ -8,6 +8,7 @@ from edc_consent.field_mixins import IdentityFieldsMixin
 from edc_consent.field_mixins import PersonalFieldsMixin, VulnerabilityFieldsMixin
 from edc_consent.managers import ConsentManager
 from edc_consent.model_mixins import ConsentModelMixin
+from edc_consent.validators import eligible_if_yes
 from edc_constants.choices import YES_NO
 
 from ..choices import IDENTITY_TYPE
@@ -30,7 +31,9 @@ class InformedConsentManager(SearchSlugManager, models.Manager):
 class InformedConsent(ConsentModelMixin, SiteModelMixin,
                       UpdatesOrCreatesRegistrationModelMixin,
                       NonUniqueSubjectIdentifierModelMixin, IdentityFieldsMixin,
-                      PersonalFieldsMixin, VulnerabilityFieldsMixin, SearchSlugModelMixin, BaseUuidModel):
+                      PersonalFieldsMixin, VulnerabilityFieldsMixin,
+                      SearchSlugModelMixin, BaseUuidModel):
+
     subject_screening_model = 'esr21_subject.eligibilityconfirmation'
 
     screening_identifier = models.CharField(
@@ -57,7 +60,9 @@ class InformedConsent(ConsentModelMixin, SiteModelMixin,
     hiv_testing_consent = models.CharField(
         verbose_name='Do you consent to having HIV testing?',
         choices=YES_NO,
-        max_length=3,)
+        validators=[eligible_if_yes, ],
+        max_length=3,
+        help_text='Participant is not eligible if no')
 
     optional_sample_collection = models.CharField(
         verbose_name='Do you consent to optional sample collection?',
@@ -65,9 +70,11 @@ class InformedConsent(ConsentModelMixin, SiteModelMixin,
         max_length=3,)
 
     consent_to_participate = models.CharField(
+        verbose_name='Do you consent to participate in the study?',
         choices=YES_NO,
         max_length=3,
-        verbose_name='Do you consent to participate in the study?')
+        validators=[eligible_if_yes, ],
+        help_text='Participant is not eligible if no')
 
     gender_other = OtherCharField()
 

@@ -168,7 +168,7 @@ OUTCOME = (
     ('resolved', 'Recovered / resolved'),
     ('resolved_with_sequelae', 'Recovered / resolved with sequelae'),
     ('resolving', 'Recovering / resolving'),
-    ('fatal', 'Fatal'),
+    ('fatal', 'Fatal / Death'),
     (UNKNOWN, UNKNOWN),
 )
 
@@ -251,6 +251,7 @@ SETTLEMENT_TYPE = (
 STATUS = (
     ('resolved', 'Resolved'),
     ('ongoing', 'Ongoing'),
+    ('death', 'Death'),
 )
 
 TEMP_UNITS = (
