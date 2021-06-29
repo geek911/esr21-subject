@@ -7,6 +7,7 @@ from ..choices import SMOKED_STATUS_CHOICES, ALCOHOL_STATUS_CHOICES, \
     MODE_OF_TRANSPORT_CHOICE
 
 from .model_mixins import CrfModelMixin
+from edc_base.model_validators.date import date_not_future
 
 
 class MedicalHistory(CrfModelMixin):
@@ -92,31 +93,38 @@ class MedicalHistory(CrfModelMixin):
 
 
 class MedicalDiagnosis(CrfModelMixin):
-    medical_history_diagnosis = models.CharField(
+
+    medical_history_diagnosis = models.ForeignKey(
+        MedicalHistory,
+        on_delete=models.PROTECT,
         verbose_name='Medical History Diagnosis',
-        max_length=29)
+        max_length=25)
+
     start_date = models.DateField(
-        verbose_name='Start Date (DD/MMM/YYYY)')
+        verbose_name='Start Date (DD/MMM/YYYY)',
+        validators=[date_not_future])
 
     end_date = models.DateField(
-        verbose_name='End Date (DD/MMM/YYYY)')
+        verbose_name='End Date (DD/MMM/YYYY)',
+        null=True,
+        blank=True)
 
     ongoing = models.CharField(
         verbose_name='Ongoing',
         choices=YES_NO,
-        max_length=5)
+        max_length=3)
 
-    subject_taking_medicine = models.CharField(
+    condition_related_meds = models.CharField(
         verbose_name='Is the subject taking medication related to this '
                      'condition?',
         choices=YES_NO,
         max_length=5)
 
-    cm_log_line = models.CharField(
-        max_length=200,
-        verbose_name='CM log line')
+    rel_conc_meds = models.TextField(
+        max_length=150,
+        verbose_name='Related concomitant medications')
 
     class Meta(CrfModelMixin.Meta):
         app_label = 'esr21_subject'
         verbose_name = 'Medical Diagnosis'
-        verbose_name_plural = 'Medical Diagnosis'
+        verbose_name_plural = 'Medical Diagnoses'

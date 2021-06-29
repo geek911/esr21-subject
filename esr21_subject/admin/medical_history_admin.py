@@ -1,14 +1,37 @@
 from django.contrib import admin
-
 from .modeladmin_mixins import CrfModelAdminMixin
-from ..forms import MedicalHistoryForm
-from ..models import MedicalHistory
+from edc_model_admin.inlines import StackedInlineMixin
+from ..forms import MedicalHistoryForm, MedicalDiagnosisForm
+from ..models import MedicalHistory, MedicalDiagnosis
 from ..admin_site import esr21_subject_admin
+
+
+class MedicalDiagnosisInlineAdmin(StackedInlineMixin, admin.StackedInline):
+
+    model = MedicalDiagnosis
+    form = MedicalDiagnosisForm
+
+    extra = 0
+    max_num = 3
+
+    fieldsets = (
+        (None, {
+            'fields': [
+                'medical_history_diagnosis',
+                'start_date',
+                'end_date',
+                'ongoing',
+                'condition_related_meds',
+                'rel_conc_meds',
+                ]}
+         ),)
 
 
 @admin.register(MedicalHistory, site=esr21_subject_admin)
 class MedicalHistoryAdmin(CrfModelAdminMixin, admin.ModelAdmin):
     form = MedicalHistoryForm
+
+    inlines = [MedicalDiagnosisInlineAdmin]
 
     fieldsets = (
         (None, {

@@ -11,7 +11,7 @@ from .special_interest_adverse_event_form import SpecialInterestAdverseEventForm
 from .subject_visit_form import SubjectVisitForm
 from .covid19_preventative_behaviours_form import Covid19PreventativeBehavioursForm
 from .personal_contact_info_form import PersonalContactInfoForm
-from .medical_history_form import MedicalHistoryForm
+from .medical_history_form import MedicalHistoryForm, MedicalDiagnosisForm
 from .physical_exam_form import PhysicalExamForm
 from .pregnancy_test_form import PregnancyTestForm
 from .hospitalization_form import HospitalizationForm
