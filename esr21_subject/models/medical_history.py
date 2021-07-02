@@ -1,5 +1,7 @@
 from django.db import models
 
+from edc_base.model_mixins import BaseUuidModel
+from edc_base.sites import SiteModelMixin
 from edc_constants.choices import YES_NO
 
 from .list_models import Symptoms, Diseases
@@ -92,9 +94,9 @@ class MedicalHistory(CrfModelMixin):
         verbose_name_plural = 'Medical History'
 
 
-class MedicalDiagnosis(CrfModelMixin):
+class MedicalDiagnosis(SiteModelMixin, BaseUuidModel):
 
-    medical_history_diagnosis = models.ForeignKey(
+    medical_history = models.ForeignKey(
         MedicalHistory,
         on_delete=models.PROTECT,
         verbose_name='Medical History Diagnosis',
@@ -124,7 +126,8 @@ class MedicalDiagnosis(CrfModelMixin):
         max_length=150,
         verbose_name='Related concomitant medications')
 
-    class Meta(CrfModelMixin.Meta):
+    class Meta:
         app_label = 'esr21_subject'
+        unique_together = ('medical_history', 'start_date', 'end_date')
         verbose_name = 'Medical Diagnosis'
         verbose_name_plural = 'Medical Diagnoses'
