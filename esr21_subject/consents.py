@@ -3,7 +3,7 @@ import arrow
 from dateutil.tz import gettz
 from django.apps import apps as django_apps
 
-from edc_constants.constants import MALE, FEMALE
+from edc_constants.constants import MALE, FEMALE, OTHER
 from edc_consent.consent import Consent
 from edc_consent.site_consents import site_consents
 
@@ -23,6 +23,6 @@ v1 = Consent(
     age_min=18,
     age_is_adult=18,
     age_max=60,
-    gender=[MALE, FEMALE])
+    gender=[MALE, FEMALE, OTHER])
 
 site_consents.register(v1)
