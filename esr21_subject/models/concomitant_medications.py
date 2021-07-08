@@ -9,7 +9,7 @@ from ..choices import UNIT_OPTIONS, FREQUENCY, CONCOMITANT_ROUTE
 class ConcomitantMedication(CrfModelMixin):
 
     administered_date = models.DateField(
-        verbose_name='Date Administered (DD MMM YYYY):', )
+        verbose_name='Date of administration (DD MMM YYYY):', )
 
     medication_name = models.CharField(
         verbose_name='Name of concomitant medication ',
