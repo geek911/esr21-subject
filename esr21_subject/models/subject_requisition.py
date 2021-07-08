@@ -1,6 +1,8 @@
 from django.apps import apps as django_apps
 from django.db import models
 from django.db.models.deletion import PROTECT
+from django.utils import timezone
+from edc_base.model_validators.date import datetime_not_future
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
 from edc_consent.model_mixins import RequiresConsentFieldsModelMixin
@@ -18,9 +20,10 @@ from edc_visit_tracking.model_mixins import PreviousVisitModelMixin
 
 from edc_visit_schedule.model_mixins import SubjectScheduleCrfModelMixin
 
-from ..choices import REASON_NOT_DRAWN
+from ..choices import REASON_NOT_DRAWN, ITEM_TYPE
 from .subject_visit import SubjectVisit
 from .model_mixins import SearchSlugModelMixin
+from edc_base.model_fields.custom_fields import OtherCharField
 
 
 class Manager(VisitTrackingCrfModelManager, SearchSlugManager):
@@ -39,6 +42,11 @@ class SubjectRequisition(
 
     subject_visit = models.ForeignKey(SubjectVisit, on_delete=PROTECT)
 
+    requisition_datetime = models.DateTimeField(
+        default=timezone.now,
+        verbose_name='Requisition Date and Time',
+        validators=[datetime_not_future, ])
+
     study_site = models.CharField(
         verbose_name='Study site',
         max_length=25,)
@@ -54,8 +62,16 @@ class SubjectRequisition(
     item_count = models.IntegerField(
         verbose_name='Total number of items',
         help_text=(
-            'Number of tubes, samples, cards, etc being sent for this test/order only. '
+            'Number of tubes, samples, etc being sent for this test/order only. '
             'Determines number of labels to print'))
+
+    item_type = models.CharField(
+        verbose_name='Item collection type',
+        max_length=25,
+        choices=ITEM_TYPE,
+        default=NOT_APPLICABLE)
+
+    item_type_other = OtherCharField()
 
     priority = models.CharField(
         verbose_name='Priority',
@@ -68,6 +84,20 @@ class SubjectRequisition(
         max_length=25,
         default=NOT_APPLICABLE,
         choices=REASON_NOT_DRAWN)
+
+    drawn_datetime = models.DateTimeField(
+        verbose_name='Date / Time Specimen Drawn',
+        validators=[datetime_not_future, ],
+        null=True,
+        blank=True,
+        help_text=(
+            'If not drawn, leave blank.'))
+
+    urgent_specify = models.TextField(
+        verbose_name='If urgent, please specify',
+        max_length=250,
+        null=True,
+        blank=True,)
 
     comments = models.TextField(
         max_length=350,

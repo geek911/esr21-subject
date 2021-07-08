@@ -51,7 +51,7 @@ class SeriousAdverseEventInlineAdmin(StackedInlineMixin, admin.StackedInline):
                     'event_abate': admin.VERTICAL,
                     'event_reappear': admin.VERTICAL, }
 
-    filter_horizontal = ('seriousness_criteria', )
+    filter_horizontal = ('seriousness_criteria',)
 
 
 class SpecialInterestAdverseEventInlineAdmin(StackedInlineMixin,
@@ -64,7 +64,8 @@ class SpecialInterestAdverseEventInlineAdmin(StackedInlineMixin,
     max_num = 3
 
     fieldsets = (
-        ('Participants should be encouraged to report any adverse events reported in the AE form', {
+        ('Participants should be encouraged to report any adverse events reported in '
+         'the AE form', {
             'fields': [
                 'aesi_name',
                 'meddra_pname',
@@ -185,7 +186,7 @@ class SeriousAdverseEventAdmin(admin.ModelAdmin):
                     'event_abate': admin.VERTICAL,
                     'event_reappear': admin.VERTICAL, }
 
-    filter_horizontal = ('seriousness_criteria', )
+    filter_horizontal = ('seriousness_criteria',)
 
 
 @admin.register(SpecialInterestAdverseEvent, site=esr21_subject_admin)

@@ -13,7 +13,7 @@ from .modeladmin_mixins import CrfModelAdminMixin
 
 @admin.register(SubjectRequisition, site=esr21_subject_admin)
 class SubjectRequisitionAdmin(CrfModelAdminMixin, RequisitionAdminMixin,
-                               admin.ModelAdmin):
+                              admin.ModelAdmin):
 
     form = SubjectRequisitionForm
     ordering = ('requisition_identifier',)
@@ -30,9 +30,11 @@ class SubjectRequisitionAdmin(CrfModelAdminMixin, RequisitionAdminMixin,
                 'study_site',
                 'panel',
                 'item_type',
+                'item_type_other',
                 'item_count',
                 'estimated_volume',
                 'priority',
+                'urgent_specify',
                 'comments',
             )}),
         requisition_status_fieldset,
