@@ -48,6 +48,15 @@ list_data = {
         ('body_aches', 'Body aches'),
         ('headache', 'Headache'),
         ('shortness_of_breath', 'Shortness of breath'),
+        ('muscle_aches', 'Muscle aches'),
+        ('sore_throat', 'Sore throat'),
+        ('chills', 'Chills'),
+        ('congestion', 'Congestion'),
+        ('runny_nose', 'Runny nose'),
+        ('nausea', 'Nausea'),
+        ('vomiting', 'Vomiting'),
+        ('diarrhoea', 'Diarrhoea'),
+        ('difficulty_breathing', 'Difficulty breathing')
     ],
 
     'esr21_subject.symptoms': [

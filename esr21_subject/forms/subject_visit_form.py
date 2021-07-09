@@ -1,4 +1,5 @@
 from django import forms
+from django.apps import apps as django_apps
 from django.core.exceptions import ValidationError
 from edc_base.sites import SiteModelFormMixin
 from edc_constants.constants import OTHER
@@ -10,6 +11,30 @@ from ..models import SubjectVisit
 
 
 class VisitFormValidator(BaseVisitFormValidator):
+
+    informed_cosent_model = 'esr21_subject.informedconsent'
+
+    def clean(self):
+        report_datetime = self.cleaned_data.get('report_datetime')
+        self.validate_against_consent_datetime(report_datetime=report_datetime)
+        super().clean()
+
+    @property
+    def informed_consent_model_cls(self):
+        return django_apps.get_model(self.informed_cosent_model)
+
+    @property
+    def informed_consent_model_obj(self):
+        subject_identifier = self.cleaned_data.get('appointment').subject_identifier
+        try:
+            consent = self.informed_consent_model_cls.objects.get(
+                subject_identifier=subject_identifier,
+                version='1')
+        except self.informed_consent_model_cls.DoesNotExist:
+            raise ValidationError(
+                'Please complete the Informed Consent form before proceeding.')
+        else:
+            return consent
 
     def validate_reason_and_info_source(self):
 
@@ -25,6 +50,15 @@ class VisitFormValidator(BaseVisitFormValidator):
 
     def validate_presence(self):
         pass
+
+    def validate_against_consent_datetime(self, report_datetime=None):
+        consent = self.informed_consent_model_obj
+
+        if report_datetime and report_datetime < consent.consent_datetime:
+            message = {'report_datetime':
+                       'Visit date and time cannot be before the consent date and time'}
+            self._errors.update(message)
+            raise ValidationError(message)
 
     def validate_required_fields(self):
 

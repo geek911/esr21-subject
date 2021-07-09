@@ -1,6 +1,8 @@
 from django.contrib import admin
 from .modeladmin_mixins import CrfModelAdminMixin
 from edc_model_admin.inlines import StackedInlineMixin
+from edc_model_admin import audit_fieldset_tuple
+
 from ..forms import MedicalHistoryForm, MedicalDiagnosisForm
 from ..models import MedicalHistory, MedicalDiagnosis
 from ..admin_site import esr21_subject_admin
@@ -17,7 +19,7 @@ class MedicalDiagnosisInlineAdmin(StackedInlineMixin, admin.StackedInline):
     fieldsets = (
         (None, {
             'fields': [
-                'medical_history_diagnosis',
+                'medical_history',
                 'start_date',
                 'end_date',
                 'ongoing',
@@ -25,6 +27,11 @@ class MedicalDiagnosisInlineAdmin(StackedInlineMixin, admin.StackedInline):
                 'rel_conc_meds',
                 ]}
          ),)
+
+    radio_fields = {
+        'ongoing': admin.VERTICAL,
+        'condition_related_meds': admin.VERTICAL,
+    }
 
 
 @admin.register(MedicalHistory, site=esr21_subject_admin)
@@ -53,6 +60,7 @@ class MedicalHistoryAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                 'using_shared_kitchen',
             ),
         }),
+        audit_fieldset_tuple
     )
 
     radio_fields = {

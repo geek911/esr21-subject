@@ -6,6 +6,8 @@ from edc_lab.constants import TUBE
 from edc_visit_tracking.constants import SCHEDULED, UNSCHEDULED, LOST_VISIT
 from edc_visit_tracking.constants import MISSED_VISIT, COMPLETED_PROTOCOL_VISIT
 
+from .constants import NATIONAL_ID, NATIONAL_ID_RECEIPT
+
 ACTION_TAKEN = (
     ('dose_not_changed', 'Dose not changed'),
     ('drug_withdrawal', 'Drug withdrawal'),
@@ -128,8 +130,8 @@ INFECTION_STATUS = (
     ('seropositive', 'Seropositive'),)
 
 IDENTITY_TYPE = (
-    ('national_identity_card', 'National Identity Card'),
-    ('national_identity_card_rcpt', 'National Identity Card Receipt'),
+    (NATIONAL_ID, 'National Identity Card'),
+    (NATIONAL_ID_RECEIPT, 'National Identity Card Receipt'),
     ('passport', 'Passport'),
     (OTHER, 'Other'),
 )

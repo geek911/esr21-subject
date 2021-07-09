@@ -20,7 +20,8 @@ class InformedConsentForm(SiteModelFormMixin, FormValidatorMixin,
         widget=forms.TextInput(attrs={'readonly': 'readonly'}),
         required=False)
 
-
+    def clean_guardian_and_dob(self):
+        pass
 
     class Meta:
         model = InformedConsent
