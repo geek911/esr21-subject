@@ -14,7 +14,6 @@ class SubjectRequisitionForm(RequisitionFormMixin,
         widget=forms.TextInput(attrs={'readonly': 'readonly'}))
 
     def clean(self):
-        self.validate_requisition_datetime()
         super().clean()
 
     class Meta:

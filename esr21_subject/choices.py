@@ -257,6 +257,7 @@ STATUS = (
 TEMP_UNITS = (
     ('celcius', 'Celcius (ºC)'),
     ('fahrenheit', 'Fahrenheit (ºF)'),
+    (NOT_APPLICABLE, 'Not Applicable')
 )
 
 TREATMENT_RELATIONSHIP = (
@@ -380,9 +381,4 @@ ALCOHOL_STATUS_CHOICES = (
     ('occasionally_drinks_alcohol', 'Occasionally drinks alcohol'),
     ('currently_drinks_alcohol', 'Currently drinks alcohol'),
 
-)
-
-MODE_OF_TRANSPORT_CHOICE = (
-    ('private', 'Private'),
-    ('public', 'Public')
 )

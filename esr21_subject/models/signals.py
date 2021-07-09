@@ -4,6 +4,7 @@ from django.dispatch import receiver
 from edc_visit_schedule.site_visit_schedules import site_visit_schedules
 
 from .informed_consent import InformedConsent
+from .covid19_symptomatic_infections import Covid19SymptomaticInfections
 
 
 @receiver(post_save, weak=False, sender=InformedConsent,
@@ -14,16 +15,29 @@ def informed_consent_on_post_save(sender, instance, raw, created, **kwargs):
         if created:
             instance.registration_update_or_create()
 
-        put_on_schedule('esr21_enrol_schedule', instance=instance)
+        onschedule_model = 'esr21_subject.onschedule'
+        put_on_schedule('esr21_enrol_schedule', instance=instance,
+                        onschedule_model=onschedule_model)
 
-        put_on_schedule('esr21_fu_schedule', instance=instance)
+        put_on_schedule('esr21_fu_schedule', instance=instance,
+                        onschedule_model=onschedule_model)
 
 
-def put_on_schedule(schedule_name, instance=None):
+@receiver(post_save, weak=False, sender=Covid19SymptomaticInfections,
+          dispatch_uid='informed_consent_on_post_save')
+def covid19_symptomatic_infections_on_post_save(sender, instance, raw, created, **kwargs):
+
+    if not raw and instance.infection_status == 'seropositive':
+
+        onschedule_model = 'esr21_subject.onscheduleill'
+
+        put_on_schedule('esr21_illness_schedule', instance=instance,
+                        onschedule_model=onschedule_model)
+
+
+def put_on_schedule(schedule_name, onschedule_model, instance=None):
 
     if instance:
-
-        onschedule_model = 'esr21_subject.onschedule'
 
         _, schedule = site_visit_schedules.get_by_onschedule_model_schedule_name(
             onschedule_model=onschedule_model, name=schedule_name)

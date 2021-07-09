@@ -1,13 +1,9 @@
 from django.db import models
-
-from edc_constants.choices import YES_NO
-
-from .list_models import Symptoms, Diseases
-from ..choices import SMOKED_STATUS_CHOICES, ALCOHOL_STATUS_CHOICES, \
-    MODE_OF_TRANSPORT_CHOICE
-
-from .model_mixins import CrfModelMixin
 from edc_base.model_validators.date import date_not_future
+from edc_constants.choices import YES_NO
+from .list_models import Symptoms, Diseases
+from .model_mixins import CrfModelMixin
+from ..choices import SMOKED_STATUS_CHOICES, ALCOHOL_STATUS_CHOICES, MODE_TRANSPORT
 
 
 class MedicalHistory(CrfModelMixin):
@@ -17,18 +13,17 @@ class MedicalHistory(CrfModelMixin):
         max_length=10,
         choices=YES_NO,)
 
-    was_subject_infected_before = models.CharField(
+    prior_covid_infection = models.CharField(
         verbose_name='Has the participant had a prior infection of '
                      'SARS-CoV-2/COVID 19?',
         max_length=10,
         choices=YES_NO,)
 
-    # TODO: Needed if {was_subject_infected_before} is 'yes'
-    symptoms = models.ManyToManyField(
+    covid_symptoms = models.ManyToManyField(
         Symptoms,
-        verbose_name='If yes, did the participant experience any symptoms?')
+        verbose_name='If yes, did the participant experience any symptoms?',
+        blank=True)
 
-    # TODO: Needed if {symptoms} is 'other'
     symptoms_other = models.TextField(
         verbose_name='If other specify',
         blank=True,
@@ -54,7 +49,6 @@ class MedicalHistory(CrfModelMixin):
     comorbidities = models.ManyToManyField(Diseases,
                                            verbose_name='Comorbidities')
 
-    # TODO: If {comorbidities} is 'other'
     comorbidities_other = models.CharField(
         verbose_name='Other specify',
         max_length=50,
@@ -64,7 +58,8 @@ class MedicalHistory(CrfModelMixin):
     no_of_mass_gathering = models.PositiveIntegerField(
         default=0,
         verbose_name='How many mass gatherings has the participant attended '
-                     'in the preceding 12 weeks? '
+                     'in the preceding 12 weeks? ',
+        help_text=('eg, weddings, funerals; defined as 50 or more people')
     )
 
     no_internal_trips = models.PositiveIntegerField(
@@ -74,7 +69,7 @@ class MedicalHistory(CrfModelMixin):
     )
 
     mode_of_transport = models.CharField(
-        choices=MODE_OF_TRANSPORT_CHOICE,
+        choices=MODE_TRANSPORT,
         verbose_name='Mode of Transport',
         max_length=30,
     )

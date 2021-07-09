@@ -1,5 +1,4 @@
 from django.db import models
-
 from edc_base.model_validators import date_not_future
 from edc_constants.choices import YES_NO
 from .model_mixins import CrfModelMixin
@@ -9,7 +8,8 @@ from ..choices import UNIT_OPTIONS, FREQUENCY, CONCOMITANT_ROUTE
 class ConcomitantMedication(CrfModelMixin):
 
     administered_date = models.DateField(
-        verbose_name='Date Administered (DD MMM YYYY):', )
+        verbose_name='Date Administered (DD MMM YYYY):',
+        validators=[date_not_future])
 
     medication_name = models.CharField(
         verbose_name='Name of concomitant medication ',
@@ -67,7 +67,7 @@ class ConcomitantMedication(CrfModelMixin):
         null=True)
 
     reason_of_use = models.TextField(
-        verbose_name='Reason for use', )
+        verbose_name='Reason for use',)
 
     ongoing = models.CharField(
         verbose_name='Ongoing',

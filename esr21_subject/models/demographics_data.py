@@ -5,8 +5,7 @@ from edc_constants.choices import YES_NO
 
 from ..maternal_choices import ETHNICITY, HIGHEST_EDUCATION
 from .model_mixins import CrfModelMixin
-from ..choices import EMPLOYMENT_STATUS, SETTLEMENT_TYPE, MARITAL_STATUS, \
-    MODE_TRANSPORT
+from ..choices import EMPLOYMENT_STATUS, SETTLEMENT_TYPE, MARITAL_STATUS
 
 
 class DemographicsData(CrfModelMixin):

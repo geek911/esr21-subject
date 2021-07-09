@@ -1,4 +1,4 @@
-from edc_constants.constants import OTHER
+from edc_constants.constants import OTHER, NOT_APPLICABLE
 
 from edc_list_data import PreloadData
 
@@ -58,7 +58,8 @@ list_data = {
         ('headache', 'Headache'),
         ('muscle_or_joint_pain', 'Muscle or joint pain'),
         ('shortness_of_breath', 'Shortness Of Breath'),
-        ('difficulty_breathing_or_shortness_of_breath', 'Difficulty breathing or shortness of breath'),
+        ('difficulty_breathing_or_shortness_of_breath',
+         'Difficulty breathing or shortness of breath'),
         ('chest_pain_or_pressure', 'Chest pain or pressure'),
         ('loss_of_speech_or_movement', 'Loss of speech or movement'),
         (OTHER, 'Other')
@@ -66,15 +67,17 @@ list_data = {
     'esr21_subject.diseases': [
         ('HIV', 'HIV'),
         ('malignancy', 'malignancy'),
-        ('chronic_disease', 'Chronic Disease'),
-        ('chronic_obstructive_pulmonary_disease_and_other_chronic_lung_diseases',
-         'Chronic obstructive pulmonary disease and other chronic lung diseases'),
+        ('chronic_kidney_disease', 'Chronic Kidney Disease'),
+        ('chronic_obstructive_pulmonary_disease', 'Chronic obstructive pulmonary disease'),
+        ('other_chronic_lung_diseases', 'Other chronic lung diseases'),
         ('hypertension', 'Hypertension'),
+        ('heart_failure', 'Heart failure'),
         ('coronary_artery_disease', 'Coronary artery disease'),
         ('cardiomyopathy', 'Cardiomyopathy'),
         ('pulmonary_hypertension', 'Pulmonary hypertension'),
         ('obesity', 'Obesity'),
-        (OTHER, 'Other')
+        (OTHER, 'Other'),
+        (NOT_APPLICABLE, 'Not Applicable')
     ]
 
 }

@@ -1,6 +1,6 @@
 from django.db import models
 from edc_base.model_fields import OtherCharField
-from edc_base.model_validators.date import date_not_future
+from edc_base.model_validators.date import date_not_future, date_is_future
 from edc_constants.choices import YES_NO
 
 from .model_mixins import CrfModelMixin
@@ -17,13 +17,14 @@ class PregnancyStatus(CrfModelMixin):
 
     expected_delivery = models.DateField(
         verbose_name='Date of Expected Delivery (DD/MMM/YYYY)',
+        validators=[date_is_future, ],
         null=True,
         blank=True)
 
     contraceptive_usage = models.CharField(
         verbose_name='Using Contraception',
         choices=YES_NO,
-        max_length=10, )
+        max_length=3,)
 
     contraceptive = models.CharField(
         verbose_name='If yes, specify contraception',
@@ -32,39 +33,40 @@ class PregnancyStatus(CrfModelMixin):
         blank=True,
         null=True)
 
-    contraceptive_othr = OtherCharField()
+    contraceptive_other = OtherCharField()
 
     """""Pregnancy History"""""
 
-    number_prev_pregnancies = models.IntegerField(
-        verbose_name='Overall Number of Previous Pregnancies',
+    number_prev_pregnancies = models.PositiveIntegerField(
+        verbose_name='Overall number of previous pregnancies',
         null=True,
         blank=True)
 
-    number_normal_pregnancies = models.IntegerField(
-        verbose_name='Number of Normal Deliveries',
+    number_normal_pregnancies = models.PositiveIntegerField(
+        verbose_name='Number of normal deliveries',
         null=True,
         blank=True)
 
-    number_miscarriages = models.IntegerField(
-        verbose_name='Number of Spontaneous Miscarriages',
+    number_miscarriages = models.PositiveIntegerField(
+        verbose_name='Number of spontaneous miscarriages',
         null=True,
         blank=True)
 
     date_miscarriages = models.DateField(
-        verbose_name='Date of Spontaneous Miscarriages',
+        verbose_name='Date of last spontaneous miscarriage',
+        validators=[date_not_future, ],
         null=True,
         blank=True)
 
     risk_factor = models.CharField(
-        verbose_name='Relevant Pregnancy Risk Factor',
+        verbose_name='Relevant pregnancy risk factor',
         max_length=10,
         null=True,
         blank=True)
 
-    maternal_history = models.CharField(
+    maternal_history = models.TextField(
         verbose_name='Maternal medical and obstetric history',
-        max_length=10,
+        max_length=350,
         null=True,
         blank=True)
 

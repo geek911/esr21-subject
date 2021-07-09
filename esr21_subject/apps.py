@@ -106,4 +106,3 @@ if settings.APP_NAME == 'esr21_subject':
         reason_field = {'esr21_subject.subjectvisit': 'reason'}
         create_on_reasons = [SCHEDULED, UNSCHEDULED, COMPLETED_PROTOCOL_VISIT]
         delete_on_reasons = [LOST_VISIT, MISSED_VISIT, FAILED_ELIGIBILITY]
-
