@@ -2,9 +2,9 @@ from django.db import models
 from edc_base.model_fields import OtherCharField
 from edc_base.model_validators.date import date_not_future, date_is_future
 from edc_constants.choices import YES_NO, YES_NO_NA
-
+from .list_models import Contraception
 from .model_mixins import CrfModelMixin
-from ..choices import CONTRACEPTIVES, YES_NO_OTHER
+from ..choices import YES_NO_OTHER
 
 
 class PregnancyStatus(CrfModelMixin):
@@ -26,12 +26,11 @@ class PregnancyStatus(CrfModelMixin):
         choices=YES_NO,
         max_length=3,)
 
-    contraceptive = models.CharField(
+    contraceptive = models.ManyToManyField(
+        Contraception,
         verbose_name='If yes, specify contraception',
-        choices=CONTRACEPTIVES,
         max_length=30,
-        blank=True,
-        null=True)
+        blank=True,)
 
     contraceptive_other = OtherCharField()
 

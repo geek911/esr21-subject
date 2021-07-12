@@ -56,8 +56,9 @@ class PregnancyStatusAdmin(CrfModelAdminMixin, admin.ModelAdmin):
     )
 
     radio_fields = {'contraceptive_usage': admin.VERTICAL,
-                    'contraceptive': admin.VERTICAL,
                     'surgically_sterilized': admin.VERTICAL,
                     'amenorrhea_history': admin.VERTICAL,
                     'post_menopausal_range': admin.VERTICAL,
-                    'post_menopausal': admin.VERTICAL }
+                    'post_menopausal': admin.VERTICAL}
+
+    filter_horizontal = ('contraceptive',)

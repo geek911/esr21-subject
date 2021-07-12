@@ -91,24 +91,6 @@ CONCOMITANT_ROUTE = (
     (OTHER, 'Other'),
 )
 
-CONTRACEPTIVES = (
-    ('condoms', 'Condoms'),
-    ('subdermal_implant', 'Subdermal implant'),
-    ('injection', 'Injection'),
-    ('intrauterine_device', 'Intrauterine Device'),
-    ('diaphragm', 'Diaphragm'),
-    ('contraceptive_pill', 'Contraceptive pill'),
-    ('morning_after_pill', 'Morning after pill'),
-    ('contraceptive_ring', 'Contraceptive ring'),
-    ('contraceptive_implant', 'Contraceptive implant'),
-    ('sterilization', 'Sterilization'),
-    ('contraceptive_patch', 'Contraceptive patch'),
-    ('abstinence', 'Abstinence'),
-    ('tube_ligation', 'Tube ligation'),
-    ('partner_vasectomy', 'Partner vasectomy'),
-    (OTHER, 'Other, specify'),
-)
-
 EMPLOYMENT_STATUS = (
     ('formal-wage_employment_part_time', 'Formal wage employment (Part-time)'),
     ('formal_wage_employment-full_time)',

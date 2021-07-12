@@ -28,11 +28,11 @@ class TestVisitScheduleSetup(TestCase):
 
         self.assertEqual(OnSchedule.objects.filter(
             subject_identifier=informed_consent.subject_identifier,
-            schedule_name='esr21_enrol_schedule').count(), 1)
+            schedule_name='esr21_sub_enrol_schedule').count(), 1)
 
         self.assertEqual(OnSchedule.objects.filter(
             subject_identifier=informed_consent.subject_identifier,
-            schedule_name='esr21_fu_schedule').count(), 1)
+            schedule_name='esr21_sub_fu_schedule').count(), 1)
 
     def test_illness_onschedule(self):
         """Assert that a participant is put onschedule for illness visits if
