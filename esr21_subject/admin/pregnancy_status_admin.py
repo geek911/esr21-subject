@@ -28,8 +28,19 @@ class PregnancyStatusAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                 'expected_delivery',
                 'contraceptive_usage',
                 'contraceptive',
-                'contraceptive_othr',
+                'contraceptive_other',
             )
+        }),
+        ('Childbearing Potential', {
+            'fields': (
+                'surgically_sterilized',
+                'amenorrhea_history',
+                'post_menopausal_range',
+                'post_menopausal',
+                'post_menopausal_other',
+                'comment',
+            )
+
         }),
         ('Pregnancy History', {
             'fields': (
@@ -45,4 +56,8 @@ class PregnancyStatusAdmin(CrfModelAdminMixin, admin.ModelAdmin):
     )
 
     radio_fields = {'contraceptive_usage': admin.VERTICAL,
-                    'contraceptive': admin.VERTICAL, }
+                    'contraceptive': admin.VERTICAL,
+                    'surgically_sterilized': admin.VERTICAL,
+                    'amenorrhea_history': admin.VERTICAL,
+                    'post_menopausal_range': admin.VERTICAL,
+                    'post_menopausal': admin.VERTICAL }
