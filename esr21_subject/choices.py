@@ -1,7 +1,7 @@
 from django.utils.translation import ugettext_lazy as _
 
 from edc_constants.constants import (OTHER, NOT_APPLICABLE, UNKNOWN, POS, NEG,
-                                     IND, MALE, FEMALE)
+                                     IND, MALE, FEMALE, YES, NO)
 from edc_lab.constants import TUBE
 from edc_visit_tracking.constants import SCHEDULED, UNSCHEDULED, LOST_VISIT
 from edc_visit_tracking.constants import MISSED_VISIT, COMPLETED_PROTOCOL_VISIT
@@ -15,10 +15,12 @@ ACTION_TAKEN = (
     (UNKNOWN, UNKNOWN),
 )
 
-LEFT_RIGHT = (
-    ('left_deltoid', 'Left deltoid'),
-    ('right_arm', 'Right deltoid'),
-    (OTHER, 'Other (specify)')
+ALCOHOL_STATUS_CHOICES = (
+    ('never_drunk_alcohol', 'Never drunk alcohol'),
+    ('previously_drunk_alcohol', 'Previously drunk alcohol'),
+    ('occasionally_drinks_alcohol', 'Occasionally drinks alcohol'),
+    ('currently_drinks_alcohol', 'Currently drinks alcohol'),
+
 )
 
 AE_GRADE = (
@@ -54,13 +56,39 @@ AGREE_DISAGREE = (
     ('strongly_agree', 'Strongly agree'),
 )
 
-CONTRACEPTIVES = (
-    ('iud', 'IUD'),
-    ('diaphragm', 'Diaphragm'),
-    ('pill', 'Contraceptive pill'),
-    ('barrier_method', 'Barrier Method'),
-    ('abstention', 'Abstention'),
-    (OTHER, 'Other, specify'),
+CONCOMITANT_ROUTE = (
+    ('auricular_otic', 'Auricular(otic)'),
+    ('buccal', 'Buccal'),
+    ('endotracheal', 'Endotracheal'),
+    ('epidural', 'Epidural'),
+    ('intra-articular', 'Intra-articular'),
+    ('intracardiac', 'Intracardiac'),
+    ('intradermal', 'Intradermal'),
+    ('intralesional', 'Intralesional'),
+    ('intramuscular', 'Intramuscular'),
+    ('intraocular', 'Intraocular'),
+    ('intraperitoneal', 'Intraperitoneal'),
+    ('intrathecal', 'Intrathecal'),
+    ('intratumor', 'Intratumor'),
+    ('intravenous', 'Intravenous'),
+    ('intravenous_bolus', 'Intravenous Bolus'),
+    ('intravenous_drip', 'Intravenous Drip'),
+    ('irrigation', 'Irrigation'),
+    ('microdialysis', 'Microdialysis'),
+    ('nasal', 'Nasal'),
+    ('ophthalmic', 'Ophthalmic'),
+    ('oral', 'Oral'),
+    ('parenteral', 'Parenteral'),
+    ('percutaneous', 'Percutaneous'),
+    ('rectal', 'Rectal'),
+    ('respiratory_inhalation', 'Respiratory Inhalation'),
+    ('subcutaneous', 'Subcutaneous'),
+    ('sublingual', 'Sublingual'),
+    ('topical', 'Topical'),
+    ('transdermal', 'Transdermal'),
+    ('vaginal', 'Vaginal'),
+    (UNKNOWN, 'Unknown'),
+    (OTHER, 'Other'),
 )
 
 EMPLOYMENT_STATUS = (
@@ -148,6 +176,12 @@ LANGUAGE = (
     ('setswana', 'English'),
 )
 
+LEFT_RIGHT = (
+    ('left_deltoid', 'Left deltoid'),
+    ('right_arm', 'Right deltoid'),
+    (OTHER, 'Other (specify)')
+)
+
 MARITAL_STATUS = (
     ('Single', 'Single'),
     ('Married', 'Married'),
@@ -179,6 +213,11 @@ POS_NEG_IND = (
     (NEG, 'Negative'),
     (IND, 'Indeterminate')
 )
+
+PREGNANCY_TEST_TYPE = (
+    ('urine_serum', 'Urine/Serum'),
+    ('hgg', 'HCG'),)
+
 REASON = (
     ('not_collected', 'Not collected'),
     ('not_required', 'Not required at this visit'),
@@ -189,10 +228,6 @@ REASON = (
     ('no_information', 'No further information'),
     (NOT_APPLICABLE, 'Not applicable'),
 )
-
-PREGNANCY_TEST_TYPE = (
-    ('urine_serum', 'Urine/Serum'),
-    ('hgg', 'HCG'),)
 
 REASON_NOT_DRAWN = (
     ('not_collected', 'Not collected'),
@@ -210,44 +245,16 @@ ROUTE = (
     ('oral', 'Oral'),
 )
 
-CONCOMITANT_ROUTE = (
-    ('auricular_otic', 'Auricular(otic)'),
-    ('buccal', 'Buccal'),
-    ('endotracheal', 'Endotracheal'),
-    ('epidural', 'Epidural'),
-    ('intra-articular', 'Intra-articular'),
-    ('intracardiac', 'Intracardiac'),
-    ('intradermal', 'Intradermal'),
-    ('intralesional', 'Intralesional'),
-    ('intramuscular', 'Intramuscular'),
-    ('intraocular', 'Intraocular'),
-    ('intraperitoneal', 'Intraperitoneal'),
-    ('intrathecal', 'Intrathecal'),
-    ('intratumor', 'Intratumor'),
-    ('intravenous', 'Intravenous'),
-    ('intravenous_bolus', 'Intravenous Bolus'),
-    ('intravenous_drip', 'Intravenous Drip'),
-    ('irrigation', 'Irrigation'),
-    ('microdialysis', 'Microdialysis'),
-    ('nasal', 'Nasal'),
-    ('ophthalmic', 'Ophthalmic'),
-    ('oral', 'Oral'),
-    ('parenteral', 'Parenteral'),
-    ('percutaneous', 'Percutaneous'),
-    ('rectal', 'Rectal'),
-    ('respiratory_inhalation', 'Respiratory Inhalation'),
-    ('subcutaneous', 'Subcutaneous'),
-    ('sublingual', 'Sublingual'),
-    ('topical', 'Topical'),
-    ('transdermal', 'Transdermal'),
-    ('vaginal', 'Vaginal'),
-    (UNKNOWN, 'Unknown'),
-    (OTHER, 'Other'),
-)
-
 SETTLEMENT_TYPE = (
     ('urban', 'Urban'),
     ('rural', 'Rural'),
+)
+
+SMOKED_STATUS_CHOICES = (
+    ('never_smoked', 'Never Smoked'),
+    ('previous_smoker', 'Previous Smoker'),
+    ('occasional_smoker', 'Occasional Smoker'),
+    ('current_smoking', 'Current Smoker'),
 )
 
 STATUS = (
@@ -259,6 +266,7 @@ STATUS = (
 TEMP_UNITS = (
     ('celcius', 'Celcius (ºC)'),
     ('fahrenheit', 'Fahrenheit (ºF)'),
+    (NOT_APPLICABLE, 'Not Applicable')
 )
 
 TREATMENT_RELATIONSHIP = (
@@ -369,22 +377,7 @@ VISIT_REASON = (
 #     (OTHER, 'Other'),
 # )
 
-SMOKED_STATUS_CHOICES = (
-    ('never_smoked', 'Never Smoked'),
-    ('previous_smoker', 'Previous Smoker'),
-    ('occasional_smoker', 'Occasional Smoker'),
-    ('current_smoking', 'Current Smoker'),
-)
-
-ALCOHOL_STATUS_CHOICES = (
-    ('never_drunk_alcohol', 'Never drunk alcohol'),
-    ('previously_drunk_alcohol', 'Previously drunk alcohol'),
-    ('occasionally_drinks_alcohol', 'Occasionally drinks alcohol'),
-    ('currently_drinks_alcohol', 'Currently drinks alcohol'),
-
-)
-
-MODE_OF_TRANSPORT_CHOICE = (
-    ('private', 'Private'),
-    ('public', 'Public')
-)
+YES_NO_OTHER = (
+    (YES, YES),
+    (NO, NO),
+    (OTHER, 'Other'))

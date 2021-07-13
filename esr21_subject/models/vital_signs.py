@@ -1,12 +1,10 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
-
+from edc_base.model_validators.date import date_not_future
 from edc_constants.choices import YES_NO
 from edc_constants.constants import NOT_APPLICABLE
-
 from .model_mixins import CrfModelMixin
 from ..choices import REASON, TEMP_UNITS
-
 
 
 class VitalSigns(CrfModelMixin):
@@ -24,13 +22,14 @@ class VitalSigns(CrfModelMixin):
 
     assessment_dt = models.DateTimeField(
         verbose_name='Date and Time of Assessment',
+        validators=[date_not_future],
         blank=True,
         null=True)
 
     systolic_bp = models.IntegerField(
         verbose_name='Systolic Blood Pressure',
         help_text='Fixed Unit: mmHg',
-        validators=[MinValueValidator(75), MaxValueValidator(220),],
+        validators=[MinValueValidator(75), MaxValueValidator(220), ],
         blank=True,
         null=True)
 
@@ -57,9 +56,7 @@ class VitalSigns(CrfModelMixin):
     body_temp_unit = models.CharField(
         verbose_name='Unit of temperature',
         choices=TEMP_UNITS,
-        max_length=10,
-        blank=True,
-        null=True)
+        max_length=15,)
 
     oxygen_saturated = models.DecimalField(
         verbose_name='Oxygen Saturation (via Pulse Oximetry)',

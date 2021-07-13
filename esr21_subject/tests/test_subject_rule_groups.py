@@ -47,7 +47,7 @@ class TestRuleGroups(TestCase):
     def test_pregnancy_form_required(self):
         self.assertEqual(
             CrfMetadata.objects.get(
-                model='esr21_subject.pregnancy',
+                model='esr21_subject.pregnancytest',
                 subject_identifier=self.subject_identifier,
                 visit_code='1000',
                 visit_code_sequence='0').entry_status, REQUIRED)
@@ -76,7 +76,7 @@ class TestRuleGroups(TestCase):
 
         self.assertEqual(
             CrfMetadata.objects.get(
-                model='esr21_subject.pregnancy',
+                model='esr21_subject.pregnancytest',
                 subject_identifier=subject_consent.subject_identifier,
                 visit_code='1000',
                 visit_code_sequence='0').entry_status, NOT_REQUIRED)

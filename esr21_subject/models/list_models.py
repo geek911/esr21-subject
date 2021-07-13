@@ -1,8 +1,11 @@
 from edc_base.model_mixins import BaseUuidModel, ListModelMixin
-from django.db import models
 
 
 class COVIDSymptoms(ListModelMixin, BaseUuidModel):
+    pass
+
+
+class Contraception(ListModelMixin, BaseUuidModel):
     pass
 
 

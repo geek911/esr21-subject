@@ -1,4 +1,4 @@
-from edc_constants.constants import OTHER
+from edc_constants.constants import OTHER, NOT_APPLICABLE
 
 from edc_list_data import PreloadData
 
@@ -38,9 +38,26 @@ list_data = {
         ('nausea', 'Nausea'),
         ('hospitalization_outcome', 'Hospitalization Outcome'),
     ],
+    'esr21_subject.contraception': [
+        ('condoms', 'Condoms'),
+        ('subdermal_implant', 'Subdermal implant'),
+        ('injection', 'Injection'),
+        ('intrauterine_device', 'Intrauterine Device'),
+        ('diaphragm', 'Diaphragm'),
+        ('contraceptive_pill', 'Contraceptive pill'),
+        ('morning_after_pill', 'Morning after pill'),
+        ('contraceptive_ring', 'Contraceptive ring'),
+        ('contraceptive_implant', 'Contraceptive implant'),
+        ('sterilization', 'Sterilization'),
+        ('contraceptive_patch', 'Contraceptive patch'),
+        ('abstinence', 'Abstinence'),
+        ('tube_ligation', 'Tube ligation'),
+        ('partner_vasectomy', 'Partner vasectomy'),
+        (OTHER, 'Other, specify'),
+    ],
 
     'esr21_subject.symptomaticinfections': [
-        ('dry_cough', 'Dry Cough'),
+        ('cough', 'Cough'),
         ('fever', 'Fever'),
         ('fatigue', 'Fatigue'),
         ('loss_of_smell', 'Loss of Smell'),
@@ -67,7 +84,8 @@ list_data = {
         ('headache', 'Headache'),
         ('muscle_or_joint_pain', 'Muscle or joint pain'),
         ('shortness_of_breath', 'Shortness Of Breath'),
-        ('difficulty_breathing_or_shortness_of_breath', 'Difficulty breathing or shortness of breath'),
+        ('difficulty_breathing_or_shortness_of_breath',
+         'Difficulty breathing or shortness of breath'),
         ('chest_pain_or_pressure', 'Chest pain or pressure'),
         ('loss_of_speech_or_movement', 'Loss of speech or movement'),
         (OTHER, 'Other')
@@ -75,15 +93,17 @@ list_data = {
     'esr21_subject.diseases': [
         ('HIV', 'HIV'),
         ('malignancy', 'malignancy'),
-        ('chronic_disease', 'Chronic Disease'),
-        ('chronic_obstructive_pulmonary_disease_and_other_chronic_lung_diseases',
-         'Chronic obstructive pulmonary disease and other chronic lung diseases'),
+        ('chronic_kidney_disease', 'Chronic Kidney Disease'),
+        ('chronic_obstructive_pulmonary_disease', 'Chronic obstructive pulmonary disease'),
+        ('other_chronic_lung_diseases', 'Other chronic lung diseases'),
         ('hypertension', 'Hypertension'),
+        ('heart_failure', 'Heart failure'),
         ('coronary_artery_disease', 'Coronary artery disease'),
         ('cardiomyopathy', 'Cardiomyopathy'),
         ('pulmonary_hypertension', 'Pulmonary hypertension'),
         ('obesity', 'Obesity'),
-        (OTHER, 'Other')
+        (OTHER, 'Other'),
+        (NOT_APPLICABLE, 'Not Applicable')
     ]
 
 }

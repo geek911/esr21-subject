@@ -46,8 +46,8 @@ class MedicalHistoryAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                 'subject_visit',
                 'report_datetime',
                 'relevant_history',
-                'was_subject_infected_before',
-                'symptoms',
+                'prior_covid_infection',
+                'covid_symptoms',
                 'symptoms_other',
                 'smoking_status',
                 'alcohol_status',
@@ -65,7 +65,7 @@ class MedicalHistoryAdmin(CrfModelAdminMixin, admin.ModelAdmin):
 
     radio_fields = {
         'relevant_history': admin.VERTICAL,
-        'was_subject_infected_before': admin.VERTICAL,
+        'prior_covid_infection': admin.VERTICAL,
         'smoking_status': admin.VERTICAL,
         'alcohol_status': admin.VERTICAL,
         'diabetes': admin.VERTICAL,
@@ -73,4 +73,4 @@ class MedicalHistoryAdmin(CrfModelAdminMixin, admin.ModelAdmin):
         'using_shared_kitchen': admin.VERTICAL,
     }
 
-    filter_horizontal = ('symptoms', 'comorbidities')
+    filter_horizontal = ('covid_symptoms', 'comorbidities')

@@ -24,7 +24,7 @@ class AppConfig(DjangoAppConfig):
         'esr21_subject.medicalhistory': 1.2,
         'esr21_subject.personalcontactinfo': 1.2,
         'esr21_subject.physicalexam': 1.2,
-        'esr21_subject.pregnancystatus': 1.2,
+        'esr21_subject.pregnancystatus': 1.3,
         'esr21_subject.pregnancytest': 1.2,
         'esr21_subject.rapidhivtesting': 1.1,
         'esr21_subject.samplecollection': 1.1,
@@ -106,4 +106,3 @@ if settings.APP_NAME == 'esr21_subject':
         reason_field = {'esr21_subject.subjectvisit': 'reason'}
         create_on_reasons = [SCHEDULED, UNSCHEDULED, COMPLETED_PROTOCOL_VISIT]
         delete_on_reasons = [LOST_VISIT, MISSED_VISIT, FAILED_ELIGIBILITY]
-

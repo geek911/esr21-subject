@@ -1,9 +1,12 @@
 from django.apps import apps as django_apps
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from edc_constants.constants import YES
 from edc_visit_schedule.site_visit_schedules import site_visit_schedules
 
+from .covid19_symptomatic_infections import Covid19SymptomaticInfections
 from .informed_consent import InformedConsent
+from .onschedule import OnSchedule
 
 
 @receiver(post_save, weak=False, sender=InformedConsent,
@@ -14,16 +17,34 @@ def informed_consent_on_post_save(sender, instance, raw, created, **kwargs):
         if created:
             instance.registration_update_or_create()
 
-        put_on_schedule('esr21_enrol_schedule', instance=instance)
+        if is_subcohort_full():
+            cohort = 'esr21'
+        else:
+            cohort = 'esr21_sub'
 
-        put_on_schedule('esr21_fu_schedule', instance=instance)
+            onschedule_model = 'esr21_subject.onschedule'
+            put_on_schedule(f'{cohort}_enrol_schedule', instance=instance,
+                            onschedule_model=onschedule_model)
+
+            put_on_schedule(f'{cohort}_fu_schedule', instance=instance,
+                            onschedule_model=onschedule_model)
 
 
-def put_on_schedule(schedule_name, instance=None):
+@receiver(post_save, weak=False, sender=Covid19SymptomaticInfections,
+          dispatch_uid='informed_consent_on_post_save')
+def covid19_symptomatic_infections_on_post_save(sender, instance, raw, created, **kwargs):
+
+    if not raw and instance.symptomatic_infections == YES:
+
+        onschedule_model = 'esr21_subject.onscheduleill'
+
+        put_on_schedule('esr21_illness_schedule', instance=instance,
+                        onschedule_model=onschedule_model)
+
+
+def put_on_schedule(schedule_name, onschedule_model, instance=None):
 
     if instance:
-
-        onschedule_model = 'esr21_subject.onschedule'
 
         _, schedule = site_visit_schedules.get_by_onschedule_model_schedule_name(
             onschedule_model=onschedule_model, name=schedule_name)
@@ -43,3 +64,10 @@ def put_on_schedule(schedule_name, instance=None):
             schedule.refresh_schedule(
                 subject_identifier=instance.subject_identifier,
                 schedule_name=schedule_name)
+
+
+def is_subcohort_full():
+        onschedule_subcohort = OnSchedule.objects.filter(
+            schedule_name='esr21_sub_enrol_schedule')
+
+        return onschedule_subcohort.count() == 3000
