@@ -43,7 +43,7 @@ class PregnancyStatus(CrfModelMixin):
 
     amenorrhea_history = models.CharField(
         verbose_name=('Does the participant have a history of >= 12 months amenorrhea prior'
-                      ' to randomization, without an aletrnative cause, following cessation'
+                      ' to randomization, without an alternative cause, following cessation'
                       ' of exogenous sex-hormonal treatment?'),
         choices=YES_NO,
         max_length=3,

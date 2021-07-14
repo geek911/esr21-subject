@@ -1,6 +1,7 @@
 from django.test import TestCase, tag
 from edc_appointment.models import Appointment
 from edc_base.utils import get_utcnow
+from edc_constants.constants import YES
 from edc_facility.import_holidays import import_holidays
 from edc_visit_tracking.constants import SCHEDULED
 from model_mommy import mommy
@@ -54,7 +55,7 @@ class TestVisitScheduleSetup(TestCase):
 
         mommy.make_recipe(
             'esr21_subject.covid19_symptomatic_infections',
-            infection_status='seropositive',)
+            symptomatic_infections=YES,)
 
         self.assertEqual(OnSchedule.objects.filter(
             subject_identifier=informed_consent.subject_identifier,
