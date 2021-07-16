@@ -381,3 +381,8 @@ YES_NO_OTHER = (
     (YES, YES),
     (NO, NO),
     (OTHER, 'Other'))
+
+VACCINATION_DOSE = (
+    ("first_dose", "First Dose"),
+    ("second_dose", "Second Dose"),
+)

@@ -6,23 +6,42 @@ from edc_base.model_validators import datetime_not_future, date_is_future
 from edc_constants.choices import YES_NO
 
 from .model_mixins import CrfModelMixin
-from ..choices import ROUTE, VACCINATION_LOCATION
+from ..choices import ROUTE, VACCINATION_LOCATION, VACCINATION_DOSE
 
 
 class VaccinationDetails(CrfModelMixin):
-
-    vaccination_place = models.CharField(
-        verbose_name='Where was the vaccination administered?',
-        max_length=35,
-        blank=True,
-        null=True, )
+    # vaccination_place = models.CharField(
+    #     verbose_name='Where was the vaccination administered?',
+    #     max_length=35,
+    #     blank=True,
+    #     null=True, )
 
     vaccination_dt = models.DateTimeField(
-        verbose_name='Date and time the vaccination was administered',
+        verbose_name='Report Date and Time',
         validators=[datetime_not_future, ])
 
+    received_dose = models.CharField(
+        verbose_name='Has the participant received a vaccination dose?',
+        max_length=3,
+        choices=YES_NO)
+
+    is_received_dose = models.CharField(
+        verbose_name='If yes, please indicate dose',
+        max_length=3,
+        choices=VACCINATION_DOSE)
+
+    vaccination_site = models.CharField(
+        verbose_name='Where was the vaccination administered?',
+        max_length=30,
+        help_text="Geographical location")
+
+    vaccination_date = models.DateField(
+        verbose_name='Date and time the vaccination was administered?',
+        blank=True,
+        null=True)
+
     location = models.CharField(
-        verbose_name='Location',
+        verbose_name='Location administered',
         max_length=30,
         choices=VACCINATION_LOCATION)
 
@@ -38,6 +57,12 @@ class VaccinationDetails(CrfModelMixin):
         max_length=100,
         blank=True,
         null=True)
+
+    lot_number = models.CharField(
+        verbose_name='Vaccine batch/lot number',
+        max_length=20,
+        blank=True,
+        null=True,)
 
     expiry_date = models.DateField(
         verbose_name='Vaccination expiry date',
