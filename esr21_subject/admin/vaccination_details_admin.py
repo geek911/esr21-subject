@@ -10,7 +10,6 @@ from ..admin_site import esr21_subject_admin
 
 @admin.register(VaccinationDetails, site=esr21_subject_admin)
 class VaccinationDetailsAdmin(CrfModelAdminMixin, admin.ModelAdmin):
-
     form = VaccinationDetailsForm
 
     fieldsets = (
@@ -34,5 +33,6 @@ class VaccinationDetailsAdmin(CrfModelAdminMixin, admin.ModelAdmin):
         }),
         audit_fieldset_tuple)
 
-    radio_fields = {'location': admin.VERTICAL,
+    radio_fields = {'received_dose_before': admin.VERTICAL,
+                    'location': admin.VERTICAL,
                     'admin_per_protocol': admin.VERTICAL}
