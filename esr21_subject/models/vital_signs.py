@@ -1,6 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
-from edc_base.model_validators.date import date_not_future
+from edc_base.model_validators.date import datetime_not_future
 from edc_constants.choices import YES_NO
 from edc_constants.constants import NOT_APPLICABLE
 from .model_mixins import CrfModelMixin
@@ -22,7 +22,7 @@ class VitalSigns(CrfModelMixin):
 
     assessment_dt = models.DateTimeField(
         verbose_name='Date and Time of Assessment',
-        validators=[date_not_future],
+        validators=[datetime_not_future],
         blank=True,
         null=True)
 

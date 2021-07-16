@@ -1,7 +1,7 @@
 from django.db import models
 
 from edc_base.model_validators import datetime_not_future
-from edc_constants.choices import YES_NO, YES_NO_NA
+from edc_constants.choices import YES_NO, YES_NO_NA, NOT_APPLICABLE
 
 from .model_mixins import CrfModelMixin
 from ..choices import REASON_NOT_DRAWN
@@ -36,6 +36,7 @@ class TargetedPhysicalExamination(CrfModelMixin):
     abnormalities = models.CharField(
         verbose_name='Were any abnormalities found?',
         max_length=30,
+        default=NOT_APPLICABLE,
         choices=YES_NO_NA)
 
     if_abnormalities = models.CharField(
