@@ -16,7 +16,7 @@ class VaccinationDetailsAdmin(CrfModelAdminMixin, admin.ModelAdmin):
         (None, {
             'fields': (
                 'subject_visit',
-                'vaccination_dt',
+                'report_datetime',
                 'received_dose',
                 'received_dose_before',
                 'vaccination_site',

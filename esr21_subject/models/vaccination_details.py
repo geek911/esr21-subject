@@ -6,76 +6,71 @@ from edc_base.model_validators import datetime_not_future, date_is_future
 from edc_constants.choices import YES_NO
 
 from .model_mixins import CrfModelMixin
-from ..choices import ROUTE, VACCINATION_LOCATION, VACCINATION_DOSE
+from ..choices import VACCINATION_LOCATION, VACCINATION_DOSE
 
 
 class VaccinationDetails(CrfModelMixin):
-    # vaccination_place = models.CharField(
-    #     verbose_name='Where was the vaccination administered?',
-    #     max_length=35,
-    #     blank=True,
-    #     null=True, )
 
-    vaccination_dt = models.DateTimeField(
+    report_datetime = models.DateTimeField(
         verbose_name='Report Date and Time',
         validators=[datetime_not_future, ])
 
     received_dose = models.CharField(
         verbose_name='Has the participant received a vaccination dose?',
         max_length=3,
-        choices=YES_NO)  # Q3
+        choices=YES_NO)
 
     received_dose_before = models.CharField(
         verbose_name='If yes, please indicate dose',
-        max_length=3,
-        choices=VACCINATION_DOSE)  # Q4
+        max_length=12,
+        choices=VACCINATION_DOSE)
 
     vaccination_site = models.CharField(
         verbose_name='Where was the vaccination administered?',
         max_length=30,
-        help_text="Geographical location")  # Q5
+        help_text="Geographical location")
 
     vaccination_date = models.DateField(
         verbose_name='Date and time the vaccination was administered?',
         blank=True,
-        null=True)  # Q6
+        null=True)
 
     location = models.CharField(
         verbose_name='Location administered',
         max_length=30,
-        choices=VACCINATION_LOCATION)  # Q7
+        choices=VACCINATION_LOCATION)
 
-    location_other = OtherCharField()  # Q8
+    location_other = OtherCharField()
 
     admin_per_protocol = models.CharField(
         verbose_name='Was the vaccine administered per protocol?',
         max_length=3,
-        choices=YES_NO)  # Q9
+        choices=YES_NO)
 
     reason_not_per_protocol = models.CharField(
         verbose_name='If No, please explain:',
         max_length=100,
         blank=True,
-        null=True)  # Q10
+        null=True)
 
     lot_number = models.CharField(
         verbose_name='Vaccine batch/lot number',
         max_length=20,
         blank=True,
-        null=True, )  # Q11
+        null=True,)
 
     expiry_date = models.DateField(
         verbose_name='Vaccination expiry date',
-        validators=[date_is_future, ])  # Q12
+        validators=[date_is_future, ])
 
     provider_name = EncryptedCharField(
         verbose_name='Name of the provider',
-        max_length=35, )  # Q13
+        max_length=35,)
 
     next_vaccination_date = models.DateField(
         verbose_name=('When is the participant scheduled for their next '
                       'vaccination dose?'),
-        validators=[date_is_future, ])  # Q14
+        validators=[date_is_future, ])
 
     class Meta(CrfModelMixin.Meta):
         app_label = 'esr21_subject'

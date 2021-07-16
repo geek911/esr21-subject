@@ -35,10 +35,21 @@ def informed_consent_on_post_save(sender, instance, raw, created, **kwargs):
 def covid19_symptomatic_infections_on_post_save(sender, instance, raw, created, **kwargs):
 
     if not raw and instance.symptomatic_infections == YES:
-
         onschedule_model = 'esr21_subject.onscheduleill'
+        offschedule_model = 'esr21_subject.offschedule'
 
-        put_on_schedule('esr21_illness_schedule', instance=instance,
+        illness_count = None
+
+        latest_onschedule = onschedule_model.objects.all().latest('onschedule_datetime')
+        if latest_onschedule:
+            try:
+                offschedule_model.objects.get(schedule_name=latest_onschedule.schedule_name)
+            except offschedule_model.DoesNotExist:
+                pass
+            else:
+                illness_count = 1 + onschedule_model.objects.all().count()
+
+        put_on_schedule(f'esr21_illness{illness_count}_schedule', instance=instance,
                         onschedule_model=onschedule_model)
 
 
