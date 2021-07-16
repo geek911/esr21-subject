@@ -25,7 +25,7 @@ class VaccinationDetails(CrfModelMixin):
         max_length=3,
         choices=YES_NO)  # Q3
 
-    is_received_dose = models.CharField(
+    received_dose_before = models.CharField(
         verbose_name='If yes, please indicate dose',
         max_length=3,
         choices=VACCINATION_DOSE)  # Q4
