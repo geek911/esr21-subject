@@ -29,7 +29,7 @@ class VaccinationDetailsAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                 'lot_number',
                 'expiry_date',
                 'provider_name',
-                'next_vaccination',
+                'next_vaccination_date',
             ),
         }),
         audit_fieldset_tuple)
