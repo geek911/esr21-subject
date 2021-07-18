@@ -349,6 +349,7 @@ VACCINATION_LOCATION = (
     ('left_deltoid', 'Left deltoid'),
     ('right_deltoid', 'Right deltoid'),
     (OTHER, 'Other, specify'),
+    (NOT_APPLICABLE, 'Not applicable'),
 )
 
 VISIT_INFO_SOURCE = (
@@ -385,4 +386,5 @@ YES_NO_OTHER = (
 VACCINATION_DOSE = (
     ("first_dose", "First Dose"),
     ("second_dose", "Second Dose"),
+    (NOT_APPLICABLE, 'Not applicable')
 )

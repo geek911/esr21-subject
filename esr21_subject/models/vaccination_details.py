@@ -3,10 +3,11 @@ from django_crypto_fields.fields import EncryptedCharField
 
 from edc_base.model_fields import OtherCharField
 from edc_base.model_validators import datetime_not_future, date_is_future
-from edc_constants.choices import YES_NO
+from edc_constants.choices import YES_NO, YES_NO_NA
 
 from .model_mixins import CrfModelMixin
 from ..choices import VACCINATION_LOCATION, VACCINATION_DOSE
+from edc_constants.constants import NOT_APPLICABLE
 
 
 class VaccinationDetails(CrfModelMixin):
@@ -23,11 +24,14 @@ class VaccinationDetails(CrfModelMixin):
     received_dose_before = models.CharField(
         verbose_name='If yes, please indicate dose',
         max_length=12,
-        choices=VACCINATION_DOSE)
+        choices=VACCINATION_DOSE,
+        default=NOT_APPLICABLE)
 
     vaccination_site = models.CharField(
         verbose_name='Where was the vaccination administered?',
         max_length=30,
+        blank=True,
+        null=True,
         help_text="Geographical location")
 
     vaccination_date = models.DateField(
@@ -38,6 +42,7 @@ class VaccinationDetails(CrfModelMixin):
     location = models.CharField(
         verbose_name='Location administered',
         max_length=30,
+        default=NOT_APPLICABLE,
         choices=VACCINATION_LOCATION)
 
     location_other = OtherCharField()
@@ -45,7 +50,8 @@ class VaccinationDetails(CrfModelMixin):
     admin_per_protocol = models.CharField(
         verbose_name='Was the vaccine administered per protocol?',
         max_length=3,
-        choices=YES_NO)
+        choices=YES_NO_NA,
+        default=NOT_APPLICABLE)
 
     reason_not_per_protocol = models.CharField(
         verbose_name='If No, please explain:',
@@ -61,16 +67,22 @@ class VaccinationDetails(CrfModelMixin):
 
     expiry_date = models.DateField(
         verbose_name='Vaccination expiry date',
-        validators=[date_is_future, ])
+        validators=[date_is_future, ],
+        blank=True,
+        null=True)
 
     provider_name = EncryptedCharField(
         verbose_name='Name of the provider',
-        max_length=35,)
+        max_length=35,
+        blank=True,
+        null=True)
 
     next_vaccination_date = models.DateField(
         verbose_name=('When is the participant scheduled for their next '
                       'vaccination dose?'),
-        validators=[date_is_future, ])
+        validators=[date_is_future, ],
+        blank=True,
+        null=True)
 
     class Meta(CrfModelMixin.Meta):
         app_label = 'esr21_subject'

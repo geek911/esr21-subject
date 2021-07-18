@@ -33,6 +33,7 @@ class VaccinationDetailsAdmin(CrfModelAdminMixin, admin.ModelAdmin):
         }),
         audit_fieldset_tuple)
 
-    radio_fields = {'received_dose_before': admin.VERTICAL,
+    radio_fields = {'received_dose': admin.VERTICAL,
+                    'received_dose_before': admin.VERTICAL,
                     'location': admin.VERTICAL,
                     'admin_per_protocol': admin.VERTICAL}
