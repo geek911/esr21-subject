@@ -30,12 +30,15 @@ class PhysicalExam(CrfModelMixin):
     abnormalities_found = models.CharField(
         verbose_name='Were any abnormalities discovered?',
         max_length=10,
-        choices=YES_NO)
+        choices=YES_NO,
+        help_text='Each clinically significant abnormal finding at screening '
+                  'will be recorded in the medical history')
 
     abn_specify = OtherCharField(verbose_name='If yes, specify')
 
     clinically_significant = models.CharField(
-        verbose_name='If yes, were any abnormalities considered to be clinically significant?',
+        verbose_name='If yes, were any abnormalities considered to be '
+                     'clinically significant?',
         max_length=10,
         choices=YES_NO,
         blank=True,

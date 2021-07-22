@@ -1,15 +1,15 @@
 from django.contrib import admin
 
 from .modeladmin_mixins import CrfModelAdminMixin
-from ..forms import HospitalizationForm
-from ..models import Hospitalization
+from ..forms import HospitalisationForm
+from ..models import Hospitalisation
 from ..admin_site import esr21_subject_admin
 
 
-@admin.register(Hospitalization, site=esr21_subject_admin)
-class HospitalizationAdmin(CrfModelAdminMixin, admin.ModelAdmin):
-    model = Hospitalization
-    form = HospitalizationForm
+@admin.register(Hospitalisation, site=esr21_subject_admin)
+class HospitalisationAdmin(CrfModelAdminMixin, admin.ModelAdmin):
+    model = Hospitalisation
+    form = HospitalisationForm
 
     fieldsets = (
         (None, {
@@ -23,13 +23,13 @@ class HospitalizationAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                 'reason',
                 'reason_other',
                 'covid_symptoms',
-                'hospitalization_outcome',
+                'hospitalisation_outcome',
             ]}
          ),)
 
     radio_fields = {'status': admin.VERTICAL,
                     'ongoing': admin.VERTICAL,
                     'reason': admin.VERTICAL,
-                    'hospitalization_outcome': admin.VERTICAL, }
+                    'hospitalisation_outcome': admin.VERTICAL, }
 
     filter_horizontal = ('covid_symptoms',)

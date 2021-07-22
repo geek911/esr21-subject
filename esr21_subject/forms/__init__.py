@@ -14,7 +14,7 @@ from .personal_contact_info_form import PersonalContactInfoForm
 from .medical_history_form import MedicalHistoryForm, MedicalDiagnosisForm
 from .physical_exam_form import PhysicalExamForm
 from .pregnancy_test_form import PregnancyTestForm
-from .hospitalization_form import HospitalizationForm
+from .hospitalisation_form import HospitalisationForm
 from .covid19_symptomatic_infections_form import Covid19SymptomaticInfectionsForm
 from .sample_collection_form import SampleCollectionForm
 from .subject_requisition_form import SubjectRequisitionForm
