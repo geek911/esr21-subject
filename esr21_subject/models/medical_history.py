@@ -78,7 +78,7 @@ class MedicalHistory(CrfModelMixin):
 
     using_shared_kitchen = models.CharField(
         choices=YES_NO,
-        verbose_name='Is the participant using a shared kitchen/dinning at '
+        verbose_name='Is the participant using a shared kitchen/dining at '
                      'work?',
         max_length=3
     )
