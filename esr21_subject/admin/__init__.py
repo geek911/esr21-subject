@@ -15,7 +15,7 @@ from .medical_history_admin import MedicalHistoryAdmin
 from .personal_contact_info_admin import PersonalContactInfoAdmin
 from .physical_exam_admin import PhysicalExamAdmin
 from .pregnancy_test_admin import PregnancyTestAdmin
-from .hospitalization_admin import HospitalizationAdmin
+from .hospitalisation_admin import HospitalisationAdmin
 from .covid19_symptomatic_infections_admin import Covid19SymptomaticInfectionsAdmin
 from .subject_requisition_admin import SubjectRequisitionAdmin
 from .vital_signs_admin import VitalSignsAdmin

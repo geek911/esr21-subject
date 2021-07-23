@@ -27,8 +27,8 @@ class DemographicsData(CrfModelMixin):
         null=True,)
 
     household_members = models.IntegerField(
-        verbose_name='How many household members live in the participants '
-                     'primary home / compound',)
+        verbose_name='How many household members live in the '
+                     'participants primary home',)
 
     highest_education = models.CharField(
         verbose_name='Highest education level',

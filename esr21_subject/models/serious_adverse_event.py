@@ -90,11 +90,6 @@ class SeriousAdverseEvent(SiteModelMixin, BaseUuidModel):
         choices=YES_NO,
         max_length=3)
 
-    event_reappear = models.CharField(
-        verbose_name='Did the event abate after drug discontinuation?',
-        choices=YES_NO,
-        max_length=3)
-
     describe_sae_treatmnt = models.TextField(
         verbose_name='Describe treatment for event including medications',
         max_length=200)

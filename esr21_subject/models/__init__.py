@@ -4,7 +4,7 @@ from .covid19_preventative_behaviours import Covid19PreventativeBehaviours
 from .covid19_symptomatic_infections import Covid19SymptomaticInfections
 from .demographics_data import DemographicsData
 from .eligibility_confirmation import EligibilityConfirmation
-from .hospitalization import Hospitalization
+from .hospitalisation import Hospitalisation
 from .informed_consent import InformedConsent
 from .medical_history import MedicalDiagnosis
 from .medical_history import MedicalHistory

@@ -2,24 +2,24 @@ from django.db import models
 from edc_base.model_fields import OtherCharField
 from edc_constants.choices import YES_NO
 
-from ..choices import (HOSPITALIZATION_STATUS,
-                       HOSPITALIZATION_REASON, HOSPITALIZATION_OUTCOME)
+from ..choices import (HOSPITALISATION_STATUS,
+                       HOSPITALISATION_REASON, HOSPITALISATION_OUTCOME)
 from .model_mixins import CrfModelMixin
 from .list_models import COVIDSymptoms
 
 
-class Hospitalization(CrfModelMixin):
+class Hospitalisation(CrfModelMixin):
 
     status = models.CharField(
-        verbose_name='Hospitalization Status',
+        verbose_name='Hospitalisation Status',
         max_length=50,
-        choices=HOSPITALIZATION_STATUS)
+        choices=HOSPITALISATION_STATUS)
 
     start_date = models.DateField(
-        verbose_name='Start date of hospitalization')
+        verbose_name='Start date of hospitalisation')
 
     stop_date = models.DateField(
-        verbose_name='Stop date of hospitalization',
+        verbose_name='Stop date of hospitalisation',
         null=True,
         blank=True)
 
@@ -30,7 +30,7 @@ class Hospitalization(CrfModelMixin):
     reason = models.CharField(
         verbose_name='Primary reason for hospital/ inpatient/ ER visit',
         max_length=50,
-        choices=HOSPITALIZATION_REASON,)
+        choices=HOSPITALISATION_REASON,)
 
     reason_other = OtherCharField(
         verbose_name='If Other, specify',
@@ -45,13 +45,13 @@ class Hospitalization(CrfModelMixin):
                       'apply'),
         blank=True)
 
-    hospitalization_outcome = models.CharField(
-        verbose_name='Hospitalization Outcome',
+    hospitalisation_outcome = models.CharField(
+        verbose_name='Hospitalisation Outcome',
         max_length=90,
-        choices=HOSPITALIZATION_OUTCOME,
+        choices=HOSPITALISATION_OUTCOME,
     )
 
     class Meta(CrfModelMixin.Meta):
         app_label = 'esr21_subject'
-        verbose_name = 'Hospitalization'
-        verbose_name_plural = 'Hospitalization'
+        verbose_name = 'Hospitalisation'
+        verbose_name_plural = 'Hospitalisation'

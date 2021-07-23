@@ -54,18 +54,18 @@ class AdverseEvent(CrfModelMixin):
         blank=True,
         null=True)
 
+    stop_date = models.DateField(
+        verbose_name='Adverse Event stop date',
+        validators=[date_not_future, ],
+        null=True,
+        blank=True)
+
     status = models.CharField(
         verbose_name='Status of the Adverse Event',
         max_length=10,
         choices=STATUS,
         blank=True,
         null=True)
-
-    stop_date = models.DateField(
-        verbose_name='Adverse Event stop date',
-        validators=[date_not_future, ],
-        null=True,
-        blank=True)
 
     ae_grade = models.CharField(
         verbose_name='FDA Severity Grading',

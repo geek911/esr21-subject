@@ -6,7 +6,7 @@ list_data = {
     'esr21_subject.saecriteria': [
         ('death', 'Death'),
         ('life_threatening', 'Life-threatening'),
-        ('hospitalization', 'Initial or prolonged hospitalization'),
+        ('hospitalisation', 'Initial or prolonged hospitalisation'),
         ('incapacity', 'Persistent or significant disability/incapacity'),
         ('birth_defects', 'Congenital anomaly/birth defect'),
         (OTHER, 'Other important medical event'),
@@ -36,7 +36,7 @@ list_data = {
         ('congestion', 'Congestion'),
         ('runny_nose', 'Runny Nose'),
         ('nausea', 'Nausea'),
-        ('hospitalization_outcome', 'Hospitalization Outcome'),
+        ('hospitalisation_outcome', 'Hospitalisation Outcome'),
     ],
     'esr21_subject.contraception': [
         ('condoms', 'Condoms'),
@@ -60,8 +60,8 @@ list_data = {
         ('cough', 'Cough'),
         ('fever', 'Fever'),
         ('fatigue', 'Fatigue'),
-        ('loss_of_smell', 'Loss of Smell'),
-        ('loss_of_taste', 'Loss of Taste'),
+        ('loss_of_smell', 'New loss of Smell'),
+        ('loss_of_taste', 'New loss of Taste'),
         ('body_aches', 'Body aches'),
         ('headache', 'Headache'),
         ('shortness_of_breath', 'Shortness of breath'),

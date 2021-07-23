@@ -40,7 +40,6 @@ class SeriousAdverseEventInlineAdmin(StackedInlineMixin, admin.StackedInline):
                 'medical_event_other',
                 'rationale',
                 'event_abate',
-                'event_reappear',
                 'describe_sae_treatmnt',
                 'test_performed',
                 'additional_info',
@@ -48,8 +47,7 @@ class SeriousAdverseEventInlineAdmin(StackedInlineMixin, admin.StackedInline):
          ),)
 
     radio_fields = {'sae_intensity': admin.VERTICAL,
-                    'event_abate': admin.VERTICAL,
-                    'event_reappear': admin.VERTICAL, }
+                    'event_abate': admin.VERTICAL, }
 
     filter_horizontal = ('seriousness_criteria',)
 
@@ -110,8 +108,8 @@ class AdverseEventAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                 'meddra_version',
                 'event_details',
                 'start_date',
-                'status',
                 'stop_date',
+                'status',
                 'ae_grade',
                 'study_treatmnt_rel',
                 'nonstudy_treatmnt_rel',
@@ -174,7 +172,6 @@ class SeriousAdverseEventAdmin(admin.ModelAdmin):
                 'medical_event_other',
                 'rationale',
                 'event_abate',
-                'event_reappear',
                 'describe_sae_treatmnt',
                 'test_performed',
                 'additional_info',
@@ -183,8 +180,7 @@ class SeriousAdverseEventAdmin(admin.ModelAdmin):
     )
 
     radio_fields = {'sae_intensity': admin.VERTICAL,
-                    'event_abate': admin.VERTICAL,
-                    'event_reappear': admin.VERTICAL, }
+                    'event_abate': admin.VERTICAL, }
 
     filter_horizontal = ('seriousness_criteria',)
 

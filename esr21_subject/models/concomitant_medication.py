@@ -82,6 +82,17 @@ class ConcomitantMedication(CrfModelMixin):
         verbose_name='Is concomitant medication prohibited?',
         max_length=25,
         choices=YES_NO)
+    reason_prohibited = models.TextField(
+        verbose_name='Prohibited medication, further details, i.e.,'
+                     'Specify, reason',
+        help_text='The use of concomitant medications and/or vaccines,  will '
+                  'not definitively require withdrawal of the participant '
+                  'from the study, but may determine a '
+                  'participant’s eligibility to '
+                  'receive a second dose or evaluability in the per-protocol '
+                  'analysis set - please refer to the Protocol for further'
+                  ' guidance'
+    )
 
     class Meta(CrfModelMixin.Meta):
         app_label = 'esr21_subject'

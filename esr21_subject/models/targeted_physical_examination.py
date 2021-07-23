@@ -37,7 +37,9 @@ class TargetedPhysicalExamination(CrfModelMixin):
         verbose_name='Were any abnormalities found?',
         max_length=30,
         default=NOT_APPLICABLE,
-        choices=YES_NO_NA)
+        choices=YES_NO_NA,
+        help_text='Each clinically significant abnormal finding at screening'
+                  ' will be recorded in the medical history')
 
     if_abnormalities = models.CharField(
         verbose_name='If Yes, were any abnormalities clinically significant? ',

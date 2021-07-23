@@ -25,7 +25,7 @@ class SpecialInterestAdverseEvent(SiteModelMixin, BaseUuidModel):
         max_length=100)
 
     meddra_pcode = models.CharField(
-        verbose_name='MedDRA Preferred Code OF the AESI',
+        verbose_name='MedDRA Preferred Code of the AESI',
         max_length=50)
 
     meddra_version = models.IntegerField(
@@ -52,7 +52,7 @@ class SpecialInterestAdverseEvent(SiteModelMixin, BaseUuidModel):
 
     rationale = models.CharField(
         verbose_name=('Investigator\'s rationale for Study Treatment being '
-                      'Related to the events'),
+                      'related to the events'),
         max_length=100)
 
     describe_aesi_treatmnt = models.TextField(

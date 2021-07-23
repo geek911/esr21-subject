@@ -31,7 +31,8 @@ class ConcomitantMedicationAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                 'reason_of_use',
                 'ongoing',
                 'stop_date',
-                'prohibited',)}),
+                'prohibited',
+                'reason_prohibited')}),
         audit_fieldset_tuple)
 
     radio_fields = {'ongoing': admin.VERTICAL,

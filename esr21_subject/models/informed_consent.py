@@ -112,6 +112,7 @@ class InformedConsent(ConsentModelMixin, SiteModelMixin,
     class Meta(ConsentModelMixin.Meta):
         app_label = 'esr21_subject'
         verbose_name = 'Informed Consent'
+        verbose_name_plural = 'Informed Consent'
         unique_together = (
             ('subject_identifier', 'version'),
             ('subject_identifier', 'screening_identifier', 'version'),

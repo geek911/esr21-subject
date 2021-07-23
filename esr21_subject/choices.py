@@ -95,9 +95,9 @@ EMPLOYMENT_STATUS = (
     ('formal-wage_employment_part_time', 'Formal wage employment (Part-time)'),
     ('formal_wage_employment-full_time)',
         'Formal wage employment (full-time)'),
-    ('self_employed_full_time)', 'Self employed (full time)'),
-    ('self_employed_part_time)', 'Self employed (part time)'),
-    ('adhoc_work', 'Adhoc work'),
+    ('self_employed_full_time)', 'Self-employed (full time)'),
+    ('self_employed_part_time)', 'Self-employed (part time)'),
+    ('adhoc_work', 'Ad-hoc work'),
     ('Seasonal_employment', 'Seasonal employment'),
     (OTHER, 'Other (specify)'),)
 
@@ -130,7 +130,7 @@ GENERAL_APPEARANCE = (
     ('abnormal', 'Abnormal'),
 )
 
-HOSPITALIZATION_OUTCOME = (
+HOSPITALISATION_OUTCOME = (
     ('expired', 'Expired'),
     ('hospice_care', 'Home: Hospice Care'),
     ('self_care', 'Home: Self Care'),
@@ -143,12 +143,12 @@ HOSPITALIZATION_OUTCOME = (
     ('unit_ward_change', 'Unit/Ward Change'),
 )
 
-HOSPITALIZATION_REASON = (
+HOSPITALISATION_REASON = (
     ('covid19_related_symptoms', 'COVID-19 related symptoms'),
     (OTHER, 'Other'),
 )
 
-HOSPITALIZATION_STATUS = (
+HOSPITALISATION_STATUS = (
     ('er', 'ER'),
     ('regular_ward', 'Regular Ward'),
     ('icu_hdu', 'ICU/HDU'),
