@@ -14,6 +14,7 @@ from edc_lab.models import RequisitionModelMixin, RequisitionStatusMixin
 from edc_metadata.model_mixins.updates import UpdatesRequisitionMetadataModelMixin
 from edc_reference.model_mixins import RequisitionReferenceModelMixin
 from edc_search.model_mixins import SearchSlugManager
+from edc_senaite_interface.model_mixins import SenaiteRequisitionModelMixin
 from edc_visit_tracking.managers import CrfModelManager as VisitTrackingCrfModelManager
 from edc_visit_tracking.model_mixins import CrfModelMixin as VisitTrackingCrfModelMixin
 from edc_visit_tracking.model_mixins import PreviousVisitModelMixin
@@ -36,7 +37,7 @@ class SubjectRequisition(
         VisitTrackingCrfModelMixin, SubjectScheduleCrfModelMixin,
         RequiresConsentFieldsModelMixin, PreviousVisitModelMixin,
         RequisitionReferenceModelMixin, UpdatesRequisitionMetadataModelMixin,
-        SearchSlugModelMixin, BaseUuidModel):
+        SearchSlugModelMixin, SenaiteRequisitionModelMixin, BaseUuidModel):
 
     lab_profile_name = 'esr21_subject'
 
@@ -122,6 +123,7 @@ class SubjectRequisition(
             self.protocol_number = edc_protocol_app_config.protocol_number
         self.report_datetime = self.requisition_datetime
         self.subject_identifier = self.subject_visit.subject_identifier
+        self.consent_model = 'esr21_subject.informedconsent'
         super().save(*args, **kwargs)
 
     def get_search_slug_fields(self):
