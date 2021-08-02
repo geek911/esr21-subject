@@ -1,7 +1,6 @@
 from django.contrib import admin
 from edc_lab.admin import RequisitionAdminMixin
-from edc_lab.admin import requisition_identifier_fields
-from edc_lab.admin import requisition_identifier_fieldset, requisition_verify_fields
+from edc_lab.admin import  requisition_verify_fields
 from edc_lab.admin import requisition_verify_fieldset, requisition_status_fieldset
 from edc_model_admin import audit_fieldset_tuple
 
@@ -9,6 +8,19 @@ from ..admin_site import esr21_subject_admin
 from ..forms import SubjectRequisitionForm
 from ..models import SubjectRequisition
 from .modeladmin_mixins import CrfModelAdminMixin
+
+
+requisition_identifier_fields = (
+    'sample_id',
+    'requisition_identifier',
+    'identifier_prefix',
+    'primary_aliquot_identifier'
+)
+
+requisition_identifier_fieldset = (
+    'Identifiers', {
+        'classes': ('collapse',),
+        'fields': (requisition_identifier_fields)})
 
 
 @admin.register(SubjectRequisition, site=esr21_subject_admin)
