@@ -14,6 +14,11 @@ class OffSchedule(OffScheduleModelMixin, BaseUuidModel):
         blank=True,
         null=True)
 
+    consent_version = models.CharField(
+        max_length=2,
+        blank=True,
+        null=True)
+
     objects = SubjectIdentifierManager()
 
     on_site = CurrentSiteManager()

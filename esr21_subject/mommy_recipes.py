@@ -1,11 +1,10 @@
 from .models import EligibilityConfirmation, InformedConsent, SubjectVisit
-from .models import Covid19SymptomaticInfections
+from .models import Covid19SymptomaticInfections, OffSchedule
 from edc_base.utils import get_utcnow
 from edc_constants.constants import ALIVE, YES, ON_STUDY, PARTICIPANT
 from edc_visit_tracking.constants import SCHEDULED
 from faker import Faker
 from model_mommy.recipe import Recipe, seq
-from esr21_subject.models import covid19_symptomatic_infections
 
 fake = Faker()
 
@@ -31,5 +30,8 @@ subjectvisit = Recipe(
     survival_status=ALIVE,
     info_source=PARTICIPANT)
 
-covid19_symptomatic_infections = Recipe(
+covid19symptomaticinfections = Recipe(
     Covid19SymptomaticInfections)
+
+offschedule = Recipe(
+    OffSchedule)
