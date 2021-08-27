@@ -11,6 +11,7 @@ from edc_consent.field_mixins import PersonalFieldsMixin, VulnerabilityFieldsMix
 from edc_consent.managers import ConsentManager
 from edc_consent.model_mixins import ConsentModelMixin
 from edc_consent.validators import eligible_if_yes
+from edc_base.model_validators.date import date_is_future
 from edc_constants.choices import YES_NO
 
 from ..choices import IDENTITY_TYPE
@@ -73,6 +74,12 @@ class InformedConsent(ConsentModelMixin, SiteModelMixin,
         validators=[eligible_if_yes, ],
         max_length=3,
         help_text='Participant is not eligible if no')
+
+    hiv_testing_date = models.DateField(
+        verbose_name='Date to get tested',
+        help_text='Date when the participant is willing to get tested',
+        validators=[date_is_future, ],
+    )
 
     optional_sample_collection = models.CharField(
         verbose_name='Do you consent to optional sample collection?',
