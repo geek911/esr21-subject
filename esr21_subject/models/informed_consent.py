@@ -1,4 +1,6 @@
+from django.core.validators import RegexValidator
 from django.db import models
+from django_crypto_fields.fields import EncryptedCharField
 from edc_base.model_fields import OtherCharField
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
@@ -33,8 +35,16 @@ class InformedConsent(ConsentModelMixin, SiteModelMixin,
                       NonUniqueSubjectIdentifierModelMixin, IdentityFieldsMixin,
                       PersonalFieldsMixin, VulnerabilityFieldsMixin,
                       SearchSlugModelMixin, BaseUuidModel):
-
     subject_screening_model = 'esr21_subject.eligibilityconfirmation'
+
+    initials = EncryptedCharField(
+        validators=[RegexValidator(
+            regex=r'^[A-Z]{2,3}$',
+            message=('Ensure initials consist of letters '
+                     'only in upper case, no spaces.'))],
+        help_text=('Ensure initials consist of letters '
+                   'only in upper case, no spaces.'),
+        null=True, blank=False)
 
     screening_identifier = models.CharField(
         verbose_name='Screening identifier',
@@ -67,7 +77,7 @@ class InformedConsent(ConsentModelMixin, SiteModelMixin,
     optional_sample_collection = models.CharField(
         verbose_name='Do you consent to optional sample collection?',
         choices=YES_NO,
-        max_length=3,)
+        max_length=3, )
 
     consent_to_participate = models.CharField(
         verbose_name='Do you consent to participate in the study?',
