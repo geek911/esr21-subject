@@ -26,7 +26,7 @@ class DemographicsData(CrfModelMixin):
         blank=True,
         null=True,)
 
-    household_members = models.IntegerField(
+    household_members = models.PositiveSmallIntegerField(
         verbose_name='How many household members live in the '
                      'participants primary home',)
 

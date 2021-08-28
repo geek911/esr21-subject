@@ -31,6 +31,8 @@ class PhysicalExamAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                 'abnormalities_found',
                 'abn_specify',
                 'clinically_significant',
+                'participant_weight',
+                'participant_height',
                 'general_appearance',
                 'abnormality_description',
                 'face_check',

@@ -34,7 +34,7 @@ class VaccinationDetails(CrfModelMixin):
         null=True,
         help_text="Geographical location")
 
-    vaccination_date = models.DateField(
+    vaccination_date = models.DateTimeField(
         verbose_name='Date and time the vaccination was administered?',
         blank=True,
         null=True)

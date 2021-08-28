@@ -104,11 +104,6 @@ class PregnancyStatus(CrfModelMixin):
         null=True,
         blank=True)
 
-    maternal_history = models.TextField(
-        verbose_name='Maternal medical and obstetric history',
-        max_length=350,
-        null=True,
-        blank=True)
 
     class Meta(CrfModelMixin.Meta):
         app_label = 'esr21_subject'
