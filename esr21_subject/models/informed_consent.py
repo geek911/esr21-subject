@@ -2,6 +2,7 @@ from django.db import models
 from edc_base.model_fields import OtherCharField
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
+from edc_base.sites import CurrentSiteManager
 from edc_base.sites.site_model_mixin import SiteModelMixin
 from edc_base.utils import get_utcnow
 from edc_consent.field_mixins import IdentityFieldsMixin
@@ -21,7 +22,7 @@ from ..choices import GENDER_OTHER
 from ..subject_identifier import SubjectIdentifier
 
 
-class InformedConsentManager(SearchSlugManager, models.Manager):
+class InformedConsentManager(ConsentManager, SearchSlugManager, models.Manager):
 
     def get_by_natural_key(self, subject_identifier, version):
         return self.get(
@@ -81,6 +82,8 @@ class InformedConsent(ConsentModelMixin, SiteModelMixin,
     objects = InformedConsentManager()
 
     consent = ConsentManager()
+
+    on_site = CurrentSiteManager()
 
     history = HistoricalRecords()
 

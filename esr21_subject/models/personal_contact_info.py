@@ -17,6 +17,7 @@ from ..action_items import CONTACT_INFORMATION_ACTION
 
 class PersonalContactInfo(LocatorModelMixin, ActionModelMixin, SiteModelMixin,
                           BaseUuidModel):
+
     action_name = CONTACT_INFORMATION_ACTION
 
     tracking_identifier_prefix = 'CI'

@@ -1,11 +1,19 @@
 from django.db import models
-
+from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.model_validators import date_not_future
 from edc_base.sites import SiteModelMixin
 
 from .adverse_event import AdverseEvent
 from ..choices import AESI_CATEGORY
+
+
+class SpecialInterestAdverseEventManager(models.Manager):
+
+    def get_by_natural_key(self, meddra_pname, start_date, adverse_event):
+        return self.get(adverse_event=adverse_event,
+                        meddra_pname=meddra_pname,
+                        start_date=start_date)
 
 
 class SpecialInterestAdverseEvent(SiteModelMixin, BaseUuidModel):
@@ -48,7 +56,7 @@ class SpecialInterestAdverseEvent(SiteModelMixin, BaseUuidModel):
     aesi_category = models.CharField(
         verbose_name='AESI category',
         max_length=50,
-        choices=AESI_CATEGORY, )
+        choices=AESI_CATEGORY,)
 
     rationale = models.CharField(
         verbose_name=('Investigator\'s rationale for Study Treatment being '
@@ -63,6 +71,15 @@ class SpecialInterestAdverseEvent(SiteModelMixin, BaseUuidModel):
         verbose_name=('Additional information (Symptoms, course, results, '
                       'diagnostic and other comments)'),
         max_length=200)
+
+    history = HistoricalRecords()
+
+    objects = SpecialInterestAdverseEventManager()
+
+    def natural_key(self):
+        return (self.meddra_pname, self.start_date,) + self.adverse_event.natural_key()
+
+    natural_key.dependencies = ['esr21_subject.adverseevent']
 
     class Meta:
         app_label = 'esr21_subject'

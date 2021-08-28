@@ -105,8 +105,6 @@ class SubjectRequisition(
         null=True,
         blank=True)
 
-#     on_site = CurrentSiteManager()
-
     objects = Manager()
 
     history = HistoricalRecords()
