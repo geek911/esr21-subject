@@ -25,7 +25,7 @@ class PhysicalExam(CrfModelMixin):
     exam_date = models.DateField(
         verbose_name='Date of examination (DD/MMM/YYYY)',
         blank=True,
-        null=True,)
+        null=True, )
 
     abnormalities_found = models.CharField(
         verbose_name='Were any abnormalities discovered?',
@@ -44,6 +44,16 @@ class PhysicalExam(CrfModelMixin):
         blank=True,
         null=True)
 
+    participant_weight = models.DecimalField(
+        verbose_name='Participant Weight',
+        max_digits=5,
+        decimal_places=3)
+
+    participant_height = models.DecimalField(
+        verbose_name='Participant Height',
+        max_digits=5,
+        decimal_places=3)
+
     general_appearance = models.CharField(
         verbose_name='General Appearance',
         max_length=20,
@@ -53,7 +63,7 @@ class PhysicalExam(CrfModelMixin):
     abnormality_description = models.TextField(
         verbose_name='Abnormal, description of abnormality',
         blank=True,
-        null=True,)
+        null=True, )
 
     face_check = models.CharField(
         verbose_name='Head, eyes, ears, and nose',
@@ -64,7 +74,7 @@ class PhysicalExam(CrfModelMixin):
     face_description = models.TextField(
         verbose_name='Abnormal, description of abnormality',
         blank=True,
-        null=True,)
+        null=True, )
 
     neck_check = models.CharField(
         verbose_name='Neck',
@@ -75,7 +85,7 @@ class PhysicalExam(CrfModelMixin):
     neck_description = models.TextField(
         verbose_name='Abnormal, description of abnormality',
         blank=True,
-        null=True,)
+        null=True, )
 
     respiratory_check = models.CharField(
         verbose_name='Respiratory',
@@ -86,7 +96,7 @@ class PhysicalExam(CrfModelMixin):
     respiratory_description = models.TextField(
         verbose_name='Abnormal, description of abnormality',
         blank=True,
-        null=True,)
+        null=True, )
 
     cardiovascular_check = models.CharField(
         verbose_name='Cardiovascular',
@@ -97,7 +107,7 @@ class PhysicalExam(CrfModelMixin):
     cardiovascular_description = models.TextField(
         verbose_name='Abnormal, description of abnormality',
         blank=True,
-        null=True,)
+        null=True, )
 
     abdominal_check = models.CharField(
         verbose_name='Abdominal',
@@ -108,7 +118,7 @@ class PhysicalExam(CrfModelMixin):
     abdominal_description = models.TextField(
         verbose_name='Abnormal, description of abnormality',
         blank=True,
-        null=True,)
+        null=True, )
 
     skin_check = models.CharField(
         verbose_name='Skin',
@@ -119,7 +129,7 @@ class PhysicalExam(CrfModelMixin):
     skin_description = models.TextField(
         verbose_name='Abnormal, description of abnormality',
         blank=True,
-        null=True,)
+        null=True, )
 
     neurological_check = models.CharField(
         verbose_name='Neurological',
@@ -130,7 +140,7 @@ class PhysicalExam(CrfModelMixin):
     neurological_description = models.TextField(
         verbose_name='Abnormal, description of abnormality',
         blank=True,
-        null=True,)
+        null=True, )
 
     class Meta(CrfModelMixin.Meta):
         app_label = 'esr21_subject'

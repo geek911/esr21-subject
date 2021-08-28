@@ -49,7 +49,6 @@ class PregnancyStatusAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                 'number_miscarriages',
                 'date_miscarriages',
                 'risk_factor',
-                'maternal_history',
             )
 
         }),
