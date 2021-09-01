@@ -75,14 +75,6 @@ class InformedConsent(ConsentModelMixin, SiteModelMixin,
         max_length=3,
         help_text='Participant is not eligible if no')
 
-    hiv_testing_date = models.DateTimeField(
-        verbose_name='Date to get tested',
-        help_text='Date when the participant is willing to get tested',
-        validators=[date_is_future, ],
-        null=True,
-        blank=True
-    )
-
     optional_sample_collection = models.CharField(
         verbose_name='Do you consent to optional sample collection?',
         choices=YES_NO,
