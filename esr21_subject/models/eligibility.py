@@ -1,5 +1,4 @@
 MIN_AGE_OF_CONSENT = 40
-MAX_AGE_OF_CONSENT = 60
 
 
 class Eligibility:
@@ -13,10 +12,6 @@ class Eligibility:
         if self.age_in_years < MIN_AGE_OF_CONSENT:
             self.error_message.append(
                 'Participant is under {}'.format(MIN_AGE_OF_CONSENT))
-        # Max age has been removed
-        # if self.age_in_years > MAX_AGE_OF_CONSENT:
-        #     self.error_message.append(
-        #         'Participant is too old (>{})'.format(MAX_AGE_OF_CONSENT))
         if self.received_vaccines == 'Yes':
             self.error_message.append(
                 'Participant received vaccines other than licensed influenza vaccines')

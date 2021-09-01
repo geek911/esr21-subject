@@ -1,7 +1,7 @@
 from django.db import models
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
-from edc_base.sites import CurrentSiteManager as BaseCurrentSiteManager
+from edc_base.sites import CurrentSiteManager
 from edc_base.sites.site_model_mixin import SiteModelMixin
 from edc_consent.model_mixins import RequiresConsentFieldsModelMixin
 from edc_metadata.model_mixins.creates import CreatesMetadataModelMixin
@@ -11,10 +11,6 @@ from edc_visit_tracking.model_mixins import VisitModelMixin
 
 from ..choices import VISIT_INFO_SOURCE, VISIT_REASON
 from edc_appointment.models import Appointment
-
-
-class CurrentSiteManager(VisitModelManager, BaseCurrentSiteManager):
-    pass
 
 
 class SubjectVisit(
@@ -59,4 +55,5 @@ class SubjectVisit(
     history = HistoricalRecords()
 
     class Meta(VisitModelMixin.Meta):
-        pass
+        app_label = 'esr21_subject'
+        verbose_name = 'Subject Visit'

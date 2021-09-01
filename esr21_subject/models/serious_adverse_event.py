@@ -1,6 +1,7 @@
 from django.db import models
 
 from edc_base.model_fields import OtherCharField
+from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.model_validators import date_not_future
 from edc_base.sites import SiteModelMixin
@@ -9,6 +10,14 @@ from edc_constants.choices import SEVERITY_LEVEL
 from .adverse_event import AdverseEvent
 from .list_models import SAECriteria
 from edc_constants.choices import YES_NO
+
+
+class SeriousAdverseEventManager(models.Manager):
+
+    def get_by_natural_key(self, meddra_pname, start_date, adverse_event):
+        return self.get(adverse_event=adverse_event,
+                        meddra_pname=meddra_pname,
+                        start_date=start_date)
 
 
 class SeriousAdverseEvent(SiteModelMixin, BaseUuidModel):
@@ -20,7 +29,7 @@ class SeriousAdverseEvent(SiteModelMixin, BaseUuidModel):
         on_delete=models.PROTECT)
 
     sae_details = models.TextField(
-        verbose_name='Details of the SAE', )
+        verbose_name='Details of the SAE',)
 
     sae_name = models.CharField(
         verbose_name='Name of the SAE',
@@ -59,7 +68,7 @@ class SeriousAdverseEvent(SiteModelMixin, BaseUuidModel):
     seriousness_criteria = models.ManyToManyField(
         SAECriteria,
         verbose_name='Select seriousness criteria',
-        help_text='(check all that apply)', )
+        help_text='(check all that apply)',)
 
     admission_date = models.DateField(
         verbose_name='If hospitalized, Date of Admission',
@@ -103,6 +112,15 @@ class SeriousAdverseEvent(SiteModelMixin, BaseUuidModel):
                       'presenting illness, course of illness, complications, '
                       'risk factors and/or other contributing factors)'),
         max_length=200)
+
+    history = HistoricalRecords()
+
+    objects = SeriousAdverseEventManager()
+
+    def natural_key(self):
+        return (self.meddra_pname, self.start_date,) + self.adverse_event.natural_key()
+
+    natural_key.dependencies = ['esr21_subject.adverseevent']
 
     class Meta:
         app_label = 'esr21_subject'

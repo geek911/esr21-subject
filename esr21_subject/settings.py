@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 import os
 import sys
+import configparser
 from pathlib import Path
 from django.core.management.color import color_style
 
@@ -34,6 +35,13 @@ SITE_ID = 1
 ALLOWED_HOSTS = []
 ETC_DIR = '/etc/'
 
+CONFIG_FILE = f'esr21.ini'
+
+CONFIG_PATH = os.path.join('/etc', 'esr21', CONFIG_FILE)
+sys.stdout.write(style.SUCCESS(f'  * Reading config from {CONFIG_FILE}\n'))
+config = configparser.ConfigParser()
+config.read(CONFIG_PATH)
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -44,8 +52,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'rest_framework.authtoken',
     'django_crypto_fields.apps.AppConfig',
     'edc_action_item.apps.AppConfig',
+    'edc_sync.apps.AppConfig',
+    'edc_sync_files.apps.AppConfig',
     'edc_base.apps.AppConfig',
     'edc_device.apps.AppConfig',
     'edc_lab.apps.AppConfig',
@@ -154,6 +165,11 @@ DATE_INPUT_FORMATS = ['%d-%m-%Y']
 COUNTRY = 'botswana'
 
 HOLIDAY_FILE = os.path.join(BASE_DIR, 'holidays.csv')
+
+EDC_SYNC_SERVER_IP = None
+EDC_SYNC_FILES_USER = None
+EDC_SYNC_FILES_REMOTE_HOST = None
+EDC_SYNC_FILES_USB_VOLUME = None
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/

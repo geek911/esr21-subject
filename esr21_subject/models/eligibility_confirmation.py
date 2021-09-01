@@ -23,6 +23,7 @@ class EligibilityConfirmationManager(SearchSlugManager, models.Manager):
 class EligibilityConfirmation(NonUniqueSubjectIdentifierFieldMixin,
                               SiteModelMixin,
                               SearchSlugModelMixin, BaseUuidModel):
+
     identifier_cls = ScreeningIdentifier
 
     screening_identifier = models.CharField(
@@ -72,7 +73,9 @@ class EligibilityConfirmation(NonUniqueSubjectIdentifierFieldMixin,
         return self.screening_identifier
 
     def natural_key(self):
-        return self.screening_identifier
+        return (self.screening_identifier,)
+
+    natural_key.dependencies = ['sites.Site']
 
     def save(self, *args, **kwargs):
         eligibility_criteria = Eligibility(self.age_in_years,

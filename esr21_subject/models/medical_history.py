@@ -1,5 +1,6 @@
 from django.db import models
 from edc_base.model_validators.date import date_not_future
+from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.sites import SiteModelMixin
 from edc_constants.choices import YES_NO
@@ -89,6 +90,13 @@ class MedicalHistory(CrfModelMixin):
         verbose_name_plural = 'Medical History'
 
 
+class MedicalDiagnosisManager(models.Manager):
+
+    def get_by_natural_key(self, start_date, medical_history):
+        return self.get(medical_history=medical_history,
+                        start_date=start_date)
+
+
 class MedicalDiagnosis(SiteModelMixin, BaseUuidModel):
 
     medical_history = models.ForeignKey(
@@ -120,6 +128,15 @@ class MedicalDiagnosis(SiteModelMixin, BaseUuidModel):
     rel_conc_meds = models.TextField(
         max_length=150,
         verbose_name='Related concomitant medications')
+
+    history = HistoricalRecords()
+
+    objects = MedicalDiagnosisManager()
+
+    def natural_key(self):
+        return (self.start_date,) + self.medical_history.natural_key()
+
+    natural_key.dependencies = ['esr21_subject.medicalhistory']
 
     class Meta:
         app_label = 'esr21_subject'
