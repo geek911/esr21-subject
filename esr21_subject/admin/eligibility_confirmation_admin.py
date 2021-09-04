@@ -18,6 +18,7 @@ class EligibilityConfirmationAdmin(ModelAdminMixin, admin.ModelAdmin):
                 'screening_identifier',
                 'report_datetime',
                 'age_in_years',
+                'any_vaccine_receipt',
                 'received_vaccines', )}),
         audit_fieldset_tuple)
 
