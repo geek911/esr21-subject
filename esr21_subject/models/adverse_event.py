@@ -41,7 +41,7 @@ class AdverseEvent(CrfModelMixin):
         blank=True,
         null=True)
 
-    meddra_version = models.IntegerField(
+    meddra_version = models.PositiveIntegerField(
         verbose_name='MedDRA version',
         blank=True,
         null=True)
