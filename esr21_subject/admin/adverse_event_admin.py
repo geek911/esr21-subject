@@ -111,7 +111,7 @@ class AdverseEventAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                 'event_details',
                 'start_date',
                 'stop_date',
-                'hypersensitivity',
+                'substance_hypersensitivity',
                 'status',
                 'ae_grade',
                 'study_treatmnt_rel',
@@ -147,7 +147,7 @@ class AdverseEventAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                     'medically_attended_ae': admin.VERTICAL,
                     'treatment_given': admin.VERTICAL,
                     'ae_study_discontinued': admin.VERTICAL,
-                    'hypersensitivity': admin.VERTICAL,
+                    'substance_hypersensitivity': admin.VERTICAL,
                     'covid_related_ae': admin.VERTICAL, }
 
 

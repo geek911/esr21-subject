@@ -51,7 +51,7 @@ class EligibilityConfirmation(NonUniqueSubjectIdentifierFieldMixin,
 
     participating_in_other_studies = models.CharField(
         verbose_name='Is the participant participating in other studies?',
-        max_length=20,
+        max_length=3,
         choices=YES_NO,
         default=NO, )
 

@@ -61,7 +61,7 @@ class AdverseEvent(CrfModelMixin):
         blank=True)
 
     # TODO: Question 3
-    hypersensitivity = models.CharField(
+    substance_hypersensitivity = models.CharField(
         verbose_name='Is participant hypersensitivity to any substance?',
         help_text='Hypersensitivity to the active substance or to any of the excipients',
         blank=True,
