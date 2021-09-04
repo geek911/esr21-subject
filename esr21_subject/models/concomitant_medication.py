@@ -18,14 +18,6 @@ class ConcomitantMedication(CrfModelMixin):
         max_length=40,
     )
 
-    who_name = models.CharField(
-        verbose_name='WHODRUG preferred name',
-        max_length=30)
-
-    who_code = models.CharField(
-        verbose_name='WHODRUG preferred code',
-        max_length=30)
-
     atc_code = models.CharField(
         verbose_name='ATC code',
         max_length=30)
