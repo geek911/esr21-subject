@@ -43,7 +43,7 @@ class SeriousAdverseEventInlineAdmin(StackedInlineMixin, admin.StackedInline):
                 'describe_sae_treatmnt',
                 'test_performed',
                 'additional_info',
-                ]}
+            ]}
          ),)
 
     radio_fields = {'sae_intensity': admin.VERTICAL,
@@ -64,22 +64,24 @@ class SpecialInterestAdverseEventInlineAdmin(StackedInlineMixin,
     fieldsets = (
         ('Participants should be encouraged to report any adverse events reported in '
          'the AE form', {
-            'fields': [
-                'aesi_name',
-                'meddra_pname',
-                'meddra_pcode',
-                'meddra_version',
-                'start_date',
-                'end_date',
-                'date_aware_of',
-                'aesi_category',
-                'rationale',
-                'describe_aesi_treatmnt',
-                'additional_info',
-                ]}
+             'fields': [
+                 'aesi_name',
+                 'meddra_pname',
+                 'meddra_pcode',
+                 'meddra_version',
+                 'start_date',
+                 'end_date',
+                 'date_aware_of',
+                 'aesi_category',
+                 'rationale',
+                 'describe_aesi_treatmnt',
+                 'additional_info',
+             ]}
          ),)
 
-    radio_fields = {'aesi_category': admin.VERTICAL, }
+    radio_fields = {
+        'aesi_category': admin.VERTICAL,
+    }
 
 
 @admin.register(AdverseEvent, site=esr21_subject_admin)
@@ -109,6 +111,7 @@ class AdverseEventAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                 'event_details',
                 'start_date',
                 'stop_date',
+                'hypersensitivity',
                 'status',
                 'ae_grade',
                 'study_treatmnt_rel',
@@ -144,6 +147,7 @@ class AdverseEventAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                     'medically_attended_ae': admin.VERTICAL,
                     'treatment_given': admin.VERTICAL,
                     'ae_study_discontinued': admin.VERTICAL,
+                    'hypersensitivity': admin.VERTICAL,
                     'covid_related_ae': admin.VERTICAL, }
 
 

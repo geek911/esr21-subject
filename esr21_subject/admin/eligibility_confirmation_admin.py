@@ -17,12 +17,16 @@ class EligibilityConfirmationAdmin(ModelAdminMixin, admin.ModelAdmin):
             'fields': (
                 'screening_identifier',
                 'report_datetime',
+                'participating_in_other_studies',
                 'age_in_years',
                 'any_vaccine_receipt',
                 'received_vaccines', )}),
         audit_fieldset_tuple)
 
-    radio_fields = {'received_vaccines': admin.VERTICAL, }
+    radio_fields = {
+        'received_vaccines': admin.VERTICAL,
+        'participating_in_other_studies': admin.VERTICAL,
+    }
 
     search_fields = ['screening_identifier']
 

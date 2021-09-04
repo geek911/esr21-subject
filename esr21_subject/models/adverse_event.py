@@ -60,6 +60,16 @@ class AdverseEvent(CrfModelMixin):
         null=True,
         blank=True)
 
+    # TODO: Question 3
+    hypersensitivity = models.CharField(
+        verbose_name='Is participant hypersensitivity to any substance?',
+        help_text='Hypersensitivity to the active substance or to any of the excipients',
+        blank=True,
+        null=True,
+        choices=YES_NO,
+        max_length=30
+    )
+
     status = models.CharField(
         verbose_name='Status of the Adverse Event',
         max_length=10,
