@@ -1,12 +1,14 @@
+from decimal import Decimal
+
 from django.db import models
 from edc_base.model_validators import date_not_future
 from edc_constants.choices import YES_NO
 from .model_mixins import CrfModelMixin
 from ..choices import UNIT_OPTIONS, FREQUENCY, CONCOMITANT_ROUTE
+from django.core.validators import MinValueValidator
 
 
 class ConcomitantMedication(CrfModelMixin):
-
     administered_date = models.DateField(
         verbose_name='Date of administration (DD MMM YYYY):',
         validators=[date_not_future])
@@ -16,22 +18,15 @@ class ConcomitantMedication(CrfModelMixin):
         max_length=40,
     )
 
-    who_name = models.CharField(
-        verbose_name='WHODRUG preferred name',
-        max_length=30)
-
-    who_code = models.CharField(
-        verbose_name='WHODRUG preferred code',
-        max_length=30)
-
     atc_code = models.CharField(
         verbose_name='ATC code',
         max_length=30)
 
     dose = models.DecimalField(
         verbose_name='Dose',
+        validators=[MinValueValidator(Decimal('0.00'))],
         decimal_places=2,
-        max_digits=4)
+        max_digits=4)  # can only accept positive numbers
 
     unit = models.CharField(
         verbose_name='Unit',
@@ -67,7 +62,7 @@ class ConcomitantMedication(CrfModelMixin):
         null=True)
 
     reason_of_use = models.TextField(
-        verbose_name='Reason for use',)
+        verbose_name='Reason for use', )
 
     ongoing = models.CharField(
         verbose_name='Ongoing',

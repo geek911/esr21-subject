@@ -18,8 +18,6 @@ class ConcomitantMedicationAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                 'report_datetime',
                 'administered_date',
                 'medication_name',
-                'who_name',
-                'who_code',
                 'atc_code',
                 'dose',
                 'unit',

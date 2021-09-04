@@ -5,6 +5,7 @@ from edc_base.model_mixins import BaseUuidModel
 from edc_base.model_validators import datetime_not_future
 from edc_base.sites import SiteModelMixin
 from edc_base.utils import get_utcnow
+from edc_constants.constants import NO
 from edc_identifier.model_mixins import NonUniqueSubjectIdentifierFieldMixin
 from edc_search.model_mixins import SearchSlugManager
 from edc_constants.choices import YES_NO
@@ -23,7 +24,6 @@ class EligibilityConfirmationManager(SearchSlugManager, models.Manager):
 class EligibilityConfirmation(NonUniqueSubjectIdentifierFieldMixin,
                               SiteModelMixin,
                               SearchSlugModelMixin, BaseUuidModel):
-
     identifier_cls = ScreeningIdentifier
 
     screening_identifier = models.CharField(
@@ -38,9 +38,26 @@ class EligibilityConfirmation(NonUniqueSubjectIdentifierFieldMixin,
         validators=[datetime_not_future],
         help_text='Date and time of report.')
 
+    # TODO: Asked a question about what type of answer
+    any_vaccine_receipt = models.CharField(
+        verbose_name='Any receipt of, or planned receipt of any vaccines, medications, or investigational products '
+                     'indicated for the prevention of SARS-CoV-2 infection or treatment of COVID-19?',
+        help_text='For study participants who become hospitalised with COVID-19, receipt of licensed treatment '
+                  'options and/or participation in investigational treatment studies is permitted.',
+        null=True,
+        blank=True,
+        max_length=50,
+    )
+
+    participating_in_other_studies = models.CharField(
+        verbose_name='Is the participant participating in other studies?',
+        max_length=3,
+        choices=YES_NO,
+        default=NO, )
+
     age_in_years = models.IntegerField(
         verbose_name='What is the participants age?',
-        help_text='(Years)',)
+        help_text='(Years)', )
 
     received_vaccines = models.CharField(
         verbose_name='Has the participant received any vaccine other than '

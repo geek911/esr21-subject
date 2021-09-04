@@ -41,7 +41,7 @@ class AdverseEvent(CrfModelMixin):
         blank=True,
         null=True)
 
-    meddra_version = models.IntegerField(
+    meddra_version = models.PositiveIntegerField(
         verbose_name='MedDRA version',
         blank=True,
         null=True)
@@ -59,6 +59,16 @@ class AdverseEvent(CrfModelMixin):
         validators=[date_not_future, ],
         null=True,
         blank=True)
+
+    # TODO: Question 3
+    substance_hypersensitivity = models.CharField(
+        verbose_name='Is participant hypersensitivity to any substance?',
+        help_text='Hypersensitivity to the active substance or to any of the excipients',
+        blank=True,
+        null=True,
+        choices=YES_NO,
+        max_length=30
+    )
 
     status = models.CharField(
         verbose_name='Status of the Adverse Event',

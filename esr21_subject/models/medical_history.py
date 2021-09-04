@@ -4,23 +4,73 @@ from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.sites import SiteModelMixin
 from edc_constants.choices import YES_NO
+from edc_constants.constants import NO
+
 from .list_models import Symptoms, Diseases
 from .model_mixins import CrfModelMixin
 from ..choices import SMOKED_STATUS_CHOICES, ALCOHOL_STATUS_CHOICES, MODE_TRANSPORT
 
 
 class MedicalHistory(CrfModelMixin):
+    pregnancy_status = models.CharField(
+        verbose_name='Are you pregnant or nursing or do you plan to get pregnant in the next 3 months?',
+        max_length=3,
+        choices=YES_NO,
+        default=NO
+    )
+
+    # ADDED QUESTIONS FROM THE DOC
+    thrombosis_or_thrombocytopenia = models.CharField(
+        verbose_name='Does individuals have any risk factors for or a reported history of thrombosis and/or '
+                     'thrombocytopenia?',
+        max_length=3,
+        choices=YES_NO,
+        default=NO,
+    )
+
+    clinical_bleeding = models.CharField(
+        verbose_name='Ever experienced clinically significant bleeding?',
+        help_text='Clinically significant bleeding (eg, factor deficiency, coagulopathy, or platelet disorder) or '
+                  'prior history of significant bleeding or bruising following intramuscular injections or '
+                  'venepuncture',
+        max_length=20,
+        choices=YES_NO,
+        default=NO,
+    )
+
+    guillain_barre_syndrome = models.CharField(
+        verbose_name='Any history of Guillain-Barré syndrome?',
+        max_length=3,
+        choices=YES_NO,
+        default=NO, )
+
+    suspected_immuno_condition = models.CharField(
+        verbose_name='Any confirmed or suspected immunosuppressive or immunodeficient state (including Asplenia)?',
+        max_length=3,
+        choices=YES_NO,
+        default=NO, )
+
+    significant_disease = models.CharField(
+        verbose_name='Any other significant disease, disorder, or finding that may significantly increase the risk to '
+                     'the participant?',
+        choices=YES_NO,
+        default=NO,
+        max_length=3
+
+    )
+
+    # End
 
     relevant_history = models.CharField(
         verbose_name='Does the subject have any relevant Medical History?',
-        max_length=10,
-        choices=YES_NO,)
+        max_length=3,
+        choices=YES_NO, )
 
     prior_covid_infection = models.CharField(
         verbose_name='Has the participant had a prior infection of '
                      'SARS-CoV-2/COVID 19?',
-        max_length=10,
-        choices=YES_NO,)
+        max_length=3,
+        choices=YES_NO, )
 
     covid_symptoms = models.ManyToManyField(
         Symptoms,
@@ -35,7 +85,7 @@ class MedicalHistory(CrfModelMixin):
     smoking_status = models.CharField(
         choices=SMOKED_STATUS_CHOICES,
         verbose_name='Smoking status/history',
-        max_length=20,)
+        max_length=20, )
 
     alcohol_status = models.CharField(
         choices=ALCOHOL_STATUS_CHOICES,
@@ -98,7 +148,6 @@ class MedicalDiagnosisManager(models.Manager):
 
 
 class MedicalDiagnosis(SiteModelMixin, BaseUuidModel):
-
     medical_history = models.ForeignKey(
         MedicalHistory,
         on_delete=models.PROTECT,

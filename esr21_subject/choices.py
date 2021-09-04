@@ -94,30 +94,34 @@ CONCOMITANT_ROUTE = (
 EMPLOYMENT_STATUS = (
     ('formal-wage_employment_part_time', 'Formal wage employment (Part-time)'),
     ('formal_wage_employment-full_time)',
-        'Formal wage employment (full-time)'),
+     'Formal wage employment (full-time)'),
     ('self_employed_full_time)', 'Self-employed (full time)'),
     ('self_employed_part_time)', 'Self-employed (part time)'),
     ('adhoc_work', 'Ad-hoc work'),
     ('Seasonal_employment', 'Seasonal employment'),
     (OTHER, 'Other (specify)'),)
 
-FREQUENCY = (('BID', 'BID'),
-             ('TID', 'TID',),
-             ('QID', 'QID'),
-             ('QOD', 'QOD'),
-             ('PRN', 'PRD'),
-             ('Once', 'Once'),
-             ('one_time_per_week', 'One Time Per Week'),
-             ('every_month', 'Every Month'),
-             ('QH', 'QH'),
-             ('Q2H', 'Q2H'),
-             ('Q3H', 'Q3H'),
-             ('Q4H', 'Q4H'),
-             ('Q6H', 'Q6H'),
-             ('Q8H', 'Q8H'),
-             ('Q12H', 'Q12H'),
-             (UNKNOWN, 'Unknown'),
-             (OTHER, 'Other'))
+FREQUENCY = (
+    ('QD', 'QD'),
+    ('OD', 'OD'),
+    ('BID', 'BID'),
+    ('TID', 'TID',),
+    ('QID', 'QID'),
+    ('QOD', 'QOD'),
+    ('PRN', 'PRD'),
+    ('Once', 'Once'),
+    ('one_time_per_week', 'One Time Per Week'),
+    ('every_month', 'Every Month'),
+    ('QH', 'QH'),
+    ('Q2H', 'Q2H'),
+    ('Q3H', 'Q3H'),
+    ('Q4H', 'Q4H'),
+    ('Q6H', 'Q6H'),
+    ('Q8H', 'Q8H'),
+    ('Q12H', 'Q12H'),
+    (UNKNOWN, 'Unknown'),
+    (OTHER, 'Other')
+)
 
 GENDER_OTHER = (
     (MALE, _('Male')),

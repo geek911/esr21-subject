@@ -25,7 +25,7 @@ class MedicalDiagnosisInlineAdmin(StackedInlineMixin, admin.StackedInline):
                 'ongoing',
                 'condition_related_meds',
                 'rel_conc_meds',
-                ]}
+            ]}
          ),)
 
     radio_fields = {
@@ -45,6 +45,12 @@ class MedicalHistoryAdmin(CrfModelAdminMixin, admin.ModelAdmin):
             'fields': (
                 'subject_visit',
                 'report_datetime',
+                'pregnancy_status',
+                'thrombosis_or_thrombocytopenia',
+                'clinical_bleeding',
+                'guillain_barre_syndrome',
+                'suspected_immuno_condition',
+                'significant_disease',
                 'relevant_history',
                 'prior_covid_infection',
                 'covid_symptoms',
@@ -71,6 +77,12 @@ class MedicalHistoryAdmin(CrfModelAdminMixin, admin.ModelAdmin):
         'diabetes': admin.VERTICAL,
         'mode_of_transport': admin.VERTICAL,
         'using_shared_kitchen': admin.VERTICAL,
+        'pregnancy_status': admin.VERTICAL,
+        'thrombosis_or_thrombocytopenia': admin.VERTICAL,
+        'clinical_bleeding': admin.VERTICAL,
+        'guillain_barre_syndrome': admin.VERTICAL,
+        'suspected_immuno_condition': admin.VERTICAL,
+        'significant_disease': admin.VERTICAL,
     }
 
     filter_horizontal = ('covid_symptoms', 'comorbidities')
