@@ -9,7 +9,6 @@ from .list_models import COVIDSymptoms
 
 
 class Hospitalisation(CrfModelMixin):
-
     status = models.CharField(
         verbose_name='Hospitalisation Status',
         max_length=50,
@@ -30,7 +29,7 @@ class Hospitalisation(CrfModelMixin):
     reason = models.CharField(
         verbose_name='Primary reason for hospital/ inpatient/ ER visit',
         max_length=50,
-        choices=HOSPITALISATION_REASON,)
+        choices=HOSPITALISATION_REASON, )
 
     reason_other = OtherCharField(
         verbose_name='If Other, specify',
@@ -49,6 +48,8 @@ class Hospitalisation(CrfModelMixin):
         verbose_name='Hospitalisation Outcome',
         max_length=90,
         choices=HOSPITALISATION_OUTCOME,
+        null=True,
+        blank=True
     )
 
     class Meta(CrfModelMixin.Meta):
