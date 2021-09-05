@@ -64,7 +64,9 @@ class SubjectRequisition(
         verbose_name='Total number of items',
         help_text=(
             'Number of tubes, samples, etc being sent for this test/order only. '
-            'Determines number of labels to print'))
+            'Determines number of labels to print'),
+        null=True,
+        blank=True)
 
     item_type = models.CharField(
         verbose_name='Item collection type',
