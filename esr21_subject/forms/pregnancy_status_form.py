@@ -1,8 +1,17 @@
 from django import forms
+from esr21_subject_validation.form_validators import PregnancyStatusFormValidator
+from .form_mixins import SubjectModelFormMixin
 from ..models import PregnancyStatus
 
 
-class PregnancyStatusForm(forms.ModelForm):
+class PregnancyStatusForm(SubjectModelFormMixin, forms.ModelForm):
+
+    form_validator_cls = PregnancyStatusFormValidator
+
+    child_bearing_potential = forms.CharField(
+        label='Child Bearing Potential',
+        widget=forms.TextInput(attrs={'readonly': 'readonly'}),
+        required=False)
 
     class Meta:
         model = PregnancyStatus

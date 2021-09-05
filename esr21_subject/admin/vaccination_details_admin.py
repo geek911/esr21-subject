@@ -1,29 +1,39 @@
 from django.contrib import admin
 
-from edc_model_admin import ModelAdminBasicMixin
 from edc_model_admin.model_admin_audit_fields_mixin import audit_fieldset_tuple
-from simple_history.admin import SimpleHistoryAdmin
 
+from .modeladmin_mixins import CrfModelAdminMixin
 from ..forms import VaccinationDetailsForm
 from ..models import VaccinationDetails
-from ..admin_site import vaccine_subject_admin
+from ..admin_site import esr21_subject_admin
 
 
-@admin.register(VaccinationDetails, site=vaccine_subject_admin)
-class VaccinationDetailsAdmin(ModelAdminBasicMixin,
-                              SimpleHistoryAdmin,
-                              admin.ModelAdmin):
+@admin.register(VaccinationDetails, site=esr21_subject_admin)
+class VaccinationDetailsAdmin(CrfModelAdminMixin, admin.ModelAdmin):
     form = VaccinationDetailsForm
+
     fieldsets = (
         (None, {
             'fields': (
+                'subject_visit',
                 'report_datetime',
-                'date_of_vaccination',
-                'vaccination_place',
-                'vaccine_name',
-                'dosage_administered',
-                'batch_number',
+                'received_dose',
+                'received_dose_before',
+                'vaccination_site',
+                'vaccination_date',
+                'location',
+                'location_other',
+                'admin_per_protocol',
+                'reason_not_per_protocol',
+                'lot_number',
                 'expiry_date',
                 'provider_name',
-                'next_vaccination',)}),
+                'next_vaccination_date',
+            ),
+        }),
         audit_fieldset_tuple)
+
+    radio_fields = {'received_dose': admin.VERTICAL,
+                    'received_dose_before': admin.VERTICAL,
+                    'location': admin.VERTICAL,
+                    'admin_per_protocol': admin.VERTICAL}

@@ -1,160 +1,125 @@
-from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
-
-from edc_base.model_mixins import BaseUuidModel
-from edc_base.sites import SiteModelMixin
 from edc_base.model_fields import OtherCharField
-from edc_identifier.model_mixins import NonUniqueSubjectIdentifierFieldMixin
-from edc_base.utils import get_utcnow
-from edc_constants.choices import YES_NO, YES_NO_NA
-from .list_models import ChronicConditions, ParticipantMedications, WcsDxAdult
-from ..maternal_choices import KNOW_HIV_STATUS, IS_DATE_ESTIMATED
+from edc_base.model_validators.date import date_not_future, date_is_future
+from edc_constants.choices import YES_NO
+from .list_models import Contraception
+from .model_mixins import CrfModelMixin
+from ..choices import YES_NO_OTHER
+from edc_constants.constants import NO, YES
 
 
-class PregnancyStatus(NonUniqueSubjectIdentifierFieldMixin,
-                      SiteModelMixin, BaseUuidModel):
+class PregnancyStatus(CrfModelMixin):
 
-    report_datetime = models.DateTimeField(
-        verbose_name='Report Date and Time',
-        default=get_utcnow,
-        help_text='Date and time of report.')
+    start_date_menstrual_period = models.DateField(
+        verbose_name='Start Date of Last Menstrual Period (DD/MMM/YYYY)',
+        validators=[date_not_future, ],
+        null=True,
+        blank=True)
 
-    """"Maternal Medical History"""""
+    expected_delivery = models.DateField(
+        verbose_name='Date of Expected Delivery (DD/MMM/YYYY)',
+        validators=[date_is_future, ],
+        null=True,
+        blank=True)
 
-    chronic_condition = models.CharField(
-        verbose_name='Does the participant have any significant chronic'
-                     ' condition(s) that were diagnosed prior to the current'
-                     ' pregnancy and that remain ongoing?',
+    contraceptive_usage = models.CharField(
+        verbose_name='Using Contraception',
         choices=YES_NO,
-        max_length=10,)
+        max_length=3,)
 
-    who_diagnosed = models.CharField(
-        verbose_name='Prior to the current pregnancy, was the participant'
-                     'Yes ever diagnosed with a WHO Stage III or IV illness?',
-        choices=YES_NO_NA,
-        max_length=10,)
-
-    who = models.ManyToManyField(
-        WcsDxAdult,
-        verbose_name='List any new WHO Stage III/IV diagnoses that are '
-                     'not reported'
-    )
-    participant_chronic = models.ManyToManyField(
-        ChronicConditions,
-        max_length=10,
-        related_name='caregiver',
-        verbose_name=('Does the caregiver have any of the above. Tick all '
-                      'that apply'),
-    )
-
-    participant_chronic_other = OtherCharField(
-        max_length=35,
-        verbose_name='If other, specify.',
-        blank=True,
-        null=True)
-
-    participant_medications = models.ManyToManyField(
-        ParticipantMedications,
-        max_length=10,
-        verbose_name='Does the participant currently take any of the '
-                     'following medications.(tick all that apply)',
-        blank=True
-    )
-
-    participant_medications_other = OtherCharField(
-        max_length=35,
-        verbose_name='If other, specify.',
-        blank=True,
-        null=True)
-
-    sero_positive = models.CharField(
-        verbose_name='Is the participant HIV sero-positive?',
-        max_length=10,
-        choices=YES_NO,)
-
-    if_sero_positive = models.DateField(
-        verbose_name='If HIV sero-positive, what is the approximate '
-                     'date of diagnosis?',
-        default=get_utcnow,)
-
-    hiv_infected = models.CharField(
-        verbose_name='Was the mother perinatally infected with HIV?',
-        max_length=10,
-        choices=YES_NO_NA,)
-
-    know_hiv_status = models.CharField(
-        verbose_name='Was the mother perinatally infected with HIV?',
+    contraceptive = models.ManyToManyField(
+        Contraception,
+        verbose_name='If yes, specify contraception',
         max_length=30,
-        choices=KNOW_HIV_STATUS, )
+        blank=True,)
 
-    cd4_known = models.CharField(
-        verbose_name='Is the participants lowest CD4 known?',
+    contraceptive_other = OtherCharField()
+
+    """""Childbearing Potential"""""
+
+    surgically_sterilized = models.CharField(
+        verbose_name='Is the participant considered to be surgically sterilized?',
+        choices=YES_NO,
+        max_length=3)
+
+    amenorrhea_history = models.CharField(
+        verbose_name=('Does the participant have a history of >= 12 months amenorrhea prior'
+                      ' to randomization, without an alternative cause, following cessation'
+                      ' of exogenous sex-hormonal treatment?'),
+        choices=YES_NO,
+        max_length=3,
+        help_text='Including bilateral tubal ligation, bilateral oophorectomy,or hysterectomy')
+
+    post_menopausal_range = models.CharField(
+        verbose_name=('Does the participant have a follicle-stimulating hormone level in the'
+                      ' post-menopausal range?'),
+        choices=YES_NO,
+        max_length=12,
+        help_text=('Until follicle-stimulating hormone is documented to be within menopausal'
+                   ' range, the participant is to be considered of childbearing potential.')
+        )
+
+    post_menopausal = models.CharField(
+        verbose_name='Is the woman considered to be post-menopausal?',
+        choices=YES_NO_OTHER,
+        max_length=10)
+
+    post_menopausal_other = models.TextField(
+        verbose_name='If other, specify',
+        max_length=150,
+        null=True,
+        blank=True)
+
+    comment = models.TextField(
+        verbose_name='Comment',
+        max_length=200,
+        null=True,
+        blank=True)
+
+    child_bearing_potential = models.CharField(
+        max_length=3,
+        choices=YES_NO,
+        blank=True)
+
+    """""Pregnancy History"""""
+
+    number_prev_pregnancies = models.PositiveIntegerField(
+        verbose_name='Overall number of previous pregnancies',
+        null=True,
+        blank=True)
+
+    number_normal_pregnancies = models.PositiveIntegerField(
+        verbose_name='Number of normal deliveries',
+        null=True,
+        blank=True)
+
+    number_miscarriages = models.PositiveIntegerField(
+        verbose_name='Number of spontaneous miscarriages',
+        null=True,
+        blank=True)
+
+    date_miscarriages = models.DateField(
+        verbose_name='Date of last spontaneous miscarriage',
+        validators=[date_not_future, ],
+        null=True,
+        blank=True)
+
+    risk_factor = models.CharField(
+        verbose_name='Relevant pregnancy risk factor',
         max_length=10,
-        choices=YES_NO_NA, )
+        null=True,
+        blank=True)
 
-    lowest_known_cd4 = models.IntegerField(
-        verbose_name='What was the participants lowest known (nadir) CD4 '
-                     'cell count (cells/mm3) at any time in the past?')
-    date_cd4_test = models.DateField(
-        verbose_name='Year/Month of CD4 test',
-        default=get_utcnow, )
+    def save(self, *args, **kwargs):
 
-    is_estimated = models.CharField(
-        verbose_name='Is the subject date of CD4 test estimated?',
-        max_length=40,
-        choices=IS_DATE_ESTIMATED)
+        if self.post_menopausal == NO and self.surgically_sterilized == NO:
+            self.child_bearing_potential = YES
+        else:
+            self.child_bearing_potential = NO
 
-    """""Maternal Obstetric History"""""
+        super().save(*args, **kwargs)
 
-    prev_pregnancies = models.IntegerField(
-        verbose_name=('Including this pregnancy, how many previous '
-                      'pregnancies for this participant?'),
-        validators=[MinValueValidator(1), MaxValueValidator(20), ],)
-
-    pregs_24wks_or_more = models.IntegerField(
-        verbose_name='Number of pregnancies at least 24 weeks?',
-        validators=[MinValueValidator(0), MaxValueValidator(20), ],
-    )
-
-    lost_before_24wks = models.IntegerField(
-        verbose_name='Number of pregnancies lost before 24 weeks gestation',
-        validators=[MinValueValidator(0), MaxValueValidator(20), ],
-    )
-
-    lost_after_24wks = models.IntegerField(
-        verbose_name='Number of pregnancies lost at or after 24 weeks'
-                     ' gestation ',
-        validators=[MinValueValidator(0), MaxValueValidator(20), ],
-    )
-
-    live_children = models.IntegerField(
-        verbose_name='How many other living children does the '
-                     'participant currently have (excluding baby to be '
-                     'enrolled in the study)',
-        validators=[MinValueValidator(0), MaxValueValidator(20), ],
-    )
-
-    children_died_b4_5yrs = models.IntegerField(
-        verbose_name='How many of the participant\'s children died after '
-                     'birth before 5 years of age? ',
-        validators=[MinValueValidator(0), MaxValueValidator(20), ],
-    )
-
-    children_deliv_before_37wks = models.IntegerField(
-        verbose_name='Number of previous pregnancies delivered at < 37'
-                     ' weeks GA?',
-        validators=[MinValueValidator(0), MaxValueValidator(20), ],
-    )
-
-    children_deliv_aftr_37wks = models.IntegerField(
-        verbose_name='Number of previous pregnancies delivered at >= 37'
-                     ' weeks GA?',
-        validators=[MinValueValidator(0), MaxValueValidator(20), ],
-    )
-    comments = models.TextField(
-        verbose_name='Comments',
-    )
-
-    class Meta:
-        verbose_name = "Pregnancy Status"
-        verbose_name_plural = "Pregnancy Status"
+    class Meta(CrfModelMixin.Meta):
+        app_label = 'esr21_subject'
+        verbose_name = 'Pregnancy Status'
+        verbose_name_plural = 'Pregnancy Status'

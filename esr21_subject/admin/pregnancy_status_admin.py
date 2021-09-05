@@ -1,16 +1,18 @@
+from django.apps import apps as django_apps
 from django.contrib import admin
 from django.db import models
 from django.forms import Textarea
-
-from edc_model_admin import audit_fieldset_tuple
-from ..forms import AdverseEventsForm
+from edc_base.utils import age
+from edc_fieldsets.fieldlist import Insert
+from .modeladmin_mixins import CrfModelAdminMixin
+from ..forms import PregnancyStatusForm
 from ..models import PregnancyStatus
-from ..admin_site import vaccine_subject_admin
+from ..admin_site import esr21_subject_admin
 
 
-@admin.register(PregnancyStatus, site=vaccine_subject_admin)
-class PregnancyStatusAdmin(admin.ModelAdmin):
-    form = AdverseEventsForm
+@admin.register(PregnancyStatus, site=esr21_subject_admin)
+class PregnancyStatusAdmin(CrfModelAdminMixin, admin.ModelAdmin):
+    form = PregnancyStatusForm
 
     formfield_overrides = {
         models.TextField: {'widget': Textarea(
@@ -22,53 +24,66 @@ class PregnancyStatusAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
             'fields': (
+                'subject_visit',
                 'report_datetime',
+                'start_date_menstrual_period',
+                'expected_delivery',
+                'contraceptive_usage',
+                'contraceptive',
+                'contraceptive_other',
             )
         }),
-        ('Maternal Medical History', {
+        ('Childbearing Potential', {
             'fields': (
-                'chronic_condition',
-                'who_diagnosed',
-                'who',
-                'participant_chronic',
-                'participant_chronic_other',
-                'participant_medications',
-                'participant_medications_other',
-                'sero_positive',
-                'if_sero_positive',
-                'hiv_infected',
-                'know_hiv_status',
-                'cd4_known',
-                'lowest_known_cd4',
-                'date_cd4_test',
-                'is_estimated',
+                'surgically_sterilized',
+                'amenorrhea_history',
+                'post_menopausal',
+                'post_menopausal_other',
+                'child_bearing_potential',
+                'comment',
+
             )
 
         }),
-        ('Maternal Obstetric History', {
+        ('Pregnancy History', {
             'fields': (
-                'prev_pregnancies',
-                'pregs_24wks_or_more',
-                'lost_before_24wks',
-                'lost_after_24wks',
-                'live_children',
-                'children_died_b4_5yrs',
-                'children_deliv_before_37wks',
-                'children_deliv_aftr_37wks',
-                'comments',
+                'number_prev_pregnancies',
+                'number_normal_pregnancies',
+                'number_miscarriages',
+                'date_miscarriages',
+                'risk_factor',
             )
-        }),
 
-        audit_fieldset_tuple
+        }),
     )
 
-    radio_fields = {'chronic_condition': admin.VERTICAL,
-                    'who_diagnosed': admin.VERTICAL,
-                    'sero_positive': admin.VERTICAL,
-                    'hiv_infected': admin.VERTICAL,
-                    'know_hiv_status': admin.VERTICAL,
-                    'cd4_known': admin.VERTICAL,
-                    'is_estimated': admin.VERTICAL,
-                    }
-    filter_horizontal = ('participant_chronic', 'who',
-                         'participant_medications',)
+    radio_fields = {'contraceptive_usage': admin.VERTICAL,
+                    'surgically_sterilized': admin.VERTICAL,
+                    'amenorrhea_history': admin.VERTICAL,
+                    'post_menopausal_range': admin.VERTICAL,
+                    'post_menopausal': admin.VERTICAL}
+
+    filter_horizontal = ('contraceptive',)
+
+    conditional_fieldlists = {
+        'above_50': Insert('post_menopausal_range', after='amenorrhea_history',
+                           section='Childbearing Potential')}
+
+    def get_key(self, request, obj=None):
+        consent_cls = django_apps.get_model('esr21_subject.informedconsent')
+
+        try:
+            consent_obj = consent_cls.objects.get(
+                subject_identifier=request.GET.get('subject_identifier'))
+        except consent_cls.DoesNotExist:
+            pass
+        else:
+            try:
+                visit_obj = self.visit_model.objects.get(
+                    id=request.GET.get('subject_visit'))
+            except self.visit_model.DoesNotExist:
+                pass
+            else:
+                if age(consent_obj.dob, visit_obj.report_datetime).years >= 50:
+                    return 'above_50'
+

@@ -1,133 +1,73 @@
 from django.db import models
+from django_countries.fields import CountryField
 from edc_base.model_fields import OtherCharField
-from edc_constants.choices import YES_NO, YES_NO_NA, NOT_APPLICABLE
+from edc_constants.choices import YES_NO
 
-from edc_base.model_mixins import BaseUuidModel
-from edc_base.sites import SiteModelMixin
-from edc_identifier.model_mixins import NonUniqueSubjectIdentifierFieldMixin
-from edc_base.utils import get_utcnow
-from ..maternal_choices import (MARITAL_STATUS, ETHNICITY, HIGHEST_EDUCATION,
-                                CURRENT_OCCUPATION, MONEY_PROVIDER,
-                                MONEY_EARNED, WATER_SOURCE, TOILET_FACILITY,
-                                HOUSE_TYPE)
+from ..maternal_choices import ETHNICITY, HIGHEST_EDUCATION
+from .model_mixins import CrfModelMixin
+from ..choices import EMPLOYMENT_STATUS, SETTLEMENT_TYPE, MARITAL_STATUS
 
 
-class DemographicsData(NonUniqueSubjectIdentifierFieldMixin,
-                       SiteModelMixin, BaseUuidModel):
-    report_datetime = models.DateTimeField(
-        verbose_name='Report Date and Time',
-        default=get_utcnow,
-        help_text='Date and time of report.')
+class DemographicsData(CrfModelMixin):
 
-    marital_status = models.CharField(
-        max_length=25,
-        verbose_name="Current Marital status ",
-        choices=MARITAL_STATUS)
+    # age_at_entry = models.IntegerField(
+    #     #     verbose_name='Age at study entry',)
 
-    marital_status_other = OtherCharField(
-        max_length=35,
-        verbose_name="if other specify...",
-        blank=True,
-        null=True, )
+    country = CountryField()
 
     ethnicity = models.CharField(
         max_length=25,
-        verbose_name="Ethnicity ",
+        verbose_name='Ethnicity ',
         choices=ETHNICITY)
 
     ethnicity_other = OtherCharField(
         max_length=35,
-        verbose_name="if other specify...",
-        blank=True,
-        null=True, )
-
-    highest_education = models.CharField(
-        max_length=25,
-        verbose_name="Highest educational level completed ",
-        choices=HIGHEST_EDUCATION)
-
-    current_occupation = models.CharField(
-        max_length=75,
-        verbose_name="Current occupation",
-        choices=CURRENT_OCCUPATION)
-
-    current_occupation_other = OtherCharField(
-        max_length=35,
-        verbose_name="if other specify...",
-        blank=True,
-        null=True, )
-
-    provides_money = models.CharField(
-        max_length=50,
-        verbose_name="Who provides most of your money?",
-        choices=MONEY_PROVIDER)
-
-    provides_money_other = OtherCharField(
-        max_length=35,
-        verbose_name="if other specify...",
-        blank=True,
-        null=True, )
-
-    money_earned = models.CharField(
-        max_length=50,
-        verbose_name="How much money do you personally earn? ",
-        choices=MONEY_EARNED)
-
-    money_earned_other = OtherCharField(
-        max_length=35,
-        verbose_name="if other specify...",
-        blank=True,
-        null=True, )
-
-    own_phone = models.CharField(
-        max_length=25,
-        choices=YES_NO,
-        verbose_name="Do you have your own cell phone that you use regularly?",
-        blank=True,
-        null=True, )
-
-    water_source = models.CharField(
-        max_length=50,
-        verbose_name="At your primary home  where do you "
-                     "get most of your family's drinking water?",
-        choices=WATER_SOURCE,
-        blank=True,
-        null=True, )
-
-    house_electrified = models.CharField(
-        max_length=25,
-        choices=YES_NO,
-        verbose_name="Is there electricity in this house / compound? ",
-        blank=True,
-        null=True, )
-
-    toilet_facility = models.CharField(
-        max_length=50,
-        verbose_name=("Which of the following types of toilet facilities do "
-                      "you most often use at this house / compound? "),
-        choices=TOILET_FACILITY,
-        blank=True,
-        null=True, )
-
-    toilet_facility_other = OtherCharField(
-        max_length=35,
-        verbose_name="if other specify...",
-        blank=True,
-        null=True, )
-
-    house_people_number = models.IntegerField(
-        verbose_name="How many people, including yourself, "
-                     "stay in this home / compound most of the time?",
-        blank=True,
-        null=True)
-
-    house_type = models.CharField(
-        max_length=50,
-        verbose_name="Housing type? ",
-        choices=HOUSE_TYPE,
+        verbose_name='If other specify...',
         blank=True,
         null=True,)
 
-    class Meta:
-        verbose_name = "DemographicsData"
-        verbose_name_plural = "DemographicsData"
+    household_members = models.PositiveSmallIntegerField(
+        verbose_name='How many household members live in the '
+                     'participants primary home',)
+
+    highest_education = models.CharField(
+        verbose_name='Highest education level',
+        max_length=30,
+        choices=HIGHEST_EDUCATION)
+
+    employment_status = models.CharField(
+        verbose_name='Employment Status',
+        max_length=33,
+        choices=EMPLOYMENT_STATUS)
+
+    employment_status_other = models.CharField(
+        verbose_name='Other, specify',
+        max_length=33,
+        blank=True,
+        null=True)
+
+    settlement_type = models.CharField(
+        verbose_name='Settlement Type?',
+        max_length=30,
+        choices=SETTLEMENT_TYPE)
+
+    marital_status = models.CharField(
+        verbose_name='Current marital status?',
+        max_length=30,
+        choices=MARITAL_STATUS)
+
+    marital_status_other = models.CharField(
+        verbose_name='Other, specify',
+        max_length=30,
+        blank=True,
+        null=True)
+
+    running_water = models.CharField(
+        verbose_name='Is there running water in domicile?',
+        max_length=30,
+        choices=YES_NO)
+
+    class Meta(CrfModelMixin.Meta):
+        app_label = 'esr21_subject'
+        verbose_name = 'Demographic Data'
+        verbose_name_plural = 'Demographic Data'

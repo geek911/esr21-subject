@@ -1,56 +1,38 @@
 from django.contrib import admin
 from edc_model_admin import audit_fieldset_tuple
 
+from .modeladmin_mixins import CrfModelAdminMixin
 from ..forms import DemographicsDataForm
 from ..models import DemographicsData
-from ..admin_site import vaccine_subject_admin
+from ..admin_site import esr21_subject_admin
 
 
-@admin.register(DemographicsData, site=vaccine_subject_admin)
-class DemographicDataAdmin(admin.ModelAdmin):
+@admin.register(DemographicsData, site=esr21_subject_admin)
+class DemographicDataAdmin(CrfModelAdminMixin, admin.ModelAdmin):
     form = DemographicsDataForm
-
-    list_display = ('marital_status',
-                    'ethnicity',
-                    'highest_education',
-                    'own_phone')
-    list_filter = ('marital_status',
-                   'ethnicity',
-                   'highest_education',
-                   'own_phone')
 
     fieldsets = (
         (None, {
             'fields': [
+                'subject_visit',
                 'report_datetime',
-                'marital_status',
-                'marital_status_other',
+                'country',
                 'ethnicity',
                 'ethnicity_other',
+                'household_members',
                 'highest_education',
-                'current_occupation',
-                'current_occupation_other',
-                'provides_money',
-                'provides_money_other',
-                'money_earned',
-                'money_earned_other',
-                'own_phone',
-                'water_source',
-                'house_electrified',
-                'toilet_facility',
-                'toilet_facility_other',
-                'house_people_number',
-                'house_type']}
+                'employment_status',
+                'employment_status_other',
+                'settlement_type',
+                'marital_status',
+                'marital_status_other',
+                'running_water',
+               ]}
          ), audit_fieldset_tuple)
 
-    radio_fields = {'marital_status': admin.VERTICAL,
-                    'ethnicity': admin.VERTICAL,
+    radio_fields = {'ethnicity': admin.VERTICAL,
                     'highest_education': admin.VERTICAL,
-                    'current_occupation': admin.VERTICAL,
-                    'provides_money': admin.VERTICAL,
-                    'money_earned': admin.VERTICAL,
-                    'own_phone': admin.VERTICAL,
-                    'water_source': admin.VERTICAL,
-                    'house_electrified': admin.VERTICAL,
-                    'toilet_facility': admin.VERTICAL,
-                    'house_type': admin.VERTICAL, }
+                    'employment_status': admin.VERTICAL,
+                    'settlement_type': admin.VERTICAL,
+                    'marital_status': admin.VERTICAL,
+                    'running_water': admin.VERTICAL, }

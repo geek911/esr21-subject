@@ -1,5 +1,5 @@
 from edc_constants.choices import YES, NO
-from edc_constants.constants import OTHER, NOT_APPLICABLE
+from edc_constants.constants import OTHER, UNKNOWN
 
 
 YES_NO_DNT_DWTA = (
@@ -112,3 +112,17 @@ IS_DATE_ESTIMATED = (
     ('Yes, estimated Year, Month and Day',
      'Yes, estimated Year, Month and Day'),
 )
+OUTCOME = (
+    ('live_birth', 'Live Birth'),
+    ('miscarriage', 'Miscarriage'),
+    ('abortion', 'Abortion'),
+)
+CHILDBEARING = (
+    ('post-menopausal', 'Post-Menopausal'),
+    ('surgically_sterile', 'Surgically Sterile'),
+    (OTHER, 'Other, specify'),)
+
+RACE = (
+    ('reported', 'Reported'),
+    ('not_reported', 'Not Reported'),
+    (UNKNOWN, 'Unknown'),)

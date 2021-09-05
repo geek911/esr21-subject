@@ -1,5 +1,5 @@
 """
-ASGI config for vaccine_subject project.
+ASGI config for esr21_subject project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'vaccine_subject.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'esr21_subject.settings')
 
 application = get_asgi_application()
