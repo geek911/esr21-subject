@@ -22,7 +22,7 @@ v1 = Consent(
         datetime(2022, 5, 31, 23, 59, 59), tzinfo=tzinfo).to('UTC').datetime,
     age_min=18,
     age_is_adult=18,
-    age_max=60,
+    age_max=None,
     gender=[MALE, FEMALE, OTHER])
 
 site_consents.register(v1)
