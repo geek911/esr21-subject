@@ -10,7 +10,8 @@ class PregnancyStatusForm(SubjectModelFormMixin, forms.ModelForm):
 
     child_bearing_potential = forms.CharField(
         label='Child Bearing Potential',
-        widget=forms.TextInput(attrs={'readonly': 'readonly'}))
+        widget=forms.TextInput(attrs={'readonly': 'readonly'}),
+        required=False)
 
     class Meta:
         model = PregnancyStatus

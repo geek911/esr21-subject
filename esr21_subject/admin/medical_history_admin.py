@@ -50,7 +50,6 @@ class MedicalHistoryAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                 'clinical_bleeding',
                 'guillain_barre_syndrome',
                 'suspected_immuno_condition',
-                'significant_disease',
                 'relevant_history',
                 'prior_covid_infection',
                 'covid_symptoms',
@@ -70,19 +69,17 @@ class MedicalHistoryAdmin(CrfModelAdminMixin, admin.ModelAdmin):
     )
 
     radio_fields = {
-        'relevant_history': admin.VERTICAL,
+        'pregnancy_status': admin.VERTICAL,
         'prior_covid_infection': admin.VERTICAL,
         'smoking_status': admin.VERTICAL,
         'alcohol_status': admin.VERTICAL,
         'diabetes': admin.VERTICAL,
         'mode_of_transport': admin.VERTICAL,
         'using_shared_kitchen': admin.VERTICAL,
-        'pregnancy_status': admin.VERTICAL,
         'thrombosis_or_thrombocytopenia': admin.VERTICAL,
         'clinical_bleeding': admin.VERTICAL,
         'guillain_barre_syndrome': admin.VERTICAL,
         'suspected_immuno_condition': admin.VERTICAL,
-        'significant_disease': admin.VERTICAL,
     }
 
     filter_horizontal = ('covid_symptoms', 'comorbidities')
