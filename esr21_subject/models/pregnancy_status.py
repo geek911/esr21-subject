@@ -1,10 +1,11 @@
 from django.db import models
 from edc_base.model_fields import OtherCharField
 from edc_base.model_validators.date import date_not_future, date_is_future
-from edc_constants.choices import YES_NO, YES_NO_NA
+from edc_constants.choices import YES_NO
 from .list_models import Contraception
 from .model_mixins import CrfModelMixin
 from ..choices import YES_NO_OTHER
+from edc_constants.constants import NO, YES
 
 
 class PregnancyStatus(CrfModelMixin):
@@ -52,7 +53,7 @@ class PregnancyStatus(CrfModelMixin):
     post_menopausal_range = models.CharField(
         verbose_name=('Does the participant have a follicle-stimulating hormone level in the'
                       ' post-menopausal range?'),
-        choices=YES_NO_NA,
+        choices=YES_NO,
         max_length=12,
         help_text=('Until follicle-stimulating hormone is documented to be within menopausal'
                    ' range, the participant is to be considered of childbearing potential.')
@@ -74,6 +75,10 @@ class PregnancyStatus(CrfModelMixin):
         max_length=200,
         null=True,
         blank=True)
+
+    child_bearing_potential = models.CharField(
+        max_length=3,
+        choices=YES_NO)
 
     """""Pregnancy History"""""
 
@@ -104,6 +109,14 @@ class PregnancyStatus(CrfModelMixin):
         null=True,
         blank=True)
 
+    def save(self, *args, **kwargs):
+
+        if self.post_menopausal == NO and self.surgically_sterilized == NO:
+            self.child_bearing_potential = YES
+        else:
+            self.child_bearing_potential = NO
+
+        super().save(*args, **kwargs)
 
     class Meta(CrfModelMixin.Meta):
         app_label = 'esr21_subject'

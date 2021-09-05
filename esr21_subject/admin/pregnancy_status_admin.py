@@ -1,7 +1,9 @@
+from django.apps import apps as django_apps
 from django.contrib import admin
 from django.db import models
 from django.forms import Textarea
-
+from edc_base.utils import age
+from edc_fieldsets.fieldlist import Insert
 from .modeladmin_mixins import CrfModelAdminMixin
 from ..forms import PregnancyStatusForm
 from ..models import PregnancyStatus
@@ -35,10 +37,11 @@ class PregnancyStatusAdmin(CrfModelAdminMixin, admin.ModelAdmin):
             'fields': (
                 'surgically_sterilized',
                 'amenorrhea_history',
-                'post_menopausal_range',
                 'post_menopausal',
                 'post_menopausal_other',
+                'child_bearing_potential',
                 'comment',
+
             )
 
         }),
@@ -61,3 +64,26 @@ class PregnancyStatusAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                     'post_menopausal': admin.VERTICAL}
 
     filter_horizontal = ('contraceptive',)
+
+    conditional_fieldlists = {
+        'above_50': Insert('post_menopausal_range', after='amenorrhea_history',
+                           section='Childbearing Potential')}
+
+    def get_key(self, request, obj=None):
+        consent_cls = django_apps.get_model('esr21_subject.informedconsent')
+
+        try:
+            consent_obj = consent_cls.objects.get(
+                subject_identifier=request.GET.get('subject_identifier'))
+        except consent_cls.DoesNotExist:
+            pass
+        else:
+            try:
+                visit_obj = self.visit_model.objects.get(
+                    id=request.GET.get('subject_visit'))
+            except self.visit_model.DoesNotExist:
+                pass
+            else:
+                if age(consent_obj.dob, visit_obj.report_datetime).years >= 50:
+                    return 'above_50'
+
