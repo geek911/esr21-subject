@@ -52,19 +52,21 @@ class SubjectRequisition(
         verbose_name='Study site',
         max_length=25,)
 
+    item_count = models.IntegerField(
+        verbose_name='Total number of items',
+        help_text=(
+            'Number of tubes, samples, etc being sent for this test/order only. '
+            'Determines number of labels to print'),
+        null=True,
+        blank=True)
+
     estimated_volume = models.DecimalField(
         verbose_name='Estimated volume in mL',
         max_digits=7,
         decimal_places=2,
         help_text=(
             'If applicable, estimated volume of sample for this test/order. '
-            'This is the total volume if number of "tubes" above is greater than 1'))
-
-    item_count = models.IntegerField(
-        verbose_name='Total number of items',
-        help_text=(
-            'Number of tubes, samples, etc being sent for this test/order only. '
-            'Determines number of labels to print'),
+            'This is the total volume if number of "tubes" above is greater than 1'),
         null=True,
         blank=True)
 
