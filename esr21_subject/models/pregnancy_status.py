@@ -78,7 +78,8 @@ class PregnancyStatus(CrfModelMixin):
 
     child_bearing_potential = models.CharField(
         max_length=3,
-        choices=YES_NO)
+        choices=YES_NO,
+        blank=True)
 
     """""Pregnancy History"""""
 
