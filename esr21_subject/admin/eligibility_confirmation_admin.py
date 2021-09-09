@@ -20,11 +20,12 @@ class EligibilityConfirmationAdmin(ModelAdminMixin, admin.ModelAdmin):
                 'participating_in_other_studies',
                 'age_in_years',
                 'any_vaccine_receipt',
-                'received_vaccines', )}),
+                'received_vaccines',)}),
         audit_fieldset_tuple)
 
     radio_fields = {
         'received_vaccines': admin.VERTICAL,
+        'any_vaccine_receipt': admin.VERTICAL,
         'participating_in_other_studies': admin.VERTICAL,
     }
 
