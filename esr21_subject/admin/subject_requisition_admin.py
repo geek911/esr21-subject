@@ -3,6 +3,7 @@ from edc_lab.admin import RequisitionAdminMixin
 from edc_lab.admin import requisition_verify_fields
 from edc_lab.admin import requisition_verify_fieldset, requisition_status_fieldset
 from edc_model_admin import audit_fieldset_tuple
+from edc_senaite_interface.admin import SenaiteRequisitionAdminMixin
 
 from ..admin_site import esr21_subject_admin
 from ..forms import SubjectRequisitionForm
@@ -23,7 +24,7 @@ requisition_identifier_fieldset = (
 
 @admin.register(SubjectRequisition, site=esr21_subject_admin)
 class SubjectRequisitionAdmin(CrfModelAdminMixin, RequisitionAdminMixin,
-                              admin.ModelAdmin):
+                              SenaiteRequisitionAdminMixin, admin.ModelAdmin):
 
     form = SubjectRequisitionForm
     ordering = ('requisition_identifier',)
