@@ -1,0 +1,49 @@
+from django.contrib import admin
+from edc_model_admin.inlines import StackedInlineMixin
+
+from .modeladmin_mixins import CrfModelAdminMixin
+from ..forms import SpecialInterestAdverseEventRecordForm, SpecialInterestAdverseEventForm
+from ..models import SpecialInterestAdverseEvent, SpecialInterestAdverseEventRecord
+from ..admin_site import esr21_subject_admin
+
+
+class SpecialInterestAdverseEventInlineAdmin(StackedInlineMixin,
+                                             admin.StackedInline):
+
+    model = SpecialInterestAdverseEventRecord
+    form = SpecialInterestAdverseEventRecordForm
+
+    extra = 0
+    max_num = 3
+
+    fieldsets = (
+        ('Participants should be encouraged to report any adverse events reported in '
+         'the AE form', {
+             'fields': [
+                 'aesi_name',
+                 'meddra_pname',
+                 'meddra_pcode',
+                 'meddra_version',
+                 'start_date',
+                 'end_date',
+                 'date_aware_of',
+                 'aesi_category',
+                 'rationale',
+                 'describe_aesi_treatmnt',
+                 'additional_info',
+             ]}
+         ),)
+
+    radio_fields = {
+        'aesi_category': admin.VERTICAL,
+    }
+
+
+@admin.register(SpecialInterestAdverseEvent, site=esr21_subject_admin)
+class SpecialInterestAdverseEventAdmin(CrfModelAdminMixin, admin.ModelAdmin):
+
+    form = SpecialInterestAdverseEventForm
+    inlines = [SpecialInterestAdverseEventInlineAdmin, ]
+
+    extra = 0
+    max_num = 3
