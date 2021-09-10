@@ -80,6 +80,7 @@ class MedicalHistoryAdmin(CrfModelAdminMixin, admin.ModelAdmin):
         'clinical_bleeding': admin.VERTICAL,
         'guillain_barre_syndrome': admin.VERTICAL,
         'suspected_immuno_condition': admin.VERTICAL,
+        'relevant_history': admin.VERTICAL,
     }
 
     filter_horizontal = ('covid_symptoms', 'comorbidities')
