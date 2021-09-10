@@ -48,7 +48,7 @@ class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
         verbose_name='MedDRA Preferred Code OF the SAE',
         max_length=50)
 
-    meddra_version = models.IntegerField(
+    meddra_version = models.PositiveIntegerField(
         verbose_name='MedDRA version')
 
     sae_intensity = models.CharField(
@@ -98,11 +98,6 @@ class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
         verbose_name=('Investigator\'s rationale for Study Treatment being '
                       'Related to the events'),
         max_length=100)
-
-    event_abate = models.CharField(
-        verbose_name='Did the event abate after drug discontinuation?',
-        choices=YES_NO,
-        max_length=3)
 
     describe_sae_treatmnt = models.TextField(
         verbose_name='Describe treatment for event including medications',

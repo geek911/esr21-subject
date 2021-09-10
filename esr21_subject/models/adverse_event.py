@@ -92,7 +92,7 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
         choices=STATUS,)
 
     ae_grade = models.CharField(
-        verbose_name='FDA Severity Grading',
+        verbose_name='Common Terminology Criteria for Adverse Events (CTCAE) grading',
         max_length=30,
         choices=AE_GRADE)
 

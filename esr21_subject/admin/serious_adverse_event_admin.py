@@ -33,15 +33,13 @@ class SeriousAdverseEventRecordInlineAdmin(StackedInlineMixin, admin.StackedInli
                 'incapacity_specify',
                 'medical_event_other',
                 'rationale',
-                'event_abate',
                 'describe_sae_treatmnt',
                 'test_performed',
                 'additional_info',
             ]}
          ),)
 
-    radio_fields = {'sae_intensity': admin.VERTICAL,
-                    'event_abate': admin.VERTICAL, }
+    radio_fields = {'sae_intensity': admin.VERTICAL, }
 
     filter_horizontal = ('seriousness_criteria',)
 
