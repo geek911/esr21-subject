@@ -28,11 +28,11 @@ class AdverseEventRecordForm(SubjectModelFormMixin, forms.ModelForm):
                 msg = {'serious_event':
                            'Please complete the serious adverse event table.'}
                 raise forms.ValidationError(msg)
-        elif serious_event == NO and int(serious_ae) != 0:
-            msg = {'serious_event':
-                       'This is not a serious AE, please *DO NOT* complete the '
-                       'serious adverse event table.'}
-            raise forms.ValidationError(msg)
+            elif serious_event == NO and int(serious_ae) != 0:
+                msg = {'serious_event':
+                           'This is not a serious AE, please *DO NOT* complete the '
+                           'serious adverse event table.'}
+                raise forms.ValidationError(msg)
 
         special_interest_ae = cleaned_data.get('special_interest_ae')
         aesi = self.data.get('specialinterestadverseevent_set-TOTAL_FORMS')
