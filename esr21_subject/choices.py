@@ -241,7 +241,7 @@ REASON_NOT_DRAWN = (
     ('equipment_malfunction', 'Equipment malfunction'),
     ('staff_unavailable', 'Staff unavailable'),
     ('no_further_information', 'No further information'),
-    (OTHER,'Other, specify'),
+    (OTHER, 'Other, specify'),
     (NOT_APPLICABLE, 'Not applicable'),
 )
 
@@ -277,6 +277,12 @@ TEMP_UNITS = (
 TREATMENT_RELATIONSHIP = (
     ('related', 'Related'),
     ('not_related', 'Not Related'),
+)
+
+TREATMENT_RELATIONSHIP_WITH_NA = (
+    ('related', 'Related'),
+    ('not_related', 'Not Related'),
+    (NOT_APPLICABLE, 'Not Applicable')
 )
 
 UNIT_OPTIONS = (
