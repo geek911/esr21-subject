@@ -42,11 +42,15 @@ class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
 
     meddra_pname = models.CharField(
         verbose_name='MedDRA Preferred Name of the SAE',
-        max_length=100)
+        max_length=100,
+        blank=True,
+        null=True)
 
     meddra_pcode = models.CharField(
         verbose_name='MedDRA Preferred Code OF the SAE',
-        max_length=50)
+        max_length=50,
+        blank=True,
+        null=True)
 
     meddra_version = models.PositiveIntegerField(
         verbose_name='MedDRA version')
