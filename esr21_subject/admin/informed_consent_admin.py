@@ -9,7 +9,7 @@ from edc_model_admin import (
     ModelAdminFormAutoNumberMixin, ModelAdminInstitutionMixin,
     audit_fieldset_tuple, audit_fields, ModelAdminNextUrlRedirectMixin,
     ModelAdminNextUrlRedirectError, ModelAdminReplaceLabelTextMixin,
-    ModelAdminFormInstructionsMixin)
+    ModelAdminFormInstructionsMixin, ModelAdminAuditFieldsMixin)
 from edc_model_admin import ModelAdminBasicMixin, ModelAdminReadOnlyMixin
 from simple_history.admin import SimpleHistoryAdmin
 
@@ -24,7 +24,7 @@ class ModelAdminMixin(ModelAdminNextUrlRedirectMixin, ModelAdminFormAutoNumberMi
                       ModelAdminRevisionMixin, ModelAdminReplaceLabelTextMixin,
                       ModelAdminInstitutionMixin, ModelAdminReadOnlyMixin,
                       VersionControlMixin, ModelAdminFormInstructionsMixin,
-                      ExportActionMixin):
+                      ModelAdminAuditFieldsMixin, ExportActionMixin):
 
     list_per_page = 10
     date_hierarchy = 'modified'
