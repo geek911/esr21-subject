@@ -1,6 +1,6 @@
 from django.contrib import admin
 from edc_model_admin.inlines import StackedInlineMixin
-
+from edc_model_admin import audit_fieldset_tuple
 from .modeladmin_mixins import CrfModelAdminMixin
 from ..forms import SpecialInterestAdverseEventRecordForm, SpecialInterestAdverseEventForm
 from ..models import SpecialInterestAdverseEvent, SpecialInterestAdverseEventRecord
@@ -47,3 +47,13 @@ class SpecialInterestAdverseEventAdmin(CrfModelAdminMixin, admin.ModelAdmin):
 
     extra = 0
     max_num = 3
+
+    fieldsets = (
+        (None, {
+            'fields': (
+                'subject_visit',
+                'report_datetime',
+            )
+        }),
+        audit_fieldset_tuple
+    )

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from edc_model_admin.inlines import StackedInlineMixin
-
+from edc_model_admin import audit_fieldset_tuple
 from .modeladmin_mixins import CrfModelAdminMixin
 from ..forms import SeriousAdverseEventForm, SeriousAdverseEventRecordForm
 from ..models import SeriousAdverseEventRecord, SeriousAdverseEvent
@@ -51,3 +51,13 @@ class SeriousAdverseEventAdmin(CrfModelAdminMixin, admin.ModelAdmin):
 
     form = SeriousAdverseEventForm
     inlines = [SeriousAdverseEventRecordInlineAdmin, ]
+
+    fieldsets = (
+        (None, {
+            'fields': (
+                'subject_visit',
+                'report_datetime',
+            )
+        }),
+        audit_fieldset_tuple
+    )

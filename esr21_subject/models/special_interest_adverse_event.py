@@ -4,7 +4,6 @@ from edc_base.model_mixins import BaseUuidModel
 from edc_base.model_validators import date_not_future
 from edc_base.sites import SiteModelMixin
 
-from .adverse_event import AdverseEvent
 from .model_mixins import CrfModelMixin
 from ..choices import AESI_CATEGORY
 
