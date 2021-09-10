@@ -1,7 +1,7 @@
 from django import forms
 from edc_constants.constants import YES, NO
 from esr21_subject_validation.form_validators import AdverseEventRecordFormValidator
-
+from django.core.exceptions import ValidationError
 from .form_mixins import SubjectModelFormMixin
 from ..models import AdverseEvent, AdverseEventRecord
 
@@ -21,21 +21,27 @@ class AdverseEventRecordForm(SubjectModelFormMixin, forms.ModelForm):
         serious_ae = self.data.get('seriousadverseevent_set-TOTAL_FORMS')
 
         if serious_event and serious_ae:
+            """
+            Null exception fix
+            """
             if serious_event == YES and int(serious_ae) == 0:
                 msg = {'serious_event':
                            'Please complete the serious adverse event table.'}
                 raise forms.ValidationError(msg)
-            elif serious_event == NO and int(serious_ae) != 0:
-                msg = {'serious_event':
-                           'This is not a serious AE, please *DO NOT* complete the '
-                           'serious adverse event table.'}
-                raise forms.ValidationError(msg)
+        elif serious_event == NO and int(serious_ae) != 0:
+            msg = {'serious_event':
+                       'This is not a serious AE, please *DO NOT* complete the '
+                       'serious adverse event table.'}
+            raise forms.ValidationError(msg)
 
         special_interest_ae = cleaned_data.get('special_interest_ae')
         aesi = self.data.get('specialinterestadverseevent_set-TOTAL_FORMS')
 
         if special_interest_ae and aesi:
-            if special_interest_ae == YES and int(aesi) == 0:
+            """
+            Null exception fix
+            """
+            if special_interest_ae == YES and aesi and int(aesi) == 0:
                 msg = {'special_interest_ae':
                            'Please complete the AEs of special interest table.'}
                 raise forms.ValidationError(msg)
@@ -45,6 +51,7 @@ class AdverseEventRecordForm(SubjectModelFormMixin, forms.ModelForm):
                            'complete the AEs of special interest table.'}
                 raise forms.ValidationError(msg)
 
-    class Meta:
-        model = AdverseEventRecord
-        fields = '__all__'
+
+class Meta:
+    model = AdverseEventRecord
+    fields = '__all__'

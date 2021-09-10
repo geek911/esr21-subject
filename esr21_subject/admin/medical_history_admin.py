@@ -9,7 +9,6 @@ from ..admin_site import esr21_subject_admin
 
 
 class MedicalDiagnosisInlineAdmin(StackedInlineMixin, admin.StackedInline):
-
     model = MedicalDiagnosis
     form = MedicalDiagnosisForm
 
@@ -81,6 +80,7 @@ class MedicalHistoryAdmin(CrfModelAdminMixin, admin.ModelAdmin):
         'guillain_barre_syndrome': admin.VERTICAL,
         'suspected_immuno_condition': admin.VERTICAL,
         'relevant_history': admin.VERTICAL,
+
     }
 
     filter_horizontal = ('covid_symptoms', 'comorbidities')
