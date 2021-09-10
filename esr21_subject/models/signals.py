@@ -7,6 +7,30 @@ from edc_visit_schedule.site_visit_schedules import site_visit_schedules
 from .covid19_symptomatic_infections import Covid19SymptomaticInfections
 from .informed_consent import InformedConsent
 from .onschedule import OnSchedule
+from .adverse_event import AdverseEventRecord
+
+
+@receiver(post_save, weak=False, sender=AdverseEventRecord,
+          dispatch_uid="metadata_update_on_post_save")
+def metadata_update_on_post_save(sender, instance, raw, created, using,
+                                 update_fields, **kwargs):
+    """Update the meta data record on post save of a CRF model.
+    """
+
+    if not raw:
+        try:
+            instance.adverse_event.reference_updater_cls(model_obj=instance.adverse_event)
+        except AttributeError:
+            pass
+
+        try:
+            instance.adverse_event.metadata_update()
+        except AttributeError as e:
+            if 'metadata_update' not in str(e):
+                raise
+        else:
+            if django_apps.get_app_config('edc_metadata_rules').metadata_rules_enabled:
+                instance.adverse_event.run_metadata_rules_for_crf()
 
 
 @receiver(post_save, weak=False, sender=InformedConsent,

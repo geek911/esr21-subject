@@ -1,31 +1,36 @@
 from django.db import models
-
 from edc_base.model_fields import OtherCharField
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.model_validators import date_not_future
 from edc_base.sites import SiteModelMixin
-from edc_constants.choices import SEVERITY_LEVEL
+from edc_constants.choices import SEVERITY_LEVEL, YES_NO
 
-from .adverse_event import AdverseEvent
 from .list_models import SAECriteria
-from edc_constants.choices import YES_NO
+from .model_mixins import CrfModelMixin
 
 
-class SeriousAdverseEventManager(models.Manager):
+class SeriousAdverseEventRecordManager(models.Manager):
 
-    def get_by_natural_key(self, meddra_pname, start_date, adverse_event):
-        return self.get(adverse_event=adverse_event,
+    def get_by_natural_key(self, meddra_pname, start_date, serious_adverse_event):
+        return self.get(serious_adverse_event=serious_adverse_event,
                         meddra_pname=meddra_pname,
                         start_date=start_date)
 
 
-class SeriousAdverseEvent(SiteModelMixin, BaseUuidModel):
+class SeriousAdverseEvent(CrfModelMixin):
 
-    """""Serious Adverse Event (SAE)"""""
+    """""Serious Adverse Events (SAE)"""""
 
-    adverse_event = models.ForeignKey(
-        AdverseEvent,
+    class Meta:
+        app_label = 'esr21_subject'
+        verbose_name = 'Serious Adverse Event'
+
+
+class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
+
+    serious_adverse_event = models.ForeignKey(
+        SeriousAdverseEvent,
         on_delete=models.PROTECT)
 
     sae_details = models.TextField(
@@ -37,13 +42,17 @@ class SeriousAdverseEvent(SiteModelMixin, BaseUuidModel):
 
     meddra_pname = models.CharField(
         verbose_name='MedDRA Preferred Name of the SAE',
-        max_length=100)
+        max_length=100,
+        blank=True,
+        null=True)
 
     meddra_pcode = models.CharField(
         verbose_name='MedDRA Preferred Code OF the SAE',
-        max_length=50)
+        max_length=50,
+        blank=True,
+        null=True)
 
-    meddra_version = models.IntegerField(
+    meddra_version = models.PositiveIntegerField(
         verbose_name='MedDRA version')
 
     sae_intensity = models.CharField(
@@ -94,11 +103,6 @@ class SeriousAdverseEvent(SiteModelMixin, BaseUuidModel):
                       'Related to the events'),
         max_length=100)
 
-    event_abate = models.CharField(
-        verbose_name='Did the event abate after drug discontinuation?',
-        choices=YES_NO,
-        max_length=3)
-
     describe_sae_treatmnt = models.TextField(
         verbose_name='Describe treatment for event including medications',
         max_length=200)
@@ -115,14 +119,14 @@ class SeriousAdverseEvent(SiteModelMixin, BaseUuidModel):
 
     history = HistoricalRecords()
 
-    objects = SeriousAdverseEventManager()
+    objects = SeriousAdverseEventRecordManager()
 
     def natural_key(self):
-        return (self.meddra_pname, self.start_date,) + self.adverse_event.natural_key()
+        return (self.meddra_pname, self.start_date,) + self.serious_adverse_event.natural_key()
 
-    natural_key.dependencies = ['esr21_subject.adverseevent']
+    natural_key.dependencies = ['esr21_subject.seriousadverseevent']
 
     class Meta:
         app_label = 'esr21_subject'
-        verbose_name = 'Serious Adverse Event'
-        verbose_name_plural = 'Serious Adverse Events'
+        unique_together = ('serious_adverse_event', 'start_date', 'date_aware_of')
+        verbose_name = 'Serious Adverse Event Record'

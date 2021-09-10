@@ -1,14 +1,21 @@
 from django import forms
 from edc_constants.constants import YES, NO
-from esr21_subject_validation.form_validators import AdverseEventFormValidator
+from esr21_subject_validation.form_validators import AdverseEventRecordFormValidator
 
 from .form_mixins import SubjectModelFormMixin
-from ..models import AdverseEvent
+from ..models import AdverseEvent, AdverseEventRecord
 
 
 class AdverseEventForm(SubjectModelFormMixin, forms.ModelForm):
 
-    form_validator_cls = AdverseEventFormValidator
+    class Meta:
+        model = AdverseEvent
+        fields = '__all__'
+
+
+class AdverseEventRecordForm(SubjectModelFormMixin, forms.ModelForm):
+
+    form_validator_cls = AdverseEventRecordFormValidator
 
     def clean(self):
         cleaned_data = super().clean()
@@ -37,5 +44,5 @@ class AdverseEventForm(SubjectModelFormMixin, forms.ModelForm):
             raise forms.ValidationError(msg)
 
     class Meta:
-        model = AdverseEvent
+        model = AdverseEventRecord
         fields = '__all__'

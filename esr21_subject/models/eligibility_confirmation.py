@@ -40,24 +40,25 @@ class EligibilityConfirmation(NonUniqueSubjectIdentifierFieldMixin,
 
     # TODO: Asked a question about what type of answer
     any_vaccine_receipt = models.CharField(
-        verbose_name='Any receipt of, or planned receipt of any vaccines, medications, or investigational products '
-                     'indicated for the prevention of SARS-CoV-2 infection or treatment of COVID-19?',
-        help_text='For study participants who become hospitalised with COVID-19, receipt of licensed treatment '
-                  'options and/or participation in investigational treatment studies is permitted.',
-        null=True,
-        blank=True,
-        max_length=50,
+        verbose_name=('Any receipt of, or planned receipt of any vaccines, medications, or '
+                      'investigational products indicated for the prevention of SARS-CoV-2 '
+                      'infection or treatment of COVID-19?'),
+        help_text=('For study participants who become hospitalised with COVID-19, receipt of '
+                   'licensed treatment options and/or participation in investigational '
+                   'treatment studies is permitted.'),
+        choices=YES_NO,
+        max_length=3,
     )
 
     participating_in_other_studies = models.CharField(
         verbose_name='Is the participant participating in other studies?',
         max_length=3,
         choices=YES_NO,
-        default=NO, )
+        default=NO,)
 
     age_in_years = models.IntegerField(
         verbose_name='What is the participants age?',
-        help_text='(Years)', )
+        help_text='(Years)',)
 
     received_vaccines = models.CharField(
         verbose_name='Has the participant received any vaccine other than '

@@ -1,4 +1,4 @@
-from .adverse_event import AdverseEvent
+from .adverse_event import AdverseEvent, AdverseEventRecord
 from .concomitant_medication import ConcomitantMedication
 from .covid19_preventative_behaviours import Covid19PreventativeBehaviours
 from .covid19_symptomatic_infections import Covid19SymptomaticInfections
@@ -16,9 +16,10 @@ from .pregnancy_status import PregnancyStatus
 from .pregnancy_test import PregnancyTest
 from .rapid_hiv_testing import RapidHIVTesting
 from .sample_collection import SampleCollection
-from .serious_adverse_event import SeriousAdverseEvent
+from .serious_adverse_event import SeriousAdverseEvent, SeriousAdverseEventRecord
 from .signals import informed_consent_on_post_save
 from .special_interest_adverse_event import SpecialInterestAdverseEvent
+from .special_interest_adverse_event import SpecialInterestAdverseEventRecord
 from .subject_requisition import SubjectRequisition
 from .subject_visit import SubjectVisit
 from .targeted_physical_examination import TargetedPhysicalExamination
