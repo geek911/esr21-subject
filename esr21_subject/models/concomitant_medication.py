@@ -18,10 +18,6 @@ class ConcomitantMedication(CrfModelMixin):
         max_length=40,
     )
 
-    atc_code = models.CharField(
-        verbose_name='ATC code',
-        max_length=30)
-
     dose = models.DecimalField(
         verbose_name='Dose',
         validators=[MinValueValidator(Decimal('0.00'))],

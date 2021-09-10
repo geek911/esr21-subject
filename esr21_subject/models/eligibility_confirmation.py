@@ -38,14 +38,15 @@ class EligibilityConfirmation(NonUniqueSubjectIdentifierFieldMixin,
         validators=[datetime_not_future],
         help_text='Date and time of report.')
 
-    # TODO: Asked a question about what type of answer
+    # TODO: To be discussed in the meeting
     any_vaccine_receipt = models.CharField(
         verbose_name='Any receipt of, or planned receipt of any vaccines, medications, or investigational products '
                      'indicated for the prevention of SARS-CoV-2 infection or treatment of COVID-19?',
         help_text='For study participants who become hospitalised with COVID-19, receipt of licensed treatment '
                   'options and/or participation in investigational treatment studies is permitted.',
-        null=True,
+
         blank=True,
+        null=True,
         max_length=50,
     )
 

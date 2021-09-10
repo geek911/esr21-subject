@@ -30,13 +30,19 @@ class SpecialInterestAdverseEvent(SiteModelMixin, BaseUuidModel):
 
     meddra_pname = models.CharField(
         verbose_name='MedDRA Preferred Name of the AESI',
+        null=True,
+        blank=True,
         max_length=100)
 
     meddra_pcode = models.CharField(
         verbose_name='MedDRA Preferred Code of the AESI',
+        null=True,
+        blank=True,
         max_length=50)
 
-    meddra_version = models.IntegerField(
+    meddra_version = models.PositiveIntegerField(
+        null=True,
+        blank=True,
         verbose_name='MedDRA version')
 
     start_date = models.DateField(
