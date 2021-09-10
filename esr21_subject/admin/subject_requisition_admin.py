@@ -13,7 +13,8 @@ from .modeladmin_mixins import CrfModelAdminMixin
 requisition_identifier_fields = (
     'requisition_identifier',
     'identifier_prefix',
-    'primary_aliquot_identifier'
+    'primary_aliquot_identifier',
+    'sample_id'
 )
 
 requisition_identifier_fieldset = (
