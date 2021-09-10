@@ -17,7 +17,7 @@ from edc_search.model_mixins import SearchSlugManager
 from edc_visit_tracking.managers import CrfModelManager as VisitTrackingCrfModelManager
 from edc_visit_tracking.model_mixins import CrfModelMixin as VisitTrackingCrfModelMixin
 from edc_visit_tracking.model_mixins import PreviousVisitModelMixin
-
+from edc_senaite_interface.model_mixins import SenaiteRequisitionModelMixin
 from edc_visit_schedule.model_mixins import SubjectScheduleCrfModelMixin
 
 from ..choices import REASON_NOT_DRAWN, ITEM_TYPE
@@ -36,7 +36,7 @@ class SubjectRequisition(
         VisitTrackingCrfModelMixin, SubjectScheduleCrfModelMixin,
         RequiresConsentFieldsModelMixin, PreviousVisitModelMixin,
         RequisitionReferenceModelMixin, UpdatesRequisitionMetadataModelMixin,
-        SearchSlugModelMixin, BaseUuidModel):
+        SearchSlugModelMixin, SenaiteRequisitionModelMixin, BaseUuidModel):
 
     lab_profile_name = 'esr21_subject'
 
