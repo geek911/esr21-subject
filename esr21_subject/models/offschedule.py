@@ -29,4 +29,29 @@ class OffSchedule(OffScheduleModelMixin, BaseUuidModel):
         pass
 
     class Meta:
-        unique_together = ('subject_identifier', 'schedule_name')
+        unique_together = ('subject_identifier', 'offschedule_datetime')
+
+
+class OffScheduleIll(OffScheduleModelMixin, BaseUuidModel):
+
+    schedule_name = models.CharField(
+        max_length=25,
+        blank=True,
+        null=True)
+
+    consent_version = models.CharField(
+        max_length=2,
+        blank=True,
+        null=True)
+
+    objects = SubjectIdentifierManager()
+
+    on_site = CurrentSiteManager()
+
+    history = HistoricalRecords()
+
+    def take_off_schedule(self):
+        pass
+
+    class Meta:
+        unique_together = ('subject_identifier', 'offschedule_datetime')

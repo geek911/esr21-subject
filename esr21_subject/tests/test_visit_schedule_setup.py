@@ -17,7 +17,7 @@ class TestVisitScheduleSetup(TestCase):
         import_holidays()
 
     @tag('vsm')
-    def test_consented_onschedule_subcohort(self):
+    def test_consented_onschedule_maincohort(self):
         """Assert that a participant is put onschedule for main study.
         """
 
@@ -36,25 +36,25 @@ class TestVisitScheduleSetup(TestCase):
             subject_identifier=informed_consent.subject_identifier,
             schedule_name='esr21_fu_schedule').count(), 1)
 
-    @tag('vs0')
-    def test_consented_onschedule_mainstudy(self):
-        """Assert that a participant is put onschedule for main study.
-        """
-        for i in range(3001):
-            mommy.make_recipe(
-                'esr21_subject.eligibilityconfirmation',)
-
-            mommy.make_recipe(
-                'esr21_subject.informedconsent',
-                subject_identifier=f'123-987{i}')
-
-        self.assertEqual(OnSchedule.objects.filter(
-            subject_identifier='123-9873000',
-            schedule_name='esr21_sub_enrol_schedule').count(), 1)
-
-        self.assertEqual(OnSchedule.objects.filter(
-            subject_identifier='123-9873000',
-            schedule_name='esr21_sub_fu_schedule').count(), 1)
+    # @tag('vs0')
+    # def test_consented_onschedule_subcohort(self):
+        # """Assert that a participant is put onschedule for subcohort.
+        # """
+        # for i in range(3001):
+            # mommy.make_recipe(
+                # 'esr21_subject.eligibilityconfirmation',)
+                #
+            # mommy.make_recipe(
+                # 'esr21_subject.informedconsent',
+                # subject_identifier=f'123-987{i}')
+                #
+        # self.assertEqual(OnSchedule.objects.filter(
+            # subject_identifier='123-9873000',
+            # schedule_name='esr21_sub_enrol_schedule').count(), 1)
+            #
+        # self.assertEqual(OnSchedule.objects.filter(
+            # subject_identifier='123-9873000',
+            # schedule_name='esr21_sub_fu_schedule').count(), 1)
 
     @tag('vs1')
     def test_illness_onschedule(self):
@@ -154,13 +154,17 @@ class TestVisitScheduleSetup(TestCase):
 
         mommy.make_recipe(
             'esr21_subject.subjectvisit',
-            appointment=Appointment.objects.get(visit_code='1000'),
+            appointment=Appointment.objects.get(
+                visit_code='1000',
+                subject_identifier=informed_consent.subject_identifier),
             report_datetime=get_utcnow(),
             reason=SCHEDULED)
 
         visit1 = mommy.make_recipe(
             'esr21_subject.subjectvisit',
-            appointment=Appointment.objects.get(visit_code='1007'),
+            appointment=Appointment.objects.get(
+                visit_code='1007',
+                subject_identifier=informed_consent.subject_identifier),
             report_datetime=get_utcnow(),
             reason=SCHEDULED)
 
@@ -173,11 +177,16 @@ class TestVisitScheduleSetup(TestCase):
             subject_identifier=informed_consent.subject_identifier,
             schedule_name='esr21_illness_schedule').count(), 1)
 
-        mommy.make_recipe(
-            'esr21_subject.offschedule',
-            schedule_name='esr21_illness_schedule',
-            consent_version='1',
-            subject_identifier=informed_consent.subject_identifier)
+        appt = Appointment.objects.get(
+                visit_code='2028',
+                subject_identifier=informed_consent.subject_identifier)
+
+        appt.appt_status = COMPLETE_APPT
+        appt.save()
+
+        # mommy.make_recipe(
+            # 'esr21_subject.offscheduleill',
+            # subject_identifier=informed_consent.subject_identifier)
 
         visit2 = mommy.make_recipe(
             'esr21_subject.subjectvisit',

@@ -8,7 +8,7 @@ from .hospitalisation import Hospitalisation
 from .informed_consent import InformedConsent
 from .medical_history import MedicalDiagnosis
 from .medical_history import MedicalHistory
-from .offschedule import OffSchedule
+from .offschedule import OffSchedule, OffScheduleIll
 from .onschedule import OnSchedule, OnScheduleIll
 from .personal_contact_info import PersonalContactInfo
 from .physical_exam import PhysicalExam
