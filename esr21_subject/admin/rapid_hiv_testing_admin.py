@@ -16,25 +16,26 @@ class RapidHIVTestingAdmin(CrfModelAdminMixin, admin.ModelAdmin):
             'fields': [
                 'subject_visit',
                 'report_datetime',
-                'current_hiv_status',
+                'prev_hiv_test',
                 'evidence_hiv_status',
-                'week32_test',
-                'week32_test_date',
-                'week32_result',
+                'hiv_test_date',
+                'hiv_result',
                 'rapid_test_done',
-                'result_date',
-                'result',
+                'rapid_test_date',
+                'rapid_test_result',
                 'comments']}
          ), audit_fieldset_tuple)
 
     list_display = ('rapid_test_done',
-                    'result')
-    list_filter = ('rapid_test_done', 'result')
-    search_fields = ('result_date',)
+                    'rapid_test_result')
+
+    list_filter = ('prev_hiv_test', 'hiv_result', 'rapid_test_done', 'rapid_test_date')
+
+    search_fields = ('rapid_test_date',)
+
     radio_fields = {
         'rapid_test_done': admin.VERTICAL,
-        'current_hiv_status': admin.VERTICAL,
         'evidence_hiv_status': admin.VERTICAL,
-        'week32_test': admin.VERTICAL,
-        'week32_result': admin.VERTICAL,
-        'result': admin.VERTICAL, }
+        'prev_hiv_test': admin.VERTICAL,
+        'hiv_result': admin.VERTICAL,
+        'rapid_test_result': admin.VERTICAL, }
