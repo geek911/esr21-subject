@@ -28,7 +28,6 @@ class RapidHIVTestingForm(SubjectModelFormMixin, forms.ModelForm):
 
         subject_visit = self.cleaned_data.get('subject_visit')
 
-        # import pdb; pdb.set_trace()
         if hiv_test_date:
 
             rapid_test_done = self.cleaned_data.get('rapid_test_done')
