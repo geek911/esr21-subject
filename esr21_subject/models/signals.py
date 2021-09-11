@@ -41,19 +41,19 @@ def informed_consent_on_post_save(sender, instance, raw, created, **kwargs):
         if created:
             instance.registration_update_or_create()
 
-        if is_subcohort_full():
-            cohort = 'esr21'
-        else:
-            cohort = 'esr21_sub'
+        # if is_subcohort_full():
+        cohort = 'esr21'
+        # else:
+            # cohort = 'esr21_sub'
 
-            onschedule_model = 'esr21_subject.onschedule'
-            put_on_schedule(f'{cohort}_enrol_schedule', instance=instance,
-                            onschedule_model=onschedule_model,
-                            onschedule_datetime=instance.consent_datetime)
+        onschedule_model = 'esr21_subject.onschedule'
+        put_on_schedule(f'{cohort}_enrol_schedule', instance=instance,
+                        onschedule_model=onschedule_model,
+                        onschedule_datetime=instance.consent_datetime)
 
-            put_on_schedule(f'{cohort}_fu_schedule', instance=instance,
-                            onschedule_model=onschedule_model,
-                            onschedule_datetime=instance.consent_datetime)
+        put_on_schedule(f'{cohort}_fu_schedule', instance=instance,
+                        onschedule_model=onschedule_model,
+                        onschedule_datetime=instance.consent_datetime)
 
 
 @receiver(post_save, weak=False, sender=Covid19SymptomaticInfections,
