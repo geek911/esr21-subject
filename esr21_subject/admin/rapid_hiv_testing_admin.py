@@ -24,7 +24,7 @@ class RapidHIVTestingAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                 'rapid_test_date',
                 'rapid_test_result',
                 'comments']}
-         ), audit_fieldset_tuple)
+        ), audit_fieldset_tuple)
 
     list_display = ('rapid_test_done',
                     'rapid_test_result')
