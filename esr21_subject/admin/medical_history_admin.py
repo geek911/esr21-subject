@@ -2,10 +2,13 @@ from django.contrib import admin
 from .modeladmin_mixins import CrfModelAdminMixin
 from edc_model_admin.inlines import StackedInlineMixin
 from edc_model_admin import audit_fieldset_tuple
-
+from edc_fieldsets.fieldlist import Insert, Remove
+from django.apps import apps as django_apps
 from ..forms import MedicalHistoryForm, MedicalDiagnosisForm
 from ..models import MedicalHistory, MedicalDiagnosis
 from ..admin_site import esr21_subject_admin
+from ..models import InformedConsent
+from edc_constants.constants import MALE
 
 
 class MedicalDiagnosisInlineAdmin(StackedInlineMixin, admin.StackedInline):
@@ -38,6 +41,27 @@ class MedicalHistoryAdmin(CrfModelAdminMixin, admin.ModelAdmin):
     form = MedicalHistoryForm
 
     inlines = [MedicalDiagnosisInlineAdmin]
+
+    conditional_fieldlists = {
+
+        'remove_pregnancy_status': Remove('pregnancy_status')
+    }
+
+    def get_appointment(self, request):
+        """Returns the appointment instance for this request or None.
+        """
+        appointment_model_cls = django_apps.get_model(self.appointment_model)
+        return appointment_model_cls.objects.get(
+            pk=request.GET.get('appointment'))
+        # return None
+
+    def get_key(self, request, obj=None):
+        subject_identifier = self.get_appointment(request).subject_identifier
+
+        participent_consent = InformedConsent.objects.filter(subject_identifier=subject_identifier, gender=MALE)
+
+        if participent_consent:
+            return 'remove_pregnancy_status'
 
     fieldsets = (
         (None, {
