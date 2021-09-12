@@ -2,6 +2,7 @@ from django.db import models
 from edc_search.model_mixins import SearchSlugManager
 from edc_identifier.model_mixins import NonUniqueSubjectIdentifierFieldMixin
 from edc_base.model_mixins import BaseUuidModel
+from esr21_subject.models.second_eligibility import SecondEligibility
 from .model_mixins import SearchSlugModelMixin
 from edc_base.model_managers import HistoricalRecords
 
@@ -29,6 +30,13 @@ class ScreeningEligibility(NonUniqueSubjectIdentifierFieldMixin,SiteModelMixin,S
         default=get_utcnow,
         validators=[datetime_not_future],
         help_text='Date and time of report.')
+    
+    substance_hypersensitivity = models.CharField(
+        verbose_name=('Any hypersensitivity to the active substance or to any of the '
+                    'excipients?'),
+        choices=YES_NO,
+        max_length=3,
+    )
     
     pregnancy_status = models.CharField(
         verbose_name=('Are you pregnant or nursing or do you plan to get pregnant in the next '
@@ -73,7 +81,8 @@ class ScreeningEligibility(NonUniqueSubjectIdentifierFieldMixin,SiteModelMixin,S
 
     comorbidities = models.ManyToManyField(
         Diseases,
-        verbose_name='Comorbidities'
+        verbose_name='Comorbidities',
+        blank=True,
     )
 
     comorbidities_other = models.CharField(
@@ -92,6 +101,10 @@ class ScreeningEligibility(NonUniqueSubjectIdentifierFieldMixin,SiteModelMixin,S
         blank=True,
         null=True)
 
+    is_eligible = models.BooleanField(
+        default=False,
+    )
+
     history = HistoricalRecords()
 
     objects = EligibilityConfirmationManager()
@@ -105,7 +118,20 @@ class ScreeningEligibility(NonUniqueSubjectIdentifierFieldMixin,SiteModelMixin,S
     natural_key.dependencies = ['sites.Site']
 
     def save(self, *args, **kwargs):
-        #check for elegibility also
+        screening_eligibility = SecondEligibility(
+            substance_hypersensitivity=self.substance_hypersensitivity,
+            pregnancy_status=self.pregnancy_status,
+            thrombosis_or_thrombocytopenia=self.thrombosis_or_thrombocytopenia,
+            guillain_barre_syndrome=self.guillain_barre_syndrome,
+            suspected_immuno_condition=self.suspected_immuno_condition,
+            clinical_bleeding=self.clinical_bleeding,
+            #covid_symptoms=self.covid_symptoms,
+            #comorbidities=self.comorbidities,
+            symptoms_other=self.symptoms_other,
+            comorbidities_other=self.comorbidities_other,
+        )
+        self.is_eligible = screening_eligibility.is_eligible
+        self.ineligibility = screening_eligibility.error_message
         if not self.subject_identifier:
             self.subject_identifier = self.identifier_cls().identifier
         super().save(*args, **kwargs)   

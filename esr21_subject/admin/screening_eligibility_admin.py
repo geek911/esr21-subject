@@ -18,18 +18,20 @@ class ScreeningEligibilityAdmin(ModelAdminMixin, admin.ModelAdmin):
             'fields': (
                 'subject_identifier',
                 'report_datetime',
-                'covid_symptoms',
-                'symptoms_other',
-                'comorbidities',
+                'substance_hypersensitivity',
                 'pregnancy_status',
                 'thrombosis_or_thrombocytopenia',
                 'guillain_barre_syndrome',
                 'suspected_immuno_condition',
-                'clinical_bleeding'
+                'clinical_bleeding',
+                'covid_symptoms',
+                'symptoms_other',
+                'comorbidities',
             )}),
         audit_fieldset_tuple)
 
     radio_fields = {
+        'substance_hypersensitivity': admin.VERTICAL,
         'pregnancy_status': admin.VERTICAL,
         'thrombosis_or_thrombocytopenia': admin.VERTICAL,
         'guillain_barre_syndrome': admin.VERTICAL,
