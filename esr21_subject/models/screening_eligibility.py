@@ -105,6 +105,12 @@ class ScreeningEligibility(NonUniqueSubjectIdentifierFieldMixin,SiteModelMixin,S
         default=False,
     )
 
+    ineligibility = models.TextField(
+        verbose_name="Reason not eligible",
+        max_length=150,
+        null=True,
+    )
+
     history = HistoricalRecords()
 
     objects = EligibilityConfirmationManager()
