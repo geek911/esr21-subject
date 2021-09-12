@@ -56,7 +56,7 @@ class EligibilityConfirmation(NonUniqueSubjectIdentifierFieldMixin,
         choices=YES_NO,
         default=NO,)
 
-    age_in_years = models.IntegerField(
+    age_in_years = models.PositiveSmallIntegerField(
         verbose_name='What is the participants age?',
         help_text='(Years)',)
 
