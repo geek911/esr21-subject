@@ -40,7 +40,7 @@ class SecondEligibility:
             self.error_message.append(
                 'Participant is either pregnant or nursing or planning to get pregnant in the next '
                     '3 months')
-        if self.thrombosis_or_thrombocytopenia != None:
+        if self.thrombosis_or_thrombocytopenia == YES:
             self.error_message.append(
                 'Participant has a risk factors for or a reported history of '
                     'thrombosis and/or thrombocytopenia')
@@ -49,7 +49,7 @@ class SecondEligibility:
             self.error_message.append(
                 'Participant has a history of Guillain-Barré syndrome')
 
-        if self.suspected_immuno_condition != None:
+        if self.suspected_immuno_condition == YES:
             self.error_message.append(
                 'Participant has a confirmed or suspected immunosuppressive or immunodeficient state')
         
@@ -59,20 +59,21 @@ class SecondEligibility:
                     'of significant bleeding or bruising following intramuscular injections '
                     'or venepuncture')
         
-        if self.covid_symptoms != None:
+        if self.covid_symptoms:
             self.error_message.append(
                 'Participant has experienced covid symptoms')
         
-        if self.covid_symptoms != None:
+        if self.symptoms_other:
             self.error_message.append(
                 'Participant has experienced other covid symptoms')
         
-        if self.comorbidities != None:
+        if self.comorbidities:
             self.error_message.append(
                 'Participant has comorbidities')
 
-        if self.comorbidities_other != None:
+        if self.comorbidities_other:
             self.error_message.append(
                 'Participant has other comorbidities')
                 
         self.is_eligible = False if self.error_message else True
+        
