@@ -6,6 +6,7 @@ from edc_facility.import_holidays import import_holidays
 from edc_visit_tracking.constants import SCHEDULED
 from model_mommy import mommy
 from ..models import OnSchedule, OnScheduleIll
+from edc_appointment.constants import COMPLETE_APPT
 
 
 @tag('vs')
@@ -200,5 +201,59 @@ class TestVisitScheduleSetup(TestCase):
             symptomatic_experiences=YES)
 
         self.assertEqual(OnScheduleIll.objects.filter(
+            subject_identifier=informed_consent.subject_identifier,
+            schedule_name='esr21_illness2_schedule').count(), 1)
+
+    @tag('vs3')
+    def test_illness2_onschedule_invalid(self):
+        """Assert that a participant is not put onschedule for second illness visit
+        """
+
+        mommy.make_recipe(
+            'esr21_subject.eligibilityconfirmation',)
+
+        informed_consent = mommy.make_recipe(
+            'esr21_subject.informedconsent',
+            subject_identifier='123-9877')
+
+        mommy.make_recipe(
+            'esr21_subject.subjectvisit',
+            appointment=Appointment.objects.get(
+                visit_code='1000',
+                subject_identifier=informed_consent.subject_identifier),
+            report_datetime=get_utcnow(),
+            reason=SCHEDULED)
+
+        visit1 = mommy.make_recipe(
+            'esr21_subject.subjectvisit',
+            appointment=Appointment.objects.get(
+                visit_code='1007',
+                subject_identifier=informed_consent.subject_identifier),
+            report_datetime=get_utcnow(),
+            reason=SCHEDULED)
+
+        mommy.make_recipe(
+            'esr21_subject.covid19symptomaticinfections',
+            subject_visit=visit1,
+            symptomatic_experiences=YES)
+
+        visit2 = mommy.make_recipe(
+            'esr21_subject.subjectvisit',
+            appointment=Appointment.objects.get(
+                visit_code='1014',
+                subject_identifier=informed_consent.subject_identifier),
+            report_datetime=get_utcnow(),
+            reason=SCHEDULED)
+
+        mommy.make_recipe(
+            'esr21_subject.covid19symptomaticinfections',
+            subject_visit=visit2,
+            symptomatic_experiences=YES)
+
+        self.assertEqual(OnScheduleIll.objects.filter(
+            subject_identifier=informed_consent.subject_identifier,
+            schedule_name='esr21_illness_schedule').count(), 1)
+
+        self.assertNotEqual(OnScheduleIll.objects.filter(
             subject_identifier=informed_consent.subject_identifier,
             schedule_name='esr21_illness2_schedule').count(), 1)

@@ -9,6 +9,7 @@ from .informed_consent import InformedConsent
 from .onschedule import OnSchedule
 from .adverse_event import AdverseEventRecord
 from edc_appointment.models.appointment import Appointment
+from edc_appointment.constants import COMPLETE_APPT
 
 
 @receiver(post_save, weak=False, sender=AdverseEventRecord,
