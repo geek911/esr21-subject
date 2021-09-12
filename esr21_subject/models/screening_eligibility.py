@@ -118,20 +118,20 @@ class ScreeningEligibility(NonUniqueSubjectIdentifierFieldMixin,SiteModelMixin,S
     natural_key.dependencies = ['sites.Site']
 
     def save(self, *args, **kwargs):
-        # screening_eligibility = SecondEligibility(
-        #     substance_hypersensitivity=self.substance_hypersensitivity,
-        #     pregnancy_status=self.pregnancy_status,
-        #     thrombosis_or_thrombocytopenia=self.thrombosis_or_thrombocytopenia,
-        #     guillain_barre_syndrome=self.guillain_barre_syndrome,
-        #     suspected_immuno_condition=self.suspected_immuno_condition,
-        #     clinical_bleeding=self.clinical_bleeding,
-        #     #covid_symptoms=self.covid_symptoms,
-        #     #comorbidities=self.comorbidities,
-        #     symptoms_other=self.symptoms_other,
-        #     comorbidities_other=self.comorbidities_other,
-        # )
-        # self.is_eligible = screening_eligibility.is_eligible
-        # self.ineligibility = screening_eligibility.error_message
+        screening_eligibility = SecondEligibility(
+            substance_hypersensitivity=self.substance_hypersensitivity,
+            pregnancy_status=self.pregnancy_status,
+            thrombosis_or_thrombocytopenia=self.thrombosis_or_thrombocytopenia,
+            guillain_barre_syndrome=self.guillain_barre_syndrome,
+            suspected_immuno_condition=self.suspected_immuno_condition,
+            clinical_bleeding=self.clinical_bleeding,
+            #covid_symptoms=self.covid_symptoms,
+            #comorbidities=self.comorbidities,
+            symptoms_other=self.symptoms_other,
+            comorbidities_other=self.comorbidities_other,
+        )
+        self.is_eligible = screening_eligibility.is_eligible
+        self.ineligibility = screening_eligibility.error_message
         if not self.subject_identifier:
             self.subject_identifier = self.identifier_cls().identifier
         super().save(*args, **kwargs)   
