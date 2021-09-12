@@ -22,3 +22,4 @@ from .sample_collection_form import SampleCollectionForm
 from .subject_requisition_form import SubjectRequisitionForm
 from .vital_signs_form import VitalSignsForm
 from .targeted_physical_examination_form import TargetedPhysicalExaminationForm
+from .screening_eligibility_form import ScreeningEligibilityForm

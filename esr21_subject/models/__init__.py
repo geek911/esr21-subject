@@ -25,3 +25,4 @@ from .subject_visit import SubjectVisit
 from .targeted_physical_examination import TargetedPhysicalExamination
 from .vaccination_details import VaccinationDetails
 from .vital_signs import VitalSigns
+from .screening_eligibility import ScreeningEligibility
