@@ -1,27 +1,201 @@
 from django.test import TestCase, tag
+from edc_constants.constants import NO, YES
 
-from ..models.screening_eligibility import ScreeningEligibility
+from ..models.second_eligibility import SecondEligibility
 
-class TestEligibility(TestCase):
+@tag('screening_eligibility')
+class TestScreeningEligibility(TestCase):
 
     """
     Participant age >= 40 and <= 60 is eligible else ineligible
     """
-    @tag('valid_age_eligibility')
-    def test_valid_participant_eligibility(self):
-        eligiblity = ScreeningEligibility(age_in_years=40)
+    @tag('test_eligibility')
+    def test_eligibility(self):
+        eligiblity = SecondEligibility(
+            substance_hypersensitivity=NO,
+            pregnancy_status=NO,
+            thrombosis_or_thrombocytopenia=NO,
+            guillain_barre_syndrome=NO,
+            suspected_immuno_condition=NO,
+            clinical_bleeding=NO,
+            covid_symptoms=None,
+            comorbidities=None,
+            symptoms_other=None,
+            comorbidities_other=None,
+        )
+        print(eligiblity.error_message)
         self.assertTrue(eligiblity.is_eligible)
 
-    """Participant age < 40 are in eligible"""
-    @tag('under_age_eligibility')
-    def test_under_age_participant_ineligibility(self):
-        eligiblity = ScreeningEligibility(age_in_years=31)
+    """
+    Participant age >= 40 and <= 60 is eligible else ineligible
+    """
+    @tag('test_ineligible')
+    def test_ineligible(self):
+        eligiblity = SecondEligibility(
+            substance_hypersensitivity=YES,
+            pregnancy_status=YES,
+            thrombosis_or_thrombocytopenia=YES,
+            guillain_barre_syndrome=YES,
+            suspected_immuno_condition=YES,
+            clinical_bleeding=YES,
+            covid_symptoms=None,
+            comorbidities=None,
+            symptoms_other=None,
+            comorbidities_other=None,
+            )
         self.assertFalse(eligiblity.is_eligible)
-        self.assertIn('Participant is under 40', eligiblity.error_message)
+    
+    """
+    Participant age >= 40 and <= 60 is eligible else ineligible
+    """
+    @tag('substance_hypersensitivity_yes')
+    def test_substance_hypersensitivity_yes(self):
+        eligiblity = SecondEligibility(
+            substance_hypersensitivity=YES,
+            pregnancy_status=NO,
+            thrombosis_or_thrombocytopenia=NO,
+            guillain_barre_syndrome=NO,
+            suspected_immuno_condition=NO,
+            clinical_bleeding=NO,
+            covid_symptoms=None,
+            comorbidities=None,
+            symptoms_other=None,
+            comorbidities_other=None,
+            )
+        self.assertFalse(eligiblity.is_eligible)
+
+    """
+    Participant age >= 40 and <= 60 is eligible else ineligible
+    """
+    @tag('substance_hypersensitivity_no')
+    def test_substance_hypersensitivity_yes(self):
+        eligiblity = SecondEligibility(
+            substance_hypersensitivity=NO,
+            pregnancy_status=YES,
+            thrombosis_or_thrombocytopenia=YES,
+            guillain_barre_syndrome=YES,
+            suspected_immuno_condition=YES,
+            clinical_bleeding=YES,
+            covid_symptoms=None,
+            comorbidities=None,
+            symptoms_other=None,
+            comorbidities_other=None,
+            )
+        self.assertFalse(eligiblity.is_eligible)
+
+    """Participant age < 40 are in eligible"""
+    @tag('pregnancy_status')
+    def test_pregnancy_status(self):
+        eligiblity = SecondEligibility(
+            substance_hypersensitivity=NO,
+            pregnancy_status=YES,
+            thrombosis_or_thrombocytopenia=NO,
+            guillain_barre_syndrome=NO,
+            suspected_immuno_condition=NO,
+            clinical_bleeding=NO,
+            #covid_symptoms=self.covid_symptoms,
+            #comorbidities=self.comorbidities,
+            symptoms_other=None,
+            comorbidities_other=None,
+            )
+        self.assertFalse(eligiblity.is_eligible)
+
+    @tag('thrombosis_or_thrombocytopenia')
+    def test_thrombosis_or_thrombocytopenia(self):
+        eligiblity = SecondEligibility(
+            substance_hypersensitivity=NO,
+            pregnancy_status=NO,
+            thrombosis_or_thrombocytopenia=YES,
+            guillain_barre_syndrome=NO,
+            suspected_immuno_condition=NO,
+            clinical_bleeding=NO,
+            #covid_symptoms=self.covid_symptoms,
+            #comorbidities=self.comorbidities,
+            symptoms_other=None,
+            comorbidities_other=None,
+            )
+        self.assertFalse(eligiblity.is_eligible)
+
+    @tag('guillain_barre_syndrome')
+    def test_guillain_barre_syndrome(self):
+        eligiblity = SecondEligibility(
+            substance_hypersensitivity=NO,
+            pregnancy_status=NO,
+            thrombosis_or_thrombocytopenia=NO,
+            guillain_barre_syndrome=YES,
+            suspected_immuno_condition=NO,
+            clinical_bleeding=NO,
+            #covid_symptoms=self.covid_symptoms,
+            #comorbidities=self.comorbidities,
+            symptoms_other=None,
+            comorbidities_other=None,
+            )
+        self.assertFalse(eligiblity.is_eligible)
 
     """Participant age > 60 are in eligible"""
-    @tag('invalid_over_age_eligibility')
-    def test_over_age_participant_ineligibility(self):
-        eligiblity = ScreeningEligibility(age_in_years=61)
+    @tag('clinical_bleeding')
+    def test_clinical_bleeding(self):
+        eligiblity = SecondEligibility(
+            substance_hypersensitivity=NO,
+            pregnancy_status=NO,
+            thrombosis_or_thrombocytopenia=NO,
+            guillain_barre_syndrome=NO,
+            suspected_immuno_condition=NO,
+            clinical_bleeding=YES,
+            #covid_symptoms=self.covid_symptoms,
+            #comorbidities=self.comorbidities,
+            symptoms_other=None,
+            comorbidities_other=None,
+            )
         self.assertFalse(eligiblity.is_eligible)
-        self.assertIn('Participant is too old (>60)', eligiblity.error_message)
+
+    """Participant age > 60 are in eligible"""
+    @tag('covid_symptoms')
+    def test_thrombosis_or_thrombocytopenia(self):
+        eligiblity = SecondEligibility(
+            substance_hypersensitivity=NO,
+            pregnancy_status=NO,
+            thrombosis_or_thrombocytopenia=YES,
+            guillain_barre_syndrome=NO,
+            suspected_immuno_condition=NO,
+            clinical_bleeding=NO,
+            #covid_symptoms=self.covid_symptoms,
+            #comorbidities=self.comorbidities,
+            symptoms_other=None,
+            comorbidities_other=None,
+            )
+        self.assertFalse(eligiblity.is_eligible)
+    
+    """Participant age > 60 are in eligible"""
+    @tag('symptoms_other')
+    def test_symptoms_other(self):
+        eligiblity = SecondEligibility(
+            substance_hypersensitivity=NO,
+            pregnancy_status=NO,
+            thrombosis_or_thrombocytopenia=NO,
+            guillain_barre_syndrome=NO,
+            suspected_immuno_condition=NO,
+            clinical_bleeding=NO,
+            #covid_symptoms=self.covid_symptoms,
+            #comorbidities=self.comorbidities,
+            symptoms_other='Other',
+            comorbidities_other=None,
+            )
+        self.assertFalse(eligiblity.is_eligible)
+    
+    """Participant age > 60 are in eligible"""
+    @tag('comorbidities')
+    def test_comorbidities(self):
+        eligiblity = SecondEligibility(
+            substance_hypersensitivity=YES,
+            pregnancy_status=YES,
+            thrombosis_or_thrombocytopenia=YES,
+            guillain_barre_syndrome=YES,
+            suspected_immuno_condition=YES,
+            clinical_bleeding=YES,
+            #covid_symptoms=self.covid_symptoms,
+            #comorbidities=self.comorbidities,
+            symptoms_other=None,
+            comorbidities_other=None,
+            )
+        self.assertFalse(eligiblity.is_eligible)
