@@ -83,3 +83,13 @@ class ExportActionMixin:
                 raise ValidationError('Missing Maternal Consent form.')
             else:
                 return maternal_consent.consent_datetime
+
+
+    def render_change_form(self, request, context, add=False, change=False, form_url='', obj=None):
+        context.update({
+            'show_save': True,
+            'show_save_and_continue': False,
+            'show_save_and_add_another': False,
+            'show_delete': True
+        })
+        return super().render_change_form(request, context, add, change, form_url, obj)

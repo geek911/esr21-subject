@@ -1,6 +1,6 @@
 from .models import EligibilityConfirmation, InformedConsent, SubjectVisit
 from .models import Covid19SymptomaticInfections, OffSchedule, PregnancyStatus
-from .models import RapidHIVTesting
+from .models import RapidHIVTesting, OffScheduleIll
 from edc_base.utils import get_utcnow
 from edc_constants.constants import ALIVE, YES, ON_STUDY, PARTICIPANT
 from edc_visit_tracking.constants import SCHEDULED
@@ -44,3 +44,6 @@ covid19symptomaticinfections = Recipe(
 
 offschedule = Recipe(
     OffSchedule)
+
+offscheduleill = Recipe(
+    OffScheduleIll)
