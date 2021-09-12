@@ -8,7 +8,6 @@ from ..choices import REASON, TEMP_UNITS
 
 
 class VitalSigns(CrfModelMixin):
-
     vital_signs_measured = models.CharField(
         verbose_name='Were the vital signs measurements performed?',
         max_length=3,
@@ -56,15 +55,13 @@ class VitalSigns(CrfModelMixin):
     body_temp_unit = models.CharField(
         verbose_name='Unit of temperature',
         choices=TEMP_UNITS,
-        max_length=15,)
+        max_length=15, )
 
     oxygen_saturated = models.DecimalField(
         verbose_name='Oxygen Saturation (via Pulse Oximetry)',
         max_digits=5,
         decimal_places=2,
-        help_text='Fixed Unit: %',
-        blank=True,
-        null=True)
+        help_text='Fixed Unit: %', )
 
     comment = models.TextField(
         verbose_name='Comment',
