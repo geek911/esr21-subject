@@ -10,9 +10,9 @@ from ..choices import AESI_CATEGORY
 
 class SpecialInterestAdverseEventManager(models.Manager):
 
-    def get_by_natural_key(self, meddra_pname, start_date, special_interest_adverse_event):
+    def get_by_natural_key(self, aesi_name, start_date, special_interest_adverse_event):
         return self.get(special_interest_adverse_event=special_interest_adverse_event,
-                        meddra_pname=meddra_pname,
+                        aesi_name=aesi_name,
                         start_date=start_date)
 
 
@@ -88,7 +88,7 @@ class SpecialInterestAdverseEventRecord(SiteModelMixin, BaseUuidModel):
     objects = SpecialInterestAdverseEventManager()
 
     def natural_key(self):
-        return (self.meddra_pname, self.start_date,) + self.special_interest_adverse_event.natural_key()
+        return (self.aesi_name, self.start_date,) + self.special_interest_adverse_event.natural_key()
 
     natural_key.dependencies = ['esr21_subject.specialinterestadverseevent']
 

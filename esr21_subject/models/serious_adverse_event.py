@@ -4,7 +4,7 @@ from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.model_validators import date_not_future
 from edc_base.sites import SiteModelMixin
-from edc_constants.choices import SEVERITY_LEVEL, YES_NO
+from edc_constants.choices import SEVERITY_LEVEL
 
 from .list_models import SAECriteria
 from .model_mixins import CrfModelMixin
@@ -12,9 +12,9 @@ from .model_mixins import CrfModelMixin
 
 class SeriousAdverseEventRecordManager(models.Manager):
 
-    def get_by_natural_key(self, meddra_pname, start_date, serious_adverse_event):
+    def get_by_natural_key(self, sae_name, start_date, serious_adverse_event):
         return self.get(serious_adverse_event=serious_adverse_event,
-                        meddra_pname=meddra_pname,
+                        sae_name=sae_name,
                         start_date=start_date)
 
 
@@ -122,7 +122,7 @@ class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
     objects = SeriousAdverseEventRecordManager()
 
     def natural_key(self):
-        return (self.meddra_pname, self.start_date,) + self.serious_adverse_event.natural_key()
+        return (self.sae_name, self.start_date,) + self.serious_adverse_event.natural_key()
 
     natural_key.dependencies = ['esr21_subject.seriousadverseevent']
 
