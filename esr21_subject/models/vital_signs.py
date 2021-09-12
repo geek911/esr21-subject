@@ -8,7 +8,6 @@ from ..choices import REASON, TEMP_UNITS
 
 
 class VitalSigns(CrfModelMixin):
-
     vital_signs_measured = models.CharField(
         verbose_name='Were the vital signs measurements performed?',
         max_length=3,
@@ -26,21 +25,21 @@ class VitalSigns(CrfModelMixin):
         blank=True,
         null=True)
 
-    systolic_bp = models.IntegerField(
+    systolic_bp = models.PositiveIntegerField(
         verbose_name='Systolic Blood Pressure',
         help_text='Fixed Unit: mmHg',
         validators=[MinValueValidator(75), MaxValueValidator(220), ],
         blank=True,
         null=True)
 
-    diastolic_bp = models.IntegerField(
+    diastolic_bp = models.PositiveIntegerField(
         verbose_name='Diastolic Blood Pressure',
         help_text='Fixed Unit: mmHg',
         validators=[MinValueValidator(55), MaxValueValidator(150), ],
         blank=True,
         null=True)
 
-    heart_rate = models.IntegerField(
+    heart_rate = models.PositiveIntegerField(
         verbose_name='Heart Rate',
         help_text='beats/min',
         blank=True,
@@ -50,21 +49,25 @@ class VitalSigns(CrfModelMixin):
         verbose_name='Body Temperature',
         max_digits=5,
         decimal_places=2,
+        validators=[
+            MinValueValidator(
+                30, message="Cannot below 30"),
+            MinValueValidator(
+                60, message="Cannot be above 60"), ],
         blank=True,
         null=True)
 
     body_temp_unit = models.CharField(
         verbose_name='Unit of temperature',
         choices=TEMP_UNITS,
-        max_length=15,)
+        max_length=15, )
 
     oxygen_saturated = models.DecimalField(
         verbose_name='Oxygen Saturation (via Pulse Oximetry)',
+        validators=[MaxValueValidator(0), ],
         max_digits=5,
         decimal_places=2,
-        help_text='Fixed Unit: %',
-        blank=True,
-        null=True)
+        help_text='Fixed Unit: %', )
 
     comment = models.TextField(
         verbose_name='Comment',
