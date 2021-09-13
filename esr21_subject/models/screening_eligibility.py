@@ -124,6 +124,8 @@ class ScreeningEligibility(UniqueSubjectIdentifierModelMixin,SiteModelMixin,Sear
     natural_key.dependencies = ['sites.Site']
 
     def save(self, *args, **kwargs):
+
+        import pdb; pdb.set_trace()
         screening_eligibility = SecondEligibility(
             substance_hypersensitivity=self.substance_hypersensitivity,
             pregnancy_status=self.pregnancy_status,
@@ -131,8 +133,6 @@ class ScreeningEligibility(UniqueSubjectIdentifierModelMixin,SiteModelMixin,Sear
             guillain_barre_syndrome=self.guillain_barre_syndrome,
             suspected_immuno_condition=self.suspected_immuno_condition,
             clinical_bleeding=self.clinical_bleeding,
-            covid_symptoms=self.covid_symptoms,
-            comorbidities=self.comorbidities,
             symptoms_other=self.symptoms_other,
             comorbidities_other=self.comorbidities_other,
         )
