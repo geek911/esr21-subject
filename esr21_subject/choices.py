@@ -399,3 +399,19 @@ VACCINATION_DOSE = (
     ("second_dose", "Second Dose"),
     (NOT_APPLICABLE, 'Not applicable')
 )
+
+"""
+Greater Francistown
+Greater Gaborone
+Ngami
+Greater Selibe Phikwe
+Serowe/Palapye
+"""
+
+HUBS = (
+    ('greater_francistown', 'Greater Francistown'),
+    ('greater_gaborone', 'Greater Gaborone'),
+    ('ngami', 'Ngami'),
+    ('greater_selibe_phikwe', 'Greater Selibe Phikwe'),
+    ('serowe_or_Palapye', 'Serowe/Palapye')
+)

@@ -21,7 +21,7 @@ from edc_visit_tracking.model_mixins import PreviousVisitModelMixin
 from edc_senaite_interface.model_mixins import SenaiteRequisitionModelMixin
 from edc_visit_schedule.model_mixins import SubjectScheduleCrfModelMixin
 
-from ..choices import REASON_NOT_DRAWN, ITEM_TYPE
+from ..choices import REASON_NOT_DRAWN, ITEM_TYPE, HUBS
 from .subject_visit import SubjectVisit
 from .model_mixins import SearchSlugModelMixin
 from edc_base.model_fields.custom_fields import OtherCharField
@@ -49,6 +49,7 @@ class SubjectRequisition(
 
     study_site = models.CharField(
         verbose_name='Study site',
+        choices=HUBS,
         max_length=25, )
 
     item_count = models.PositiveIntegerField(
