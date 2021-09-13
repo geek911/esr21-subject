@@ -52,7 +52,7 @@ class VitalSigns(CrfModelMixin):
         validators=[
             MinValueValidator(
                 30, message="Cannot below 30"),
-            MinValueValidator(
+            MaxValueValidator(
                 60, message="Cannot be above 60"), ],
         blank=True,
         null=True)
