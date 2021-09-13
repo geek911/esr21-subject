@@ -24,6 +24,7 @@ class TestScreeningEligibility(TestCase):
             comorbidities_other=None,
         )
         print(eligiblity.error_message)
+        print(eligiblity.error_message)
         self.assertTrue(eligiblity.is_eligible)
 
     """
