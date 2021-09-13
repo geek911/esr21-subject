@@ -58,6 +58,7 @@ class SubjectRequisitionAdmin(CrfModelAdminMixin, RequisitionAdminMixin,
         'reason_not_drawn': admin.VERTICAL,
         'item_type': admin.VERTICAL,
         'priority': admin.VERTICAL,
+        'study_site': admin.VERTICAL,
     }
 
     list_display = ('subject_visit', 'is_drawn', 'panel', 'estimated_volume',)
