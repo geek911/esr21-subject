@@ -124,8 +124,6 @@ class ScreeningEligibility(UniqueSubjectIdentifierModelMixin,SiteModelMixin,Sear
     natural_key.dependencies = ['sites.Site']
 
     def save(self, *args, **kwargs):
-
-        import pdb; pdb.set_trace()
         screening_eligibility = SecondEligibility(
             substance_hypersensitivity=self.substance_hypersensitivity,
             pregnancy_status=self.pregnancy_status,
