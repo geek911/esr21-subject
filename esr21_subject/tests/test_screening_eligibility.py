@@ -23,7 +23,6 @@ class TestScreeningEligibility(TestCase):
             symptoms_other=None,
             comorbidities_other=None,
         )
-        print(eligiblity.error_message)
         self.assertTrue(eligiblity.is_eligible)
 
     """
@@ -93,8 +92,8 @@ class TestScreeningEligibility(TestCase):
             guillain_barre_syndrome=NO,
             suspected_immuno_condition=NO,
             clinical_bleeding=NO,
-            #covid_symptoms=self.covid_symptoms,
-            #comorbidities=self.comorbidities,
+            covid_symptoms=None,
+            comorbidities=None,
             symptoms_other=None,
             comorbidities_other=None,
             )
@@ -109,8 +108,8 @@ class TestScreeningEligibility(TestCase):
             guillain_barre_syndrome=NO,
             suspected_immuno_condition=NO,
             clinical_bleeding=NO,
-            #covid_symptoms=self.covid_symptoms,
-            #comorbidities=self.comorbidities,
+            covid_symptoms=None,
+            comorbidities=None,
             symptoms_other=None,
             comorbidities_other=None,
             )
@@ -125,8 +124,8 @@ class TestScreeningEligibility(TestCase):
             guillain_barre_syndrome=YES,
             suspected_immuno_condition=NO,
             clinical_bleeding=NO,
-            #covid_symptoms=self.covid_symptoms,
-            #comorbidities=self.comorbidities,
+            covid_symptoms=None,
+            comorbidities=None,
             symptoms_other=None,
             comorbidities_other=None,
             )
@@ -142,8 +141,8 @@ class TestScreeningEligibility(TestCase):
             guillain_barre_syndrome=NO,
             suspected_immuno_condition=NO,
             clinical_bleeding=YES,
-            #covid_symptoms=self.covid_symptoms,
-            #comorbidities=self.comorbidities,
+            covid_symptoms=None,
+            comorbidities=None,
             symptoms_other=None,
             comorbidities_other=None,
             )
@@ -159,8 +158,8 @@ class TestScreeningEligibility(TestCase):
             guillain_barre_syndrome=NO,
             suspected_immuno_condition=NO,
             clinical_bleeding=NO,
-            #covid_symptoms=self.covid_symptoms,
-            #comorbidities=self.comorbidities,
+            covid_symptoms=None,
+            comorbidities=None,
             symptoms_other=None,
             comorbidities_other=None,
             )
@@ -176,8 +175,8 @@ class TestScreeningEligibility(TestCase):
             guillain_barre_syndrome=NO,
             suspected_immuno_condition=NO,
             clinical_bleeding=NO,
-            #covid_symptoms=self.covid_symptoms,
-            #comorbidities=self.comorbidities,
+            covid_symptoms=None,
+            comorbidities=None,
             symptoms_other='Other',
             comorbidities_other=None,
             )
@@ -193,8 +192,8 @@ class TestScreeningEligibility(TestCase):
             guillain_barre_syndrome=YES,
             suspected_immuno_condition=YES,
             clinical_bleeding=YES,
-            #covid_symptoms=self.covid_symptoms,
-            #comorbidities=self.comorbidities,
+            covid_symptoms=None,
+            comorbidities=None,
             symptoms_other=None,
             comorbidities_other=None,
             )

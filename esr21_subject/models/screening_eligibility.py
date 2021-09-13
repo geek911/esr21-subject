@@ -1,6 +1,6 @@
 from django.db import models
+from edc_identifier.model_mixins import UniqueSubjectIdentifierModelMixin
 from edc_search.model_mixins import SearchSlugManager
-from edc_identifier.model_mixins import NonUniqueSubjectIdentifierFieldMixin
 from edc_base.model_mixins import BaseUuidModel
 from esr21_subject.models.second_eligibility import SecondEligibility
 from .model_mixins import SearchSlugModelMixin
@@ -23,7 +23,7 @@ class EligibilityConfirmationManager(SearchSlugManager, models.Manager):
         return self.get(screening_identifier=screening_identifier)
 
 
-class ScreeningEligibility(NonUniqueSubjectIdentifierFieldMixin,SiteModelMixin,SearchSlugModelMixin, BaseUuidModel):
+class ScreeningEligibility(UniqueSubjectIdentifierModelMixin,SiteModelMixin,SearchSlugModelMixin, BaseUuidModel):
     
     report_datetime = models.DateTimeField(
         verbose_name='Report Date and Time',
@@ -131,8 +131,6 @@ class ScreeningEligibility(NonUniqueSubjectIdentifierFieldMixin,SiteModelMixin,S
             guillain_barre_syndrome=self.guillain_barre_syndrome,
             suspected_immuno_condition=self.suspected_immuno_condition,
             clinical_bleeding=self.clinical_bleeding,
-            #covid_symptoms=self.covid_symptoms,
-            #comorbidities=self.comorbidities,
             symptoms_other=self.symptoms_other,
             comorbidities_other=self.comorbidities_other,
         )
