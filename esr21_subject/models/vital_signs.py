@@ -52,7 +52,7 @@ class VitalSigns(CrfModelMixin):
         validators=[
             MinValueValidator(
                 30, message="Cannot below 30"),
-            MinValueValidator(
+            MaxValueValidator(
                 60, message="Cannot be above 60"), ],
         blank=True,
         null=True)
@@ -64,7 +64,7 @@ class VitalSigns(CrfModelMixin):
 
     oxygen_saturated = models.DecimalField(
         verbose_name='Oxygen Saturation (via Pulse Oximetry)',
-        validators=[MaxValueValidator(0), ],
+        validators=[MinValueValidator(0), ],
         max_digits=5,
         decimal_places=2,
         help_text='Fixed Unit: %', )
