@@ -1,4 +1,5 @@
 from django.apps import apps as django_apps
+from django.core.validators import MinValueValidator
 from django.db import models
 from django.db.models.deletion import PROTECT
 from django.utils import timezone
@@ -20,7 +21,7 @@ from edc_visit_tracking.model_mixins import PreviousVisitModelMixin
 from edc_senaite_interface.model_mixins import SenaiteRequisitionModelMixin
 from edc_visit_schedule.model_mixins import SubjectScheduleCrfModelMixin
 
-from ..choices import REASON_NOT_DRAWN, ITEM_TYPE
+from ..choices import REASON_NOT_DRAWN, ITEM_TYPE, HUBS
 from .subject_visit import SubjectVisit
 from .model_mixins import SearchSlugModelMixin
 from edc_base.model_fields.custom_fields import OtherCharField
@@ -31,13 +32,12 @@ class Manager(VisitTrackingCrfModelManager, SearchSlugManager):
 
 
 class SubjectRequisition(
-        NonUniqueSubjectIdentifierFieldMixin,
-        RequisitionModelMixin, RequisitionStatusMixin, RequisitionIdentifierMixin,
-        VisitTrackingCrfModelMixin, SubjectScheduleCrfModelMixin,
-        RequiresConsentFieldsModelMixin, PreviousVisitModelMixin,
-        RequisitionReferenceModelMixin, UpdatesRequisitionMetadataModelMixin,
-        SearchSlugModelMixin, SenaiteRequisitionModelMixin, BaseUuidModel):
-
+    NonUniqueSubjectIdentifierFieldMixin,
+    RequisitionModelMixin, RequisitionStatusMixin, RequisitionIdentifierMixin,
+    VisitTrackingCrfModelMixin, SubjectScheduleCrfModelMixin,
+    RequiresConsentFieldsModelMixin, PreviousVisitModelMixin,
+    RequisitionReferenceModelMixin, UpdatesRequisitionMetadataModelMixin,
+    SearchSlugModelMixin, SenaiteRequisitionModelMixin, BaseUuidModel):
     lab_profile_name = 'esr21_subject'
 
     subject_visit = models.ForeignKey(SubjectVisit, on_delete=PROTECT)
@@ -49,9 +49,10 @@ class SubjectRequisition(
 
     study_site = models.CharField(
         verbose_name='Study site',
-        max_length=25,)
+        choices=HUBS,
+        max_length=25, )
 
-    item_count = models.IntegerField(
+    item_count = models.PositiveIntegerField(
         verbose_name='Total number of items',
         help_text=(
             'Number of tubes, samples, etc being sent for this test/order only. '
@@ -61,6 +62,9 @@ class SubjectRequisition(
 
     estimated_volume = models.DecimalField(
         verbose_name='Estimated volume in mL',
+        validators=[
+            MinValueValidator(0, message="Cannot be a negative number"),
+        ],
         max_digits=7,
         decimal_places=2,
         help_text=(
@@ -81,7 +85,7 @@ class SubjectRequisition(
         verbose_name='Priority',
         max_length=25,
         choices=PRIORITY,
-        default='normal',)
+        default='normal', )
 
     reason_not_drawn = models.CharField(
         verbose_name='If not drawn, please explain',
@@ -101,7 +105,7 @@ class SubjectRequisition(
         verbose_name='If urgent, please specify',
         max_length=250,
         null=True,
-        blank=True,)
+        blank=True, )
 
     comments = models.TextField(
         max_length=350,

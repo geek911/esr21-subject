@@ -2,7 +2,7 @@ from dateutil.relativedelta import relativedelta
 from django.test import TestCase, tag
 from edc_appointment.models import Appointment
 from edc_base.utils import get_utcnow
-from edc_constants.constants import OMANG, FEMALE, MALE, NO
+from edc_constants.constants import OMANG, FEMALE, MALE, NO, YES
 from edc_facility.import_holidays import import_holidays
 from edc_metadata.constants import REQUIRED, NOT_REQUIRED
 from edc_metadata.models import CrfMetadata
@@ -38,7 +38,7 @@ class TestRuleGroups(TestCase):
 
         self.subject_identifier = self.subject_consent.subject_identifier
 
-        mommy.make_recipe(
+        self.subject_visit = mommy.make_recipe(
             'esr21_subject.subjectvisit',
             appointment=Appointment.objects.get(
                 visit_code='1000',

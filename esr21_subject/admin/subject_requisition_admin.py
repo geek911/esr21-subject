@@ -26,7 +26,6 @@ requisition_identifier_fieldset = (
 @admin.register(SubjectRequisition, site=esr21_subject_admin)
 class SubjectRequisitionAdmin(CrfModelAdminMixin, RequisitionAdminMixin,
                               SenaiteRequisitionAdminMixin, admin.ModelAdmin):
-
     form = SubjectRequisitionForm
     ordering = ('requisition_identifier',)
 
@@ -59,11 +58,21 @@ class SubjectRequisitionAdmin(CrfModelAdminMixin, RequisitionAdminMixin,
         'reason_not_drawn': admin.VERTICAL,
         'item_type': admin.VERTICAL,
         'priority': admin.VERTICAL,
+        'study_site': admin.VERTICAL,
     }
 
     list_display = ('subject_visit', 'is_drawn', 'panel', 'estimated_volume',)
 
     def get_readonly_fields(self, request, obj=None):
         return (super().get_readonly_fields(request, obj)
-                +requisition_identifier_fields
-                +requisition_verify_fields)
+                + requisition_identifier_fields
+                + requisition_verify_fields)
+
+    def render_change_form(self, request, context, add=False, change=False, form_url='', obj=None):
+        context.update({
+            'show_save': True,
+            'show_save_and_continue': False,
+            'show_save_and_add_another': False,
+            'show_delete': True
+        })
+        return super().render_change_form(request, context, add, change, form_url, obj)

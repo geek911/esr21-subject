@@ -18,7 +18,9 @@ class MedicalHistory(CrfModelMixin):
                       '3 months?'),
         max_length=3,
         choices=YES_NO,
-        default=NO
+        default=NO,
+        null=True,
+        blank=True
     )
 
     # ADDED QUESTIONS FROM THE DOC

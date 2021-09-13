@@ -37,7 +37,7 @@ class AppConfig(DjangoAppConfig):
         }
 
     def ready(self):
-        from .models import informed_consent_on_post_save
+        from .models import screening_eligibility_on_post_save
 
 
 if settings.APP_NAME == 'esr21_subject':
@@ -60,14 +60,14 @@ if settings.APP_NAME == 'esr21_subject':
         country = 'botswana'
         definitions = {
             '7-day clinic': dict(days=[MO, TU, WE, TH, FR, SA, SU],
-                                 slots=[100, 100, 100, 100, 100, 100, 100]),
+                                slots=[100, 100, 100, 100, 100, 100, 100]),
             '5-day clinic': dict(days=[MO, TU, WE, TH, FR],
-                                 slots=[100, 100, 100, 100, 100])}
+                                slots=[100, 100, 100, 100, 100])}
 
     class EdcProtocolAppConfig(BaseEdcProtocolAppConfigs):
         protocol = 'ADZ1222'
         protocol_name = 'ADZ 1222 - ESR-21-21311'
-        protocol_number = '1222'
+        protocol_number = '150'
         protocol_title = ''
         study_open_datetime = datetime(
             2021, 4, 15, 0, 0, 0, tzinfo=gettz('UTC'))

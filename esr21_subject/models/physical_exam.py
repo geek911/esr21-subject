@@ -1,9 +1,10 @@
+import decimal
 from django.db import models
 
 from edc_base.model_fields import OtherCharField
 from edc_constants.choices import YES_NO
 from edc_constants.constants import NOT_APPLICABLE
-
+from django.core.validators import MinValueValidator, MaxValueValidator
 from .model_mixins import CrfModelMixin
 from ..choices import REASON, GENERAL_APPEARANCE
 
@@ -46,13 +47,23 @@ class PhysicalExam(CrfModelMixin):
 
     participant_weight = models.DecimalField(
         verbose_name='Participant Weight',
+        validators=[
+            MinValueValidator(0, message="Cannot be a negative number"),
+            MaxValueValidator(500)
+        ],
+        help_text='Weight in kilograms (KG)',
         max_digits=5,
-        decimal_places=3)
+        decimal_places=2)
 
     participant_height = models.DecimalField(
         verbose_name='Participant Height',
+        validators=[
+            MinValueValidator(0, message="Cannot be a negative number"),
+            MaxValueValidator(4)
+        ],
+        help_text='Height in meters (M)',
         max_digits=5,
-        decimal_places=3)
+        decimal_places=2)
 
     general_appearance = models.CharField(
         verbose_name='General Appearance',

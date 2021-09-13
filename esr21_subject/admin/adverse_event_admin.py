@@ -11,7 +11,6 @@ from ..admin_site import esr21_subject_admin
 
 
 class AdverseEventRecordInlineAdmin(StackedInlineMixin, admin.StackedInline):
-
     model = AdverseEventRecord
     form = AdverseEventRecordForm
 
@@ -19,33 +18,33 @@ class AdverseEventRecordInlineAdmin(StackedInlineMixin, admin.StackedInline):
 
     fieldsets = (
         (None, {
-             'fields': [
-                 'ae_name',
-                 'meddra_pname',
-                 'meddra_pcode',
-                 'meddra_version',
-                 'event_details',
-                 'start_date',
-                 'stop_date',
-                 'substance_hypersensitivity',
-                 'status',
-                 'ae_grade',
-                 'study_treatmnt_rel',
-                 'nonstudy_treatmnt_rel',
-                 'studyproc_treatmnt_rel',
-                 'action_taken',
-                 'outcome',
-                 'sequelae_specify',
-                 'serious_event',
-                 'special_interest_ae',
-                 'medically_attended_ae',
-                 'maae_specify',
-                 'treatment_given',
-                 'treatmnt_given_specify',
-                 'ae_study_discontinued',
-                 'discontn_dt',
-                 'covid_related_ae'
-             ]}
+            'fields': [
+                'ae_name',
+                'meddra_pname',
+                'meddra_pcode',
+                'meddra_version',
+                'event_details',
+                'start_date',
+                'stop_date',
+                'substance_hypersensitivity',
+                'status',
+                'ae_grade',
+                'study_treatmnt_rel',
+                'nonstudy_treatmnt_rel',
+                'studyproc_treatmnt_rel',
+                'action_taken',
+                'outcome',
+                'sequelae_specify',
+                'serious_event',
+                'special_interest_ae',
+                'medically_attended_ae',
+                'maae_specify',
+                'treatment_given',
+                'treatmnt_given_specify',
+                'ae_study_discontinued',
+                'discontn_dt',
+                'covid_related_ae'
+            ]}
          ),)
 
     radio_fields = {'status': admin.VERTICAL,
@@ -66,7 +65,6 @@ class AdverseEventRecordInlineAdmin(StackedInlineMixin, admin.StackedInline):
 
 @admin.register(AdverseEvent, site=esr21_subject_admin)
 class AdverseEventAdmin(CrfModelAdminMixin, admin.ModelAdmin):
-
     form = AdverseEventForm
     inlines = [AdverseEventRecordInlineAdmin, ]
 
@@ -89,3 +87,12 @@ class AdverseEventAdmin(CrfModelAdminMixin, admin.ModelAdmin):
     )
 
     radio_fields = {'experienced_ae': admin.VERTICAL, }
+
+    def render_change_form(self, request, context, add=False, change=False, form_url='', obj=None):
+        context.update({
+            'show_save': True,
+            'show_save_and_continue': False,
+            'show_save_and_add_another': False,
+            'show_delete': True
+        })
+        return super().render_change_form(request, context, add, change, form_url, obj)
