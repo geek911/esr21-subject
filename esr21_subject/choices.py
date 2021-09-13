@@ -413,5 +413,5 @@ HUBS = (
     ('greater_gaborone', 'Greater Gaborone'),
     ('ngami', 'Ngami'),
     ('greater_selibe_phikwe', 'Greater Selibe Phikwe'),
-    ('serowe_or_Palapye', 'Serowe/Palapye')
+    ('serowe_or_palapye', 'Serowe/Palapye')
 )
