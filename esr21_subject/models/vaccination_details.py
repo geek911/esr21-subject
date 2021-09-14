@@ -77,6 +77,16 @@ class VaccinationDetails(CrfModelMixin):
         blank=True,
         null=True)
 
+    part_supervised = models.CharField(
+        verbose_name='Was the participant supervised 15 minutes post-dosing?',
+        max_length=3,
+        choices=YES_NO_NA)
+
+    adverse_event = models.CharField(
+        verbose_name='Were any adverse events experienced?',
+        max_length=3,
+        choices=YES_NO_NA)
+
     next_vaccination_date = models.DateField(
         verbose_name=('When is the participant scheduled for their next '
                       'vaccination dose?'),
