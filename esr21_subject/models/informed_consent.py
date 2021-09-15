@@ -69,13 +69,6 @@ class InformedConsent(ConsentModelMixin, SiteModelMixin,
         null=True,
         blank=False)
 
-    hiv_testing_consent = models.CharField(
-        verbose_name='Do you consent to having HIV testing?',
-        choices=YES_NO,
-        validators=[eligible_if_yes, ],
-        max_length=3,
-        help_text='Participant is not eligible if no')
-
     optional_sample_collection = models.CharField(
         verbose_name='Do you consent to optional sample collection?',
         choices=YES_NO,

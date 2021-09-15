@@ -16,6 +16,7 @@ class RapidHIVTestingAdmin(CrfModelAdminMixin, admin.ModelAdmin):
             'fields': [
                 'subject_visit',
                 'report_datetime',
+                'hiv_testing_consent',
                 'prev_hiv_test',
                 'evidence_hiv_status',
                 'hiv_test_date',
@@ -34,6 +35,7 @@ class RapidHIVTestingAdmin(CrfModelAdminMixin, admin.ModelAdmin):
     search_fields = ('rapid_test_date',)
 
     radio_fields = {
+        'hiv_testing_consent': admin.VERTICAL,
         'rapid_test_done': admin.VERTICAL,
         'evidence_hiv_status': admin.VERTICAL,
         'prev_hiv_test': admin.VERTICAL,
