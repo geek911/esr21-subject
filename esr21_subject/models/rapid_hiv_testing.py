@@ -13,7 +13,6 @@ class RapidHIVTesting(CrfModelMixin):
     hiv_testing_consent = models.CharField(
         verbose_name='Do you consent to having HIV testing?',
         choices=YES_NO,
-        validators=[eligible_if_yes, ],
         max_length=3,)
 
     prev_hiv_test = models.CharField(
