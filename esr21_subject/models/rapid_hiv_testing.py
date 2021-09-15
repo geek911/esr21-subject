@@ -1,7 +1,7 @@
 from django.db import models
 from edc_base.model_validators import date_not_future
+from edc_consent.validators import eligible_if_yes
 from edc_constants.choices import YES_NO, POS_NEG, YES_NO_NA
-from edc_constants.constants import NO
 from edc_protocol.validators import date_not_before_study_start
 
 from .model_mixins import CrfModelMixin
@@ -10,10 +10,15 @@ from ..choices import POS_NEG_IND
 
 class RapidHIVTesting(CrfModelMixin):
 
+    hiv_testing_consent = models.CharField(
+        verbose_name='Do you consent to having HIV testing?',
+        choices=YES_NO,
+        max_length=3,)
+
     prev_hiv_test = models.CharField(
         verbose_name=(
             "Have you tested for HIV before?"),
-        choices=YES_NO,
+        choices=YES_NO_NA,
         max_length=3)
 
     evidence_hiv_status = models.CharField(
@@ -40,7 +45,7 @@ class RapidHIVTesting(CrfModelMixin):
 
     rapid_test_done = models.CharField(
         verbose_name='Was a rapid test processed?',
-        choices=YES_NO,
+        choices=YES_NO_NA,
         max_length=3)
 
     rapid_test_date = models.DateField(

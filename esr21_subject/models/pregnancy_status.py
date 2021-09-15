@@ -1,7 +1,7 @@
 from django.db import models
 from edc_base.model_fields import OtherCharField
 from edc_base.model_validators.date import date_not_future, date_is_future
-from edc_constants.choices import YES_NO
+from edc_constants.choices import YES_NO, YES_NO_NA
 from .list_models import Contraception
 from .model_mixins import CrfModelMixin
 from ..choices import YES_NO_OTHER
@@ -24,7 +24,7 @@ class PregnancyStatus(CrfModelMixin):
 
     contraceptive_usage = models.CharField(
         verbose_name='Using Contraception',
-        choices=YES_NO,
+        choices=YES_NO_NA,
         max_length=3,)
 
     contraceptive = models.ManyToManyField(
@@ -44,19 +44,19 @@ class PregnancyStatus(CrfModelMixin):
 
     amenorrhea_history = models.CharField(
         verbose_name=('Does the participant have a history of >= 12 months amenorrhea prior'
-                      ' to randomization, without an alternative cause, following cessation'
-                      ' of exogenous sex-hormonal treatment?'),
+                    ' to randomization, without an alternative cause, following cessation'
+                    ' of exogenous sex-hormonal treatment?'),
         choices=YES_NO,
         max_length=3,
         help_text='Including bilateral tubal ligation, bilateral oophorectomy,or hysterectomy')
 
     post_menopausal_range = models.CharField(
         verbose_name=('Does the participant have a follicle-stimulating hormone level in the'
-                      ' post-menopausal range?'),
+                    ' post-menopausal range?'),
         choices=YES_NO,
         max_length=12,
         help_text=('Until follicle-stimulating hormone is documented to be within menopausal'
-                   ' range, the participant is to be considered of childbearing potential.')
+                ' range, the participant is to be considered of childbearing potential.')
         )
 
     post_menopausal = models.CharField(
