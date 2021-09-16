@@ -2,7 +2,7 @@ from .models import EligibilityConfirmation, InformedConsent, SubjectVisit
 from .models import Covid19SymptomaticInfections, OffSchedule, PregnancyStatus
 from .models import RapidHIVTesting, OffScheduleIll, ScreeningEligibility
 from edc_base.utils import get_utcnow
-from edc_constants.constants import ALIVE, YES, ON_STUDY, PARTICIPANT
+from edc_constants.constants import ALIVE, YES, ON_STUDY, PARTICIPANT, NO
 from edc_visit_tracking.constants import SCHEDULED
 from faker import Faker
 from model_mommy.recipe import Recipe, seq
@@ -24,7 +24,13 @@ informedconsent = Recipe(
     optional_sample_collection=YES)
 
 screeningeligibility = Recipe(
-    ScreeningEligibility)
+    ScreeningEligibility,
+    substance_hypersensitivity=NO,
+    pregnancy_status=NO,
+    thrombosis_or_thrombocytopenia=NO,
+    guillain_barre_syndrome=NO,
+    suspected_immuno_condition=NO,
+    clinical_bleeding=NO,)
 
 subjectvisit = Recipe(
     SubjectVisit,
