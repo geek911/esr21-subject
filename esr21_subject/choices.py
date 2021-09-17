@@ -219,8 +219,8 @@ POS_NEG_IND = (
 )
 
 PREGNANCY_TEST_TYPE = (
-    ('urine_serum', 'Urine/Serum'),
-    ('hgg', 'HCG'),)
+    ('urine', 'Urine'),
+    ('hcg', 'HCG'),)
 
 REASON = (
     ('not_collected', 'Not collected'),
