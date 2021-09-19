@@ -59,6 +59,13 @@ class TestRuleGroups(TestCase):
                 visit_code='1000',
                 visit_code_sequence='0').entry_status, REQUIRED)
 
+        self.assertEqual(
+            CrfMetadata.objects.get(
+                model='esr21_subject.pregnancytest',
+                subject_identifier=self.subject_identifier,
+                visit_code='1000',
+                visit_code_sequence='0').entry_status, NOT_REQUIRED)
+
     def test_pregnancy_status_form_not_required(self):
 
         eligibility = mommy.make_recipe(

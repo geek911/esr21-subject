@@ -32,6 +32,10 @@ class TestNaturalKey(TestCase):
             'esr21_subject.informedconsent',
             **self.options)
 
+        mommy.make_recipe(
+            'esr21_subject.screeningeligibility',
+            subject_identifier=self.informed_consent.subject_identifier)
+
         self.appointment_1000 = Appointment.objects.get(
             subject_identifier=self.informed_consent.subject_identifier,
             visit_code='1000')
