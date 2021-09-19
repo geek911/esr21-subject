@@ -22,6 +22,7 @@ class TestScreeningEligibility(TestCase):
             comorbidities=None,
             symptoms_other=None,
             comorbidities_other=None,
+            childbearing_potential=NO
         )
         self.assertTrue(eligiblity.is_eligible)
 
@@ -37,6 +38,8 @@ class TestScreeningEligibility(TestCase):
             guillain_barre_syndrome=YES,
             suspected_immuno_condition=YES,
             clinical_bleeding=YES,
+            childbearing_potential=YES,
+            birth_control=NO,
             covid_symptoms=None,
             comorbidities=None,
             symptoms_other=None,
@@ -198,3 +201,21 @@ class TestScreeningEligibility(TestCase):
             comorbidities_other=None,
             )
         self.assertFalse(eligiblity.is_eligible)
+
+    @tag('childbearing_potential')
+    def test_childbearing_potential(self):
+        eligiblity = SecondEligibility(
+            substance_hypersensitivity=NO,
+            pregnancy_status=NO,
+            thrombosis_or_thrombocytopenia=NO,
+            guillain_barre_syndrome=NO,
+            suspected_immuno_condition=NO,
+            clinical_bleeding=NO,
+            covid_symptoms=None,
+            comorbidities=None,
+            symptoms_other=None,
+            comorbidities_other=None,
+            childbearing_potential=YES,
+            birth_control=NO)
+        self.assertFalse(eligiblity.is_eligible)
+

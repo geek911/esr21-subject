@@ -36,6 +36,7 @@ class ScreeningEligibility(UniqueSubjectIdentifierModelMixin,SiteModelMixin,Sear
                     'excipients?'),
         choices=YES_NO,
         max_length=3,
+        default=NO
     )
     
     pregnancy_status = models.CharField(
@@ -77,7 +78,8 @@ class ScreeningEligibility(UniqueSubjectIdentifierModelMixin,SiteModelMixin,Sear
                     '(including Asplenia)?'),
         max_length=3,
         choices=YES_NO,
-        default=NO,)
+        default=NO
+    )
 
     comorbidities = models.ManyToManyField(
         Diseases,
@@ -111,6 +113,30 @@ class ScreeningEligibility(UniqueSubjectIdentifierModelMixin,SiteModelMixin,Sear
         null=True,
     )
 
+    childbearing_potential = models.CharField(
+        verbose_name='Is woman of childbearing potential (WOCBP)?',
+        max_length=150,
+        choices=YES_NO,
+        default=NO
+    )
+
+    birth_control = models.CharField(
+        verbose_name='Does participant use highly-effective forms of '
+        'birth control for 28 days prior to Day 0?',
+        max_length=150,
+        choices=YES_NO,
+        blank=True
+    )
+
+    birthcontrol_agreement = models.CharField(
+        verbose_name='Do you agree to continue using a highly effective form '
+        'of birth control for 60 days after their last dose (injection) '
+        'of the vaccine (day 56 to day 84)',
+        max_length=150,
+        choices=YES_NO,
+        blank=True
+    )
+
     history = HistoricalRecords()
 
     objects = EligibilityConfirmationManager()
@@ -133,6 +159,9 @@ class ScreeningEligibility(UniqueSubjectIdentifierModelMixin,SiteModelMixin,Sear
             clinical_bleeding=self.clinical_bleeding,
             symptoms_other=self.symptoms_other,
             comorbidities_other=self.comorbidities_other,
+            childbearing_potential=self.childbearing_potential,
+            birth_control=self.birth_control,
+            birthcontrol_agreement=self.birthcontrol_agreement
         )
         self.is_eligible = screening_eligibility.is_eligible
         self.ineligibility = screening_eligibility.error_message
