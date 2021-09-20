@@ -39,25 +39,45 @@ def metadata_update_on_post_save(sender, instance, raw, created, using,
           dispatch_uid='screening_eligibility_on_post_save')
 def screening_eligibility_on_post_save(sender, instance, raw, created, **kwargs):
     """ Put participant on schedule post consent """
-    if not raw and created and instance.is_eligible:
+    if not raw:
 
-        # if is_subcohort_full():
+         # if is_subcohort_full():
         cohort = 'esr21'
-        # else:
-            # cohort = 'esr21_sub'
+            # else:
+                # cohort = 'esr21_sub'
 
         onschedule_model = 'esr21_subject.onschedule'
-        put_on_schedule(f'{cohort}_enrol_schedule', instance=instance,
-                        onschedule_model=onschedule_model,
-                        onschedule_datetime=instance.created)
 
-        put_on_schedule(f'{cohort}_fu_schedule', instance=instance,
+        if created and instance.is_eligible:
+            put_on_schedule(f'{cohort}_enrol_schedule', instance=instance,
+                            onschedule_model=onschedule_model,
+                            onschedule_datetime=instance.created)
+
+            put_on_schedule(f'{cohort}_fu_schedule', instance=instance,
+                            onschedule_model=onschedule_model,
+                            onschedule_datetime=instance.created)
+
+        else:
+            if instance.is_eligible:
+                try:
+                    OnSchedule.objects.get(
+                        subject_identifier=instance.subject_identifier)
+                except OnSchedule.DoesNotExist:
+                    put_on_schedule(f'{cohort}_enrol_schedule', instance=instance,
                         onschedule_model=onschedule_model,
                         onschedule_datetime=instance.created)
+                    put_on_schedule(f'{cohort}_fu_schedule', instance=instance,
+                                    onschedule_model=onschedule_model,
+                                    onschedule_datetime=instance.created)
+                else:
+                    _, schedule = site_visit_schedules.get_by_onschedule_model_schedule_name(
+                    onschedule_model,name=instance.schedule_name)
+                    schedule.refresh_schedule(
+                        subject_identifier=instance.subject_identifier,)
 
 
 @receiver(post_save, weak=False, sender=Covid19SymptomaticInfections,
-          dispatch_uid='covid19_symptomatic_infections_on_post_save')
+        dispatch_uid='covid19_symptomatic_infections_on_post_save')
 def covid19_symptomatic_infections_on_post_save(sender, instance, raw, created, **kwargs):
 
     if not raw:

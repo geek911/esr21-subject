@@ -128,7 +128,6 @@ class MedicalHistory(CrfModelMixin):
                      'work?',
         max_length=3
     )
-
     class Meta(CrfModelMixin.Meta):
         app_label = 'esr21_subject'
         verbose_name = 'Medical History'
