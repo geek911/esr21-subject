@@ -14,7 +14,6 @@ class MedicalHistoryForm(SubjectModelFormMixin, forms.ModelForm):
 
 
 class MedicalDiagnosisForm(SubjectModelFormMixin, forms.ModelForm):
-
     class Meta:
         model = MedicalDiagnosis
         fields = '__all__'

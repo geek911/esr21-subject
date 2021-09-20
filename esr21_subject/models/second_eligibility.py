@@ -1,6 +1,6 @@
 
 
-from edc_constants.constants import YES
+from edc_constants.constants import NO, YES
 
 
 class SecondEligibility:
@@ -15,6 +15,9 @@ class SecondEligibility:
         comorbidities=None,
         symptoms_other=None,
         comorbidities_other=None,
+        childbearing_potential=None,
+        birth_control=None,
+        birthcontrol_agreement=None,
         **kwargs):
         """ checks if participant is eligible otherwise
             error message is the reason for eligibility test failed."""
@@ -30,7 +33,9 @@ class SecondEligibility:
         self.comorbidities=comorbidities
         self.symptoms_other=symptoms_other
         self.comorbidities_other=comorbidities_other
-
+        self.childbearing_potential=childbearing_potential
+        self.birth_control=birth_control
+        self.birthcontrol_agreement=birthcontrol_agreement
 
         if self.substance_hypersensitivity == YES:
             self.error_message.append(
@@ -74,6 +79,15 @@ class SecondEligibility:
         if self.comorbidities_other:
             self.error_message.append(
                 'Participant has other comorbidities')
+
+        if self.childbearing_potential == YES:
+            if self.birth_control == NO:
+                self.error_message.append(
+                'Participant is child bearing potential and not using highly-effective forms of birth control for 28 days prior to Day 0')
+            elif self.birth_control == YES:
+                if birthcontrol_agreement == NO:
+                    self.error_message.append(
+                'Participant is child bearing potential and disagree to continue using a highly effective form of birth control for 60 days after your last dose (injection) of the vaccine?')
                 
         self.is_eligible = False if self.error_message else True
         
