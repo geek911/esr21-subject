@@ -1,12 +1,30 @@
-from django import forms
-from edc_constants.constants import YES, NO
 from esr21_subject_validation.form_validators import AdverseEventRecordFormValidator
+
+from django import forms
+from django.apps import apps as django_apps
 from django.core.exceptions import ValidationError
-from .form_mixins import SubjectModelFormMixin
+from edc_constants.constants import YES, NO
+
 from ..models import AdverseEvent, AdverseEventRecord
+from .form_mixins import SubjectModelFormMixin
 
 
 class AdverseEventForm(SubjectModelFormMixin, forms.ModelForm):
+
+    ae_record = 'esr21_subject.adverseeventrecord'
+
+    @property
+    def ae_record_cls(self):
+        return django_apps.get_model(self.ae_record)
+
+    def clean(self):
+        experienced_ae = self.data.get('experienced_ae')
+        ae_count = int(self.data.get('adverseeventrecord_set-TOTAL_FORMS'))
+        if experienced_ae == YES and ae_count == 0:
+            msg = 'Subject have experienced an adverse event, '\
+            f'{self.ae_record_cls._meta.verbose_name} is required'
+            raise forms.ValidationError(msg)
+
     class Meta:
         model = AdverseEvent
         fields = '__all__'
