@@ -25,16 +25,21 @@ class TestVisitScheduleSetup(TestCase):
         mommy.make_recipe(
             'esr21_subject.eligibilityconfirmation',)
 
-        informed_consent = mommy.make_recipe(
+        consent = mommy.make_recipe(
             'esr21_subject.informedconsent',
             subject_identifier='123-9876')
 
+        screening_eligibility = mommy.make_recipe(
+            'esr21_subject.screeningeligibility',
+            subject_identifier=consent.subject_identifier,
+            is_eligible=True)
+
         self.assertEqual(OnSchedule.objects.filter(
-            subject_identifier=informed_consent.subject_identifier,
+            subject_identifier=screening_eligibility.subject_identifier,
             schedule_name='esr21_enrol_schedule').count(), 1)
 
         self.assertEqual(OnSchedule.objects.filter(
-            subject_identifier=informed_consent.subject_identifier,
+            subject_identifier=screening_eligibility.subject_identifier,
             schedule_name='esr21_fu_schedule').count(), 1)
 
     # @tag('vs0')
@@ -66,9 +71,14 @@ class TestVisitScheduleSetup(TestCase):
         mommy.make_recipe(
             'esr21_subject.eligibilityconfirmation',)
 
-        informed_consent = mommy.make_recipe(
+        consent = mommy.make_recipe(
             'esr21_subject.informedconsent',
             subject_identifier='123-9877')
+
+        screening_eligibility = mommy.make_recipe(
+            'esr21_subject.screeningeligibility',
+            subject_identifier=consent.subject_identifier,
+            is_eligible=True)
 
         mommy.make_recipe(
             'esr21_subject.subjectvisit',
@@ -88,7 +98,7 @@ class TestVisitScheduleSetup(TestCase):
             symptomatic_experiences=YES)
 
         self.assertEqual(OnScheduleIll.objects.filter(
-            subject_identifier=informed_consent.subject_identifier,
+            subject_identifier=screening_eligibility.subject_identifier,
             schedule_name='esr21_illness_schedule').count(), 1)
 
     @tag('vs2')
@@ -100,9 +110,14 @@ class TestVisitScheduleSetup(TestCase):
         mommy.make_recipe(
             'esr21_subject.eligibilityconfirmation',)
 
-        informed_consent = mommy.make_recipe(
+        consent = mommy.make_recipe(
             'esr21_subject.informedconsent',
             subject_identifier='123-9877')
+
+        screening_eligibility = mommy.make_recipe(
+            'esr21_subject.screeningeligibility',
+            subject_identifier=consent.subject_identifier,
+            is_eligible=True)
 
         mommy.make_recipe(
             'esr21_subject.subjectvisit',
@@ -122,7 +137,7 @@ class TestVisitScheduleSetup(TestCase):
             symptomatic_experiences=YES)
 
         self.assertEqual(OnScheduleIll.objects.filter(
-            subject_identifier=informed_consent.subject_identifier,
+            subject_identifier=screening_eligibility.subject_identifier,
             schedule_name='esr21_illness_schedule').count(), 1)
 
         visit2 = mommy.make_recipe(
@@ -137,7 +152,7 @@ class TestVisitScheduleSetup(TestCase):
             symptomatic_experiences=YES)
 
         self.assertEqual(OnScheduleIll.objects.filter(
-            subject_identifier=informed_consent.subject_identifier,
+            subject_identifier=screening_eligibility.subject_identifier,
             schedule_name='esr21_illness1_schedule').count(), 0)
 
     @tag('vs3')
@@ -149,15 +164,20 @@ class TestVisitScheduleSetup(TestCase):
         mommy.make_recipe(
             'esr21_subject.eligibilityconfirmation',)
 
-        informed_consent = mommy.make_recipe(
+        consent = mommy.make_recipe(
             'esr21_subject.informedconsent',
             subject_identifier='123-9877')
+
+        screening_eligibility = mommy.make_recipe(
+            'esr21_subject.screeningeligibility',
+            subject_identifier=consent.subject_identifier,
+            is_eligible=True)
 
         mommy.make_recipe(
             'esr21_subject.subjectvisit',
             appointment=Appointment.objects.get(
                 visit_code='1000',
-                subject_identifier=informed_consent.subject_identifier),
+                subject_identifier=screening_eligibility.subject_identifier),
             report_datetime=get_utcnow(),
             reason=SCHEDULED)
 
@@ -165,7 +185,7 @@ class TestVisitScheduleSetup(TestCase):
             'esr21_subject.subjectvisit',
             appointment=Appointment.objects.get(
                 visit_code='1007',
-                subject_identifier=informed_consent.subject_identifier),
+                subject_identifier=screening_eligibility.subject_identifier),
             report_datetime=get_utcnow(),
             reason=SCHEDULED)
 
@@ -175,12 +195,12 @@ class TestVisitScheduleSetup(TestCase):
             symptomatic_experiences=YES)
 
         self.assertEqual(OnScheduleIll.objects.filter(
-            subject_identifier=informed_consent.subject_identifier,
+            subject_identifier=screening_eligibility.subject_identifier,
             schedule_name='esr21_illness_schedule').count(), 1)
 
         appt = Appointment.objects.get(
                 visit_code='2028',
-                subject_identifier=informed_consent.subject_identifier)
+                subject_identifier=screening_eligibility.subject_identifier)
 
         appt.appt_status = COMPLETE_APPT
         appt.save()
@@ -201,7 +221,7 @@ class TestVisitScheduleSetup(TestCase):
             symptomatic_experiences=YES)
 
         self.assertEqual(OnScheduleIll.objects.filter(
-            subject_identifier=informed_consent.subject_identifier,
+            subject_identifier=screening_eligibility.subject_identifier,
             schedule_name='esr21_illness2_schedule').count(), 1)
 
     @tag('vs3')
@@ -212,15 +232,20 @@ class TestVisitScheduleSetup(TestCase):
         mommy.make_recipe(
             'esr21_subject.eligibilityconfirmation',)
 
-        informed_consent = mommy.make_recipe(
+        consent = mommy.make_recipe(
             'esr21_subject.informedconsent',
             subject_identifier='123-9877')
+
+        screening_eligibility = mommy.make_recipe(
+            'esr21_subject.screeningeligibility',
+            subject_identifier=consent.subject_identifier,
+            is_eligible=True)
 
         mommy.make_recipe(
             'esr21_subject.subjectvisit',
             appointment=Appointment.objects.get(
                 visit_code='1000',
-                subject_identifier=informed_consent.subject_identifier),
+                subject_identifier=screening_eligibility.subject_identifier),
             report_datetime=get_utcnow(),
             reason=SCHEDULED)
 
@@ -228,7 +253,7 @@ class TestVisitScheduleSetup(TestCase):
             'esr21_subject.subjectvisit',
             appointment=Appointment.objects.get(
                 visit_code='1007',
-                subject_identifier=informed_consent.subject_identifier),
+                subject_identifier=screening_eligibility.subject_identifier),
             report_datetime=get_utcnow(),
             reason=SCHEDULED)
 
@@ -241,7 +266,7 @@ class TestVisitScheduleSetup(TestCase):
             'esr21_subject.subjectvisit',
             appointment=Appointment.objects.get(
                 visit_code='1014',
-                subject_identifier=informed_consent.subject_identifier),
+                subject_identifier=screening_eligibility.subject_identifier),
             report_datetime=get_utcnow(),
             reason=SCHEDULED)
 
@@ -251,9 +276,9 @@ class TestVisitScheduleSetup(TestCase):
             symptomatic_experiences=YES)
 
         self.assertEqual(OnScheduleIll.objects.filter(
-            subject_identifier=informed_consent.subject_identifier,
+            subject_identifier=screening_eligibility.subject_identifier,
             schedule_name='esr21_illness_schedule').count(), 1)
 
         self.assertNotEqual(OnScheduleIll.objects.filter(
-            subject_identifier=informed_consent.subject_identifier,
+            subject_identifier=screening_eligibility.subject_identifier,
             schedule_name='esr21_illness2_schedule').count(), 1)

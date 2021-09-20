@@ -28,6 +28,8 @@ class VaccinationDetailsAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                 'lot_number',
                 'expiry_date',
                 'provider_name',
+                'part_supervised',
+                'adverse_event',
                 'next_vaccination_date',
             ),
         }),
@@ -36,10 +38,12 @@ class VaccinationDetailsAdmin(CrfModelAdminMixin, admin.ModelAdmin):
     radio_fields = {'received_dose': admin.VERTICAL,
                     'received_dose_before': admin.VERTICAL,
                     'location': admin.VERTICAL,
-                    'admin_per_protocol': admin.VERTICAL}
+                    'admin_per_protocol': admin.VERTICAL,
+                    'part_supervised': admin.VERTICAL,
+                    'adverse_event': admin.VERTICAL}
 
-
-    def render_change_form(self, request, context, add=False, change=False, form_url='', obj=None):
+    def render_change_form(self, request, context, add=False,
+                           change=False, form_url='', obj=None):
         context.update({
             'show_save': True,
             'show_save_and_continue': False,

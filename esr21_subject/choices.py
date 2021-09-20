@@ -219,8 +219,8 @@ POS_NEG_IND = (
 )
 
 PREGNANCY_TEST_TYPE = (
-    ('urine_serum', 'Urine/Serum'),
-    ('hgg', 'HCG'),)
+    ('urine', 'Urine'),
+    ('hcg', 'HCG'),)
 
 REASON = (
     ('not_collected', 'Not collected'),
@@ -398,4 +398,20 @@ VACCINATION_DOSE = (
     ("first_dose", "First Dose"),
     ("second_dose", "Second Dose"),
     (NOT_APPLICABLE, 'Not applicable')
+)
+
+"""
+Greater Francistown
+Greater Gaborone
+Ngami
+Greater Selibe Phikwe
+Serowe/Palapye
+"""
+
+HUBS = (
+    ('greater_francistown', 'Greater Francistown'),
+    ('greater_gaborone', 'Greater Gaborone'),
+    ('ngami', 'Ngami'),
+    ('greater_selibe_phikwe', 'Greater Selibe Phikwe'),
+    ('serowe_or_palapye', 'Serowe/Palapye')
 )

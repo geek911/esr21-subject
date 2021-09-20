@@ -14,9 +14,9 @@ from ..choices import OUTCOME
 
 class AdverseEventRecordManager(models.Manager):
 
-    def get_by_natural_key(self, meddra_pname, start_date, serious_adverse_event):
-        return self.get(serious_adverse_event=serious_adverse_event,
-                        meddra_pname=meddra_pname,
+    def get_by_natural_key(self, ae_name, start_date, adverse_event):
+        return self.get(adverse_event=adverse_event,
+                        ae_name=ae_name,
                         start_date=start_date)
 
 
@@ -177,7 +177,7 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
     objects = AdverseEventRecordManager()
 
     def natural_key(self):
-        return (self.meddra_pname, self.start_date,) + self.adverse_event.natural_key()
+        return (self.ae_name, self.start_date,) + self.adverse_event.natural_key()
 
     natural_key.dependencies = ['esr21_subject.adverseevent']
 

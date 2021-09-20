@@ -1,6 +1,5 @@
 from django.db import models
 from edc_base.model_validators import date_not_future
-from edc_consent.validators import eligible_if_yes
 from edc_constants.choices import YES_NO, POS_NEG, YES_NO_NA
 from edc_protocol.validators import date_not_before_study_start
 

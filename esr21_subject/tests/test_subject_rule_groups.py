@@ -36,6 +36,10 @@ class TestRuleGroups(TestCase):
             'esr21_subject.informedconsent',
             **self.consent_options)
 
+        mommy.make_recipe(
+            'esr21_subject.screeningeligibility',
+            subject_identifier=self.subject_consent.subject_identifier)
+
         self.subject_identifier = self.subject_consent.subject_identifier
 
         self.subject_visit = mommy.make_recipe(
@@ -46,6 +50,7 @@ class TestRuleGroups(TestCase):
             report_datetime=get_utcnow(),
             reason=SCHEDULED)
 
+    @tag('rg1')
     def test_pregnancy_form_required(self):
         self.assertEqual(
             CrfMetadata.objects.get(
@@ -53,6 +58,13 @@ class TestRuleGroups(TestCase):
                 subject_identifier=self.subject_identifier,
                 visit_code='1000',
                 visit_code_sequence='0').entry_status, REQUIRED)
+
+        self.assertEqual(
+            CrfMetadata.objects.get(
+                model='esr21_subject.pregnancytest',
+                subject_identifier=self.subject_identifier,
+                visit_code='1000',
+                visit_code_sequence='0').entry_status, NOT_REQUIRED)
 
     def test_pregnancy_status_form_not_required(self):
 
@@ -75,6 +87,10 @@ class TestRuleGroups(TestCase):
         subject_consent = mommy.make_recipe(
             'esr21_subject.informedconsent',
             **consent_options)
+
+        mommy.make_recipe(
+            'esr21_subject.screeningeligibility',
+            subject_identifier=subject_consent.subject_identifier)
 
         mommy.make_recipe(
             'esr21_subject.subjectvisit',
@@ -108,6 +124,10 @@ class TestRuleGroups(TestCase):
         subject_consent = mommy.make_recipe(
             'esr21_subject.informedconsent',
             **self.consent_options)
+
+        mommy.make_recipe(
+            'esr21_subject.screeningeligibility',
+            subject_identifier=subject_consent.subject_identifier)
 
         subject_visit = mommy.make_recipe(
             'esr21_subject.subjectvisit',

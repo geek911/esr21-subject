@@ -5,7 +5,7 @@ from edc_constants.constants import YES
 from edc_visit_schedule.site_visit_schedules import site_visit_schedules
 
 from .covid19_symptomatic_infections import Covid19SymptomaticInfections
-from .informed_consent import InformedConsent
+from .screening_eligibility import ScreeningEligibility
 from .onschedule import OnSchedule
 from .adverse_event import AdverseEventRecord
 from edc_appointment.models.appointment import Appointment
@@ -35,13 +35,11 @@ def metadata_update_on_post_save(sender, instance, raw, created, using,
                 instance.adverse_event.run_metadata_rules_for_crf()
 
 
-@receiver(post_save, weak=False, sender=InformedConsent,
-          dispatch_uid='informed_consent_on_post_save')
-def informed_consent_on_post_save(sender, instance, raw, created, **kwargs):
+@receiver(post_save, weak=False, sender=ScreeningEligibility,
+          dispatch_uid='screening_eligibility_on_post_save')
+def screening_eligibility_on_post_save(sender, instance, raw, created, **kwargs):
     """ Put participant on schedule post consent """
-    if not raw:
-        if created:
-            instance.registration_update_or_create()
+    if not raw and created and instance.is_eligible:
 
         # if is_subcohort_full():
         cohort = 'esr21'
@@ -51,11 +49,11 @@ def informed_consent_on_post_save(sender, instance, raw, created, **kwargs):
         onschedule_model = 'esr21_subject.onschedule'
         put_on_schedule(f'{cohort}_enrol_schedule', instance=instance,
                         onschedule_model=onschedule_model,
-                        onschedule_datetime=instance.consent_datetime)
+                        onschedule_datetime=instance.created)
 
         put_on_schedule(f'{cohort}_fu_schedule', instance=instance,
                         onschedule_model=onschedule_model,
-                        onschedule_datetime=instance.consent_datetime)
+                        onschedule_datetime=instance.created)
 
 
 @receiver(post_save, weak=False, sender=Covid19SymptomaticInfections,
