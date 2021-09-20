@@ -1,3 +1,0 @@
-include AUTHORS CHANGES README.md LICENCE
-recursive-include esr21_subject/templates *
-recursive-include esr21_subject/static *
