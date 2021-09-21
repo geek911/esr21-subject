@@ -26,6 +26,12 @@ class MedicalHistoryForm(SubjectModelFormMixin, forms.ModelForm):
                 f'{self.medical_diagnosis_cls._meta.verbose_name} is required'
                 raise forms.ValidationError(msg)
 
+        no_internal_trips = self.data.get('no_internal_trips')
+        mode_of_transport = self.data.get('mode_of_transport')
+        if int(no_internal_trips) == 0 and mode_of_transport:
+            msg = 'Mode of transport is not applicable if number of internal trips is 0'
+            raise forms.ValidationError(msg)
+
     class Meta:
         model = MedicalHistory
         fields = '__all__'
