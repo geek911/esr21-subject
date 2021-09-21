@@ -1,18 +1,17 @@
 from django.db import models
-
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.model_validators import datetime_not_future
 from edc_base.sites import SiteModelMixin
 from edc_base.utils import get_utcnow
+from edc_constants.choices import YES_NO
 from edc_constants.constants import NO
 from edc_identifier.model_mixins import NonUniqueSubjectIdentifierFieldMixin
 from edc_search.model_mixins import SearchSlugManager
-from edc_constants.choices import YES_NO
 
+from ..identifiers import ScreeningIdentifier
 from .eligibility import Eligibility
 from .model_mixins import SearchSlugModelMixin
-from ..identifiers import ScreeningIdentifier
 
 
 class EligibilityConfirmationManager(SearchSlugManager, models.Manager):
@@ -97,7 +96,8 @@ class EligibilityConfirmation(NonUniqueSubjectIdentifierFieldMixin,
 
     def save(self, *args, **kwargs):
         eligibility_criteria = Eligibility(self.age_in_years,
-                                           self.received_vaccines)
+                                           self.received_vaccines,
+                                           self.any_vaccine_receipt)
         self.is_eligible = eligibility_criteria.is_eligible
         self.ineligibility = eligibility_criteria.error_message
         if not self.screening_identifier:
