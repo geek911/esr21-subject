@@ -97,7 +97,8 @@ class EligibilityConfirmation(NonUniqueSubjectIdentifierFieldMixin,
     def save(self, *args, **kwargs):
         eligibility_criteria = Eligibility(self.age_in_years,
                                            self.received_vaccines,
-                                           self.any_vaccine_receipt)
+                                           self.any_vaccine_receipt,
+                                           self.participating_in_other_studies)
         self.is_eligible = eligibility_criteria.is_eligible
         self.ineligibility = eligibility_criteria.error_message
         if not self.screening_identifier:
