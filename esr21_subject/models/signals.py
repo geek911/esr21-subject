@@ -51,11 +51,11 @@ def screening_eligibility_on_post_save(sender, instance, raw, created, **kwargs)
         if instance.is_eligible:
             put_on_schedule(f'{cohort}_enrol_schedule', instance=instance,
                             onschedule_model=onschedule_model,
-                            onschedule_datetime=instance.created)
+                            onschedule_datetime=instance.created.replace(microsecond=0))
 
             put_on_schedule(f'{cohort}_fu_schedule', instance=instance,
                             onschedule_model=onschedule_model,
-                            onschedule_datetime=instance.created)
+                            onschedule_datetime=instance.created.replace(microsecond=0))
 
 # @receiver(post_save, weak=False, sender=Covid19SymptomaticInfections,
           # dispatch_uid='covid19_symptomatic_infections_on_post_save')
