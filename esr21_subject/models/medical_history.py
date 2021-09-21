@@ -1,14 +1,14 @@
 from django.db import models
-from edc_base.model_validators.date import date_not_future
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
+from edc_base.model_validators.date import date_not_future
 from edc_base.sites import SiteModelMixin
 from edc_constants.choices import YES_NO
 from edc_constants.constants import NO
 
+from ..choices import SMOKED_STATUS_CHOICES, ALCOHOL_STATUS_CHOICES, MODE_TRANSPORT
 from .list_models import Symptoms, Diseases
 from .model_mixins import CrfModelMixin
-from ..choices import SMOKED_STATUS_CHOICES, ALCOHOL_STATUS_CHOICES, MODE_TRANSPORT
 
 
 class MedicalHistory(CrfModelMixin):
@@ -120,6 +120,7 @@ class MedicalHistory(CrfModelMixin):
         choices=MODE_TRANSPORT,
         verbose_name='Mode of Transport',
         max_length=30,
+        blank=True
     )
 
     using_shared_kitchen = models.CharField(
@@ -128,6 +129,7 @@ class MedicalHistory(CrfModelMixin):
                      'work?',
         max_length=3
     )
+
     class Meta(CrfModelMixin.Meta):
         app_label = 'esr21_subject'
         verbose_name = 'Medical History'
