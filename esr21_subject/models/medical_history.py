@@ -1,14 +1,14 @@
 from django.db import models
-from edc_base.model_validators.date import date_not_future
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
+from edc_base.model_validators.date import date_not_future
 from edc_base.sites import SiteModelMixin
 from edc_constants.choices import YES_NO
 from edc_constants.constants import NO
 
+from ..choices import SMOKED_STATUS_CHOICES, ALCOHOL_STATUS_CHOICES, MODE_TRANSPORT
 from .list_models import Symptoms, Diseases
 from .model_mixins import CrfModelMixin
-from ..choices import SMOKED_STATUS_CHOICES, ALCOHOL_STATUS_CHOICES, MODE_TRANSPORT
 
 
 class MedicalHistory(CrfModelMixin):
@@ -95,7 +95,7 @@ class MedicalHistory(CrfModelMixin):
     )
 
     comorbidities = models.ManyToManyField(Diseases,
-                                           verbose_name='Comorbidities')
+                                        verbose_name='Comorbidities')
 
     comorbidities_other = models.CharField(
         verbose_name='Other specify',
@@ -106,20 +106,21 @@ class MedicalHistory(CrfModelMixin):
     no_of_mass_gathering = models.PositiveIntegerField(
         default=0,
         verbose_name='How many mass gatherings has the participant attended '
-                     'in the preceding 12 weeks? ',
+                    'in the preceding 12 weeks? ',
         help_text=('eg, weddings, funerals; defined as 50 or more people')
     )
 
     no_internal_trips = models.PositiveIntegerField(
         default=0,
         verbose_name='How many COVID-19 inter-zonal trips has the '
-                     'participant made in Botswana in the past 12 weeks? '
+                    'participant made in Botswana in the past 12 weeks? '
     )
 
     mode_of_transport = models.CharField(
         choices=MODE_TRANSPORT,
         verbose_name='Mode of Transport',
         max_length=30,
+        blank=True
     )
 
     using_shared_kitchen = models.CharField(

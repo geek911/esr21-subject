@@ -5,7 +5,7 @@ from edc_base.utils import get_utcnow
 from edc_constants.constants import OMANG, FEMALE, MALE, NO, YES
 from edc_facility.import_holidays import import_holidays
 from edc_metadata.constants import REQUIRED, NOT_REQUIRED
-from edc_metadata.models import CrfMetadata
+from edc_metadata.models import CrfMetadata, RequisitionMetadata
 from edc_visit_tracking.constants import SCHEDULED
 from model_mommy import mommy
 
@@ -58,6 +58,13 @@ class TestRuleGroups(TestCase):
                 subject_identifier=self.subject_identifier,
                 visit_code='1000',
                 visit_code_sequence='0').entry_status, REQUIRED)
+
+        self.assertEqual(
+            CrfMetadata.objects.get(
+                model='esr21_subject.pregnancytest',
+                subject_identifier=self.subject_identifier,
+                visit_code='1000',
+                visit_code_sequence='0').entry_status, NOT_REQUIRED)
 
     def test_pregnancy_status_form_not_required(self):
 

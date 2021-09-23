@@ -6,9 +6,6 @@ from esr21_subject.models.second_eligibility import SecondEligibility
 from .model_mixins import SearchSlugModelMixin
 from edc_base.model_managers import HistoricalRecords
 
-
-
-
 from edc_constants.choices import YES_NO
 from edc_constants.constants import NO
 from .list_models import Symptoms, Diseases
@@ -23,24 +20,26 @@ class EligibilityConfirmationManager(SearchSlugManager, models.Manager):
         return self.get(screening_identifier=screening_identifier)
 
 
-class ScreeningEligibility(UniqueSubjectIdentifierModelMixin,SiteModelMixin,SearchSlugModelMixin, BaseUuidModel):
-    
+class ScreeningEligibility(UniqueSubjectIdentifierModelMixin, SiteModelMixin,
+                           SearchSlugModelMixin, BaseUuidModel):
+
     report_datetime = models.DateTimeField(
         verbose_name='Report Date and Time',
         default=get_utcnow,
         validators=[datetime_not_future],
         help_text='Date and time of report.')
-    
+
     substance_hypersensitivity = models.CharField(
         verbose_name=('Any hypersensitivity to the active substance or to any of the '
-                    'excipients?'),
+                      'excipients?'),
         choices=YES_NO,
         max_length=3,
+        default=NO
     )
-    
+
     pregnancy_status = models.CharField(
         verbose_name=('Are you pregnant or nursing or do you plan to get pregnant in the next '
-                    '3 months?'),
+                      '3 months?'),
         max_length=3,
         choices=YES_NO,
         default=NO
@@ -49,7 +48,7 @@ class ScreeningEligibility(UniqueSubjectIdentifierModelMixin,SiteModelMixin,Sear
     # ADDED QUESTIONS FROM THE DOC
     thrombosis_or_thrombocytopenia = models.CharField(
         verbose_name=('Does individuals have any risk factors for or a reported history of '
-                    'thrombosis and/or thrombocytopenia?'),
+                      'thrombosis and/or thrombocytopenia?'),
         max_length=3,
         choices=YES_NO,
         default=NO,
@@ -57,13 +56,13 @@ class ScreeningEligibility(UniqueSubjectIdentifierModelMixin,SiteModelMixin,Sear
 
     clinical_bleeding = models.CharField(
         verbose_name=('Ever experienced clinically significant bleeding, or prior history '
-                    'of significant bleeding or bruising following intramuscular injections '
-                    'or venepuncture?'),
+                      'of significant bleeding or bruising following intramuscular injections '
+                      'or venepuncture?'),
         max_length=20,
         choices=YES_NO,
         default=NO,
         help_text=('(eg, factor deficiency, coagulopathy, or '
-                'platelet disorder) '),
+                   'platelet disorder) '),
     )
 
     guillain_barre_syndrome = models.CharField(
@@ -74,10 +73,11 @@ class ScreeningEligibility(UniqueSubjectIdentifierModelMixin,SiteModelMixin,Sear
 
     suspected_immuno_condition = models.CharField(
         verbose_name=('Any confirmed or suspected immunosuppressive or immunodeficient state '
-                    '(including Asplenia)?'),
+                      '(including Asplenia)?'),
         max_length=3,
         choices=YES_NO,
-        default=NO,)
+        default=NO
+    )
 
     comorbidities = models.ManyToManyField(
         Diseases,
@@ -111,6 +111,30 @@ class ScreeningEligibility(UniqueSubjectIdentifierModelMixin,SiteModelMixin,Sear
         null=True,
     )
 
+    childbearing_potential = models.CharField(
+        verbose_name='Is woman of childbearing potential (WOCBP)?',
+        max_length=150,
+        choices=YES_NO,
+        default=NO
+    )
+
+    birth_control = models.CharField(
+        verbose_name='Does participant use highly-effective forms of '
+        'birth control for 28 days prior to Day 0?',
+        max_length=150,
+        choices=YES_NO,
+        blank=True
+    )
+
+    birthcontrol_agreement = models.CharField(
+        verbose_name='Do you agree to continue using a highly effective form '
+        'of birth control for 60 days after their last dose (injection) '
+        'of the vaccine (day 56 to day 84)',
+        max_length=150,
+        choices=YES_NO,
+        blank=True
+    )
+
     history = HistoricalRecords()
 
     objects = EligibilityConfirmationManager()
@@ -133,12 +157,15 @@ class ScreeningEligibility(UniqueSubjectIdentifierModelMixin,SiteModelMixin,Sear
             clinical_bleeding=self.clinical_bleeding,
             symptoms_other=self.symptoms_other,
             comorbidities_other=self.comorbidities_other,
+            childbearing_potential=self.childbearing_potential,
+            birth_control=self.birth_control,
+            birthcontrol_agreement=self.birthcontrol_agreement
         )
         self.is_eligible = screening_eligibility.is_eligible
         self.ineligibility = screening_eligibility.error_message
         if not self.subject_identifier:
             self.subject_identifier = self.identifier_cls().identifier
-        super().save(*args, **kwargs)   
+        super().save(*args, **kwargs)
 
     class Meta:
         app_label = 'esr21_subject'

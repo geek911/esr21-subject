@@ -20,6 +20,9 @@ class ScreeningEligibilityAdmin(ModelAdminMixin, admin.ModelAdmin):
                 'report_datetime',
                 'substance_hypersensitivity',
                 'pregnancy_status',
+                'childbearing_potential',
+                'birth_control',
+                'birthcontrol_agreement',
                 'thrombosis_or_thrombocytopenia',
                 'guillain_barre_syndrome',
                 'suspected_immuno_condition',
@@ -37,6 +40,9 @@ class ScreeningEligibilityAdmin(ModelAdminMixin, admin.ModelAdmin):
         'guillain_barre_syndrome': admin.VERTICAL,
         'suspected_immuno_condition': admin.VERTICAL,
         'clinical_bleeding': admin.VERTICAL,
+        'childbearing_potential': admin.VERTICAL,
+        'birth_control': admin.VERTICAL,
+        'birthcontrol_agreement': admin.VERTICAL,
     }
 
     filter_horizontal = ('covid_symptoms', 'comorbidities')

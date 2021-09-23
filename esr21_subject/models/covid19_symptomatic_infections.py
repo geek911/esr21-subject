@@ -1,9 +1,9 @@
 from django.db import models
-
 from edc_constants.choices import YES_NO
-from .model_mixins import CrfModelMixin
+
 from ..choices import INFECTION_STATUS
 from .list_models import SymptomaticInfections
+from .model_mixins import CrfModelMixin
 
 
 class Covid19SymptomaticInfections(CrfModelMixin):
@@ -30,7 +30,7 @@ class Covid19SymptomaticInfections(CrfModelMixin):
         max_length=20,
         choices=INFECTION_STATUS,)
 
-    visits = models.CharField(
+    hospitalisation_visit = models.CharField(
         verbose_name='Any hospital/ inpatient/ emergency room visit?',
         max_length=20,
         choices=YES_NO,)
