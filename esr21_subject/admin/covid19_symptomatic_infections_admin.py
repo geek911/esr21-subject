@@ -21,7 +21,7 @@ class Covid19SymptomaticInfectionsAdmin(ModelAdminMixin, admin.ModelAdmin):
                 'symptomatic_infections',
                 'date_of_infection',
                 'infection_status',
-                'visits',
+                'hospitalisation_visit',
                 'hospitalisation_date',
             )}),
         audit_fieldset_tuple
@@ -30,13 +30,12 @@ class Covid19SymptomaticInfectionsAdmin(ModelAdminMixin, admin.ModelAdmin):
     radio_fields = {
         'symptomatic_experiences': admin.VERTICAL,
         'infection_status': admin.VERTICAL,
-        'visits': admin.VERTICAL, }
+        'hospitalisation_visit': admin.VERTICAL, }
 
     filter_horizontal = ("symptomatic_infections",)
 
-
-
-    def render_change_form(self, request, context, add=False, change=False, form_url='', obj=None):
+    def render_change_form(self, request, context, add=False, change=False,
+                           form_url='', obj=None):
         context.update({
             'show_save': True,
             'show_save_and_continue': False,
