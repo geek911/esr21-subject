@@ -52,9 +52,9 @@ class OnScheduleIll(
                                      blank=True,
                                      null=True)
 
-    onsite = CurrentSiteManager()
-
     objects = SubjectIdentifierManager()
+
+    onsite = CurrentSiteManager()
 
     history = HistoricalRecords()
 
