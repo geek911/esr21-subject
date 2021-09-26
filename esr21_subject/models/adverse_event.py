@@ -7,9 +7,9 @@ from edc_base.sites import SiteModelMixin
 from edc_constants.choices import YES_NO
 from edc_protocol.validators import date_not_before_study_start
 
-from .model_mixins import CrfModelMixin
 from ..choices import ACTION_TAKEN, STATUS, AE_GRADE, TREATMENT_RELATIONSHIP, TREATMENT_RELATIONSHIP_WITH_NA
 from ..choices import OUTCOME
+from .model_mixins import CrfModelMixin
 
 
 class AdverseEventRecordManager(models.Manager):
@@ -172,9 +172,9 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
         max_length=3,
         choices=YES_NO)
 
-    history = HistoricalRecords()
-
     objects = AdverseEventRecordManager()
+
+    history = HistoricalRecords()
 
     def natural_key(self):
         return (self.ae_name, self.start_date,) + self.adverse_event.natural_key()

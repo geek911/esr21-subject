@@ -1,4 +1,5 @@
 from django.db import models
+from edc_appointment.models import Appointment
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.sites import CurrentSiteManager
@@ -10,7 +11,6 @@ from edc_visit_tracking.managers import VisitModelManager
 from edc_visit_tracking.model_mixins import VisitModelMixin
 
 from ..choices import VISIT_INFO_SOURCE, VISIT_REASON
-from edc_appointment.models import Appointment
 
 
 class SubjectVisit(
@@ -48,9 +48,9 @@ class SubjectVisit(
         max_length=40,
         choices=VISIT_INFO_SOURCE)
 
-    on_site = CurrentSiteManager()
-
     objects = VisitModelManager()
+
+    on_site = CurrentSiteManager()
 
     history = HistoricalRecords()
 
