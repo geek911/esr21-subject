@@ -13,9 +13,9 @@ class Command(BaseCommand):
 
         vaccinations = VaccinationDetails.objects.filter(received_dose='Yes')
         exclude_fields = [
-            '_state', 'created', 'modified', 'user_created', 'user_modified',
+            'created', 'modified', 'user_created', 'user_modified',
             'hostname_created', 'hostname_modified', 'revision', 'device_created',
-            'device_modified', 'id', 'form_as_json', 'site_id', 'consent_model',
+            'device_modified', 'id', 'site_id', 'consent_model',
             'consent_version', 'subject_visit_id', 'report_datetime']
         count = 0
         toCSV = []
