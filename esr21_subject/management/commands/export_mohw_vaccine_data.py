@@ -16,12 +16,12 @@ class Command(BaseCommand):
             'created', 'modified', 'user_created', 'user_modified',
             'hostname_created', 'hostname_modified', 'revision', 'device_created',
             'device_modified', 'id', 'site_id', 'consent_model',
-            'consent_version', 'subject_visit_id', 'report_datetime']
+            'consent_version', 'report_datetime']
         count = 0
         toCSV = []
         for vaccination in vaccinations:
             obj_dict = vaccination.__dict__
-        
+
             for key in exclude_fields:
                 del obj_dict[key]
             consent = InformedConsent.objects.filter(
@@ -35,15 +35,15 @@ class Command(BaseCommand):
             
             identity_number = consent.identity
             identity_type = consent.identity_type
-        
+            
             demographics = DemographicsData.objects.filter(
                 subject_visit__subject_identifier=vaccination.subject_visit.subject_identifier).last()
             if demographics:
                 country = demographics.country
                 employment_status = demographics.employment_status
-        
+            
             try:
-                personal_contact = PersonalContactInfo.objects.filter(
+                personal_contact = PersonalContactInfo.objects.get(
                     subject_identifier=vaccination.subject_visit.subject_identifier)
             except PersonalContactInfo.DoesNotExist:
                 pass
@@ -59,6 +59,9 @@ class Command(BaseCommand):
                 identity_number=identity_number,
                 identity_type=identity_type
                 )
+            obj_dict.pop('_state')
+            obj_dict.pop('form_as_json')
+            obj_dict.pop('subject_visit_id')
             toCSV.append(obj_dict)
             count += 1
 
