@@ -73,7 +73,8 @@ list_data = {
         ('nausea', 'Nausea'),
         ('vomiting', 'Vomiting'),
         ('diarrhoea', 'Diarrhoea'),
-        ('difficulty_breathing', 'Difficulty breathing')
+        ('difficulty_breathing', 'Difficulty breathing'),
+        (OTHER, 'Other')
     ],
 
     'esr21_subject.symptoms': [
