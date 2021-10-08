@@ -1,4 +1,5 @@
 from django.db import models
+from edc_base.model_fields import OtherCharField
 from edc_identifier.model_mixins import UniqueSubjectIdentifierModelMixin
 from edc_search.model_mixins import SearchSlugManager
 from edc_base.model_mixins import BaseUuidModel
@@ -8,7 +9,7 @@ from edc_base.model_managers import HistoricalRecords
 
 from edc_constants.choices import YES_NO
 from edc_constants.constants import NO
-from .list_models import Symptoms, Diseases
+from .list_models import Symptoms, Diseases, SymptomaticInfections
 from edc_base.utils import get_utcnow
 from edc_base.model_validators import datetime_not_future
 from edc_base.sites import SiteModelMixin
@@ -110,6 +111,20 @@ class ScreeningEligibility(UniqueSubjectIdentifierModelMixin, SiteModelMixin,
         max_length=150,
         null=True,
     )
+
+    # covid symptomatic test
+    symptomatic_infections_experiences = models.CharField(
+        verbose_name='Are You currently experiencing covid like symptoms',
+        max_length=20,
+        choices=YES_NO, )
+
+    symptomatic_infections = models.ManyToManyField(
+        SymptomaticInfections,
+        verbose_name='Symptomatic infections ',
+        blank=True
+    )
+
+    symptomatic_infections_other = OtherCharField()
 
     childbearing_potential = models.CharField(
         verbose_name='Is woman of childbearing potential (WOCBP)?',
