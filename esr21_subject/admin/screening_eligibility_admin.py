@@ -46,6 +46,7 @@ class ScreeningEligibilityAdmin(ModelAdminMixin, admin.ModelAdmin):
         'childbearing_potential': admin.VERTICAL,
         'birth_control': admin.VERTICAL,
         'birthcontrol_agreement': admin.VERTICAL,
+        'symptomatic_infections_experiences': admin.VERTICAL,
     }
 
     filter_horizontal = ('covid_symptoms', 'comorbidities','symptomatic_infections')
