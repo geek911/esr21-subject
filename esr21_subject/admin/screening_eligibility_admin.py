@@ -1,16 +1,14 @@
 from django.contrib import admin
-
 from edc_model_admin.model_admin_audit_fields_mixin import audit_fieldset_tuple
 
 from .modeladmin_mixins import ModelAdminMixin
+from ..admin_site import esr21_subject_admin
 from ..forms import ScreeningEligibilityForm
 from ..models import ScreeningEligibility
-from ..admin_site import esr21_subject_admin
 
 
 @admin.register(ScreeningEligibility, site=esr21_subject_admin)
 class ScreeningEligibilityAdmin(ModelAdminMixin, admin.ModelAdmin):
-
     form = ScreeningEligibilityForm
 
     fieldsets = (
@@ -49,4 +47,4 @@ class ScreeningEligibilityAdmin(ModelAdminMixin, admin.ModelAdmin):
         'symptomatic_infections_experiences': admin.VERTICAL,
     }
 
-    filter_horizontal = ('covid_symptoms', 'comorbidities','symptomatic_infections')
+    filter_horizontal = ('covid_symptoms', 'comorbidities', 'symptomatic_infections')
