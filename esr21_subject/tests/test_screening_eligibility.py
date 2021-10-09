@@ -271,7 +271,7 @@ class TestScreeningEligibility(TestCase):
             symptoms_other=None,
             comorbidities_other=None,
             # adding the fields to test cases
-            symptomatic_infections_experiences=None,
+            symptomatic_infections_experiences=YES,
             symptomatic_infections=None,
             symptomatic_infections_other=None,
         )
