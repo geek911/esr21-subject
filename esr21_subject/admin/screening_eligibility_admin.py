@@ -30,6 +30,9 @@ class ScreeningEligibilityAdmin(ModelAdminMixin, admin.ModelAdmin):
                 'covid_symptoms',
                 'symptoms_other',
                 'comorbidities',
+                'symptomatic_infections_experiences',
+                'symptomatic_infections',
+                'symptomatic_infections_other'
             )}),
         audit_fieldset_tuple)
 
@@ -43,6 +46,7 @@ class ScreeningEligibilityAdmin(ModelAdminMixin, admin.ModelAdmin):
         'childbearing_potential': admin.VERTICAL,
         'birth_control': admin.VERTICAL,
         'birthcontrol_agreement': admin.VERTICAL,
+        'symptomatic_infections_experiences': admin.VERTICAL,
     }
 
-    filter_horizontal = ('covid_symptoms', 'comorbidities')
+    filter_horizontal = ('covid_symptoms', 'comorbidities','symptomatic_infections')

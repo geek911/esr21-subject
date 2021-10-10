@@ -19,6 +19,7 @@ class Covid19SymptomaticInfectionsAdmin(ModelAdminMixin, admin.ModelAdmin):
                 'report_datetime',
                 'symptomatic_experiences',
                 'symptomatic_infections',
+                'symptomatic_infections_other',
                 'date_of_infection',
                 'infection_status',
                 'hospitalisation_visit',

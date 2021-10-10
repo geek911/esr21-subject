@@ -8,7 +8,5 @@ class AdminSite(DjangoAdminSite):
     site_title = 'ESR21 Subject'
     index_title = 'ESR21 Subject'
 
-    
-
 
 esr21_subject_admin = AdminSite(name='esr21_subject_admin')

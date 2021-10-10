@@ -5,9 +5,8 @@ from esr21_subject_validation.form_validators import ScreeningEligibilityFormVal
 from ..models import ScreeningEligibility
 
 
-class  ScreeningEligibilityForm(SiteModelFormMixin, FormValidatorMixin,
-                                forms.ModelForm):
-
+class ScreeningEligibilityForm(SiteModelFormMixin, FormValidatorMixin,
+                               forms.ModelForm):
     form_validator_cls = ScreeningEligibilityFormValidator
 
     subject_identifier = forms.CharField(
