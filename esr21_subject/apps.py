@@ -1,7 +1,8 @@
+from datetime import datetime
+
+from dateutil.tz import gettz
 from django.apps import AppConfig as DjangoAppConfig
 from django.conf import settings
-from datetime import datetime
-from dateutil.tz import gettz
 
 
 class AppConfig(DjangoAppConfig):
@@ -14,7 +15,7 @@ class AppConfig(DjangoAppConfig):
         'esr21_subject.adverseevent': 2.0,
         'esr21_subject.concomitantmedication': 2.0,
         'esr21_subject.covid19preventativebehaviours': 2.0,
-        'esr21_subject.covid19symptomaticinfections': 2.0,
+        'esr21_subject.covid19symptomaticinfections': 2.1,
         'esr21_subject.demographicsdata': 2.0,
         'esr21_subject.eligibilityconfirmation': 2.0,
         'esr21_subject.hospitalisation': 2.0,
@@ -34,6 +35,7 @@ class AppConfig(DjangoAppConfig):
         'esr21_subject.targetedphysicalexamination': 2.0,
         'esr21_subject.vaccinationdetails': 2.0,
         'esr21_subject.vitalsigns': 2.0,
+        'esr21_subject.screeninglligibility': 2.0,
         }
 
     def ready(self):
