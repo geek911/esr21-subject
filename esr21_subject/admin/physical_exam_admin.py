@@ -37,6 +37,8 @@ class PhysicalExamAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                 'abnormality_description',
                 'face_check',
                 'face_description',
+                'throat_check',
+                'throat_description',
                 'neck_check',
                 'neck_description',
                 'respiratory_check',
@@ -58,6 +60,7 @@ class PhysicalExamAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                     'clinically_significant': admin.VERTICAL,
                     'general_appearance': admin.VERTICAL,
                     'face_check': admin.VERTICAL,
+                    'throat_check': admin.VERTICAL,
                     'neck_check': admin.VERTICAL,
                     'respiratory_check': admin.VERTICAL,
                     'cardiovascular_check': admin.VERTICAL,
@@ -65,8 +68,6 @@ class PhysicalExamAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                     'skin_check': admin.VERTICAL,
                     'neurological_check': admin.VERTICAL,
                     'reason_not_done': admin.VERTICAL, }
-
-
 
     def render_change_form(self, request, context, add=False, change=False, form_url='', obj=None):
         context.update({

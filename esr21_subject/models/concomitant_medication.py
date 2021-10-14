@@ -1,14 +1,16 @@
 from decimal import Decimal
 
+from django.core.validators import MinValueValidator
 from django.db import models
 from edc_base.model_validators import date_not_future
 from edc_constants.choices import YES_NO
-from .model_mixins import CrfModelMixin
+
 from ..choices import UNIT_OPTIONS, FREQUENCY, CONCOMITANT_ROUTE
-from django.core.validators import MinValueValidator
+from .model_mixins import CrfModelMixin
 
 
 class ConcomitantMedication(CrfModelMixin):
+
     administered_date = models.DateField(
         verbose_name='Date of administration (DD MMM YYYY):',
         validators=[date_not_future])
@@ -62,7 +64,7 @@ class ConcomitantMedication(CrfModelMixin):
         null=True)
 
     reason_of_use = models.TextField(
-        verbose_name='Reason for use', )
+        verbose_name='Reason for use',)
 
     ongoing = models.CharField(
         verbose_name='Ongoing',
@@ -71,12 +73,15 @@ class ConcomitantMedication(CrfModelMixin):
 
     stop_date = models.DateField(
         verbose_name='Stop Date (DD MMM YYYY)',
-        validators=[date_not_future, ])
+        validators=[date_not_future, ],
+        null=True,
+        blank=True)
 
     prohibited = models.CharField(
         verbose_name='Is concomitant medication prohibited?',
         max_length=25,
         choices=YES_NO)
+
     reason_prohibited = models.TextField(
         verbose_name='Prohibited medication, further details, i.e.,'
                      'Specify, reason',
