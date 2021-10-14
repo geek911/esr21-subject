@@ -87,6 +87,17 @@ class PhysicalExam(CrfModelMixin):
         blank=True,
         null=True, )
 
+    throat_check = models.CharField(
+        verbose_name='Throat',
+        max_length=20,
+        choices=GENERAL_APPEARANCE,
+    )
+
+    throat_description = models.TextField(
+        verbose_name='Abnormal, description of abnormality',
+        blank=True,
+        null=True, )
+
     neck_check = models.CharField(
         verbose_name='Neck',
         max_length=20,
