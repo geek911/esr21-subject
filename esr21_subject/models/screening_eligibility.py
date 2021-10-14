@@ -174,7 +174,10 @@ class ScreeningEligibility(UniqueSubjectIdentifierModelMixin, SiteModelMixin,
             comorbidities_other=self.comorbidities_other,
             childbearing_potential=self.childbearing_potential,
             birth_control=self.birth_control,
-            birthcontrol_agreement=self.birthcontrol_agreement
+            birthcontrol_agreement=self.birthcontrol_agreement,
+            symptomatic_infections_experiences=self.symptomatic_infections_experiences,
+            symptomatic_infections=self.symptomatic_infections,
+            symptomatic_infections_other=self.symptomatic_infections_other
         )
         self.is_eligible = screening_eligibility.is_eligible
         self.ineligibility = screening_eligibility.error_message

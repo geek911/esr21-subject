@@ -17,8 +17,8 @@ class AppConfig(DjangoAppConfig):
         'esr21_subject.covid19preventativebehaviours': 2.0,
         'esr21_subject.covid19symptomaticinfections': 2.1,
         'esr21_subject.demographicsdata': 2.0,
-        'esr21_subject.eligibilityconfirmation': 2.0,
-        'esr21_subject.hospitalisation': 2.0,
+        'esr21_subject.eligibilityconfirmation': 2.1,
+        'esr21_subject.hospitalisation': 2.1,
         'esr21_subject.informedconsent': 2.1,
         'esr21_subject.medicaldiagnosis': 2.0,
         'esr21_subject.medicalhistory': 2.1,
@@ -32,9 +32,9 @@ class AppConfig(DjangoAppConfig):
         'esr21_subject.specialinterestadverseevent': 2.0,
         'esr21_subject.subjectrequisition': 2.0,
         'esr21_subject.subjectvisit': 2.0,
-        'esr21_subject.targetedphysicalexamination': 2.0,
-        'esr21_subject.vaccinationdetails': 2.0,
-        'esr21_subject.vitalsigns': 2.0,
+        'esr21_subject.targetedphysicalexamination': 2.1,
+        'esr21_subject.vaccinationdetails': 2.1,
+        'esr21_subject.vitalsigns': 2.1,
         'esr21_subject.screeninglligibility': 2.0,
         }
 
