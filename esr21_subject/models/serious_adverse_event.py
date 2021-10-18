@@ -41,13 +41,13 @@ class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
         max_length=100)
 
     meddra_pname = models.CharField(
-        verbose_name='MedDRA Preferred Name of the SAE',
+        verbose_name='MedDRA preferred name of the SAE',
         max_length=100,
         blank=True,
         null=True)
 
     meddra_pcode = models.CharField(
-        verbose_name='MedDRA Preferred Code OF the SAE',
+        verbose_name='MedDRA preferred code of the SAE',
         max_length=50,
         blank=True,
         null=True)
@@ -117,117 +117,137 @@ class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
                     'risk factors and/or other contributing factors)'),
         max_length=200)
     
-    ae_number = models.TextField(
+    ae_number = models.PositiveIntegerField(
         verbose_name='AE Number',
         blank=True,
-        null=True)
+        null=True
+    )
 
     ae_term = models.CharField(
         verbose_name='Adverse Event Reported Term',
-        max_length=200
+        max_length=200,
+        blank=True,
+        null=True
     )
 
     aes_dat = models.CharField(
-        verbose_name='Date AE Met Criteria for Serious AE',
-        max_length=10
+        verbose_name='Date AE met criteria for Serious AE',
+        max_length=10,
+        blank=True,
+        null=True
     )
 
     ae_siadat = models.CharField(
-        verbose_name='Date Investigator Aware of Serious AE',
-        max_length=10
+        verbose_name='Date investigator aware of Serious AE',
+        max_length=10,
+        blank=True,
+        null=True
     )
 
     ae_sdth = models.CharField(
-        verbose_name='Results in Death',
+        verbose_name='Were results in death?',
         max_length=3,
         choices=YES_NO
     )
 
     ae_shosp = models.CharField(
-        verbose_name='Requires or Prolongs Hospitalization',
+        verbose_name='Does it require or prolong hospitalization?',
         max_length=3,
         choices=YES_NO
     )
 
     ae_scong = models.CharField(
-        verbose_name='Congenital Anomaly or Birth Defect',
+        verbose_name='Was it a congenital anomaly or birth defect?',
         max_length=6,
         choices=YES_NO
     )
 
     ae_slife = models.CharField(
-        verbose_name='Is Life Threatening',
+        verbose_name='Was it life threatening?',
         max_length=6,
         choices=YES_NO
     )
 
     ae_sdisab = models.CharField(
-        verbose_name='Persist. or Sign. Disability/Incapacity',
+        verbose_name='Was it persist. or sign. disability/incapacity?',
         max_length=6,
         choices=YES_NO
     )
 
     ae_smie = models.CharField(
-        verbose_name='Other Medically Important Serious Event',
+        verbose_name='Are there other medically important serious event?',
         max_length=6,
         choices=YES_NO
     )
 
     ae_shodat = models.CharField(
-        verbose_name='Date of Hospitalization',
+        verbose_name='Date of hospitalization',
         max_length=10,
         choices=YES_NO
     )
 
     ae_sdidat = models.CharField(
-        verbose_name='Date of Discharge',
+        verbose_name='Date of discharge',
         max_length=10,
+        blank=True,
+        null=True
     )
 
-    dthcaus_1 = models.CharField(
-        verbose_name='Primary Cause of Death',
-        max_length=200,
+    dthcaus_1 = models.TextField(
+        verbose_name='Primary cause of death',
+        blank=True,
+        null=True
     )
 
-    dthcaus_2 = models.CharField(
-        verbose_name='Secondary Cause of Death',
-        max_length=200,
+    dthcaus_2 = models.TextField(
+        verbose_name='Secondary cause of death',
+        blank=True,
+        null=True
     )
 
     ae_sautop = models.CharField(
-        verbose_name='Autopsy Performed',
+        verbose_name='Was an autopsy performed?',
         max_length=10,
         choices=YES_NO
     )
 
-    ad = models.CharField(
-        verbose_name='Additional Drug',
+    ae_caad = models.CharField(
+        verbose_name='Was AE caused by additional drug?',
         max_length=10,
+        choices=YES_NO,
     )
 
-    ae_caad = models.CharField(
-        verbose_name='AE Caused by Additional Drug',
+    ae_add_drug = models.CharField(
+        verbose_name='If yes above, please provide additional drug',
         max_length=10,
+        blank=True,
+        null=True
     )
 
     ae_smedca = models.CharField(
-        verbose_name='SAE Caused by Other Medication',
+        verbose_name='Was SAE caused by other medication?',
         max_length=10,
+        choices=YES_NO,
     )
     
     ae_smed = models.CharField(
         verbose_name='Other Medication',
         max_length=200,
+        blank=True,
+        null=True
     )
     
     ae_caussp = models.CharField(
-        verbose_name='Other Medication',
-        max_length=200,
+        verbose_name='Was SAE caused by study procedure(s)?',
+        max_length=5,
+        choices=YES_NO,
     )
 
     ae_sp = models.CharField(
         verbose_name='Study Procedure(s)',
         max_length=200,
+        blank=True,
+        null=True
     )
     
     
