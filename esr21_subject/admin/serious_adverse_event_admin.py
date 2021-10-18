@@ -35,10 +35,40 @@ class SeriousAdverseEventRecordInlineAdmin(StackedInlineMixin, admin.StackedInli
                 'describe_sae_treatmnt',
                 'test_performed',
                 'additional_info',
+                'ae_number',
+                'ae_term',
+                'aes_dat',
+                'ae_siadat',
+                'dthcaus_1',
+                'dthcaus_2',
+                'ad',
+                'ae_caad',
+                'ae_smedca',
+                'ae_smed',
+                'ae_caussp',
+                'ae_sp',
+                'ae_sdth',
+                'ae_shosp',
+                'ae_scong',
+                'ae_slife',
+                'ae_sdisab',
+                'ae_smie',
+                'ae_shodat',
+                'ae_sautop'
             ]}
-         ),)
+        ),)
 
-    radio_fields = {'sae_intensity': admin.VERTICAL, }
+    radio_fields = {
+        'sae_intensity': admin.VERTICAL,
+        'ae_sdth':       admin.VERTICAL,
+        'ae_shosp':      admin.VERTICAL,
+        'ae_scong':      admin.VERTICAL,
+        'ae_slife':      admin.VERTICAL,
+        'ae_sdisab':     admin.VERTICAL,
+        'ae_smie':       admin.VERTICAL,
+        'ae_shodat':     admin.VERTICAL,
+        'ae_sautop':     admin.VERTICAL,
+        }
 
     filter_horizontal = ('seriousness_criteria',)
 
