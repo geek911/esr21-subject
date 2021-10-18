@@ -1,13 +1,14 @@
 from django.apps import apps as django_apps
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from edc_appointment.constants import COMPLETE_APPT
+from edc_appointment.constants import COMPLETE_APPT, IN_PROGRESS_APPT, INCOMPLETE_APPT, NEW_APPT
 from edc_appointment.models.appointment import Appointment
 from edc_visit_schedule.site_visit_schedules import site_visit_schedules
 
 from .adverse_event import AdverseEventRecord
 from .onschedule import OnSchedule
 from .screening_eligibility import ScreeningEligibility
+from django.db.models.deletion import ProtectedError
 
 
 @receiver(post_save, weak=False, sender=AdverseEventRecord,
@@ -34,7 +35,7 @@ def metadata_update_on_post_save(sender, instance, raw, created, using,
 
 
 @receiver(post_save, weak=False, sender=ScreeningEligibility,
-          dispatch_uid='screening_eligibility_on_post_save')
+        dispatch_uid='screening_eligibility_on_post_save')
 def screening_eligibility_on_post_save(sender, instance, raw, created, **kwargs):
     """ Put participant on schedule post consent """
     if not raw:
@@ -56,7 +57,7 @@ def screening_eligibility_on_post_save(sender, instance, raw, created, **kwargs)
                             onschedule_datetime=instance.created.replace(microsecond=0))
 
 # @receiver(post_save, weak=False, sender=Covid19SymptomaticInfections,
-          # dispatch_uid='covid19_symptomatic_infections_on_post_save')
+        # dispatch_uid='covid19_symptomatic_infections_on_post_save')
 # def covid19_symptomatic_infections_on_post_save(sender, instance, raw, created, **kwargs):
 #
     # if not raw:

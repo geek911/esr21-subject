@@ -86,7 +86,7 @@ list_data = {
         ('muscle_or_joint_pain', 'Muscle or joint pain'),
         ('shortness_of_breath', 'Shortness Of Breath'),
         ('difficulty_breathing_or_shortness_of_breath',
-         'Difficulty breathing or shortness of breath'),
+        'Difficulty breathing or shortness of breath'),
         ('chest_pain_or_pressure', 'Chest pain or pressure'),
         ('loss_of_speech_or_movement', 'Loss of speech or movement'),
         (OTHER, 'Other')

@@ -20,9 +20,6 @@ class AdverseEventRecordInlineAdmin(StackedInlineMixin, admin.StackedInline):
         (None, {
             'fields': [
                 'ae_name',
-                'meddra_pname',
-                'meddra_pcode',
-                'meddra_version',
                 'event_details',
                 'start_date',
                 'stop_date',
@@ -39,28 +36,49 @@ class AdverseEventRecordInlineAdmin(StackedInlineMixin, admin.StackedInline):
                 'special_interest_ae',
                 'medically_attended_ae',
                 'maae_specify',
+                'hospitalized',
                 'treatment_given',
                 'treatmnt_given_specify',
                 'ae_study_discontinued',
                 'discontn_dt',
-                'covid_related_ae'
-            ]}
-         ),)
+                'covid_related_ae',
+                'invest_product',
+                'ae_rel',
+                'aecontfr',
+                'llt_code',
+                'llt_name',
+                'pt_code',
+                'pt_name',
+                'hlt_code',
+                'hlt_name',
+                'hlgt_code',
+                'soc_code',
+                'soc_name',
+                'meddra_v',
+                'ctcae_v'
 
-    radio_fields = {'status': admin.VERTICAL,
-                    'ae_grade': admin.VERTICAL,
-                    'study_treatmnt_rel': admin.VERTICAL,
-                    'nonstudy_treatmnt_rel': admin.VERTICAL,
-                    'studyproc_treatmnt_rel': admin.VERTICAL,
-                    'action_taken': admin.VERTICAL,
-                    'outcome': admin.VERTICAL,
-                    'serious_event': admin.VERTICAL,
-                    'special_interest_ae': admin.VERTICAL,
-                    'medically_attended_ae': admin.VERTICAL,
-                    'treatment_given': admin.VERTICAL,
-                    'ae_study_discontinued': admin.VERTICAL,
-                    'substance_hypersensitivity': admin.VERTICAL,
-                    'covid_related_ae': admin.VERTICAL, }
+            ]}
+        ),)
+
+    radio_fields = {
+        'status': admin.VERTICAL,
+        'ae_grade': admin.VERTICAL,
+        'study_treatmnt_rel': admin.VERTICAL,
+        'nonstudy_treatmnt_rel': admin.VERTICAL,
+        'studyproc_treatmnt_rel': admin.VERTICAL,
+        'action_taken': admin.VERTICAL,
+        'outcome': admin.VERTICAL,
+        'serious_event': admin.VERTICAL,
+        'special_interest_ae': admin.VERTICAL,
+        'medically_attended_ae': admin.VERTICAL,
+        'hospitalized' : admin.VERTICAL,
+        'treatment_given': admin.VERTICAL,
+        'ae_study_discontinued': admin.VERTICAL,
+        'substance_hypersensitivity': admin.VERTICAL,
+        'covid_related_ae': admin.VERTICAL,
+        'ae_rel': admin.VERTICAL,
+        'aecontfr' : admin.VERTICAL,
+        }
 
 
 @admin.register(AdverseEvent, site=esr21_subject_admin)
@@ -71,8 +89,8 @@ class AdverseEventAdmin(CrfModelAdminMixin, admin.ModelAdmin):
     formfield_overrides = {
         models.TextField: {'widget': Textarea(
             attrs={'rows': 500,
-                   'cols': 70,
-                   'style': 'height: 7em;'})},
+                'cols': 70,
+                'style': 'height: 7em;'})},
     }
 
     fieldsets = (
