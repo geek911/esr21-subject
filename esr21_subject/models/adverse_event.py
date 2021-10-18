@@ -24,7 +24,7 @@ class AdverseEvent(CrfModelMixin):
     """"Adverse Event"""""
 
     experienced_ae = models.CharField(
-        verbose_name='Did the participant experience any Adverse Event?',
+        verbose_name='Did the participant experience any adverse event?',
         choices=YES_NO,
         max_length=3)
 
@@ -41,32 +41,32 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
         max_length=25)
 
     ae_name = models.CharField(
-        verbose_name='Name of the Adverse Event',
+        verbose_name='Name of the adverse event',
         max_length=100,)
 
     event_details = models.TextField(
-        verbose_name='Details of the Adverse Event',
+        verbose_name='Details of the adverse event',
         blank=True,
         null=True)
 
     ae_number = models.TextField(
-        verbose_name='AE Number',
+        verbose_name='AE number',
         blank=True,
         null=True)
 
     ae_term = models.TextField(
-        verbose_name='Adverse Event Reported Term',
+        verbose_name='Adverse event reported term',
         blank=True,
         null=True)
 
     start_date = models.DateField(
-        verbose_name='Adverse Event start date',
+        verbose_name='Adverse event start date',
         validators=[
             date_not_before_study_start,
             date_not_future, ])
 
     stop_date = models.DateField(
-        verbose_name='Adverse Event stop date',
+        verbose_name='Adverse event stop date',
         validators=[date_not_future, ],
         null=True,
         blank=True)
@@ -80,12 +80,12 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
     )
 
     status = models.CharField(
-        verbose_name='Status of the Adverse Event',
+        verbose_name='Status of the adverse event',
         max_length=10,
         choices=STATUS,)
 
     ae_grade = models.CharField(
-        verbose_name='Common Terminology Criteria for Adverse Events (CTCAE) grading',
+        verbose_name='Common terminology criteria for adverse events (CTCAE) grading',
         max_length=30,
         choices=AE_GRADE)
 
@@ -118,23 +118,23 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
         null=True)
 
     sequelae_specify = OtherCharField(
-        verbose_name='If Recovered / resolved with sequelae, please specify sequelae',
+        verbose_name='If recovered / resolved with sequelae, please specify sequelae',
         max_length=100)
 
     serious_event = models.CharField(
-        verbose_name='Was this considered to be a Serious Adverse Event?',
+        verbose_name='Was this considered to be a serious adverse event?',
         max_length=3,
         choices=YES_NO)
 
     special_interest_ae = models.CharField(
-        verbose_name='Was the event an AE of Special Interest?',
+        verbose_name='Was the event an AE of special interest?',
         max_length=3,
         choices=YES_NO,
         help_text=('(If Yes, check all serious criteria that apply on the '
                 'corresponding SAE form.)'))
 
     medically_attended_ae = models.CharField(
-        verbose_name='Was the event a Medically attended AE?',
+        verbose_name='Was the event a medically attended AE?',
         max_length=3,
         choices=YES_NO)
 
@@ -166,12 +166,12 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
         null=True)
 
     covid_related_ae = models.CharField(
-        verbose_name='Is this a COVID-19 related AE?',
+        verbose_name='Is this a covid-19 related AE?',
         max_length=3,
         choices=YES_NO)
     
     invest_product = models.CharField(
-        verbose_name='Investigational Product',
+        verbose_name='Investigational product',
         max_length=20)
 
     ae_rel = models.CharField(
@@ -180,92 +180,84 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
         max_length=3,
     )
 
-    aecontfr = models.CharField(
-        verbose_name=('Continued from AE Section X*? '),
-        choices=YES_NO,
-        max_length=3,
-    )
-
     llt_code = models.PositiveIntegerField(
-        verbose_name=('MedDRA Lowest Level Term Code'),
+        verbose_name=('MedDRA lowest level term code'),
         blank=True,
         null=True
     )
 
     llt_name = models.CharField(
-        verbose_name=('MedDRA Lowest Level Term Name'),
+        verbose_name=('MedDRA lowest level term name'),
         max_length=200,
         blank=True,
         null=True
     )
 
     pt_code = models.PositiveIntegerField(
-        verbose_name='MedDRA Preferred Term Code',
+        verbose_name='MedDRA preferred term code',
         blank=True,
         null=True
     )
 
     pt_name = models.CharField(
-        verbose_name='MedDRA Preferred Term Name',
+        verbose_name='MedDRA preferred term name',
         max_length=200,
         blank=True,
         null=True
     )
 
     hlt_code = models.PositiveIntegerField(
-        verbose_name='MedDRA High Level Term Code',
+        verbose_name='MedDRA high level term code',
         blank=True,
         null=True
     )
 
     hlt_name = models.CharField(
-        verbose_name='MMedDRA High Level Term Name',
+        verbose_name='MMedDRA high level term name',
         max_length=200,
         blank=True,
         null=True
     )
 
     hlgt_code = models.PositiveIntegerField(
-        verbose_name='MedDRA High Level Group Term Code',
+        verbose_name='MedDRA high level group term code',
         blank=True,
         null=True
     )
 
     hlgt_name = models.CharField(
-        verbose_name='MedDRA High Level Group Term Name',
+        verbose_name='MedDRA high level group term name',
         max_length=200,
         blank=True,
         null=True
     )
 
     soc_code = models.PositiveIntegerField(
-        verbose_name='MedDRA System Organ Class Code',
+        verbose_name='MedDRA system organ class code',
         blank=True,
         null=True
     )
 
     soc_name = models.CharField(
-        verbose_name='MedDRA System Organ Class Name',
+        verbose_name='MedDRA system organ class name',
         max_length=200,
         blank=True,
         null=True
     )
 
     meddra_v = models.CharField(
-        verbose_name='MedDRA Version',
+        verbose_name='MedDRA version',
         max_length=5,
         blank=True,
         null=True
     )
 
     ctcae_v = models.CharField(
-        verbose_name='CTCAE Version',
+        verbose_name='CTCAE version',
         max_length=5,
         blank=True,
         null=True
     )
-
-
 
     objects = AdverseEventRecordManager()
 
