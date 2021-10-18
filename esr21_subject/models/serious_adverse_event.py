@@ -163,13 +163,13 @@ class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
     )
 
     ae_slife = models.CharField(
-        verbose_name='Was it life threatening?',
+        verbose_name='Was adverse event (AE) life threatening?',
         max_length=6,
         choices=YES_NO
     )
 
     ae_sdisab = models.CharField(
-        verbose_name='Was it persist. or sign. disability/incapacity?',
+        verbose_name='Does the participant have any persistent or significant disability/incapacity?',
         max_length=6,
         choices=YES_NO
     )
