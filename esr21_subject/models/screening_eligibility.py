@@ -134,16 +134,14 @@ class ScreeningEligibility(UniqueSubjectIdentifierModelMixin, SiteModelMixin,
     )
 
     birth_control = models.CharField(
-        verbose_name='Are you willing to use any form of birth control in the next 30 days?',
+        verbose_name='Is the participant willing to use contraceptive consistent with standard of care for birth control from Day 0?',
         max_length=150,
         choices=YES_NO,
         blank=True
     )
 
     birthcontrol_agreement = models.CharField(
-        verbose_name='Do you agree to continue using a highly effective form '
-        'of birth control for 60 days after their last dose (injection) '
-        'of the vaccine (day 56 to day 84)',
+        verbose_name='Is the participant willing to use contraceptive consistent with standard of care for 30 Days after the second dose?',
         max_length=150,
         choices=YES_NO,
         blank=True
