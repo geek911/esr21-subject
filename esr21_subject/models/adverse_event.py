@@ -188,58 +188,81 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
 
     llt_code = models.PositiveIntegerField(
         verbose_name=('MedDRA Lowest Level Term Code'),
+        blank=True,
+        null=True
     )
 
     llt_name = models.CharField(
         verbose_name=('MedDRA Lowest Level Term Name'),
         max_length=200,
+        blank=True,
+        null=True
     )
 
-    pt_code = models.CharField(
+    pt_code = models.PositiveIntegerField(
         verbose_name='MedDRA Preferred Term Code',
-        max_length=10,
+        blank=True,
+        null=True
     )
 
     pt_name = models.CharField(
         verbose_name='MedDRA Preferred Term Name',
         max_length=200,
+        blank=True,
+        null=True
     )
 
     hlt_code = models.PositiveIntegerField(
         verbose_name='MedDRA High Level Term Code',
+        blank=True,
+        null=True
     )
 
     hlt_name = models.CharField(
         verbose_name='MMedDRA High Level Term Name',
-        max_length=6,
+        max_length=200,
+        blank=True,
+        null=True
     )
 
-    hlgt_code = hlt_name = models.PositiveIntegerField(
+    hlgt_code = models.PositiveIntegerField(
         verbose_name='MedDRA High Level Group Term Code',
+        blank=True,
+        null=True
     )
 
     hlgt_name = models.CharField(
         verbose_name='MedDRA High Level Group Term Name',
         max_length=200,
+        blank=True,
+        null=True
     )
 
     soc_code = models.PositiveIntegerField(
         verbose_name='MedDRA System Organ Class Code',
+        blank=True,
+        null=True
     )
 
     soc_name = models.CharField(
         verbose_name='MedDRA System Organ Class Name',
         max_length=200,
+        blank=True,
+        null=True
     )
 
-    meddra_v = hlgt_name = models.CharField(
+    meddra_v = models.CharField(
         verbose_name='MedDRA Version',
         max_length=5,
+        blank=True,
+        null=True
     )
 
     ctcae_v = models.CharField(
         verbose_name='CTCAE Version',
         max_length=5,
+        blank=True,
+        null=True
     )
 
 

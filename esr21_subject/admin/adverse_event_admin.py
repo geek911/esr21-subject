@@ -20,9 +20,6 @@ class AdverseEventRecordInlineAdmin(StackedInlineMixin, admin.StackedInline):
         (None, {
             'fields': [
                 'ae_name',
-                'meddra_pname',
-                'meddra_pcode',
-                'meddra_version',
                 'event_details',
                 'start_date',
                 'stop_date',
@@ -79,6 +76,8 @@ class AdverseEventRecordInlineAdmin(StackedInlineMixin, admin.StackedInline):
         'ae_study_discontinued': admin.VERTICAL,
         'substance_hypersensitivity': admin.VERTICAL,
         'covid_related_ae': admin.VERTICAL,
+        'ae_rel': admin.VERTICAL,
+        'aecontfr' : admin.VERTICAL,
         }
 
 
