@@ -41,3 +41,10 @@ git+https://github.com/covid19-vaccine/esr21-prn.git@develop#egg=esr21_prn
 git+https://github.com/covid19-vaccine/esr21-reference.git@develop#esr21_reference
 git+https://github.com/covid19-vaccine/esr21-visit-schedule.git@develop#esr21_visit_schedule
 django-countries
+setuptools~=57.4.0
+Django~=3.2.8
+xlwt~=1.3.0
+django-simple-history~=3.0.0
+python-dateutil~=2.8.2
+arrow~=1.1.1
+Faker~=8.12.1

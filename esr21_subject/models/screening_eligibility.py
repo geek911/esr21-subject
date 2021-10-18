@@ -1,4 +1,5 @@
 from django.db import models
+from edc_base.model_fields import OtherCharField
 from edc_identifier.model_mixins import UniqueSubjectIdentifierModelMixin
 from edc_search.model_mixins import SearchSlugManager
 from edc_base.model_mixins import BaseUuidModel
@@ -8,7 +9,7 @@ from edc_base.model_managers import HistoricalRecords
 
 from edc_constants.choices import YES_NO
 from edc_constants.constants import NO
-from .list_models import Symptoms, Diseases
+from .list_models import Symptoms, Diseases, SymptomaticInfections
 from edc_base.utils import get_utcnow
 from edc_base.model_validators import datetime_not_future
 from edc_base.sites import SiteModelMixin
@@ -111,6 +112,20 @@ class ScreeningEligibility(UniqueSubjectIdentifierModelMixin, SiteModelMixin,
         null=True,
     )
 
+    # covid symptomatic test
+    symptomatic_infections_experiences = models.CharField(
+        verbose_name='Are you currently experiencing covid like symptoms',
+        max_length=20,
+        choices=YES_NO, )
+
+    symptomatic_infections = models.ManyToManyField(
+        SymptomaticInfections,
+        verbose_name='Symptomatic infections ',
+        blank=True
+    )
+
+    symptomatic_infections_other = OtherCharField()
+
     childbearing_potential = models.CharField(
         verbose_name='Is woman of childbearing potential (WOCBP)?',
         max_length=150,
@@ -119,8 +134,7 @@ class ScreeningEligibility(UniqueSubjectIdentifierModelMixin, SiteModelMixin,
     )
 
     birth_control = models.CharField(
-        verbose_name='Does participant use highly-effective forms of '
-        'birth control for 28 days prior to Day 0?',
+        verbose_name='Are you willing to use any form of birth control in the next 30 days?',
         max_length=150,
         choices=YES_NO,
         blank=True
@@ -159,7 +173,10 @@ class ScreeningEligibility(UniqueSubjectIdentifierModelMixin, SiteModelMixin,
             comorbidities_other=self.comorbidities_other,
             childbearing_potential=self.childbearing_potential,
             birth_control=self.birth_control,
-            birthcontrol_agreement=self.birthcontrol_agreement
+            birthcontrol_agreement=self.birthcontrol_agreement,
+            symptomatic_infections_experiences=self.symptomatic_infections_experiences,
+            symptomatic_infections=self.symptomatic_infections,
+            symptomatic_infections_other=self.symptomatic_infections_other
         )
         self.is_eligible = screening_eligibility.is_eligible
         self.ineligibility = screening_eligibility.error_message

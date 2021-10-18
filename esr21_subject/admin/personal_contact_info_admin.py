@@ -29,6 +29,10 @@ class PersonalContactInfoAdmin(ModelAdminMixin, admin.ModelAdmin):
                 'may_call_work',
                 'subject_work_place',
                 'subject_work_phone',
+            ),
+        }),
+        ('Emergency Contact Details', {
+            'fields': (
                 'may_contact_indirectly',
                 'indirect_contact_name',
                 'indirect_contact_relation',
@@ -48,7 +52,6 @@ class PersonalContactInfoAdmin(ModelAdminMixin, admin.ModelAdmin):
 
     list_display = ('subject_identifier', 'may_visit_home', 'may_call',
                     'may_call_work')
-
 
     def render_change_form(self, request, context, add=False, change=False, form_url='', obj=None):
         context.update({

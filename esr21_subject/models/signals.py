@@ -6,7 +6,6 @@ from edc_appointment.models.appointment import Appointment
 from edc_visit_schedule.site_visit_schedules import site_visit_schedules
 
 from .adverse_event import AdverseEventRecord
-from .covid19_symptomatic_infections import Covid19SymptomaticInfections
 from .onschedule import OnSchedule
 from .screening_eligibility import ScreeningEligibility
 from django.db.models.deletion import ProtectedError
