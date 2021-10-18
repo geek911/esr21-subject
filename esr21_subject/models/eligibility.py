@@ -1,5 +1,5 @@
 from edc_constants.constants import YES
-MIN_AGE_OF_CONSENT = 40
+MIN_AGE_OF_CONSENT = 18
 
 
 class Eligibility:
@@ -21,9 +21,9 @@ class Eligibility:
             self.error_message.append(
                 'Participant received vaccines other than licensed influenza vaccines')
         if self.any_vaccine_receipt == YES:
-            self.error_message.append('Any receipt of or planned receipt of any vaccines medications or '\
+            self.error_message.append('Any receipt of or planned receipt of any vaccines medications or '
                                       'investigational products indicated for '
-                                      'the prevention of SARS-CoV-2 infection or' 
+                                      'the prevention of SARS-CoV-2 infection or'
                                       ' treatment of COVID-19')
 
         if participating_in_other_studies == YES:
