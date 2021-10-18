@@ -134,8 +134,7 @@ class ScreeningEligibility(UniqueSubjectIdentifierModelMixin, SiteModelMixin,
     )
 
     birth_control = models.CharField(
-        verbose_name='Does participant use highly-effective forms of '
-        'birth control for 28 days prior to Day 0?',
+        verbose_name='Are you willing to use any form of birth control in the next 30 days?',
         max_length=150,
         choices=YES_NO,
         blank=True
