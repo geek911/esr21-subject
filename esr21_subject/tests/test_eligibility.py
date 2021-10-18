@@ -16,13 +16,13 @@ class TestEligibility(TestCase):
         eligiblity = Eligibility(age_in_years=40)
         self.assertTrue(eligiblity.is_eligible)
 
-    """Participant age < 40 are in eligible"""
+    """Participant age < 18 are in eligible"""
 
-    @tag('under_age_eligibility')
+    @tag('age_ineligibility')
     def test_under_age_participant_ineligibility(self):
-        eligiblity = Eligibility(age_in_years=31)
+        eligiblity = Eligibility(age_in_years=16)
         self.assertFalse(eligiblity.is_eligible)
-        self.assertIn('Participant is under 40', eligiblity.error_message)
+        self.assertIn('Participant is under 16', eligiblity.error_message)
 
     @tag('test_received_receipt_any_vaccines_ineligibility')
     def test_received_receipt_any_vaccines_ineligibility(self):
