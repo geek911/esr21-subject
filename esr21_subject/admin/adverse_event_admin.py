@@ -77,7 +77,6 @@ class AdverseEventRecordInlineAdmin(StackedInlineMixin, admin.StackedInline):
         'substance_hypersensitivity': admin.VERTICAL,
         'covid_related_ae': admin.VERTICAL,
         'ae_rel': admin.VERTICAL,
-        'aecontfr' : admin.VERTICAL,
         }
 
 
