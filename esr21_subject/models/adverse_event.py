@@ -49,20 +49,13 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
         blank=True,
         null=True)
 
-    meddra_pname = models.CharField(
-        verbose_name='MedDRA Preferred Name of the Adverse Event',
-        max_length=100,
+    ae_number = models.TextField(
+        verbose_name='AE Number',
         blank=True,
         null=True)
 
-    meddra_pcode = models.CharField(
-        verbose_name='MedDRA Preferred Code of the Adverse Event',
-        max_length=50,
-        blank=True,
-        null=True)
-
-    meddra_version = models.PositiveIntegerField(
-        verbose_name='MedDRA version',
+    ae_term = models.TextField(
+        verbose_name='Adverse Event Reported Term',
         blank=True,
         null=True)
 
@@ -81,7 +74,7 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
     # TODO: Question 3
     substance_hypersensitivity = models.CharField(
         verbose_name=('Any hypersensitivity to the active substance or to any of the '
-                      'excipients?'),
+                    'excipients?'),
         choices=YES_NO,
         max_length=3,
     )
@@ -138,7 +131,7 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
         max_length=3,
         choices=YES_NO,
         help_text=('(If Yes, check all serious criteria that apply on the '
-                   'corresponding SAE form.)'))
+                'corresponding SAE form.)'))
 
     medically_attended_ae = models.CharField(
         verbose_name='Was the event a Medically attended AE?',
@@ -148,6 +141,11 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
     maae_specify = OtherCharField(
         verbose_name='If MAAE, specify',
         max_length=100,)
+    
+    hospitalized = models.CharField(
+        verbose_name='Was the participant hospitalized?',
+        max_length=3,
+        choices=YES_NO)
 
     treatment_given = models.CharField(
         verbose_name='Was treatment given?',
@@ -171,6 +169,80 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
         verbose_name='Is this a COVID-19 related AE?',
         max_length=3,
         choices=YES_NO)
+    
+    invest_product = models.CharField(
+        verbose_name='Investigational Product',
+        max_length=20)
+
+    ae_rel = models.CharField(
+        verbose_name=('Was AE caused by investigational product (IP)?'),
+        choices=YES_NO,
+        max_length=3,
+    )
+
+    aecontfr = models.CharField(
+        verbose_name=('Continued from AE Section X*? '),
+        choices=YES_NO,
+        max_length=3,
+    )
+
+    llt_code = models.PositiveIntegerField(
+        verbose_name=('MedDRA Lowest Level Term Code'),
+    )
+
+    llt_name = models.CharField(
+        verbose_name=('MedDRA Lowest Level Term Name'),
+        max_length=200,
+    )
+
+    pt_code = models.CharField(
+        verbose_name='MedDRA Preferred Term Code',
+        max_length=10,
+    )
+
+    pt_name = models.CharField(
+        verbose_name='MedDRA Preferred Term Name',
+        max_length=200,
+    )
+
+    hlt_code = models.PositiveIntegerField(
+        verbose_name='MedDRA High Level Term Code',
+    )
+
+    hlt_name = models.CharField(
+        verbose_name='MMedDRA High Level Term Name',
+        max_length=6,
+    )
+
+    hlgt_code = hlt_name = models.PositiveIntegerField(
+        verbose_name='MedDRA High Level Group Term Code',
+    )
+
+    hlgt_name = models.CharField(
+        verbose_name='MedDRA High Level Group Term Name',
+        max_length=200,
+    )
+
+    soc_code = models.PositiveIntegerField(
+        verbose_name='MedDRA System Organ Class Code',
+    )
+
+    soc_name = models.CharField(
+        verbose_name='MedDRA System Organ Class Name',
+        max_length=200,
+    )
+
+    meddra_v = hlgt_name = models.CharField(
+        verbose_name='MedDRA Version',
+        max_length=5,
+    )
+
+    ctcae_v = models.CharField(
+        verbose_name='CTCAE Version',
+        max_length=5,
+    )
+
+
 
     objects = AdverseEventRecordManager()
 

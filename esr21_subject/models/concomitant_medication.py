@@ -2,7 +2,7 @@ from decimal import Decimal
 
 from django.db import models
 from edc_base.model_validators import date_not_future
-from edc_constants.choices import YES_NO
+from edc_constants.choices import YES_NO, YES_NO_NA
 from .model_mixins import CrfModelMixin
 from ..choices import UNIT_OPTIONS, FREQUENCY, CONCOMITANT_ROUTE
 from django.core.validators import MinValueValidator
@@ -20,12 +20,14 @@ class ConcomitantMedication(CrfModelMixin):
 
     atc_code = models.CharField(
         verbose_name='ATC code',
+        blank=True,
         max_length=30)
 
     dose = models.DecimalField(
         verbose_name='Dose',
         validators=[MinValueValidator(Decimal('0.00'))],
         decimal_places=2,
+        blank=True,
         max_digits=4)  # can only accept positive numbers
 
     unit = models.CharField(
@@ -71,6 +73,7 @@ class ConcomitantMedication(CrfModelMixin):
 
     stop_date = models.DateField(
         verbose_name='Stop Date (DD MMM YYYY)',
+        blank=True,
         validators=[date_not_future, ])
 
     prohibited = models.CharField(
@@ -86,7 +89,8 @@ class ConcomitantMedication(CrfModelMixin):
                   'participant’s eligibility to '
                   'receive a second dose or evaluability in the per-protocol '
                   'analysis set - please refer to the Protocol for further'
-                  ' guidance'
+                  ' guidance',
+        blank=True,      
     )
 
     class Meta(CrfModelMixin.Meta):
