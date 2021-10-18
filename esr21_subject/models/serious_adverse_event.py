@@ -41,13 +41,13 @@ class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
         max_length=100)
 
     meddra_pname = models.CharField(
-        verbose_name='MedDRA Preferred Name of the SAE',
+        verbose_name='MedDRA preferred name of the SAE',
         max_length=100,
         blank=True,
         null=True)
 
     meddra_pcode = models.CharField(
-        verbose_name='MedDRA Preferred Code OF the SAE',
+        verbose_name='MedDRA preferred code of the SAE',
         max_length=50,
         blank=True,
         null=True)
@@ -131,33 +131,33 @@ class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
     )
 
     aes_dat = models.CharField(
-        verbose_name='Date AE Met Criteria for Serious AE',
+        verbose_name='Date AE met criteria for Serious AE',
         max_length=10,
         blank=True,
         null=True
     )
 
     ae_siadat = models.CharField(
-        verbose_name='Date Investigator Aware of Serious AE',
+        verbose_name='Date investigator aware of Serious AE',
         max_length=10,
         blank=True,
         null=True
     )
 
     ae_sdth = models.CharField(
-        verbose_name='Was results in death?',
+        verbose_name='Were results in death?',
         max_length=3,
         choices=YES_NO
     )
 
     ae_shosp = models.CharField(
-        verbose_name='Does it require or prolongs hospitalization?',
+        verbose_name='Does it require or prolong hospitalization?',
         max_length=3,
         choices=YES_NO
     )
 
     ae_scong = models.CharField(
-        verbose_name='Was congenital anomaly or birth defect?',
+        verbose_name='Was it a congenital anomaly or birth defect?',
         max_length=6,
         choices=YES_NO
     )
@@ -169,13 +169,13 @@ class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
     )
 
     ae_sdisab = models.CharField(
-        verbose_name='Was it persist. or Sign. disability/incapacity?',
+        verbose_name='Was it persist. or sign. disability/incapacity?',
         max_length=6,
         choices=YES_NO
     )
 
     ae_smie = models.CharField(
-        verbose_name='Is there other medically important serious event?',
+        verbose_name='Are there other medically important serious event?',
         max_length=6,
         choices=YES_NO
     )
@@ -206,7 +206,7 @@ class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
     )
 
     ae_sautop = models.CharField(
-        verbose_name='Was autopsy performed?',
+        verbose_name='Was an autopsy performed?',
         max_length=10,
         choices=YES_NO
     )
@@ -218,7 +218,7 @@ class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
     )
 
     ae_add_drug = models.CharField(
-        verbose_name='Additional Drug',
+        verbose_name='If yes above, please provide additional drug',
         max_length=10,
         blank=True,
         null=True
