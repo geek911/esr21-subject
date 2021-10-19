@@ -118,27 +118,27 @@ class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
         max_length=200)
     
     ae_number = models.PositiveIntegerField(
-        verbose_name='AE Number',
+        verbose_name='AE number',
         blank=True,
         null=True
     )
 
     ae_term = models.CharField(
-        verbose_name='Adverse Event Reported Term',
+        verbose_name='Adverse event reported term',
         max_length=200,
         blank=True,
         null=True
     )
 
     aes_dat = models.CharField(
-        verbose_name='Date AE met criteria for Serious AE',
+        verbose_name='Date AE met criteria for serious AE',
         max_length=10,
         blank=True,
         null=True
     )
 
     ae_siadat = models.CharField(
-        verbose_name='Date investigator aware of Serious AE',
+        verbose_name='Date investigator aware of serious AE',
         max_length=10,
         blank=True,
         null=True
@@ -163,13 +163,13 @@ class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
     )
 
     ae_slife = models.CharField(
-        verbose_name='Was it life threatening?',
+        verbose_name='Was adverse event (AE) life threatening?',
         max_length=6,
         choices=YES_NO
     )
 
     ae_sdisab = models.CharField(
-        verbose_name='Was it persist. or sign. disability/incapacity?',
+        verbose_name='Does the participant have any persistent or significant disability/incapacity?',
         max_length=6,
         choices=YES_NO
     )
