@@ -260,12 +260,12 @@ class TestScreeningEligibility(TestCase):
     @tag('symptomatic_infections')
     def test_symptomatic_infections(self):
         eligiblity = SecondEligibility(
-            substance_hypersensitivity=YES,
-            pregnancy_status=YES,
-            thrombosis_or_thrombocytopenia=YES,
-            guillain_barre_syndrome=YES,
-            suspected_immuno_condition=YES,
-            clinical_bleeding=YES,
+            substance_hypersensitivity=NO,
+            pregnancy_status=NO,
+            thrombosis_or_thrombocytopenia=NO,
+            guillain_barre_syndrome=NO,
+            suspected_immuno_condition=NO,
+            clinical_bleeding=NO,
             covid_symptoms=None,
             comorbidities=None,
             symptoms_other=None,
@@ -275,7 +275,8 @@ class TestScreeningEligibility(TestCase):
             symptomatic_infections=None,
             symptomatic_infections_other=None,
         )
-        self.assertFalse(eligiblity.is_eligible)
+        print(eligiblity.error_message)
+        self.assertTrue(eligiblity.is_eligible)
 
     @tag('childbearing_potential')
     def test_childbearing_potential(self):
