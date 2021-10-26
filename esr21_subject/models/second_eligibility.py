@@ -84,20 +84,6 @@ class SecondEligibility:
             self.error_message.append(
                 'Participant has other comorbidities')
 
-        if self.symptomatic_infections_experiences == YES:
-            self.error_message.append(
-                'Participant has experiences symptomatic infections'
-            )
-
-        if self.symptomatic_infections:
-            self.error_message.append(
-                'Participant has symptomatic infections'
-            )
-        if self.symptomatic_infections_other:
-            self.error_message.append(
-                'Participant has other symptomatic infections'
-            )
-
         if self.childbearing_potential == YES:
             if self.birth_control == NO:
                 self.error_message.append(
