@@ -32,166 +32,19 @@ class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
     serious_adverse_event = models.ForeignKey(
         SeriousAdverseEvent,
         on_delete=models.PROTECT)
-
-    sae_details = models.TextField(
-        verbose_name='Details of the SAE',)
-
-    sae_name = models.CharField(
-        verbose_name='Name of the SAE',
-        max_length=100)
-
-    meddra_pname = models.CharField(
-        verbose_name='MedDRA preferred name of the SAE',
-        max_length=100,
-        blank=True,
-        null=True)
-
-    meddra_pcode = models.CharField(
-        verbose_name='MedDRA preferred code of the SAE',
-        max_length=50,
-        blank=True,
-        null=True)
-
-    meddra_version = models.PositiveIntegerField(
-        verbose_name='MedDRA version')
-
-    sae_intensity = models.CharField(
-        verbose_name='Intensity of the SAE',
-        choices=SEVERITY_LEVEL,
-        max_length=10)
-
-    start_date = models.DateField(
-        verbose_name='SAE start date',
-        validators=[date_not_future, ])
-
-    resolution_date = models.DateField(
-        verbose_name='SAE end date',
-        validators=[date_not_future, ],
-        null=True,
-        blank=True)
-
-    date_aware_of = models.DateField(
-        verbose_name="Date investigator became aware of SAE",
-        validators=[date_not_future, ])
-
-    seriousness_criteria = models.ManyToManyField(
-        SAECriteria,
-        verbose_name='Select seriousness criteria',
-        help_text='(check all that apply)',)
-
-    admission_date = models.DateField(
-        verbose_name='If hospitalized, Date of Admission',
-        validators=[date_not_future, ],
-        null=True,
-        blank=True)
-
-    discharge_date = models.DateField(
-        verbose_name='If hospitalized, Date of Discharge',
-        null=True,
-        blank=True)
-
-    incapacity_specify = OtherCharField(
-        verbose_name='Specify persistent or significant disability/incapacity',
-        max_length=100)
-
-    medical_event_other = OtherCharField(
-        verbose_name='If, Other important medical event, specify',
-        max_length=100)
-
-    rationale = models.CharField(
-        verbose_name=('Investigator\'s rationale for Study Treatment being '
-                    'Related to the events'),
-        max_length=100)
-
-    describe_sae_treatmnt = models.TextField(
-        verbose_name='Describe treatment for event including medications',
-        max_length=200)
-
-    test_performed = models.TextField(
-        verbose_name='List all diagnostic tests that were performed to confirm event',
-        max_length=200)
-
-    additional_info = models.TextField(
-        verbose_name=('Additional information (for example: history of '
-                    'presenting illness, course of illness, complications, '
-                    'risk factors and/or other contributing factors)'),
-        max_length=200)
     
     ae_number = models.PositiveIntegerField(
         verbose_name='AE number',
-        blank=True,
         null=True
     )
 
-    ae_term = models.CharField(
-        verbose_name='Adverse event reported term',
-        max_length=200,
-        blank=True,
-        null=True
-    )
-
-    aes_dat = models.CharField(
-        verbose_name='Date AE met criteria for serious AE',
-        max_length=10,
-        blank=True,
-        null=True
-    )
-
-    ae_siadat = models.CharField(
-        verbose_name='Date investigator aware of serious AE',
-        max_length=10,
-        blank=True,
-        null=True
-    )
-
-    ae_sdth = models.CharField(
-        verbose_name='Were results in death?',
-        max_length=3,
-        choices=YES_NO
-    )
-
-    ae_shosp = models.CharField(
-        verbose_name='Does it require or prolong hospitalization?',
-        max_length=3,
-        choices=YES_NO
-    )
-
-    ae_scong = models.CharField(
-        verbose_name='Was it a congenital anomaly or birth defect?',
-        max_length=6,
-        choices=YES_NO
-    )
-
-    ae_slife = models.CharField(
-        verbose_name='Was adverse event (AE) life threatening?',
-        max_length=6,
-        choices=YES_NO
-    )
-
-    ae_sdisab = models.CharField(
-        verbose_name='Does the participant have any persistent or significant disability/incapacity?',
-        max_length=6,
-        choices=YES_NO
-    )
-
-    ae_smie = models.CharField(
-        verbose_name='Are there other medically important serious event?',
-        max_length=6,
-        choices=YES_NO
-    )
-
-    ae_shodat = models.CharField(
-        verbose_name='Date of hospitalization',
-        max_length=10,
-        choices=YES_NO
-    )
-
-    ae_sdidat = models.CharField(
-        verbose_name='Date of discharge',
-        max_length=10,
-        blank=True,
-        null=True
-    )
+    sae_name = models.CharField(
+        verbose_name='AE reported term',
+        max_length=100)
+    
+    sae_details = models.TextField(
+        verbose_name='Details of the SAE',)
+    
 
     dthcaus_1 = models.TextField(
         verbose_name='Primary cause of death',
@@ -249,6 +102,111 @@ class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
         blank=True,
         null=True
     )
+
+    sae_intensity = models.CharField(
+        verbose_name='Intensity of the SAE',
+        choices=SEVERITY_LEVEL,
+        max_length=10)
+
+    start_date = models.DateField(
+        verbose_name='Date AE Met Criteria for Serious AE',
+        validators=[date_not_future, ])
+
+    resolution_date = models.DateField(
+        verbose_name='SAE end date',
+        validators=[date_not_future, ],
+        null=True,
+        blank=True)
+
+    date_aware_of = models.DateField(
+        verbose_name="Date investigator became aware of SAE",
+        validators=[date_not_future, ])
+    
+
+    ae_sdth = models.CharField(
+        verbose_name='Were results in death?',
+        max_length=3,
+        choices=YES_NO
+    )
+
+    ae_shosp = models.CharField(
+        verbose_name='Does it require or prolong hospitalization?',
+        max_length=3,
+        choices=YES_NO,
+    )
+
+    ae_scong = models.CharField(
+        verbose_name='Was it a congenital anomaly or birth defect?',
+        max_length=6,
+        choices=YES_NO,
+    )
+
+    ae_slife = models.CharField(
+        verbose_name='Was adverse event (AE) life threatening?',
+        max_length=6,
+        choices=YES_NO
+    )
+
+    ae_sdisab = models.CharField(
+        verbose_name='Does the participant have any persistent or significant disability/incapacity?',
+        max_length=6,
+        choices=YES_NO
+    )
+
+    ae_smie = models.CharField(
+        verbose_name='Are there other medically important serious event?',
+        max_length=6,
+        choices=YES_NO
+    )
+
+
+    admission_date = models.DateField(
+        verbose_name='If hospitalized, Date of hospitalization (DD MMM YYYY)',
+        validators=[date_not_future, ],
+        null=True,
+        blank=True)
+
+    discharge_date = models.DateField(
+        verbose_name='If hospitalized, Date of Discharge',
+        null=True,
+        blank=True)
+
+    incapacity_specify = OtherCharField(
+        verbose_name='Specify persistent or significant disability/incapacity',
+        max_length=100)
+
+    medical_event_other = OtherCharField(
+        verbose_name='If, Other important medical event, specify',
+        null=True,
+        blank=True,
+        max_length=100)
+
+    rationale = models.CharField(
+        verbose_name=('Investigator\'s rationale for Study Treatment being '
+                    'Related to the events'),
+        null=True,
+        blank=True,
+        max_length=100)
+
+    describe_sae_treatmnt = models.TextField(
+        verbose_name='Describe treatment for event including medications',
+        null=True,
+        blank=True,
+        max_length=200)
+
+    test_performed = models.TextField(
+        verbose_name='List all diagnostic tests that were performed to confirm event',
+         null=True,
+        blank=True,
+        max_length=200)
+
+    additional_info = models.TextField(
+        verbose_name=('Additional information (for example: history of '
+                    'presenting illness, course of illness, complications, '
+                    'risk factors and/or other contributing factors)'),
+        null=True,
+        blank=True,
+        max_length=200)
     
     
 

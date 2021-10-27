@@ -19,8 +19,9 @@ class AdverseEventRecordInlineAdmin(StackedInlineMixin, admin.StackedInline):
     fieldsets = (
         (None, {
             'fields': [
-                'ae_name',
-                'event_details',
+                'ae_number',
+                'ae_term',
+                'ae_details',
                 'start_date',
                 'stop_date',
                 'substance_hypersensitivity',
@@ -44,7 +45,6 @@ class AdverseEventRecordInlineAdmin(StackedInlineMixin, admin.StackedInline):
                 'covid_related_ae',
                 'invest_product',
                 'ae_rel',
-                'aecontfr',
                 'llt_code',
                 'llt_name',
                 'pt_code',
