@@ -26,7 +26,6 @@ class SeriousAdverseEventRecordInlineAdmin(StackedInlineMixin, admin.StackedInli
                 'start_date',
                 'resolution_date',
                 'date_aware_of',
-                'seriousness_criteria',
                 'admission_date',
                 'discharge_date',
                 'incapacity_specify',
@@ -53,7 +52,6 @@ class SeriousAdverseEventRecordInlineAdmin(StackedInlineMixin, admin.StackedInli
                 'ae_slife',
                 'ae_sdisab',
                 'ae_smie',
-                'ae_shodat',
                 'ae_sautop'
             ]}
         ),)
@@ -66,14 +64,13 @@ class SeriousAdverseEventRecordInlineAdmin(StackedInlineMixin, admin.StackedInli
         'ae_slife':      admin.VERTICAL,
         'ae_sdisab':     admin.VERTICAL,
         'ae_smie':       admin.VERTICAL,
-        'ae_shodat':     admin.VERTICAL,
         'ae_sautop':     admin.VERTICAL,
         'ae_caad':       admin.VERTICAL,
         'ae_smedca':     admin.VERTICAL,
         'ae_caussp':     admin.VERTICAL,
         }
 
-    filter_horizontal = ('seriousness_criteria',)
+    #filter_horizontal = ('seriousness_criteria',)
 
 
 @admin.register(SeriousAdverseEvent, site=esr21_subject_admin)
