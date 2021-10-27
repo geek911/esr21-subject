@@ -17,10 +17,8 @@ class SeriousAdverseEventRecordInlineAdmin(StackedInlineMixin, admin.StackedInli
     fieldsets = (
         (None, {
             'fields': [
+                'ae_number',
                 'sae_name',
-                'meddra_pname',
-                'meddra_pcode',
-                'meddra_version',
                 'sae_details',
                 'sae_intensity',
                 'start_date',
@@ -34,10 +32,6 @@ class SeriousAdverseEventRecordInlineAdmin(StackedInlineMixin, admin.StackedInli
                 'describe_sae_treatmnt',
                 'test_performed',
                 'additional_info',
-                'ae_number',
-                'ae_term',
-                'aes_dat',
-                'ae_siadat',
                 'dthcaus_1',
                 'dthcaus_2',
                 'ae_add_drug',

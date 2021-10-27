@@ -41,15 +41,12 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
         max_length=25)
 
 
-    ae_number = models.TextField(
-        verbose_name='AE number',
-        blank=True,
-        null=True)
+    ae_number = models.PositiveIntegerField(
+        verbose_name='AE number',)
 
-    ae_term = models.TextField(
+    ae_term = models.CharField(
         verbose_name='Adverse event reported term',
-        blank=True,
-        null=True)
+        max_length=100)
     
     ae_details = models.TextField(
         verbose_name='Details of the AE',)
