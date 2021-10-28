@@ -64,7 +64,6 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
         null=True,
         blank=True)
 
-    # TODO: Question 3
     substance_hypersensitivity = models.CharField(
         verbose_name=('Any hypersensitivity to the active substance or to any of the '
                     'excipients?'),
