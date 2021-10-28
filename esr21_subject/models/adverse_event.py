@@ -166,10 +166,7 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
         max_length=3,
         null=True,
         choices=YES_NO)
-    
-    invest_product = models.CharField(
-        verbose_name='Investigational product action taken',
-        max_length=20)
+
 
     continued_ae_section_x = models.CharField(
         verbose_name='Continued from AE Section X*?',
@@ -194,11 +191,8 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
     )
 
 
-
     llt_code = models.PositiveIntegerField(
         verbose_name=('MedDRA lowest level term code'),
-        blank=True,
-        null=True
     )
 
     llt_name = models.CharField(

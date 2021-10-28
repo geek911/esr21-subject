@@ -42,7 +42,6 @@ class AdverseEventRecordInlineAdmin(StackedInlineMixin, admin.StackedInline):
                 'ae_study_discontinued',
                 'discontn_dt',
                 'covid_related_ae',
-                'invest_product',
                 'ae_rel',
                 'llt_code',
                 'llt_name',

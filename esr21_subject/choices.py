@@ -400,18 +400,34 @@ VACCINATION_DOSE = (
     (NOT_APPLICABLE, 'Not applicable')
 )
 
-"""
-Greater Francistown
-Greater Gaborone
-Ngami
-Greater Selibe Phikwe
-Serowe/Palapye
-"""
-
 HUBS = (
     ('greater_francistown', 'Greater Francistown'),
     ('greater_gaborone', 'Greater Gaborone'),
     ('ngami', 'Ngami'),
     ('greater_selibe_phikwe', 'Greater Selibe Phikwe'),
     ('serowe_or_palapye', 'Serowe/Palapye')
+)
+
+
+
+# TODO: Add options to the AE Form
+
+'''
+AE Number
+Investigational Product
+
+Action Taken, Investigational Product
+Investigational Product 1
+Action Taken, Investigational Product 1
+Investigational Product 2
+Action Taken, Investigational Product 2
+
+'''
+
+INTENSITY_SAE = (
+    ('requires_or_prolongs_hospitalization', 'Requires or Prolongs Hospitalization'),
+    ('congenital_anomaly_or_birth_defect', 'Requires or Prolongs Hospitalization'),
+    ('is_life_threatening', 'Is Life Threatening'),
+    ('persist_or_sign_disability_or_Incapacity', 'Persist. or Sign. Disability/Incapacity'),
+    ('other_medically_important Serious Event', 'Other Medically Important Serious Event')
 )
