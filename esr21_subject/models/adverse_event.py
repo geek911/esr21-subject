@@ -72,12 +72,6 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
         max_length=3,
     )
 
-    status = models.CharField(
-        verbose_name='Outcome of the adverse event',
-        max_length=10,
-        null=True,
-        choices=STATUS,)
-
     ae_grade = models.CharField(
         verbose_name='FDA Severity Grading',
         max_length=30,
@@ -178,10 +172,21 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
         verbose_name='Investigational product action taken',
         max_length=20)
 
+    continued_ae_section_x = models.CharField(
+        verbose_name='Continued from AE Section X*?',
+        choices=YES_NO,
+        max_length=20)
+
     ae_rel = models.CharField(
         verbose_name=('Was AE caused by investigational product action taken (IP)?'),
         choices=YES_NO,
         max_length=3,
+    )
+
+    pt_name = models.CharField(
+        verbose_name='MedDRA preferred term name',
+        max_length=200,
+
     )
     
     pt_code = models.PositiveIntegerField(
@@ -189,11 +194,7 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
        
     )
 
-    pt_name = models.CharField(
-        verbose_name='MedDRA preferred term name',
-        max_length=200,
-        
-    )
+
 
     llt_code = models.PositiveIntegerField(
         verbose_name=('MedDRA lowest level term code'),
