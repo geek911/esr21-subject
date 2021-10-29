@@ -138,3 +138,6 @@ dmypy.json
 .pyre/
 ./esr21_subject/migrations
 .idea
+
+/esr21_subject/migrations/
+esr21_subject/migrations/0001_initial.py

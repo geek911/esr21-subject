@@ -53,11 +53,11 @@ class PregnancyStatus(CrfModelMixin):
 
     post_menopausal_range = models.CharField(
         verbose_name=('Does the participant have a follicle-stimulating hormone level in the'
-                    ' post-menopausal range?'),
+                      ' post-menopausal range?'),
         choices=YES_NO,
         max_length=12,
         help_text=('Until follicle-stimulating hormone is documented to be within menopausal'
-                ' range, the participant is to be considered of childbearing potential.')
+                   ' range, the participant is to be considered of childbearing potential.')
         )
 
     post_menopausal = models.CharField(

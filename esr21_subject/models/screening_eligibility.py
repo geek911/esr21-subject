@@ -134,17 +134,14 @@ class ScreeningEligibility(UniqueSubjectIdentifierModelMixin, SiteModelMixin,
     )
 
     birth_control = models.CharField(
-        verbose_name='Does participant use highly-effective forms of '
-        'birth control for 28 days prior to Day 0?',
+        verbose_name='Is the participant willing to use contraceptive consistent with standard of care for birth control from Day 0?',
         max_length=150,
         choices=YES_NO,
         blank=True
     )
 
     birthcontrol_agreement = models.CharField(
-        verbose_name='Do you agree to continue using a highly effective form '
-        'of birth control for 60 days after their last dose (injection) '
-        'of the vaccine (day 56 to day 84)',
+        verbose_name='Is the participant willing to use contraceptive consistent with standard of care for 30 Days after the second dose?',
         max_length=150,
         choices=YES_NO,
         blank=True
@@ -174,7 +171,9 @@ class ScreeningEligibility(UniqueSubjectIdentifierModelMixin, SiteModelMixin,
             comorbidities_other=self.comorbidities_other,
             childbearing_potential=self.childbearing_potential,
             birth_control=self.birth_control,
-            birthcontrol_agreement=self.birthcontrol_agreement
+            birthcontrol_agreement=self.birthcontrol_agreement,
+            symptomatic_infections_experiences=self.symptomatic_infections_experiences,
+            symptomatic_infections_other=self.symptomatic_infections_other
         )
         self.is_eligible = screening_eligibility.is_eligible
         self.ineligibility = screening_eligibility.error_message

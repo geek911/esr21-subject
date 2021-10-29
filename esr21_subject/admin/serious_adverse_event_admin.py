@@ -17,16 +17,16 @@ class SeriousAdverseEventRecordInlineAdmin(StackedInlineMixin, admin.StackedInli
     fieldsets = (
         (None, {
             'fields': [
+                'ae_number',
                 'sae_name',
-                'meddra_pname',
-                'meddra_pcode',
-                'meddra_version',
                 'sae_details',
                 'sae_intensity',
                 'start_date',
                 'resolution_date',
                 'date_aware_of',
-                'seriousness_criteria',
+                'dthcaus_1',
+                'dthcaus_2',
+                'sae_criteria',
                 'admission_date',
                 'discharge_date',
                 'incapacity_specify',
@@ -35,12 +35,37 @@ class SeriousAdverseEventRecordInlineAdmin(StackedInlineMixin, admin.StackedInli
                 'describe_sae_treatmnt',
                 'test_performed',
                 'additional_info',
+                'ae_add_drug',
+                'ae_caad',
+                'ae_smedca',
+                'ae_smed',
+                'ae_caussp',
+                'ae_sp',
+                'ae_sdth',
+                'ae_shosp',
+                'ae_scong',
+                'ae_slife',
+                'ae_sdisab',
+                'ae_smie',
+                'ae_sautop'
             ]}
-         ),)
+        ),)
 
-    radio_fields = {'sae_intensity': admin.VERTICAL, }
+    radio_fields = {
+        'sae_intensity': admin.VERTICAL,
+        'ae_sdth':       admin.VERTICAL,
+        'ae_shosp':      admin.VERTICAL,
+        'ae_scong':      admin.VERTICAL,
+        'ae_slife':      admin.VERTICAL,
+        'ae_sdisab':     admin.VERTICAL,
+        'ae_smie':       admin.VERTICAL,
+        'ae_sautop':     admin.VERTICAL,
+        'ae_caad':       admin.VERTICAL,
+        'ae_smedca':     admin.VERTICAL,
+        'ae_caussp':     admin.VERTICAL,
+        }
 
-    filter_horizontal = ('seriousness_criteria',)
+    filter_horizontal = ('sae_criteria',)
 
 
 @admin.register(SeriousAdverseEvent, site=esr21_subject_admin)
