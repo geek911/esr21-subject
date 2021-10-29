@@ -25,7 +25,6 @@ class AdverseEventRecordInlineAdmin(StackedInlineMixin, admin.StackedInline):
                 'start_date',
                 'stop_date',
                 'substance_hypersensitivity',
-                'status',
                 'ae_grade',
                 'study_treatmnt_rel',
                 'nonstudy_treatmnt_rel',
@@ -43,7 +42,6 @@ class AdverseEventRecordInlineAdmin(StackedInlineMixin, admin.StackedInline):
                 'ae_study_discontinued',
                 'discontn_dt',
                 'covid_related_ae',
-                'invest_product',
                 'ae_rel',
                 'llt_code',
                 'llt_name',
@@ -61,7 +59,6 @@ class AdverseEventRecordInlineAdmin(StackedInlineMixin, admin.StackedInline):
         ),)
 
     radio_fields = {
-        'status': admin.VERTICAL,
         'ae_grade': admin.VERTICAL,
         'study_treatmnt_rel': admin.VERTICAL,
         'nonstudy_treatmnt_rel': admin.VERTICAL,

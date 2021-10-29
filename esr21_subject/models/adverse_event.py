@@ -64,19 +64,12 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
         null=True,
         blank=True)
 
-    # TODO: Question 3
     substance_hypersensitivity = models.CharField(
         verbose_name=('Any hypersensitivity to the active substance or to any of the '
                     'excipients?'),
         choices=YES_NO,
         max_length=3,
     )
-
-    status = models.CharField(
-        verbose_name='Outcome of the adverse event',
-        max_length=10,
-        null=True,
-        choices=STATUS,)
 
     ae_grade = models.CharField(
         verbose_name='FDA Severity Grading',
@@ -173,9 +166,11 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
         max_length=3,
         null=True,
         choices=YES_NO)
-    
-    invest_product = models.CharField(
-        verbose_name='Investigational product action taken',
+
+
+    continued_ae_section_x = models.CharField(
+        verbose_name='Continued from AE Section X*?',
+        choices=YES_NO,
         max_length=20)
 
     ae_rel = models.CharField(
@@ -183,22 +178,21 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
         choices=YES_NO,
         max_length=3,
     )
+
+    pt_name = models.CharField(
+        verbose_name='MedDRA preferred term name',
+        max_length=200,
+
+    )
     
     pt_code = models.PositiveIntegerField(
         verbose_name='MedDRA preferred term code',
        
     )
 
-    pt_name = models.CharField(
-        verbose_name='MedDRA preferred term name',
-        max_length=200,
-        
-    )
 
     llt_code = models.PositiveIntegerField(
         verbose_name=('MedDRA lowest level term code'),
-        blank=True,
-        null=True
     )
 
     llt_name = models.CharField(

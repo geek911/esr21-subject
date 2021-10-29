@@ -24,6 +24,9 @@ class SeriousAdverseEventRecordInlineAdmin(StackedInlineMixin, admin.StackedInli
                 'start_date',
                 'resolution_date',
                 'date_aware_of',
+                'dthcaus_1',
+                'dthcaus_2',
+                'sae_criteria',
                 'admission_date',
                 'discharge_date',
                 'incapacity_specify',
@@ -32,8 +35,6 @@ class SeriousAdverseEventRecordInlineAdmin(StackedInlineMixin, admin.StackedInli
                 'describe_sae_treatmnt',
                 'test_performed',
                 'additional_info',
-                'dthcaus_1',
-                'dthcaus_2',
                 'ae_add_drug',
                 'ae_caad',
                 'ae_smedca',
@@ -64,7 +65,7 @@ class SeriousAdverseEventRecordInlineAdmin(StackedInlineMixin, admin.StackedInli
         'ae_caussp':     admin.VERTICAL,
         }
 
-    #filter_horizontal = ('seriousness_criteria',)
+    filter_horizontal = ('sae_criteria',)
 
 
 @admin.register(SeriousAdverseEvent, site=esr21_subject_admin)
