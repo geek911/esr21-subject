@@ -28,7 +28,7 @@ class AppConfig(DjangoAppConfig):
         'esr21_subject.pregnancytest': 2.1,
         'esr21_subject.rapidhivtesting': 2.1,
         'esr21_subject.samplecollection': 2.0,
-        'esr21_subject.seriousadverseevent': 2.0,
+        'esr21_subject.seriousadverseevent': 2.1,
         'esr21_subject.specialinterestadverseevent': 2.0,
         'esr21_subject.subjectrequisition': 2.0,
         'esr21_subject.subjectvisit': 2.0,
