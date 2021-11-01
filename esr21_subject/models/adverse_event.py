@@ -53,13 +53,13 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
     
 
     start_date = models.DateField(
-        verbose_name='Adverse event start date',
+        verbose_name='Adverse Event Start Date',
         validators=[
             date_not_before_study_start,
             date_not_future, ])
 
     stop_date = models.DateField(
-        verbose_name='Adverse event stop date',
+        verbose_name='Adverse Event Stop Date',
         validators=[date_not_future, ],
         null=True,
         blank=True)
@@ -70,12 +70,6 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
         choices=YES_NO,
         max_length=3,
     )
-
-    ae_grade = models.CharField(
-        verbose_name='FDA Severity Grading',
-        max_length=30,
-        null=True,
-        choices=AE_GRADE)
 
     study_treatmnt_rel = models.CharField(
         verbose_name='Relationship to study treatment',
@@ -159,6 +153,7 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
 
     discontn_dt = models.DateField(
         verbose_name='Date of discontinuation',
+        blank=True,
         null=True)
 
     covid_related_ae = models.CharField(
@@ -205,7 +200,7 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
     )
 
     hlt_name = models.CharField(
-        verbose_name='MMedDRA high level term name',
+        verbose_name='MedDRA high level term name',
         max_length=200,
     )
 
