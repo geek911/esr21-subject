@@ -68,6 +68,9 @@ class SeriousAdverseEventRecordInlineAdmin(StackedInlineMixin, admin.StackedInli
         'ae_caad': admin.VERTICAL,
         'ae_smedca': admin.VERTICAL,
         'ae_caussp': admin.VERTICAL,
+        'ae_caad': admin.VERTICAL,
+        'ae_caad1': admin.VERTICAL,
+        'ae_caad2': admin.VERTICAL,
     }
 
     filter_horizontal = ('sae_criteria',)
