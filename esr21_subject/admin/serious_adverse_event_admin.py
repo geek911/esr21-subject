@@ -58,7 +58,6 @@ class SeriousAdverseEventRecordInlineAdmin(StackedInlineMixin, admin.StackedInli
     radio_fields = {
         'sae_intensity': admin.VERTICAL,
         'ae_sdth': admin.VERTICAL,
-        'ae_shosp': admin.VERTICAL,
         'ae_scong': admin.VERTICAL,
         'ae_slife': admin.VERTICAL,
         'ae_sdisab': admin.VERTICAL,
