@@ -90,11 +90,7 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
         choices=TREATMENT_RELATIONSHIP_WITH_NA,
     )
 
-    action_taken = models.CharField(
-        verbose_name='Action taken with study treatment',
-        max_length=25,
-        null=True,
-        choices=ACTION_TAKEN)
+
 
     outcome = models.CharField(
         verbose_name='Outcome',
@@ -111,6 +107,43 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
         max_length=3,
         null=True,
         choices=YES_NO)
+
+    investigation_product = models.CharField(
+        verbose_name='Investigational Product',
+        max_length=20
+    )
+
+    action_taken = models.CharField(
+        verbose_name='Action Taken, Investigational Product',
+        max_length=25,
+        null=True,
+        choices=ACTION_TAKEN)
+
+
+    investigation_product1 = models.CharField(
+        verbose_name='Investigational Product 1',
+        max_length=20
+    )
+
+
+    action_taken1 = models.CharField(
+        verbose_name='Action Taken, Investigational Product 1',
+        max_length=25,
+        null=True,
+        choices=ACTION_TAKEN)
+
+    investigation_product2 = models.CharField(
+        verbose_name='Investigational Product 2',
+        max_length=20
+    )
+
+
+    action_taken2 = models.CharField(
+        verbose_name='Action Taken, Investigational Product 2',
+        max_length=25,
+        null=True,
+        choices=ACTION_TAKEN)
+
 
     special_interest_ae = models.CharField(
         verbose_name='Was the event an AE of special interest?',
