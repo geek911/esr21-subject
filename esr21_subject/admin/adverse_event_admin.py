@@ -28,7 +28,6 @@ class AdverseEventRecordInlineAdmin(StackedInlineMixin, admin.StackedInline):
                 'study_treatmnt_rel',
                 'nonstudy_treatmnt_rel',
                 'studyproc_treatmnt_rel',
-                'action_taken',
                 'outcome',
                 'sequelae_specify',
                 'serious_event',
