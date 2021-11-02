@@ -26,7 +26,6 @@ class SeriousAdverseEventRecordInlineAdmin(StackedInlineMixin, admin.StackedInli
                 'date_aware_of',
                 'sae_criteria',
                 'ae_sdth',
-                'ae_shosp',
                 'ae_scong',
                 'ae_slife',
                 'ae_sdisab',
