@@ -85,6 +85,8 @@ class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
         verbose_name='AE Caused by Additional Drug',
         max_length=10,
         choices=YES_NO,
+        blank=True,
+        null=True
     )
 
     ad1 = models.CharField(
@@ -98,6 +100,8 @@ class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
         verbose_name='AE Caused by Additional Drug 1',
         max_length=10,
         choices=YES_NO,
+        blank=True,
+        null=True
     )
 
     ad2 = models.CharField(
@@ -111,6 +115,8 @@ class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
         verbose_name='AE Caused by Additional Drug 2',
         max_length=10,
         choices=YES_NO,
+        blank=True,
+        null=True
     )
 
     ae_smedca = models.CharField(
@@ -164,11 +170,6 @@ class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
         choices=YES_NO
     )
 
-    ae_shosp = models.CharField(
-        verbose_name='Requires or prolong hospitalization',
-        max_length=3,
-        choices=YES_NO,
-    )
 
     ae_scong = models.CharField(
         verbose_name='Was it a congenital anomaly or birth defect?',
@@ -183,7 +184,7 @@ class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
     )
 
     ae_sdisab = models.CharField(
-        verbose_name='Was it persistent or resulting in significant disability/incapacity? ',
+        verbose_name='Did it result in significant disability/incapacity? ',
         max_length=6,
         choices=YES_NO
     )
@@ -210,7 +211,7 @@ class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
         max_length=100)
 
     medical_event_other = OtherCharField(
-        verbose_name='If, Other important medical event, specify',
+        verbose_name='If, Other important medical event',
         null=True,
         blank=True,
         max_length=100)
