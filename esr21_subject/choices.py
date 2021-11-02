@@ -204,11 +204,11 @@ MED_HISTORY_NO = (
 )
 
 OUTCOME = (
-    ('not_resolved', 'Not recovered/ not resolved'),
-    ('resolved', 'Recovered / resolved'),
-    ('resolved_with_sequelae', 'Recovered / resolved with sequelae'),
-    ('resolving', 'Recovering / resolving'),
-    ('fatal', 'Fatal / Death'),
+    ('C49498', 'Recovered/Resolved'),
+    ('C49496', 'Recovering/Resolving'),
+    ('C49495', 'Recovered/Resolved with sequelae'),
+    ('C49494', 'Not recovered/Not resolved'),
+    ('C48275', 'Fatal'),
     (UNKNOWN, UNKNOWN),
 )
 

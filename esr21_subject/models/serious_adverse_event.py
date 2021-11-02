@@ -85,6 +85,8 @@ class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
         verbose_name='AE Caused by Additional Drug',
         max_length=10,
         choices=YES_NO,
+        blank=True,
+        null=True
     )
 
     ad1 = models.CharField(
@@ -98,6 +100,8 @@ class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
         verbose_name='AE Caused by Additional Drug 1',
         max_length=10,
         choices=YES_NO,
+        blank=True,
+        null=True
     )
 
     ad2 = models.CharField(
@@ -111,6 +115,8 @@ class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
         verbose_name='AE Caused by Additional Drug 2',
         max_length=10,
         choices=YES_NO,
+        blank=True,
+        null=True
     )
 
     ae_smedca = models.CharField(
