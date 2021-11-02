@@ -12,7 +12,7 @@ ACTION_TAKEN = (
     ('dose_not_changed', 'Dose not changed'),
     ('drug_withdrawal', 'Drug withdrawal'),
     (NOT_APPLICABLE, NOT_APPLICABLE),
-    (UNKNOWN, UNKNOWN),
+    (UNKNOWN, 'Unknown'),
 )
 
 ALCOHOL_STATUS_CHOICES = (
@@ -209,7 +209,7 @@ OUTCOME = (
     ('C49495', 'Recovered/Resolved with sequelae'),
     ('C49494', 'Not recovered/Not resolved'),
     ('C48275', 'Fatal'),
-    (UNKNOWN, UNKNOWN),
+    (UNKNOWN, 'Unknown'),
 )
 
 POS_NEG_IND = (

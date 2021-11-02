@@ -24,7 +24,7 @@ class AdverseEvent(CrfModelMixin):
     """"Adverse Event"""""
 
     experienced_ae = models.CharField(
-        verbose_name='Did the participant experience any adverse event?',
+        verbose_name='Did the participant experience any Adverse Event?',
         choices=YES_NO,
         max_length=3)
 
@@ -34,39 +34,36 @@ class AdverseEvent(CrfModelMixin):
 
 
 class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
-
     adverse_event = models.ForeignKey(
         AdverseEvent,
         on_delete=models.PROTECT,
         max_length=25)
 
-
     ae_number = models.PositiveIntegerField(
-        verbose_name='AE number',)
+        verbose_name='AE Number', )
 
     ae_term = models.CharField(
-        verbose_name='Adverse event reported term',
+        verbose_name='AE reported term',
         max_length=100)
-    
+
     ae_details = models.TextField(
-        verbose_name='Details of the AE',)
-    
+        verbose_name='Details of the AE', )
 
     start_date = models.DateField(
-        verbose_name='Adverse Event Start Date',
+        verbose_name='AE Start Date',
         validators=[
             date_not_before_study_start,
             date_not_future, ])
 
     stop_date = models.DateField(
-        verbose_name='Adverse Event Stop Date',
+        verbose_name='AE Stop Date',
         validators=[date_not_future, ],
         null=True,
         blank=True)
 
     substance_hypersensitivity = models.CharField(
         verbose_name=('Any hypersensitivity to the active substance or to any of the '
-                    'excipients?'),
+                      'excipients?'),
         choices=YES_NO,
         max_length=3,
     )
@@ -89,8 +86,6 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
         null=True,
         choices=TREATMENT_RELATIONSHIP_WITH_NA,
     )
-
-
 
     outcome = models.CharField(
         verbose_name='Outcome',
@@ -119,39 +114,13 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
         null=True,
         choices=ACTION_TAKEN)
 
-
-    investigation_product1 = models.CharField(
-        verbose_name='Investigational Product 1',
-        max_length=20
-    )
-
-
-    action_taken1 = models.CharField(
-        verbose_name='Action Taken, Investigational Product 1',
-        max_length=25,
-        null=True,
-        choices=ACTION_TAKEN)
-
-    investigation_product2 = models.CharField(
-        verbose_name='Investigational Product 2',
-        max_length=20
-    )
-
-
-    action_taken2 = models.CharField(
-        verbose_name='Action Taken, Investigational Product 2',
-        max_length=25,
-        null=True,
-        choices=ACTION_TAKEN)
-
-
     special_interest_ae = models.CharField(
         verbose_name='Was the event an AE of special interest?',
         max_length=3,
         null=True,
         choices=YES_NO,
         help_text=('(If Yes, check all serious criteria that apply on the '
-                'corresponding SAE form.)'))
+                   'corresponding SAE form.)'))
 
     medically_attended_ae = models.CharField(
         verbose_name='Was the event a medically attended AE?',
@@ -161,8 +130,8 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
 
     maae_specify = OtherCharField(
         verbose_name='If MAAE, specify',
-        max_length=100,)
-    
+        max_length=100, )
+
     hospitalized = models.CharField(
         verbose_name='Was the participant hospitalized?',
         max_length=3,
@@ -195,14 +164,13 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
         null=True,
         choices=YES_NO)
 
-
     continued_ae_section_x = models.CharField(
         verbose_name='Continued from AE Section X*?',
         choices=YES_NO,
         max_length=20)
 
     ae_rel = models.CharField(
-        verbose_name=('Was AE caused by investigational product action taken (IP)?'),
+        verbose_name='Reasonable possibility AE caused by IP?',
         choices=YES_NO,
         max_length=3,
     )
@@ -212,12 +180,11 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
         max_length=200,
 
     )
-    
+
     pt_code = models.PositiveIntegerField(
         verbose_name='MedDRA preferred term code',
-       
-    )
 
+    )
 
     llt_code = models.PositiveIntegerField(
         verbose_name=('MedDRA lowest level term code'),
