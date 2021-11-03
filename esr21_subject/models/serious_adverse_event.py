@@ -178,7 +178,7 @@ class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
     )
 
     ae_slife = models.CharField(
-        verbose_name='Is life threatening',
+        verbose_name='Was it life-threatening',
         max_length=6,
         choices=YES_NO
     )
@@ -206,15 +206,15 @@ class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
         null=True,
         blank=True)
 
-    incapacity_specify = OtherCharField(
-        verbose_name='Specify persistent or significant disability/incapacity',
-        max_length=100)
+    # incapacity_specify = OtherCharField(
+    #     verbose_name='Specify persistent or significant disability/incapacity',
+    #     max_length=100)
 
-    medical_event_other = OtherCharField(
-        verbose_name='If, Other important medical event',
-        null=True,
-        blank=True,
-        max_length=100)
+    # medical_event_other = OtherCharField(
+    #     verbose_name='If yes, specify important serious event',
+    #     null=True,
+    #     blank=True,
+    #     max_length=100)
 
     rationale = models.CharField(
         verbose_name=('Investigator\'s rationale for Study Treatment being '

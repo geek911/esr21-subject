@@ -164,11 +164,6 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
         null=True,
         choices=YES_NO)
 
-    continued_ae_section_x = models.CharField(
-        verbose_name='Continued from AE Section X*?',
-        choices=YES_NO,
-        max_length=20)
-
     ae_rel = models.CharField(
         verbose_name='Reasonable possibility AE caused by IP?',
         choices=YES_NO,
