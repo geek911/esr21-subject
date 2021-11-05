@@ -84,13 +84,14 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
         verbose_name='Relationship to study procedure',
         max_length=15,
         null=True,
-        choices=TREATMENT_RELATIONSHIP_WITH_NA,
+        choices=TREATMENT_RELATIONSHIP,
     )
 
     outcome = models.CharField(
         verbose_name='Outcome',
         max_length=50,
         choices=OUTCOME,
+        blank=True,
         null=True)
 
     sequelae_specify = OtherCharField(
@@ -112,6 +113,7 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
         verbose_name='Action Taken, Investigational Product',
         max_length=25,
         null=True,
+        blank=True,
         choices=ACTION_TAKEN)
 
     special_interest_ae = models.CharField(
