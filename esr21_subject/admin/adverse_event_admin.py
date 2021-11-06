@@ -59,7 +59,7 @@ class AdverseEventRecordInlineAdmin(StackedInlineMixin, admin.StackedInline):
                 'ctcae_v'
 
             ]}
-        ),)
+         ),)
 
     radio_fields = {
         'study_treatmnt_rel': admin.VERTICAL,
@@ -70,13 +70,15 @@ class AdverseEventRecordInlineAdmin(StackedInlineMixin, admin.StackedInline):
         'serious_event': admin.VERTICAL,
         'special_interest_ae': admin.VERTICAL,
         'medically_attended_ae': admin.VERTICAL,
-        'hospitalized' : admin.VERTICAL,
+        'hospitalized': admin.VERTICAL,
         'treatment_given': admin.VERTICAL,
         'ae_study_discontinued': admin.VERTICAL,
         'substance_hypersensitivity': admin.VERTICAL,
         'covid_related_ae': admin.VERTICAL,
         'ae_rel': admin.VERTICAL,
-        }
+        'ctcae_grade': admin.VERTICAL,
+        'max_ctcae_grade': admin.VERTICAL,
+    }
 
 
 @admin.register(AdverseEvent, site=esr21_subject_admin)
@@ -87,8 +89,8 @@ class AdverseEventAdmin(CrfModelAdminMixin, admin.ModelAdmin):
     formfield_overrides = {
         models.TextField: {'widget': Textarea(
             attrs={'rows': 500,
-                'cols': 70,
-                'style': 'height: 7em;'})},
+                   'cols': 70,
+                   'style': 'height: 7em;'})},
     }
 
     fieldsets = (
