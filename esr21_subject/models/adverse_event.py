@@ -116,6 +116,16 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
         blank=True,
         choices=ACTION_TAKEN)
 
+    ctcae_grade = models.CharField(
+        verbose_name='CTCAE Grade',
+        max_length=25,
+        choices=AE_GRADE)
+
+    max_ctcae_grade = models.CharField(
+        verbose_name='Maximum CTCAE Grade',
+        max_length=25,
+        choices=AE_GRADE)
+
     special_interest_ae = models.CharField(
         verbose_name='Was the event an AE of special interest?',
         max_length=3,

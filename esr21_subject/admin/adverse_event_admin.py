@@ -33,6 +33,8 @@ class AdverseEventRecordInlineAdmin(StackedInlineMixin, admin.StackedInline):
                 'serious_event',
                 'investigation_product',
                 'action_taken',
+                'ctcae_grade',
+                'max_ctcae_grade',
                 'special_interest_ae',
                 'medically_attended_ae',
                 'maae_specify',
