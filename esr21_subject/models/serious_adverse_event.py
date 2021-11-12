@@ -19,7 +19,6 @@ class SeriousAdverseEventRecordManager(models.Manager):
 
 
 class SeriousAdverseEvent(CrfModelMixin):
-
     """""Serious Adverse Events (SAE)"""""
 
     class Meta:
@@ -28,23 +27,26 @@ class SeriousAdverseEvent(CrfModelMixin):
 
 
 class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
-
     serious_adverse_event = models.ForeignKey(
         SeriousAdverseEvent,
         on_delete=models.PROTECT)
-    
+
     ae_number = models.PositiveIntegerField(
         verbose_name='AE number',
         null=True
     )
 
     sae_name = models.CharField(
-        verbose_name='AE reported term',
+        verbose_name='Adverse Event Reported Term',
         max_length=100)
-    
+
     sae_details = models.TextField(
-        verbose_name='Details of the SAE',)
-    
+        verbose_name='SAE Description', )
+
+    sae_criteria = models.ManyToManyField(
+        SAECriteria,
+        verbose_name='SAE Criteria'
+    )
 
     dthcaus_1 = models.TextField(
         verbose_name='Primary cause of death',
@@ -58,40 +60,80 @@ class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
         null=True
     )
 
+    ae_sddat = models.DateField(
+        verbose_name='Date of death',
+        null = True,
+        blank = True
+    )
+
     ae_sautop = models.CharField(
         verbose_name='Was an autopsy performed?',
         max_length=10,
         choices=YES_NO
     )
 
-    ae_caad = models.CharField(
-        verbose_name='Was AE caused by additional drug?',
-        max_length=10,
-        choices=YES_NO,
-    )
-
-    ae_add_drug = models.CharField(
-        verbose_name='If yes above, please provide additional drug',
+    ad = models.CharField(
+        verbose_name='Additional drug',
         max_length=10,
         blank=True,
         null=True
     )
 
+
+
+    ae_caad = models.CharField(
+        verbose_name='AE Caused by Additional Drug',
+        max_length=10,
+        choices=YES_NO,
+        blank=True,
+        null=True
+    )
+
+    ad1 = models.CharField(
+        verbose_name='Additional drug 1',
+        max_length=10,
+        blank=True,
+        null=True
+    )
+
+    ae_caad1 = models.CharField(
+        verbose_name='AE Caused by Additional Drug 1',
+        max_length=10,
+        choices=YES_NO,
+        blank=True,
+        null=True
+    )
+
+    ad2 = models.CharField(
+        verbose_name='Additional drug 2',
+        max_length=10,
+        blank=True,
+        null=True
+    )
+
+    ae_caad2 = models.CharField(
+        verbose_name='AE Caused by Additional Drug 2',
+        max_length=10,
+        choices=YES_NO,
+        blank=True,
+        null=True
+    )
+
     ae_smedca = models.CharField(
-        verbose_name='Was SAE caused by other medication?',
+        verbose_name='SAE caused by other medication?',
         max_length=10,
         choices=YES_NO,
     )
-    
+
     ae_smed = models.CharField(
         verbose_name='Other Medication',
         max_length=200,
         blank=True,
         null=True
     )
-    
+
     ae_caussp = models.CharField(
-        verbose_name='Was SAE caused by study procedure(s)?',
+        verbose_name='SAE caused by study procedure(s)?',
         max_length=5,
         choices=YES_NO,
     )
@@ -121,19 +163,13 @@ class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
     date_aware_of = models.DateField(
         verbose_name="Date investigator became aware of SAE",
         validators=[date_not_future, ])
-    
 
     ae_sdth = models.CharField(
-        verbose_name='Were results in death?',
+        verbose_name='Results in death',
         max_length=3,
         choices=YES_NO
     )
 
-    ae_shosp = models.CharField(
-        verbose_name='Does it require or prolong hospitalization?',
-        max_length=3,
-        choices=YES_NO,
-    )
 
     ae_scong = models.CharField(
         verbose_name='Was it a congenital anomaly or birth defect?',
@@ -142,26 +178,25 @@ class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
     )
 
     ae_slife = models.CharField(
-        verbose_name='Was adverse event (AE) life threatening?',
+        verbose_name='Was it life-threatening',
         max_length=6,
         choices=YES_NO
     )
 
     ae_sdisab = models.CharField(
-        verbose_name='Does the participant have any persistent or significant disability/incapacity?',
+        verbose_name='Did it result in significant disability/incapacity? ',
         max_length=6,
         choices=YES_NO
     )
 
     ae_smie = models.CharField(
-        verbose_name='Are there other medically important serious event?',
+        verbose_name='Other medically important serious event',
         max_length=6,
         choices=YES_NO
     )
 
-
     admission_date = models.DateField(
-        verbose_name='If hospitalized, Date of hospitalization (DD MMM YYYY)',
+        verbose_name='Date of hospitalization',
         validators=[date_not_future, ],
         null=True,
         blank=True)
@@ -171,21 +206,19 @@ class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
         null=True,
         blank=True)
 
-    incapacity_specify = OtherCharField(
-        verbose_name='Specify persistent or significant disability/incapacity',
-        max_length=100)
+    # incapacity_specify = OtherCharField(
+    #     verbose_name='Specify persistent or significant disability/incapacity',
+    #     max_length=100)
 
-    medical_event_other = OtherCharField(
-        verbose_name='If, Other important medical event, specify',
-        null=True,
-        blank=True,
-        max_length=100)
+    # medical_event_other = OtherCharField(
+    #     verbose_name='If yes, specify important serious event',
+    #     null=True,
+    #     blank=True,
+    #     max_length=100)
 
     rationale = models.CharField(
         verbose_name=('Investigator\'s rationale for Study Treatment being '
-                    'Related to the events'),
-        null=True,
-        blank=True,
+                      'Related to the events'),
         max_length=100)
 
     describe_sae_treatmnt = models.TextField(
@@ -196,19 +229,21 @@ class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
 
     test_performed = models.TextField(
         verbose_name='List all diagnostic tests that were performed to confirm event',
-         null=True,
+        null=True,
         blank=True,
         max_length=200)
 
     additional_info = models.TextField(
         verbose_name=('Additional information (for example: history of '
-                    'presenting illness, course of illness, complications, '
-                    'risk factors and/or other contributing factors)'),
+                      'presenting illness, course of illness, complications, '
+                      'risk factors and/or other contributing factors)'),
         null=True,
         blank=True,
         max_length=200)
-    
-    
+
+    event_abate = models.TextField(
+        verbose_name='List all diagnostic tests that were performed to confirm event',
+        max_length=200)
 
     history = HistoricalRecords()
 

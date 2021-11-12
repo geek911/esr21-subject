@@ -12,7 +12,7 @@ class AppConfig(DjangoAppConfig):
 
     form_versions = {
         'edc_appointment.appointment': 2.0,
-        'esr21_subject.adverseevent': 2.1,
+        'esr21_subject.adverseevent': 2.2,
         'esr21_subject.concomitantmedication': 2.0,
         'esr21_subject.covid19preventativebehaviours': 2.0,
         'esr21_subject.covid19symptomaticinfections': 2.1,
