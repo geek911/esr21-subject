@@ -38,9 +38,6 @@ class AppConfig(DjangoAppConfig):
         'esr21_subject.screeningeligibility': 2.0,
         }
 
-    def ready(self):
-        from .models import screening_eligibility_on_post_save
-
 
 if settings.APP_NAME == 'esr21_subject':
     from edc_appointment.appointment_config import AppointmentConfig
