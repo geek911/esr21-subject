@@ -32,60 +32,7 @@ def metadata_update_on_post_save(sender, instance, raw, created, using,
         else:
             if django_apps.get_app_config('edc_metadata_rules').metadata_rules_enabled:
                 instance.adverse_event.run_metadata_rules_for_crf()
-
-
-@receiver(post_save, weak=False, sender=ScreeningEligibility,
-        dispatch_uid='screening_eligibility_on_post_save')
-def screening_eligibility_on_post_save(sender, instance, raw, created, **kwargs):
-    """ Put participant on schedule post consent """
-    if not raw:
-
-        # if is_subcohort_full():
-        cohort = 'esr21'
-        # else:
-        # cohort = 'esr21_sub'
-
-        onschedule_model = 'esr21_subject.onschedule'
-
-        if instance.is_eligible:
-            put_on_schedule(f'{cohort}_enrol_schedule', instance=instance,
-                            onschedule_model=onschedule_model,
-                            onschedule_datetime=instance.created.replace(microsecond=0))
-
-            put_on_schedule(f'{cohort}_fu_schedule', instance=instance,
-                            onschedule_model=onschedule_model,
-                            onschedule_datetime=instance.created.replace(microsecond=0))
-
-# @receiver(post_save, weak=False, sender=Covid19SymptomaticInfections,
-        # dispatch_uid='covid19_symptomatic_infections_on_post_save')
-# def covid19_symptomatic_infections_on_post_save(sender, instance, raw, created, **kwargs):
-#
-    # if not raw:
-        # if instance.symptomatic_experiences == YES:
-            # onschedule_model = 'esr21_subject.onscheduleill'
-            # onschedule_cls = django_apps.get_model('esr21_subject.onscheduleill')
-            # offschedule_model = django_apps.get_model('esr21_subject.offscheduleill')
-            #
-            # illness_count = ''
-            #
-            # ill_onschedules = onschedule_cls.objects.filter(
-                # subject_identifier=instance.visit.subject_identifier)
-                #
-            # if ill_onschedules:
-                # latest_onschedule = ill_onschedules.latest('onschedule_datetime')
-                #
-                # try:
-                    # offschedule_model.objects.get(
-                        # subject_identifier=instance.visit.subject_identifier,
-                        # schedule_name=latest_onschedule.schedule_name)
-                # except offschedule_model.DoesNotExist:
-                    # pass
-                # else:
-                    # illness_count = 1 + onschedule_cls.objects.all().count()
-                    #
-            # put_on_schedule(f'esr21_illness{illness_count}_schedule', instance=instance,
-                            # onschedule_model=onschedule_model, onschedule_datetime=instance.created)
-
+          
 
 @receiver(post_save, weak=False, sender=Appointment, dispatch_uid='appointment_on_post_save')
 def appointment_on_post_save(sender, instance, raw, created, **kwargs):
@@ -113,7 +60,6 @@ def appointment_on_post_save(sender, instance, raw, created, **kwargs):
 def put_on_schedule(schedule_name, onschedule_model, instance=None, onschedule_datetime=None):
 
     if instance:
-
         _, schedule = site_visit_schedules.get_by_onschedule_model_schedule_name(
             onschedule_model=onschedule_model, name=schedule_name)
 

@@ -17,7 +17,6 @@ from .pregnancy_test import PregnancyTest
 from .rapid_hiv_testing import RapidHIVTesting
 from .sample_collection import SampleCollection
 from .serious_adverse_event import SeriousAdverseEvent, SeriousAdverseEventRecord
-from .signals import screening_eligibility_on_post_save
 from .special_interest_adverse_event import SpecialInterestAdverseEvent
 from .special_interest_adverse_event import SpecialInterestAdverseEventRecord
 from .subject_requisition import SubjectRequisition

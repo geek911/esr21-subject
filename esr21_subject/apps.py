@@ -12,7 +12,7 @@ class AppConfig(DjangoAppConfig):
 
     form_versions = {
         'edc_appointment.appointment': 2.0,
-        'esr21_subject.adverseevent': 2.1,
+        'esr21_subject.adverseevent': 2.2,
         'esr21_subject.concomitantmedication': 2.0,
         'esr21_subject.covid19preventativebehaviours': 2.0,
         'esr21_subject.covid19symptomaticinfections': 2.1,
@@ -28,18 +28,15 @@ class AppConfig(DjangoAppConfig):
         'esr21_subject.pregnancytest': 2.1,
         'esr21_subject.rapidhivtesting': 2.1,
         'esr21_subject.samplecollection': 2.0,
-        'esr21_subject.seriousadverseevent': 2.0,
+        'esr21_subject.seriousadverseevent': 2.1,
         'esr21_subject.specialinterestadverseevent': 2.0,
         'esr21_subject.subjectrequisition': 2.0,
         'esr21_subject.subjectvisit': 2.0,
         'esr21_subject.targetedphysicalexamination': 2.1,
         'esr21_subject.vaccinationdetails': 2.1,
         'esr21_subject.vitalsigns': 2.1,
-        'esr21_subject.screeninglligibility': 2.0,
+        'esr21_subject.screeningeligibility': 2.0,
         }
-
-    def ready(self):
-        from .models import screening_eligibility_on_post_save
 
 
 if settings.APP_NAME == 'esr21_subject':
