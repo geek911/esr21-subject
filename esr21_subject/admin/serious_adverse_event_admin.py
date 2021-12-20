@@ -20,12 +20,12 @@ class SeriousAdverseEventRecordInlineAdmin(StackedInlineMixin, admin.StackedInli
                 'ae_number',
                 'sae_name',
                 'sae_details',
-                'sae_intensity',
                 'start_date',
                 'resolution_date',
                 'date_aware_of',
                 'sae_criteria',
                 'ae_sdth',
+                'hospitalization',
                 'ae_scong',
                 'ae_slife',
                 'ae_sdisab',
@@ -53,10 +53,9 @@ class SeriousAdverseEventRecordInlineAdmin(StackedInlineMixin, admin.StackedInli
                 'ae_caussp',
                 'ae_sp',
             ]}
-         ),)
+        ),)
 
     radio_fields = {
-        'sae_intensity': admin.VERTICAL,
         'ae_sdth': admin.VERTICAL,
         'ae_scong': admin.VERTICAL,
         'ae_slife': admin.VERTICAL,
@@ -68,6 +67,7 @@ class SeriousAdverseEventRecordInlineAdmin(StackedInlineMixin, admin.StackedInli
         'ae_caad': admin.VERTICAL,
         'ae_caad1': admin.VERTICAL,
         'ae_caad2': admin.VERTICAL,
+        'hospitalization': admin.VERTICAL,
     }
 
     filter_horizontal = ('sae_criteria',)
