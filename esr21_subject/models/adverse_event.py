@@ -10,6 +10,7 @@ from edc_protocol.validators import date_not_before_study_start
 from ..choices import ACTION_TAKEN, STATUS, AE_GRADE, TREATMENT_RELATIONSHIP, TREATMENT_RELATIONSHIP_WITH_NA
 from ..choices import OUTCOME
 from .model_mixins import CrfModelMixin
+from esr21_subject.models.informed_consent import InformedConsent
 
 
 class AdverseEventRecordManager(models.Manager):
@@ -240,6 +241,16 @@ class AdverseEventRecord(SiteModelMixin, BaseUuidModel):
     )
 
     objects = AdverseEventRecordManager()
+
+    @property
+    def dob(self):
+        consent = InformedConsent.objects.filter(subject_identifier=self.adverse_event.subject_visit.subject_identifier).last()
+        return consent.dob
+
+    @property
+    def gender(self):
+        consent = InformedConsent.objects.filter(subject_identifier=self.adverse_event.subject_visit.subject_identifier).last()
+        return consent.gender
 
     history = HistoricalRecords()
 
