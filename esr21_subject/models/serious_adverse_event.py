@@ -1,13 +1,14 @@
 from django.db import models
-from edc_base.model_fields import OtherCharField
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.model_validators import date_not_future
 from edc_base.sites import SiteModelMixin
-from edc_constants.choices import SEVERITY_LEVEL, YES_NO
+from edc_constants.choices import YES_NO
 
 from .list_models import SAECriteria
 from .model_mixins import CrfModelMixin
+from .adverse_event import AdverseEventRecord
+from django.core.exceptions import ValidationError
 
 
 class SeriousAdverseEventRecordManager(models.Manager):
@@ -79,8 +80,6 @@ class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
         null=True
     )
 
-
-
     ae_caad = models.CharField(
         verbose_name='AE Caused by Additional Drug',
         max_length=10,
@@ -145,11 +144,6 @@ class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
         null=True
     )
 
-    sae_intensity = models.CharField(
-        verbose_name='Intensity of the SAE',
-        choices=SEVERITY_LEVEL,
-        max_length=10)
-
     start_date = models.DateField(
         verbose_name='Date AE Met Criteria for Serious AE',
         validators=[date_not_future, ])
@@ -170,6 +164,11 @@ class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
         choices=YES_NO
     )
 
+    hospitalization = models.CharField(
+        verbose_name='Requires or prolong hospitalization?',
+        max_length=3,
+        choices=YES_NO
+    )
 
     ae_scong = models.CharField(
         verbose_name='Was it a congenital anomaly or birth defect?',
@@ -253,6 +252,26 @@ class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
         return (self.sae_name, self.start_date,) + self.serious_adverse_event.natural_key()
 
     natural_key.dependencies = ['esr21_subject.seriousadverseevent']
+
+    @property
+    def update_ae_number(self):
+        """Update AE number.
+        """
+        ae_number = 0
+        ae = AdverseEventRecord.objects.filter(
+            adverse_event__subject_visit__subject_identifier=self.serious_adverse_event.subject_visit.subject_identifier,
+            adverse_event__subject_visit__visit_code=self.serious_adverse_event.subject_visit.visit_code).order_by('created')
+        if ae:
+            last_ae = ae.last()
+            ae_number = last_ae.ae_number
+        else:
+            raise ValidationError("An SAE can not exist without an AE")
+        return ae_number
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.ae_number = self.update_ae_number
+        super().save(*args, **kwargs)
 
     class Meta:
         app_label = 'esr21_subject'
