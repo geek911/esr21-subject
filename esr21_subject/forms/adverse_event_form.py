@@ -20,7 +20,8 @@ class AdverseEventForm(SubjectModelFormMixin, forms.ModelForm):
     def clean(self):
         experienced_ae = self.data.get('experienced_ae')
         ae_count = int(self.data.get('adverseeventrecord_set-TOTAL_FORMS'))
-        if experienced_ae == YES and ae_count == 0:
+        ae_number = self.data.get('adverseeventrecord_set-0-ae_number')
+        if experienced_ae == YES and (ae_count == 0 or ae_number == ''):
             msg = 'Participant has experienced an adverse event, '\
             f'{self.ae_record_cls._meta.verbose_name} is required'
             raise forms.ValidationError(msg)
