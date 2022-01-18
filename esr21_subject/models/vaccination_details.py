@@ -1,4 +1,5 @@
-from django.db import models
+from django.core.exceptions import ValidationError
+from django.db import models, IntegrityError
 from django_crypto_fields.fields import EncryptedCharField
 
 from edc_base.model_fields import OtherCharField
@@ -11,7 +12,6 @@ from edc_constants.constants import NOT_APPLICABLE
 
 
 class VaccinationDetails(CrfModelMixin):
-
     report_datetime = models.DateTimeField(
         verbose_name='Report Date and Time',
         validators=[datetime_not_future, ])
@@ -63,7 +63,7 @@ class VaccinationDetails(CrfModelMixin):
         verbose_name='Vaccine batch/lot number',
         max_length=20,
         blank=True,
-        null=True,)
+        null=True, )
 
     expiry_date = models.DateField(
         verbose_name='Vaccination expiry date',
@@ -93,6 +93,30 @@ class VaccinationDetails(CrfModelMixin):
         validators=[date_is_future, ],
         blank=True,
         null=True)
+
+    def validate_unique(self, exclude=None):
+        """
+        validated_unique had to be overridden because unique_together does not work
+        with foreign keys or foreign keys yet each CRF for each participant can be uniquely
+        be identified using the subject identifier obtained from the appointments
+        """
+        try:
+            vaccination_details = VaccinationDetails.objects.get(
+                subject_visit__appointment__subject_identifier=self.subject_identifier)
+        except VaccinationDetails.DoesNotExist:
+            pass
+        else:
+            if self.subject_visit.schedule_name != 'esr21_enrol_schedule' and \
+                    vaccination_details.received_dose_before == self.received_dose_before:
+                # cannot be first_dose == first_dose nor sec_dose == sec_dose
+                # otherwise a constraint will be thrown
+                error_message = '''\
+                Indicated dose cannot be the same when the participant \
+                when the participant was vaccinated before.
+                '''
+                raise IntegrityError(error_message)
+
+        super(VaccinationDetails, self).validate_unique(exclude=exclude)
 
     class Meta(CrfModelMixin.Meta):
         app_label = 'esr21_subject'
