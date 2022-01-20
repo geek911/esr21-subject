@@ -90,7 +90,6 @@ class Command(BaseCommand):
             count += 1
 
         # keys = toCSV[0].keys()
-        toCSV = toCSV[:3]
         df = pd.DataFrame(toCSV)
         df_mask = df.copy()
         df_mask2 = df_mask.rename(columns={'received_dose_before':'Received Dose','dose_type':'Dose Vaccine Type', 'vaccination_site':'Vaccination Site',
