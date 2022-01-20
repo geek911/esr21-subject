@@ -1,4 +1,6 @@
 import csv
+from operator import index
+import pandas as pd
 
 from django.core.management.base import BaseCommand
 
@@ -8,7 +10,8 @@ from edc_base.utils import get_utcnow
 class Command(BaseCommand):
     help = 'Export vaccine data'
 
-    def district_check(location):
+    def district_check(self, location):
+        location = location.lower()
         switcher = {
             "gaborone": "South East",
             "maun": "Ngamiland",
@@ -16,28 +19,16 @@ class Command(BaseCommand):
             "phikwe": " Central",
             "serowe": "Central",
         }
-        return print(switcher.get(location, "no location"))
+        return switcher.get(location, "no location")
 
 
     def handle(self, *args, **kwargs):
         vaccinations_tuple = ('received_dose_before', 'vaccination_site',
-                              'vaccination_date', 'lot_number', 'expiry_date',
-                              'provider_name')
+                              'vaccination_date',)
         vaccinations = VaccinationDetails.objects.filter(received_dose='Yes').only(
             *vaccinations_tuple)
         count = 0
         toCSV = []
-        columnNames = ['Programinstanceid',	'Firstname', 'Surname',	'Sex', 'Date_of_birth',	'Mobile_number',
-        	'ID Number', 'Covid Zone', 'District',
-        	'City_Village',	'Plot_Ward', 'Occupation', 'Employer',
-            'DOSE1_organisationunitid', 'DOSE1_vaccinesite',
-            'Dose1_district', 'DOSE1_date_vaccinated', 'DOSE1_vaccinetype',
-            'DOSE2_organisationunitid',	'DOSE2_vaccinesite', 'dose2_district',
-            'DOSE2_date_vaccinated', 'DOSE2_vaccinetype']
-
-        newColumnNames = ['Firstname', 'Surname','Sex', 'Date_of_birth', 'Mobile_number',
-        	'ID Number', 'Covid Zone', 'District','Address' ,'Occupation', ]  
-
         for vaccination in vaccinations:
             obj_dict = vaccination.__dict__
 
@@ -64,7 +55,7 @@ class Command(BaseCommand):
                 employment_status = demographics.employment_status
                 employment_status_other = demographics.employment_status_other
                 if employment_status_other:
-                    occupation = employment_status_other
+                    occupation = employment_status_other.strip(')')
                 else:
                     occupation = employment_status
 
@@ -77,6 +68,7 @@ class Command(BaseCommand):
                 subject_cell = personal_contact.subject_cell
                 physical_address = personal_contact.physical_address
                 location = site[6:]
+                district = self.district_check(location)
             obj_dict.update(
                 first_name=first_name,
                 last_name=last_name,
@@ -85,9 +77,10 @@ class Command(BaseCommand):
                 subject_cell=subject_cell,
                 identity_number=identity_number,
                 covidzone="{} {} {}".format("Greater",location,"Zone"),
-                district = self.district_check(location.lower()),
+                district = district,
                 physical_address=physical_address,
                 occupation=occupation,
+                dose_type="Astra-Zeneca",
                 )
             obj_dict.pop('id')
             obj_dict.pop('_state')
@@ -97,11 +90,23 @@ class Command(BaseCommand):
             count += 1
 
         # keys = toCSV[0].keys()
+        toCSV = toCSV[:3]
+        df = pd.DataFrame(toCSV)
+        df_mask = df.copy()
+        df_mask2 = df_mask.rename(columns={'received_dose_before':'Received Dose','dose_type':'Dose Vaccine Type', 'vaccination_site':'Vaccination Site',
+                              'vaccination_date':'Date Vaccinated', 'first_name':'Firstname', 
+                              'last_name':'Surname', 'gender':'Sex', 'dob':'Date of Birth' ,
+                              'subject_cell':'Mobile Number', 'identity_number':'Identity Number',
+                              'covidzone':'Covid Zone', 'district':'District','physical_address':'Address',
+                               'occupation':'Occupation',
+                                })  
+        
         timestamp = get_utcnow().strftime("%m%d%Y%H%M%S")
-        with open('vacinations_' + timestamp + '.csv', 'w', newline='')  as output_file:
-            dict_writer = csv.DictWriter(output_file, fieldnames=newColumnNames)
-            dict_writer.writeheader()
-            dict_writer.writerows(toCSV)
+        df_mask2.to_csv('~/source/vaccinations_'+timestamp+ '.csv', index=False)
+        # with open('vacinations_' + timestamp + '.csv', 'w', newline='')  as output_file:
+        #     dict_writer = csv.DictWriter(output_file)
+        #     dict_writer.writeheader()
+        #     dict_writer.writerows(df_mask2)
 
-        self.stdout.write(self.style.SUCCESS(f'Total exported: {count}.'))
+        # self.stdout.write(self.style.SUCCESS(f'Total exported: {count}.'))
 
