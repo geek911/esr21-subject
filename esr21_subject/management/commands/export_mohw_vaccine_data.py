@@ -1,9 +1,7 @@
 import csv
 from operator import index
 import pandas as pd
-
 from django.core.management.base import BaseCommand
-
 from ...models import PersonalContactInfo, DemographicsData, InformedConsent, VaccinationDetails
 from edc_base.utils import get_utcnow
 
@@ -29,7 +27,7 @@ class Command(BaseCommand):
             *vaccinations_tuple)
         count = 0
         toCSV = []
-        for vaccination in vaccinations:
+        for vaccination in vaccinations[:3]:
             obj_dict = vaccination.__dict__
 
             consent = InformedConsent.objects.filter(
@@ -37,7 +35,7 @@ class Command(BaseCommand):
             first_name = consent.first_name
             last_name = consent.last_name
             dob = consent.dob
-            gender = consent.gender
+            gender = consent.get_gender_display()
             age = consent.formatted_age_at_consent
             site = consent.site.name
             country = None
@@ -52,10 +50,10 @@ class Command(BaseCommand):
                 subject_visit__subject_identifier=vaccination.subject_visit.subject_identifier).last()
             if demographics:
                 country = demographics.country
-                employment_status = demographics.employment_status
+                employment_status = demographics.get_employment_status_display()
                 employment_status_other = demographics.employment_status_other
                 if employment_status_other:
-                    occupation = employment_status_other.strip(')')
+                    occupation = employment_status_other
                 else:
                     occupation = employment_status
 
@@ -89,23 +87,16 @@ class Command(BaseCommand):
             toCSV.append(obj_dict)
             count += 1
 
-        # keys = toCSV[0].keys()
         df = pd.DataFrame(toCSV)
         df_mask = df.copy()
-        df_mask2 = df_mask.rename(columns={'received_dose_before':'Received Dose','dose_type':'Dose Vaccine Type', 'vaccination_site':'Vaccination Site',
+        df_mask2 = df_mask.rename(columns={'received_dose_before':'Received Dose', 'dose_type':'Dose Vaccine Type',
+                              'vaccination_site':'Vaccination Site',
                               'vaccination_date':'Date Vaccinated', 'first_name':'Firstname', 
                               'last_name':'Surname', 'gender':'Sex', 'dob':'Date of Birth' ,
                               'subject_cell':'Mobile Number', 'identity_number':'Identity Number',
                               'covidzone':'Covid Zone', 'district':'District','physical_address':'Address',
                                'occupation':'Occupation',
-                                })  
+                            })  
         
         timestamp = get_utcnow().strftime("%m%d%Y%H%M%S")
         df_mask2.to_csv('~/source/vaccinations_'+timestamp+ '.csv', index=False)
-        # with open('vacinations_' + timestamp + '.csv', 'w', newline='')  as output_file:
-        #     dict_writer = csv.DictWriter(output_file)
-        #     dict_writer.writeheader()
-        #     dict_writer.writerows(df_mask2)
-
-        # self.stdout.write(self.style.SUCCESS(f'Total exported: {count}.'))
-
