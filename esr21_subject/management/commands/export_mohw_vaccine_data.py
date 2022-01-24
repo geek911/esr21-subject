@@ -1,11 +1,16 @@
 import csv
 from operator import index
-import pandas as pd
+
 from django.core.management.base import BaseCommand
-from ...models import PersonalContactInfo, DemographicsData, InformedConsent, VaccinationDetails
 from edc_base.utils import get_utcnow
 
+import pandas as pd
+
+from ...models import PersonalContactInfo, DemographicsData, InformedConsent, VaccinationDetails
+
+
 class Command(BaseCommand):
+
     help = 'Export vaccine data'
 
     def district_check(self, location):
@@ -19,8 +24,8 @@ class Command(BaseCommand):
         }
         return switcher.get(location, "no location")
 
-
     def handle(self, *args, **kwargs):
+
         vaccinations_tuple = ('received_dose_before', 'vaccination_site',
                               'vaccination_date',)
         vaccinations = VaccinationDetails.objects.filter(received_dose='Yes').only(
@@ -75,7 +80,7 @@ class Command(BaseCommand):
                 subject_cell=subject_cell,
                 identity_number=identity_number,
                 covidzone=f"Greater {location} Zone",
-                district = district,
+                district=district,
                 physical_address=physical_address,
                 occupation=occupation,
                 dose_type="Astra-Zeneca",
@@ -89,14 +94,14 @@ class Command(BaseCommand):
 
         df = pd.DataFrame(toCSV)
         df_mask = df.copy()
-        df_mask2 = df_mask.rename(columns={'received_dose_before':'Received Dose', 'dose_type':'Dose Vaccine Type',
-                              'vaccination_site':'Vaccination Site',
-                              'vaccination_date':'Date Vaccinated', 'first_name':'Firstname', 
-                              'last_name':'Surname', 'gender':'Sex', 'dob':'Date of Birth' ,
-                              'subject_cell':'Mobile Number', 'identity_number':'Identity Number',
-                              'covidzone':'Covid Zone', 'district':'District','physical_address':'Address',
-                               'occupation':'Occupation',
-                            })  
-        
+        df_mask2 = df_mask.rename(
+            columns={'received_dose_before': 'Received Dose', 'dose_type': 'Dose Vaccine Type',
+                     'vaccination_site': 'Vaccination Site',
+                     'vaccination_date': 'Date Vaccinated', 'first_name': 'Firstname',
+                     'last_name': 'Surname', 'gender': 'Sex', 'dob': 'Date of Birth',
+                     'subject_cell': 'Mobile Number', 'identity_number': 'Identity Number',
+                     'covidzone': 'Covid Zone', 'district': 'District',
+                     'physical_address': 'Address', 'occupation': 'Occupation', })
+
         timestamp = get_utcnow().strftime("%m%d%Y%H%M%S")
-        df_mask2.to_csv('~/source/vaccinations_'+timestamp+ '.csv', index=False)
+        df_mask2.to_csv('~/source/vaccinations_' + timestamp + '.csv', index=False)
