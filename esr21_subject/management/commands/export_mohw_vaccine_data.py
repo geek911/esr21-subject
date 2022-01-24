@@ -13,26 +13,46 @@ class Command(BaseCommand):
 
     help = 'Export vaccine data'
 
+    def add_arguments(self, parser):
+        parser.add_argument(
+            'site_id', type=str, help='Site specific export')
+
     def district_check(self, location):
         location = location.lower()
         switcher = {
-            "gaborone": "South East",
-            "maun": "Ngamiland",
-            "francistown": "North East",
-            "phikwe": " Central",
-            "serowe": "Central",
+            'gaborone': 'South East',
+            'maun': 'Ngamiland',
+            'francistown': 'North East',
+            'phikwe': 'Central',
+            'serowe': 'Central',
         }
-        return switcher.get(location, "no location")
+        return switcher.get(location, 'no location')
+
+    def site_name_by_id(self, site_id=None):
+        sites_mapping = {
+            '40': 'gaborone',
+            '41': 'maun',
+            '42': 'serowe',
+            '43': 'francistown',
+            '44': 'phikwe'}
+        return sites_mapping.get(site_id, site_id)
 
     def handle(self, *args, **kwargs):
-
+        vaccinations = None
         vaccinations_tuple = ('received_dose_before', 'vaccination_site',
                               'vaccination_date',)
-        vaccinations = VaccinationDetails.objects.filter(received_dose='Yes').only(
-            *vaccinations_tuple)
+        site_id = kwargs.get('site_id')
+
+        if site_id == 'all':
+            vaccinations = VaccinationDetails.objects.filter(
+                received_dose='Yes').only(*vaccinations_tuple)
+        else:
+            vaccinations = VaccinationDetails.objects.filter(
+                received_dose='Yes', site_id=site_id).only(*vaccinations_tuple)
+
         count = 0
         toCSV = []
-        for vaccination in vaccinations:
+        for vaccination in vaccinations[:6]:
             obj_dict = vaccination.__dict__
 
             consent = InformedConsent.objects.filter(
@@ -47,6 +67,9 @@ class Command(BaseCommand):
             employment_status = None
             employment_status_other = None
             subject_cell = None
+            physical_address = None
+            location = None
+            district = None
             occupation = None
 
             identity_number = consent.identity
@@ -79,11 +102,11 @@ class Command(BaseCommand):
                 dob=dob,
                 subject_cell=subject_cell,
                 identity_number=identity_number,
-                covidzone=f"Greater {location} Zone",
+                covidzone=f'Greater {location} Zone',
                 district=district,
                 physical_address=physical_address,
                 occupation=occupation,
-                dose_type="Astra-Zeneca",
+                dose_type='Astra-Zeneca',
                 )
             obj_dict.pop('id')
             obj_dict.pop('_state')
@@ -104,4 +127,11 @@ class Command(BaseCommand):
                      'physical_address': 'Address', 'occupation': 'Occupation', })
 
         timestamp = get_utcnow().strftime("%m%d%Y%H%M%S")
-        df_mask2.to_csv('~/source/vaccinations_' + timestamp + '.csv', index=False)
+        site_name = self.site_name_by_id(site_id=site_id)
+        df_mask2.to_csv(f'~/source/esr21/{site_name}_vaccinations_{timestamp}.csv', index=False)
+        # with open('vacinations_' + timestamp + '.csv', 'w', newline='')  as output_file:
+        #     dict_writer = csv.DictWriter(output_file)
+        #     dict_writer.writeheader()
+        #     dict_writer.writerows(df_mask2)
+
+        self.stdout.write(self.style.SUCCESS(f'Total exported: {count}.'))
