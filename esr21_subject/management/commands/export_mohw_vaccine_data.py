@@ -3,6 +3,7 @@ from operator import index
 
 from django.core.management.base import BaseCommand
 from edc_base.utils import get_utcnow
+from edc_registration.models import RegisteredSubject
 
 import pandas as pd
 
@@ -37,32 +38,37 @@ class Command(BaseCommand):
             '44': 'phikwe'}
         return sites_mapping.get(site_id, site_id)
 
+    def dosage_mapping(self, dose_type=None):
+        dosage_mapping = {
+            'first_dose': 'DOSE1',
+            'second_dose': 'DOSE2'}
+        return dosage_mapping.get(dose_type, '')
+
     def handle(self, *args, **kwargs):
-        vaccinations = None
-        vaccinations_tuple = ('received_dose_before', 'vaccination_site',
-                              'vaccination_date',)
+        identifiers = []
         site_id = kwargs.get('site_id')
 
         if site_id == 'all':
-            vaccinations = VaccinationDetails.objects.filter(
-                received_dose='Yes').only(*vaccinations_tuple)
+            identifiers = RegisteredSubject.objects.values_list(
+                'subject_identifier', flat=True)
         else:
-            vaccinations = VaccinationDetails.objects.filter(
-                received_dose='Yes', site_id=site_id).only(*vaccinations_tuple)
+            identifiers = RegisteredSubject.objects.filter(site_id=site_id).values_list(
+                'subject_identifier', flat=True)
+
+        vaccinations_tuple = ('received_dose_before', 'vaccination_site',
+                              'vaccination_date', 'site',)
 
         count = 0
         toCSV = []
-        for vaccination in vaccinations[:6]:
-            obj_dict = vaccination.__dict__
+        for identifier in identifiers[:6]:
+            obj_dict = {}
 
-            consent = InformedConsent.objects.filter(
-                subject_identifier=vaccination.subject_visit.subject_identifier).last()
+            consent = InformedConsent.objects.filter(subject_identifier=identifier).last()
             first_name = consent.first_name
             last_name = consent.last_name
             dob = consent.dob
             gender = consent.get_gender_display()
             age = consent.formatted_age_at_consent
-            site = consent.site.name
             country = None
             employment_status = None
             employment_status_other = None
@@ -75,7 +81,7 @@ class Command(BaseCommand):
             identity_number = consent.identity
 
             demographics = DemographicsData.objects.filter(
-                subject_visit__subject_identifier=vaccination.subject_visit.subject_identifier).last()
+                subject_visit__subject_identifier=identifier).last()
             if demographics:
                 country = demographics.country
                 employment_status = demographics.get_employment_status_display()
@@ -87,14 +93,13 @@ class Command(BaseCommand):
 
             try:
                 personal_contact = PersonalContactInfo.objects.get(
-                    subject_identifier=vaccination.subject_visit.subject_identifier)
+                    subject_identifier=identifier)
             except PersonalContactInfo.DoesNotExist:
                 pass
             else:
                 subject_cell = personal_contact.subject_cell
                 physical_address = personal_contact.physical_address
-                location = site[6:]
-                district = self.district_check(location)
+
             obj_dict.update(
                 first_name=first_name,
                 last_name=last_name,
@@ -103,28 +108,44 @@ class Command(BaseCommand):
                 subject_cell=subject_cell,
                 identity_number=identity_number,
                 covidzone=f'Greater {location} Zone',
-                district=district,
                 physical_address=physical_address,
-                occupation=occupation,
-                dose_type='Astra-Zeneca',
-                )
-            obj_dict.pop('id')
-            obj_dict.pop('_state')
-#             obj_dict.pop('form_as_json')
-            obj_dict.pop('subject_visit_id')
+                occupation=occupation)
+
+            vaccinations = VaccinationDetails.objects.filter(
+                received_dose='Yes',
+                subject_visit__subject_identifier=identifier).only(*vaccinations_tuple)
+
+            vaccine_type = 'Astra-Zeneca'
+            for vaccination in vaccinations:
+                dose_type = self.dosage_mapping(dose_type=vaccination.received_dose_before)
+
+                # Get vaccination disctrict from site name
+                site = vaccination.site.name
+                location = site[6:]
+                district = self.district_check(location)
+
+                obj_dict.update(
+                    {f'{dose_type}_vaccinesite': vaccination.vaccination_site,
+                     f'{dose_type}_vaccine_type': vaccine_type,
+                     f'{dose_type}_district': district,
+                     f'{dose_type}_date_vaccinated': vaccination.vaccination_date})
+
             toCSV.append(obj_dict)
             count += 1
 
         df = pd.DataFrame(toCSV)
         df_mask = df.copy()
         df_mask2 = df_mask.rename(
-            columns={'received_dose_before': 'Received Dose', 'dose_type': 'Dose Vaccine Type',
-                     'vaccination_site': 'Vaccination Site',
-                     'vaccination_date': 'Date Vaccinated', 'first_name': 'Firstname',
-                     'last_name': 'Surname', 'gender': 'Sex', 'dob': 'Date of Birth',
-                     'subject_cell': 'Mobile Number', 'identity_number': 'Identity Number',
-                     'covidzone': 'Covid Zone', 'district': 'District',
-                     'physical_address': 'Address', 'occupation': 'Occupation', })
+            columns={'first_name': 'Firstname',
+                     'last_name': 'Surname',
+                     'gender': 'Sex',
+                     'dob': 'Date of Birth',
+                     'subject_cell': 'Mobile Number',
+                     'identity_number': 'Identity Number',
+                     'covidzone': 'Covid Zone',
+                     'district': 'District',
+                     'physical_address': 'Address',
+                     'occupation': 'Occupation', })
 
         timestamp = get_utcnow().strftime("%m%d%Y%H%M%S")
         site_name = self.site_name_by_id(site_id=site_id)
