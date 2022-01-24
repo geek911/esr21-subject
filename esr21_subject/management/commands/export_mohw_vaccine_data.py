@@ -74,7 +74,7 @@ class Command(BaseCommand):
                 dob=dob,
                 subject_cell=subject_cell,
                 identity_number=identity_number,
-                covidzone="{} {} {}".format("Greater",location,"Zone"),
+                covidzone=f"Greater {location} Zone",
                 district = district,
                 physical_address=physical_address,
                 occupation=occupation,
