@@ -27,7 +27,7 @@ class Command(BaseCommand):
             *vaccinations_tuple)
         count = 0
         toCSV = []
-        for vaccination in vaccinations[:3]:
+        for vaccination in vaccinations:
             obj_dict = vaccination.__dict__
 
             consent = InformedConsent.objects.filter(
