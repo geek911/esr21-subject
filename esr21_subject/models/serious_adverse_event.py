@@ -255,18 +255,19 @@ class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
 
     @property
     def update_ae_number(self):
-        """Update AE number.
         """
-        ae_number = 0
-        ae = AdverseEventRecord.objects.filter(
-            adverse_event__subject_visit__subject_identifier=self.serious_adverse_event.subject_visit.subject_identifier,
-            adverse_event__subject_visit__visit_code=self.serious_adverse_event.subject_visit.visit_code).order_by('created')
-        if ae:
-            last_ae = ae.last()
-            ae_number = last_ae.ae_number
+        Update SAE number.
+        """
+        sae_number = 0
+        sae_record_cls = self._meta.model
+        sae = sae_record_cls.objects.filter(
+            serious_adverse_event=self.serious_adverse_event).order_by('created')
+        if sae:
+            last_sae = sae.last()
+            sae_number = last_sae.sae_number + 1
         else:
-            raise ValidationError("An SAE can not exist without an AE")
-        return ae_number
+            sae_number += 1
+        return sae_number
 
     def save(self, *args, **kwargs):
         if not self.id:
