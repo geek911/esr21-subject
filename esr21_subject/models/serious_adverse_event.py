@@ -254,7 +254,7 @@ class SeriousAdverseEventRecord(SiteModelMixin, BaseUuidModel):
     natural_key.dependencies = ['esr21_subject.seriousadverseevent']
 
     @property
-    def update_ae_number(self):
+    def update_sae_number(self):
         """
         Update SAE number.
         """
